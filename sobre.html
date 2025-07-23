@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Criar Evento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f6f6fb;
+      color: #333;
+    }
+
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 30;
+    }
+    p{
+        font-family: 'Times New Roman', Times, serif;
+      font-size: 30;    
+
+    }
+
+    header {
+      background-color: #eee4dc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-button {
+      background-color: #6d5a43;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-button:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background-color: #d4b183;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      z-index: 10;
+      width: 120px;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 5px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #6d5a43;
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .banner {
+      background-color: #c3915e;
+      padding: 100px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    section{
+        text-align: center;
+        margin-bottom: 100px;
+    }
+    .footer {
+      background-color: #eee4dc;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .footer img {
+      height: 25px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="logo">
+        <img src="https://i.imgur.com/Nj1z6hl.png" alt="Logo">
+      </div>
+      <nav>
+        <a href="index.html"><button class="nav-button">Página Inicial</button></a>
+        <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
+        <button class="nav-button">Galeria</button>
+        <div class="nav-button">
+          Sobre Nós
+          <div class="dropdown">
+            <a href="sobre.html">Sobre nós</a>
+            <a href="#">Missão</a>
+            <a href="#">Visão</a>
+            <a href="#">Valores</a>
+          </div>
+        </div>
+        <a href="evento.html"><button class="nav-button">Serviços</button></a>
+        <a href="evento.html"><button class="nav-button">Contacto</button></a>
+
+      </nav>
+      <div class="icons">
+        <i class="fas fa-box"></i>
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+    </header>
+ <section>
+    <div class="banner">Sobre nós</div>
+   
+    <div><img src="imgs/Captura de ecrã 2025-07-23 111500.png" width="500px" alt=""></div>
+</section>
+
+    <main class="main">
+      <p><strong>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto magni consequuntur ad minima, molestias ex praesentium tenetur, earum suscipit nobis fugit consequatur recusandae esse delectus tempora odit libero doloribus fuga possimus sapiente natus labore. Veniam, mollitia ducimus maiores harum sed corrupti ipsa nulla beatae adipisci doloremque repellat saepe inventore, perferendis eius. Non laudantium pariatur enim aut dolores optio eligendi tenetur, ex totam nisi, odio doloremque temporibus illum quia ipsa autem quibusdam numquam aperiam ab porro soluta! Soluta dolor repellat veritatis quae quidem nisi magnam, nemo dolorem laudantium natus assumenda doloremque dolore deleniti deserunt cum eaque illum. Tempora iure odit sed molestiae hic voluptatibus enim neque officiis, ipsum ab earum ad esse asperiores fugit assumenda praesentium pariatur quaerat placeat voluptate? Eum aut dicta ad fugit. Sit quod praesentium possimus eveniet modi ullam hic ut, animi beatae maiores debitis! Labore suscipit, eveniet voluptate iure totam porro assumenda qui cum, numquam consectetur inventore culpa, illum quos. At repellendus accusamus perspiciatis veniam ullam laudantium reprehenderit. Aliquid repellendus nisi autem magni omnis consequuntur, nemo soluta! Molestiae, consequuntur minima! Excepturi officia dignissimos mollitia? Non quasi natus qui alias minus ducimus doloremque, harum in earum nam, aliquid, nobis fugit exercitationem similique optio tempore voluptatibus officiis doloribus inventore!</strong></p>
+    </main>
+
+    <footer class="footer">
+      <img src="https://i.imgur.com/Nj1z6hl.png" alt="Logo pequeno">
+      © - 2025 Puro Encanto. Todos os direitos reservados.
+    </footer>
+  </div>
+</body>
+</html>

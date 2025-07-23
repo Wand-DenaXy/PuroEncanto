@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços Festa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #eee4dc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      position: relative;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-button {
+      background-color: #6d5a43;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-button:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background-color: #d4b183;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      z-index: 10;
+      width: 120px;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 5px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #6d5a43;
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .banner {
+      background-image: url('https://i.imgur.com/CjJNVYB.jpg'); /* Usa o teu URL aqui */
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 1200px;
+    }
+
+    .card {
+      background-color: #d4b183;
+      padding: 20px;
+      border-radius: 8px;
+      width: 260px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      font-size: 14px;
+    }
+
+    .card i {
+      margin-right: 8px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .banner {
+        height: 250px;
+      }
+
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://i.imgur.com/Nj1z6hl.png" alt="Logo"> <!-- Substitui pelo teu -->
+    </div>
+
+    <nav>
+        <a href="index.html"><button class="nav-button">Página Inicial</button></a>
+        <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
+        <button class="nav-button">Galeria</button>
+        <div class="nav-button">
+          Sobre Nós
+          <div class="dropdown">
+            <a href="sobre.html">Sobre nós</a>
+            <a href="#">Missão</a>
+            <a href="#">Visão</a>
+            <a href="#">Valores</a>
+          </div>
+        </div>
+        <a href="evento.html"><button class="nav-button">Serviços</button></a>
+        <a href="evento.html"><button class="nav-button">Contacto</button></a>
+
+      </nav>
+
+    <div class="icons">
+      <i class="fas fa-box"></i>
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+  </header>
+
+  <section class="banner">
+    <!-- Imagem já está no fundo -->
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3><i class="fas fa-box"></i> Pacote Nº1</h3>
+      <p><strong>Catering</strong><br>200 €<br>Inclui uma seleção equilibrada de doces, salgados e bebidas leves, tudo preparado com rigor e bom gosto.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-box"></i> Pacote Nº2</h3>
+      <p><strong>Aluguer de insuflável</strong><br>100 €<br>Inclui montagem e desmontagem de um insuflável seguro e colorido. Perfeito para festas infantis.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-box"></i> Pacote Nº3</h3>
+      <p><strong>Máquina de pipocas</strong><br>300 €<br>Cria um ambiente descontraído e divertido, com pipocas fresquinhas servidas na hora.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-box"></i> Pacote Nº4</h3>
+      <p><strong>Decoração temática e animação</strong><br>100 €<br>Transformamos qualquer espaço com balões, flores, mesas temáticas e detalhes personalizados.</p>
+    </div>
+  </section>
+
+</body>
+</html>

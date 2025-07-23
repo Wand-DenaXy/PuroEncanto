@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #f8f8fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 350px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 100px;
+    }
+
+    h2 {
+      color: #b68f5c;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f1e8ee;
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #555;
+    }
+
+    .btn {
+      background-color: #6d5a43;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #eee3dd;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .or {
+      margin: 10px 0;
+      color: #999;
+    }
+
+    .footer {
+      font-size: 14px;
+      color: #444;
+      margin-top: 20px;
+    }
+
+    .footer a {
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">
+      <img src="https://i.imgur.com/Nj1z6hl.png" alt="Logo"> <!-- Podes substituir pelo teu logo -->
+    </div>
+    <h2>SIGN UP</h2>
+
+    <div class="input-group">
+      <input type="email" placeholder="Email address" required>
+      <i class="fas fa-envelope"></i>
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Create a password" required>
+      <i class="fas fa-lock"></i>
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Confirm password" required>
+      <i class="fas fa-lock"></i>
+    </div>
+
+    <button class="btn">Create</button>
+
+    <div class="or">Or</div>
+
+    <div class="social-login">
+      <div class="social-btn"><strong>G</strong></div>
+      <div class="social-btn"><strong>f</strong></div>
+    </div>
+
+    <div class="footer">
+      Already have an account? <a href="#">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Font Awesome para os ícones -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
