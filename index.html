@@ -4,153 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serviços Festa</title>
+  <link rel="stylesheet" href="src/css/index.css">
+  <script src="src/js/lib/bootstrap.js"></script>
+  <script src="src/js/lib/datatables.js"></script>
+  <script src="src/js/lib/jquery.js"></script>
+  <script src="src/js/lib/select2.js"></script>
+  <script src="src/js/lib/sweatalert.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-
-    header {
-      background-color: #eee4dc;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 30px;
-      position: relative;
-    }
-
-    .logo img {
-      height: 50px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-button {
-      background-color: #6d5a43;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .nav-button:hover .dropdown {
-      display: block;
-    }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      background-color: #d4b183;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-      z-index: 10;
-      width: 120px;
-    }
-
-    .dropdown a {
-      display: block;
-      padding: 5px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .dropdown a:hover {
-      background-color: #6d5a43;
-    }
-
-    .icons {
-      display: flex;
-      gap: 15px;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .banner {
-      background-image: url('https://i.imgur.com/CjJNVYB.jpg'); /* Usa o teu URL aqui */
-      background-size: cover;
-      background-position: center;
-      height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin: 30px auto;
-      padding: 20px;
-      max-width: 1200px;
-    }
-
-    .card {
-      background-color: #d4b183;
-      padding: 20px;
-      border-radius: 8px;
-      width: 260px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .card p {
-      font-size: 14px;
-    }
-
-    .card i {
-      margin-right: 8px;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .banner {
-        height: 250px;
-      }
-
-      .cards {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .card {
-        width: 90%;
-      }
-    }
+ 
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <img src="https://i.imgur.com/Nj1z6hl.png" alt="Logo"> <!-- Substitui pelo teu -->
+      <img src="imgs/PURO ENCANTO LOGO.png" alt="Logo">
     </div>
-
     <nav>
         <a href="index.html"><button class="nav-button">Página Inicial</button></a>
         <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
@@ -176,7 +47,32 @@
   </header>
 
   <section class="banner">
-    <!-- Imagem já está no fundo -->
+    <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> 
   </section>
 
   <section class="cards">

@@ -1,0 +1,133 @@
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f6f6fb;
+      color: #333;
+    }
+
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 30;
+    }
+    p{
+        font-family: 'Times New Roman', Times, serif;
+      font-size: 30;    
+
+    }
+
+    header {
+      background-color: #eee4dc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-button {
+      background-color: #6d5a43;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-button:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background-color: #d4b183;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      z-index: 10;
+      width: 120px;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 5px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #6d5a43;
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .banner {
+      background-color: #c3915e;
+      padding: 100px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    section{
+        text-align: center;
+        margin-bottom: 100px;
+    }
+    .footer {
+      background-color: #eee4dc;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .footer img {
+      height: 25px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
