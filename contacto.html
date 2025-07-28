@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="src/css/contacto.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="imgs/PURO ENCANTO LOGO.png" alt="Logo">
+    </div>
+    <div class="nav-container">
+      <nav>
+          <a href="index.html"><button class="nav-button">Página Inicial</button></a>
+          <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
+          <button class="nav-button">Galeria</button>
+          <a href="sobre.html"><button class="nav-button">Sobre Nós</button></a>
+          <a href="evento.html"><button class="nav-button">Serviços</button></a>
+          <a href="contacto.html"><button class="nav-button">Contacto</button></a>
+        </nav>
+
+      <div class="icons">
+        <i class="fas fa-box"></i>
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+    </div>
+  </header>
+  <main class="contact-container">
+    <h2>Contacte-nos</h2>
+    <img src="imgs/PURO ENCANTO LOGO.png" class="contact-logo" alt="Logo Central">
+    
+    <form class="contact-form">
+      <label>Nome Completo:</label>
+      <input type="text" required>
+      
+      <label>E-mail:</label>
+      <input type="email" required>
+      
+      <label>Tipo de Evento:</label>
+      <select>
+        <option>Casamento</option>
+        <option>Aniversário</option>
+        <option>Batizado</option>
+        <option>Outros</option>
+      </select>
+      
+      <label>Mensagem:</label>
+      <textarea rows="1"></textarea>
+      
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div class="contact-info">
+      <p><strong>Email:</strong> geralpuroencanto@gmail.com</p>
+      <p><strong>Telefone:</strong> +351 963 753 653</p>
+    </div>
+  </main>
+
+  <footer>
+    <img src="imgs/PURO ENCANTO LOGO.png" class="footer-logo" alt="Logo Rodapé">
+    <p>© - 2025 Puro Encanto. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
