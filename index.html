@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serviços Festa</title>
   <link rel="stylesheet" href="src/css/index.css">
-  <script src="src/js/lib/bootstrap.js"></script>
-  <script src="src/js/lib/datatables.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="src/js/lib/datatables.js"></script>
   <script src="src/js/lib/jquery.js"></script>
   <script src="src/js/lib/select2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="src/js/lib/sweatalert.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -17,62 +19,58 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="imgs/PURO ENCANTO LOGO.png" alt="Logo">
     </div>
-    <nav>
-        <a href="index.html"><button class="nav-button">Página Inicial</button></a>
-        <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
-        <button class="nav-button">Galeria</button>
-        <div class="nav-button">
-          Sobre Nós
-          <div class="dropdown">
-            <a href="sobre.html">Sobre nós</a>
-            <a href="#">Missão</a>
-            <a href="#">Visão</a>
-            <a href="#">Valores</a>
+    <div class="nav-container">
+      <nav>
+          <a href="index.html"><button class="nav-button">Página Inicial</button></a>
+          <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
+          <button class="nav-button">Galeria</button>
+          <div class="nav-button">
+            Sobre Nós
+            <div class="dropdown">
+              <a href="sobre.html">Sobre nós</a>
+              <a href="#">Missão</a>
+              <a href="#">Visão</a>
+              <a href="#">Valores</a>
+            </div>
           </div>
-        </div>
-        <a href="evento.html"><button class="nav-button">Serviços</button></a>
-        <a href="evento.html"><button class="nav-button">Contacto</button></a>
+          <a href="evento.html"><button class="nav-button">Serviços</button></a>
+          <a href="evento.html"><button class="nav-button">Contacto</button></a>
 
-      </nav>
+        </nav>
 
-    <div class="icons">
-      <i class="fas fa-box"></i>
-      <i class="fas fa-shopping-cart"></i>
+      <div class="icons">
+        <i class="fas fa-box"></i>
+        <i class="fas fa-shopping-cart"></i>
+      </div>
     </div>
   </header>
 
   <section class="banner">
-    <div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="imgs/carra.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="imgs/pexels-cottonbro-3171837.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="imgs/criancas-brincando-em-um-castelo-insuflavel.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div> 
+</div>
   </section>
 
   <section class="cards">
