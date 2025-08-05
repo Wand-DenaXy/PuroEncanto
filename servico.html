@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <title>Serviços</title>
+  <link rel="stylesheet" href="/src/css/servico.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="src/js/lib/datatables.js"></script>
+  <script src="src/js/lib/jquery.js"></script>
+  <script src="src/js/lib/select2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="src/js/lib/sweatalert.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+</head>
+<body>
+    <header>
+    <div class="logo">
+      <img src="imgs/PURO ENCANTO LOGO.png" alt="Logo Bomdia11">
+    </div>
+    <div class="nav-container">
+      <nav>
+          <a href="pagina.html"><button class="nav-button">Página Inicial</button></a>
+          <a href="evento.html"><button class="nav-button">Criar Evento</button></a>
+          <a href="galeria.html"><button class="nav-button">Galeria</button></a>
+          <a href="sobre.html"><button class="nav-button">Sobre Nós</button></a>
+          <a href="servico.html"><button class="nav-button">Serviços</button></a>
+          <a href="contacto.html"><button class="nav-button">Contacto</button></a>
+        </nav>
+
+      <div class="icons">
+        <i class="fas fa-box"></i>
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+    </div>
+  </header>
+
+<section class="section pricing">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title text-center">
+          <br>
+          <h3>Serviços</h3>
+          <p>Todos os Serviços disponivel do <span class="titulo">Puro Encanto</span></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+      <div class="col">
+        <div class="pricing-item">
+          <div class="pricing-heading">
+            <div class="title"><h6>Aluguer insuflável</h6></div>
+            <div class="price"><h2>100<span>€</span></h2><p>Por pessoa</p></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="feature-list m-0 p-0">
+              <li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seat</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
+              <li><p><span class="fa fa-times-circle unavailable"></span>Certificate</p></li>
+              <li><p><span class="fa fa-times-circle unavailable"></span>Easy Access</p></li>
+            </ul>
+          </div>
+          <div class="pricing-footer text-center">
+            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
+          </div>
+        </div>
+      </div>
+                <div class="col">
+        <div class="pricing-item">
+          <div class="pricing-heading">
+            <div class="title"><h6>Catering</h6></div>
+            <div class="price"><h2>200<span>€</span></h2><p>Por pessoa</p></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="feature-list m-0 p-0">
+              <br>
+              <li><p><span class="fa fa-check-circle available"></span>2 Comfortable Seats</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Lunch Included</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
+              <li><p><span class="fa fa-times-circle unavailable"></span>VIP Area</p></li>
+            </ul>
+          </div>
+          <div class="pricing-footer text-center">
+            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="pricing-item">
+          <div class="pricing-heading">
+            <div class="title"><h6>Máquina de pipocas</h6></div>
+            <div class="price"><h2>300<span>€</span></h2><p>Por pessoa</p></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="feature-list m-0 p-0">
+              <li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seat</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Easy Access</p></li>
+            </ul>
+          </div>
+          <div class="pricing-footer text-center">
+            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="pricing-item">
+          <div class="pricing-heading">
+            <div class="title"><h6>Decoração temática</h6></div>
+            <div class="price"><h2>100<span>€</span></h2><p>Por pessoa</p></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="feature-list m-0 p-0">
+              <br>
+              <li><p><span class="fa fa-check-circle available"></span>2 Comfortable Seats</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Lunch Included</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
+              <li><p><span class="fa fa-times-circle unavailable"></span>VIP Area</p></li>
+            </ul>
+          </div>
+          <div class="pricing-footer text-center">
+            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
+          </div>
+        </div>
+      </div>
+          <div class="col">
+        <div class="pricing-item">
+          <div class="pricing-heading">
+            <div class="title"><h6>Bolo</h6></div>
+            <div class="price"><h2>70<span>€</span></h2><p>Por pessoa</p></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="feature-list m-0 p-0">
+              <br>
+              <li><p><span class="fa fa-check-circle available"></span>2 Comfortable Seats</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Lunch Included</p></li>
+              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
+              <li><p><span class="fa fa-times-circle unavailable"></span>VIP Area</p></li>
+            </ul>
+          </div>
+          <div class="pricing-footer text-center">
+            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
+          </div>
+        </div>
+      </div>
+</section>
+    <br>
+    <br>
+    <footer class="metodos footer">
+      <p><strong>Métodos de pagamentos</strong></p>
+      <div class="pagamentos">
+        <img src="mbway.png" alt="MB WAY"/>
+        <img src="visa.png" alt="VISA"/>
+        <img src="mastercard.png" alt="Mastercard"/>
+        <img src="gpay.png" alt="Google Pay"/>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+@import url('header.css');
+
+/* Reset e Box-Sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Footer: métodos de pagamento */
+.metodos {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #e8dfd6;
+  border-top: 2px solid #c8b9a9;
+}
+
+/* Imagens de pagamento */
+.pagamentos img {
+  height: 30px;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+ .pricing .pricing-item {
+  border: 1px solid #e5e5e5;
+}
+@media (max-width: 991px) {
+  .pricing .pricing-item {
+    margin-bottom: 30px;
+  }
+}
+.pricing .pricing-item .pricing-heading {
+  padding: 20px 40px 30px 40px;
+  background: #e4c39d;
+  border-bottom: 1px solid #e5e5e5;
+}
+.pricing .pricing-item .pricing-heading .title h6 {
+  text-transform: uppercase;
+  font-weight: 400;
+  width: 170px;
+  line-height: 50px;
+  border-bottom: 3px solid #d2a679;
+}
+.pricing .pricing-item .pricing-heading .price {
+  margin-top: 28px;
+}
+.pricing .pricing-item .pricing-heading .price h2 {
+  font-size: 3.625rem;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+.pricing .pricing-item .pricing-heading .price h2 span {
+  font-size: 1.5625rem;
+} 
+.pricing .pricing-item .pricing-body {
+  padding: 45px 40px;
+}
+.pricing .pricing-item .pricing-body ul.feature-list li {
+  list-style: none;
+}
+.pricing .pricing-item .pricing-body ul.feature-list li p span {
+  margin-right: 15px;
+}
+.pricing .pricing-item .pricing-body ul.feature-list li p span.unavailable {
+  color: #d2d2d2;
+}
+.pricing .pricing-item .pricing-body ul.feature-list li:not(:last-child) {
+  margin-bottom: 15px;
+}
+.pricing .pricing-item .pricing-footer {
+  padding-bottom: 40px;
+}
+.pricing .pricing-item.featured {
+  border: none;
+  box-shadow: 0px 0px 30px 0px rgba(11, 29, 66, 0.15);
+}
+.pricing .pricing-item.featured .pricing-heading .title h6 {
+  color: #fff;
+  border-bottom: 1px solid #f69351;
+}
+.pricing .pricing-item.featured .pricing-heading .price {
+  margin-top: 28px;
+}
+.pricing .pricing-item.featured .pricing-heading .price h2 {
+  color: #fff;
+  font-size: 3.625rem;
+  margin-bottom: 0px;
+}
+.pricing .pricing-item.featured .pricing-heading .price h2 span {
+  font-size: 1.5625rem;
+}
+.pricing .pricing-item.featured .pricing-heading .price p {
+  color: #fff;
+}
+.pricing.two .pricing-item {
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+@media (max-width: 991px) {
+  .pricing.two .pricing-item {
+    margin-bottom: 30px;
+  }
+}
+.pricing.two .pricing-item .pricing-heading {
+  position: relative;
+  margin-bottom: 10px;
+}
+.pricing.two .pricing-item .pricing-heading .title h6 {
+  position: relative;
+}
+.pricing.two .pricing-item .pricing-heading .price {
+  position: relative;
+}
+.pricing.two .pricing-item .pricing-heading:before {
+  content: "";
+  position: absolute;
+  bottom: -25%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 64px 500px 0 0;
+  border-color: #fafafa transparent transparent transparent;
+}
+@media (max-width: 991px) {
+  .pricing.two .pricing-item .pricing-heading:before {
+    content: none;
+  }
+}
+.pricing.two .pricing-item .pricing-body {
+  padding: 70px 40px 45px;
+}
+.pricing.two .pricing-item.featured .pricing-heading:before {
+  border-color: #ff6600 transparent transparent transparent;
+}
