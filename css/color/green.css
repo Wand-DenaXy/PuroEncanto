@@ -42,7 +42,7 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-    border-color: #5BB12F;
+    border-color: #925a19;
     background-color: #ff9148;
 }
 
@@ -51,7 +51,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-xl {
-    border-color: #5BB12F;
+    border-color: #925a19;
     background-color: #ff9148;
 }
 
@@ -79,12 +79,12 @@ fieldset[disabled] .btn-xl:active,
 .btn-xl.disabled.active,
 .btn-xl[disabled].active,
 fieldset[disabled] .btn-xl.active {
-    border-color: #5BB12F;
-    background-color: #5BB12F;
+    border-color: #925a19;
+    background-color: #925a19;
 }
 
 .btn-xl .badge {
-    color: #5BB12F;
+    color: #925a19;
     background-color: #fff;
 }
 
@@ -97,7 +97,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:active,
 .navbar-default .navbar-brand.active {
-    color: #5BB12F;
+    color: #ffbf77;
 }
 
 .navbar-default .navbar-toggle {
