@@ -116,7 +116,7 @@ li {
 
 .navbar-default {
     border-color: transparent;
-    background-color: #222;
+    background-color: #f89d48;
 }
 
 .navbar-default .navbar-brand {
@@ -124,11 +124,11 @@ li {
 }
 
 .navbar-default .navbar-collapse {
-    border-color: rgba(255,255,255,.02);
+    border-color: rgb(255, 172, 63);
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-    background-color: #fff;
+    background-color: #ff6b6b;
 }
 
 
@@ -137,7 +137,7 @@ li {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     letter-spacing: 1px;
-    color: #fff;
+    color: #000000;
     font-size: 12px;
 }
 
@@ -149,7 +149,7 @@ li {
 
 .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus {
-    color: #fff;
+    color: #ffffff;
 }
 
 @media(min-width:768px) {
@@ -180,13 +180,15 @@ li {
 
     .navbar-default.navbar-shrink {
         padding: 10px 0;
-        background-color: #222;
+        background-color: #EDE7E2;
     }
 
     .navbar-default.navbar-shrink .navbar-brand {
         font-size: 1.5em;
     }
-    
+    .navbar-brand page-scroll {
+        color: #ff8b8b;
+    }
 }
 
 
@@ -304,7 +306,7 @@ li {
 	height: 100%;
 	top: 0;
 	left: 50%;
-	background: #bdc3c7;
+	background: #3faaf1;
 }
 
 .close-button::before {
@@ -327,7 +329,7 @@ li {
 	z-index: 1001;
 	width: 300px;
 	height: 100%;
-	background: #111;
+	background: #ff0808;
 	padding: 2.5em 1.5em 0;
 	font-size: 1.15em;
     
