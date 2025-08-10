@@ -1,0 +1,148 @@
+
+CREATE DATABASE IF NOT EXISTS PuroEncanto;
+USE PuroEncanto;
+
+
+CREATE TABLE TipoUtilizador (
+    ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
+    Tipo VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE Utilizador (
+    ID_Utilizador INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Contacto VARCHAR(15),
+    ID_TipoUtilizador INT,
+    FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
+        ON DELETE SET NULL
+);
+
+
+CREATE TABLE Fornecedores (
+    ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    Contacto VARCHAR(15),
+    Email VARCHAR(100)
+);
+
+
+CREATE TABLE Produtos (
+    ID_Produto INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL,
+    Stock INT NOT NULL
+);
+
+
+CREATE TABLE Fornecimento (
+    ID_Fornecimento INT PRIMARY KEY AUTO_INCREMENT,
+    Data DATE NOT NULL,
+    Quantidade INT NOT NULL,
+    ID_Fornecedor INT,
+    ID_Produto INT,
+    FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
+        ON DELETE CASCADE,
+    FOREIGN KEY (ID_Produto) REFERENCES Produtos(ID_Produto)
+        ON DELETE CASCADE
+);
+
+
+CREATE TABLE Servicos (
+    ID_Servico INT PRIMARY KEY AUTO_INCREMENT,
+    Descricao VARCHAR(255) NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE Venda (
+    ID_Venda INT PRIMARY KEY AUTO_INCREMENT,
+    Data DATE NOT NULL,
+    ValorTotal DECIMAL(10,2) NOT NULL,
+    ID_Utilizador INT,
+    FOREIGN KEY (ID_Utilizador) REFERENCES Utilizador(ID_Utilizador)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Rendimento (
+    ID_Rendimento INT PRIMARY KEY AUTO_INCREMENT,
+    Valor DECIMAL(10,2) NOT NULL,
+    Data DATE NOT NULL,
+    ID_Venda INT,
+    FOREIGN KEY (ID_Venda) REFERENCES Venda(ID_Venda)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Gastos (
+    ID_Gasto INT PRIMARY KEY AUTO_INCREMENT,
+    Descricao VARCHAR(255),
+    Valor DECIMAL(10,2) NOT NULL,
+    Data DATE NOT NULL
+);
+
+CREATE TABLE TiposEventos (
+    ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Eventos (
+    ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    Data DATE NOT NULL,
+    Localizacao VARCHAR(100),
+    ID_TipoEvento INT,
+    FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento)
+        ON DELETE SET NULL
+);
+
+INSERT INTO TipoUtilizador (Tipo) VALUES 
+('Administrador'), 
+('Funcionário');
+
+
+INSERT INTO Utilizador (Nome, Email, Password, Contacto, ID_TipoUtilizador) VALUES
+('Pedro Silva', 'pedro@email.com', 'senha123', '912345678', 1),
+('Ana Costa', 'ana@email.com', 'senha456', '913456789', 2);
+
+
+INSERT INTO Fornecedores (Nome, Contacto, Email) VALUES
+('Fornecedor A', '917654321', 'fornA@email.com'),
+('Fornecedor B', '918765432', 'fornB@email.com');
+
+INSERT INTO Produtos (Nome, Preco, Stock) VALUES
+('Relógio Clássico', 120.00, 15),
+('Relógio Moderno', 180.50, 10);
+
+
+INSERT INTO Fornecimento (Data, Quantidade, ID_Fornecedor, ID_Produto) VALUES
+('2025-08-01', 5, 1, 1),
+('2025-08-03', 3, 2, 2);
+
+
+INSERT INTO Servicos (Descricao, Preco) VALUES
+('Limpeza de relógio', 25.00),
+('Reparação de bracelete', 40.00);
+
+
+INSERT INTO Venda (Data, ValorTotal, ID_Utilizador) VALUES
+('2025-08-05', 200.00, 1);
+
+
+INSERT INTO Rendimento (Valor, Data, ID_Venda) VALUES
+(200.00, '2025-08-05', 1);
+
+
+INSERT INTO Gastos (Descricao, Valor, Data) VALUES
+('Compra de material de limpeza', 35.00, '2025-08-02'),
+('Publicidade online', 50.00, '2025-08-04');
+
+
+INSERT INTO TiposEventos (Nome) VALUES
+('Promoção'),
+('Feira');
+
+INSERT INTO Eventos (Nome, Data, Localizacao, ID_TipoEvento) VALUES
+('Black Friday', '2025-11-29', 'Loja Principal', 1),
+('Feira de Natal', '2025-12-10', 'Centro Comercial', 2);
+
