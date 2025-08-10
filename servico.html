@@ -1,23 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Serviços</title>
-  <link rel="stylesheet" href="css/servico.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-<script src="src/js/lib/datatables.js"></script>
-  <script src="src/js/lib/jquery.js"></script>
-  <script src="src/js/lib/select2.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="src/js/lib/sweatalert.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fame - One Page Multipurpose Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    
+    
+    <!-- Animate CSS -->
+    <link href="css/animate.css" rel="stylesheet" >
+    
+    <!-- Owl-Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css" >
+    <link rel="stylesheet" href="css/owl.theme.css" >
+    <link rel="stylesheet" href="css/owl.transitions.css" >
+
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    
+    <!-- Colors CSS -->
+    <link rel="stylesheet" type="text/css" href="css/color/green.css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    
+    
+    <!-- Modernizer js -->
+    <script src="js/modernizr.custom.js"></script>
 </head>
-<body>
+
+<body class="index">
+    
+
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -28,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Puro Encanto</a>
+                <a class="navbar-brand page-scroll" href="index.html">Puro Encanto</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,10 +68,10 @@
                         <a class="page-scroll" href="#feature">Feature</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Portfolio</a>
+                        <a class="page-scroll" href="sobre.html">Sobre Nós</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about-us">About</a>
+                        <a class="page-scroll" href="sobre.html">About</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="servico.html">Serviço</a>
@@ -55,15 +82,7 @@
                     <li>
                         <a class="page-scroll" href="#pricing">Pricing</a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#latest-news">Latest News</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#testimonial">Testimonials</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#partner">Partner</a>
-                    </li>
+                     
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
@@ -74,129 +93,259 @@
         <!-- /.container-fluid -->
     </nav>
 
-<section class="section pricing">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-title text-center">
-          <br>
-          <h3>Serviços</h3>
-          <p>Todos os Serviços disponivel do <span class="titulo">Puro Encanto</span></p>
-        </div>
-      </div>
-    </div>
     
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
-      <div class="col">
-        <div class="pricing-item">
-          <div class="pricing-heading">
-            <div class="title"><h6>Aluguer insuflável</h6></div>
-            <div class="price"><h2>100<span>€</span></h2><p>Por pessoa</p></div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list m-0 p-0">
-              <li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seat</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
-              <li><p><span class="fa fa-times-circle unavailable"></span>Certificate</p></li>
-              <li><p><span class="fa fa-times-circle unavailable"></span>Easy Access</p></li>
-            </ul>
-          </div>
-          <div class="pricing-footer text-center">
-            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
-          </div>
+    
+    
+    <!-- Start Home Page Slider -->
+    <section id="page-top">
+        <!-- Carousel -->
+        <div id="main-slide" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#main-slide" data-slide-to="0" class="active"></li>
+                <li data-target="#main-slide" data-slide-to="1" ></li>
+                <li data-target="#main-slide" data-slide-to="2"></li>
+            </ol>
+            <!--/ Indicators end-->
+
+            <!-- Carousel inner -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="img-responsive" src="images/taças.png" alt="slider">
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated3">
+                                <span><strong>Fame</strong> for the highest</span>
+                            </h1>
+                            <p class="animated2">At vero eos et accusamus et iusto odio dignissimos<br> ducimus qui blanditiis praesentium voluptatum</p>	
+                            <a href="#feature" class="page-scroll btn btn-primary animated1">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Carousel item end -->
+                <div class="item">
+                    <img class="img-responsive" src="images/Decoracao.png" alt="slider">
+                    
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated1">
+                    		  <span>Welcome to <strong>Fame</strong></span>
+                    	    </h1>
+                            <p class="animated2">Generate a flood of new business with the<br> power of a digital media platform</p>
+                            <a href="#feature" class="page-scroll btn btn-primary animated3">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--/ Carousel item end -->
+                
+                <div class="item">
+                    <img class="img-responsive" src="images/nova.png" alt="slider">
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated2">
+                                <span>The way of <strong>Success</strong></span>
+                            </h1>
+                            <p class="animated1">At vero eos et accusamus et iusto odio dignissimos<br> ducimus qui blanditiis praesentium voluptatum</p>	
+                             <a class="animated3 slider btn btn-primary btn-min-block" href="#">Get Now</a><a class="animated3 slider btn btn-default btn-min-block" href="#">Live Demo</a>
+                                
+                        </div>
+                    </div>
+                </div>
+                <!--/ Carousel item end -->
+            </div>
+            <!-- Carousel inner end-->
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#main-slide" data-slide="prev">
+                <span><i class="fa fa-angle-left"></i></span>
+            </a>
+            <a class="right carousel-control" href="#main-slide" data-slide="next">
+                <span><i class="fa fa-angle-right"></i></span>
+            </a>
         </div>
-      </div>
-                <div class="col">
-        <div class="pricing-item">
-          <div class="pricing-heading">
-            <div class="title"><h6>Catering</h6></div>
-            <div class="price"><h2>200<span>€</span></h2><p>Por pessoa</p></div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list m-0 p-0">
-              <br>
-              <li><p><span class="fa fa-check-circle available"></span>2 Comfortable Seats</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Lunch Included</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
-              <li><p><span class="fa fa-times-circle unavailable"></span>VIP Area</p></li>
-            </ul>
-          </div>
-          <div class="pricing-footer text-center">
-            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
-          </div>
+        <!-- /carousel -->
+    </section>
+        <!-- End Portfolio Modal Section -->
+
+    <!-- Start Pricing Table Section -->
+    <div id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="section-title text-center">
+                            <h3>Serviços</h3>
+                            <p class="white-text">Duis aute irure dolor in reprehenderit in voluptate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="row">
+                        
+                <div class="pricing">
+                        
+                        <div class="col-md-12">
+                            <div class="pricing-table">
+                                <div class="plan-name">
+								    <h3>Bolo</h3>
+                                </div>
+                                <div class="plan-price">
+                                    <div class="price-value">70<span>.00€</span></div>
+                                    <div class="interval">per month</div>
+                                </div>
+                                <div class="plan-list">
+                                    <ul>
+                                        <li>40 GB Storage</li>
+                                        <li>40GB Transfer</li>
+                                        <li>10 Domains</li>
+                                        <li>20 Projects</li>
+                                        <li>Free installation</li>
+                                    </ul>
+                                </div>
+                                <div class="plan-signup">
+                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="pricing-table">
+                                <div class="plan-name">
+								    <h3>Decoração</h3>
+                                </div>
+                                <div class="plan-price">
+                                    <div class="price-value">100<span>.00€</span></div>
+                                    <div class="interval">per month</div>
+                                </div>
+                                <div class="plan-list">
+                                    <ul>
+                                        <li>40 GB Storage</li>
+                                        <li>40GB Transfer</li>
+                                        <li>10 Domains</li>
+                                        <li>20 Projects</li>
+                                        <li>Free installation</li>
+                                    </ul>
+                                </div>
+                                <div class="plan-signup">
+                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pricing-table">
+                                <div class="plan-name">
+								    <h3>Catering</h3>
+                                </div>
+                                <div class="plan-price">
+                                    <div class="price-value">200<span>.00€</span></div>
+                                    <div class="interval">per month</div>
+                                </div>
+                                <div class="plan-list">
+                                    <ul>
+                                        <li>40 GB Storage</li>
+                                        <li>40GB Transfer</li>
+                                        <li>10 Domains</li>
+                                        <li>20 Projects</li>
+                                        <li>Free installation</li>
+                                    </ul>
+                                </div>
+                                <div class="plan-signup">
+                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="pricing-table">
+                                <div class="plan-name">
+								    <h3>Pipocas</h3>
+                                </div>
+                                <div class="plan-price">
+                                    <div class="price-value">300<span>.00€</span></div>
+                                    <div class="interval">per month</div>
+                                </div>
+                                <div class="plan-list">
+                                    <ul>
+                                        <li>40 GB Storage</li>
+                                        <li>40GB Transfer</li>
+                                        <li>10 Domains</li>
+                                        <li>20 Projects</li>
+                                        <li>Free installation</li>
+                                    </ul>
+                                </div>
+                                <div class="plan-signup">
+                                    <a href="#" class="btn-system btn-small">Sign Up Now</a>
+                                </div>
+                            </div>
+                        </div>
+            </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="pricing-item">
-          <div class="pricing-heading">
-            <div class="title"><h6>Máquina de pipocas</h6></div>
-            <div class="price"><h2>300<span>€</span></h2><p>Por pessoa</p></div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list m-0 p-0">
-              <li><p><span class="fa fa-check-circle available"></span>1 Comfortable Seat</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Free Lunch and Coffee</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Easy Access</p></li>
-            </ul>
-          </div>
-          <div class="pricing-footer text-center">
-            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
-          </div>
+    </div>
+    <!-- End Pricing Table Section -->
+    
+        <footer class="style-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <span class="copyright">Copyright &copy; <a href="http://guardiantheme.com">Puro Encanto</a> 2025</span>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="footer-social text-center">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="footer-link">
+                          <span class="copyright">Todos os Direitos Reservados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+    <div id="loader">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
         </div>
-      </div>
-      <div class="col">
-        <div class="pricing-item">
-          <div class="pricing-heading">
-            <div class="title"><h6>Decoração temática</h6></div>
-            <div class="price"><h2>100<span>€</span></h2><p>Por pessoa</p></div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list m-0 p-0">
-              <br>
-              <li><p><span class="fa fa-check-circle available"></span>2 Comfortable Seats</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Lunch Included</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
-              <li><p><span class="fa fa-times-circle unavailable"></span>VIP Area</p></li>
-            </ul>
-          </div>
-          <div class="pricing-footer text-center">
-            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
-          </div>
-        </div>
-      </div>
-          <div class="col">
-        <div class="pricing-item">
-          <div class="pricing-heading">
-            <div class="title"><h6>Bolo</h6></div>
-            <div class="price"><h2>70<span>€</span></h2><p>Por pessoa</p></div>
-          </div>
-          <div class="pricing-body">
-            <ul class="feature-list m-0 p-0">
-              <br>
-              <li><p><span class="fa fa-check-circle available"></span>2 Comfortable Seats</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Lunch Included</p></li>
-              <li><p><span class="fa fa-check-circle available"></span>Certificate</p></li>
-              <li><p><span class="fa fa-times-circle unavailable"></span>VIP Area</p></li>
-            </ul>
-          </div>
-          <div class="pricing-footer text-center">
-            <a href="sobre.html"><button class="nav-button">Comprar Serviço</button></a>
-          </div>
-        </div>
-      </div>
-</section>
-    <br>
-    <br>
-    <footer class="metodos footer">
-      <p><strong>Métodos de pagamentos</strong></p>
-      <div class="pagamentos">
-        <img src="mbway.png" alt="MB WAY"/>
-        <img src="visa.png" alt="VISA"/>
-        <img src="mastercard.png" alt="Mastercard"/>
-        <img src="gpay.png" alt="Google Pay"/>
-      </div>
-    </footer>
-  </div>
+    </div>
+
+    
+
+    <!-- jQuery Version 2.1.1 -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="asset/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/count-to.js"></script>
+    <script src="js/jquery.appear.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.fitvids.js"></script>
+	<script src="js/styleswitcher.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/script.js"></script>
+
 </body>
+
 </html>
