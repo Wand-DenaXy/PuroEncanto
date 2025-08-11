@@ -1,22 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt  ">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registe-se</title>
+    <title>Inicie Sessão</title>
+    <link rel="stylesheet" href="css/login.css">
     <script src="asset/js/lib/jquery.js"></script>
     <script src="asset/js/lib/bootstrap.js"></script>
     <script src="asset/js/lib/datatables.js"></script>
     <script src="asset/js/lib/select2.js"></script>
     <script src="asset/js/lib/sweatalert.js"></script>
-
-
-
-
-    <link rel="stylesheet" href="css/login.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -26,27 +20,19 @@
         <div class="logo">
             <img src="images/logos/PURO ENCANTO LOGO.png" alt="Logo">
         </div>
-        <h2>Registe-se</h2>
+        <h2>Inicie Sessão</h2>
 
         <div class="input-group">
-            <input type="text" placeholder="Username" required id="username">
+            <input type="email" placeholder="Email address" required id="emailLogin">
             <i class="fas fa-envelope"></i>
         </div>
+
         <div class="input-group">
-            <input type="email" placeholder="Email" required id="email">
-            <i class="fas fa-envelope"></i>
-        </div>
-        <div class="input-group">
-            <input type="password" placeholder="Crie a sua palavra-chave" required id="password">
+            <input type="password" placeholder="Confirm password" required id="passwordLogin">
             <i class="fas fa-lock"></i>
         </div>
 
-        <div class="col-md-3">
-            <label for="tpUser" class="form-label">Tipo Utilizador</label>
-            <select class="form-control" id="tpUser">
-            </select>
-        </div>
-        <button class="btn" onclick="registaUser()">Crie a sua conta</button>
+        <button class="btn" onclick="login()">Login</button>
 
         <div class="or">Or</div>
 
@@ -56,11 +42,13 @@
         </div>
 
         <div class="footer">
-            Já tem uma conta? Faz o seu <a href="login.html">Login</a>
+            Não tem uma Conta? <a href="registo.html">Registe-se</a>
         </div>
     </div>
+
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="asset/js/login.js"></script>
+
 </body>
 
 </html>

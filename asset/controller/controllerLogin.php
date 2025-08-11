@@ -5,11 +5,11 @@ include_once "../model/modelLogin.php";
 $log = new Login();
 
 if($_POST['op'] == 1){
-    $resp = $log -> registaUser($_POST['username'],$_POST['password'],$_POST['tpUser']);
+    $resp = $log -> registaUser($_POST['username'],$_POST['email'],$_POST['password'],$_POST['tpUser']);
     echo($resp);
 
 }else if($_POST['op'] == 2){
-    $resp = $log -> login($_POST['username'],$_POST['password']);
+    $resp = $log -> login($_POST['email'],$_POST['password']);
     echo($resp);
 }else if($_POST['op'] == 3){
     $resp = $log -> logout();

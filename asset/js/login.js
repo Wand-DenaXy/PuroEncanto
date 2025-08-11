@@ -2,9 +2,10 @@ function registaUser(){
 
     let dados = new FormData();
     dados.append("op", 1);
-    dados.append("username", $('#username').val());
-    dados.append("password", $('#password').val());
-    dados.append("tpUser", $('#tpUser').val());
+    dados.append('username', $('#username').val())
+    dados.append('email', $('#email').val());
+    dados.append('password', $('#password').val());
+    dados.append('tpUser', $('#tpUser').val());
 
     $.ajax({
     url: "asset/controller/controllerLogin.php",
@@ -36,8 +37,8 @@ function login(){
 
     let dados = new FormData();
     dados.append("op", 2);
-    dados.append("username", $('#usernameLogin').val());
-    dados.append("password", $('#passwordLogin').val());
+    dados.append('email', $('#emailLogin').val());
+    dados.append('password', $('#passwordLogin').val());
 
     $.ajax({
     url: "asset/controller/controllerLogin.php",
@@ -56,7 +57,7 @@ function login(){
             alerta("Utilizador",obj.msg,"success");
             
             setTimeout(function(){ 
-                window.location.href = "main.php";
+                window.location.href = "index.php";
             }, 2000);
 
         }else{
