@@ -1,38 +1,10 @@
-<?php
-session_start();
-require 'conect.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $stmt = $pdo->prepare("SELECT * FROM Utilizador WHERE Email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['Password'])) {
-        $_SESSION['user_id'] = $user['ID_Utilizador'];
-        $_SESSION['tipo'] = $user['ID_TipoUtilizador'];
-
-        if ($user['ID_TipoUtilizador'] == 1) {
-            header("Location: sleek-bootstrap-main/theme/index.html"); 
-        } else {  
-            header("Location: index.html");   
-        }
-        exit;
-    } else {
-        echo "Email ou password inválidos.";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicie Sessão</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="src/css/login.css">
     <script src="src/js/lib/bootstrap.js"></script>
   <script src="src/js/lib/datatables.js"></script>
   <script src="src/js/lib/jquery.js"></script>
@@ -45,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   <div class="container">
     <div class="logo">
-      <img src="imgs/PURO ENCANTO LOGO.png" alt="Logo">
+      <img src="images/logos/PURO ENCANTO LOGO.png" alt="Logo">
     </div>
     <h2>Inicie Sessão</h2>
 
