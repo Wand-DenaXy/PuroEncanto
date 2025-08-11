@@ -4798,7 +4798,7 @@ input[type="button"].btn-block {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  min-width: 100px;
   word-wrap: break-word;
   background-color: #ffffff;
   background-clip: border-box;
@@ -4808,9 +4808,11 @@ input[type="button"].btn-block {
 
 .card > hr {
   margin-right: 0;
-  margin-left: 0;
+  margin-left: 100px;
 }
-
+.row-fix{
+  width: 2300px;
+}
 .card > .list-group {
   border-top: inherit;
   border-bottom: inherit;
