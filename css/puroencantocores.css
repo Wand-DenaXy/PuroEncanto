@@ -42,7 +42,7 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-    border-color: #925a19;
+    border-color:  #ffb951;
     background-color: #ff9148;
 }
 
@@ -51,7 +51,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-xl {
-    border-color: #925a19;
+    border-color:  #ffb951;
     background-color: #ff9148;
 }
 
@@ -79,12 +79,12 @@ fieldset[disabled] .btn-xl:active,
 .btn-xl.disabled.active,
 .btn-xl[disabled].active,
 fieldset[disabled] .btn-xl.active {
-    border-color: #925a19;
-    background-color: #925a19;
+    border-color:  #ffb951;
+    background-color:  #ffb951;
 }
 
 .btn-xl .badge {
-    color: #925a19;
+    color:  #ffb951;
     background-color: #fff;
 }
 
@@ -97,7 +97,12 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:active,
 .navbar-default .navbar-brand.active {
-    color: #ffbf77;
+    color:  #ffb951;
+}
+
+.navbar-default .navbar-toggle {
+    border-color:  #ffb951;
+    background-color: #925a19;
 }
 
 .navbar-default .nav li a:hover,
@@ -148,6 +153,7 @@ fieldset[disabled] .btn-xl.active {
 .no-touch .feature:hover i,
 	.no-touch .feature:active i,
 	.no-touch .feature:focus i {
+        
         box-shadow: 0 0 0 0 #925a19;
 }
 
@@ -182,7 +188,7 @@ fieldset[disabled] .btn-xl.active {
     color: #925a19;
 }
 .portfolio-item:hover .portfolio-caption {
-    background-color: rgba(91, 177, 47, 0.8);
+    background-color:  #ffb951(91, 177, 47, 0.8);
 }
 
 .welcome-section:hover .border {
@@ -216,7 +222,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .team-member .team-details {
-    background-color: rgba(91, 177, 47, 0.8);
+    background-color:  #ffb951(91, 177, 47, 0.8);
 }
 
 .counter-item i {
@@ -276,7 +282,7 @@ footer.style-1 .footer-social li a {
 }
 
 .footer-contact-info {
-    background: rgba(91, 177, 47, 0.8);
+    background:  #ffb951(91, 177, 47, 0.8);
 }
 
 footer.style-1 {
