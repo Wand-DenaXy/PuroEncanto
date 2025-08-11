@@ -718,7 +718,12 @@ pre code {
 .order-last {
   order: 13;
 }
-
+.mb-3
+{
+  margin: auto;
+  width: 70%;
+  text-align: center;
+}
 .order-0 {
   order: 0;
 }
