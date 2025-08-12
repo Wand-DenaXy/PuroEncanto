@@ -97,5 +97,6 @@ new Chart(ctxPie, {
     }
 });
 </script>
-
+  die("Connection failed: " . $conn->connect_error);
+}
 

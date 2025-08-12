@@ -19,11 +19,12 @@ CREATE TABLE Utilizador (
 );
 
 
-CREATE TABLE Fornecedores (
+CREATE TABLE IF NOT EXISTS Fornecedores (
     ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
-    Nome VARCHAR(100) NOT NULL,
-    Contacto VARCHAR(15),
-    Email VARCHAR(100)
+    nome VARCHAR(100) NOT NULL,
+	contacto VARCHAR(15),
+    email VARCHAR(100),
+    morada VARCHAR(100) NOT NULL
 );
 
 
@@ -134,9 +135,9 @@ INSERT INTO Utilizador (Nome, Email, Password, Contacto, ID_TipoUtilizador) VALU
 ('Ana Costa', 'ana@email.com', 'senha456', '913456789', 2);
 
 
-INSERT INTO Fornecedores (Nome, Contacto, Email) VALUES
-('Fornecedor A', '917654321', 'fornA@email.com'),
-('Fornecedor B', '918765432', 'fornB@email.com');
+INSERT INTO Fornecedores (Nome, Contacto, Email, Morada) VALUES
+('Fornecedor A', '917654321', 'fornA@email.com', 'Bairro da Casinha'),
+('Fornecedor B', '918765432', 'fornB@email.com', 'Fria Aleixo');
 
 
 INSERT INTO Produtos (Nome, Preco, Stock) VALUES
@@ -185,4 +186,4 @@ INSERT INTO VendasServicos (descricao, total_vendas) VALUES
 ('PE_Catering Serviço', 28200),
 ('PE_Decoração Serviço', 4300),
 ('PE_Insuflável Serviço', 2450),
-('PE_Máq Pipocas Serviço', 9000);
+('PE_Máq Pipocas Serviço', 9000);
