@@ -17,18 +17,19 @@ CREATE TABLE IF NOT EXISTS Utilizador (
 );
 
 
-CREATE TABLE IF NOT exists Fornecedores (
+CREATE TABLE IF NOT EXISTS Fornecedores (
     ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
-    Nome VARCHAR(100) NOT NULL,
-    Contacto VARCHAR(15),
-    Email VARCHAR(100)
+    nome VARCHAR(100) NOT NULL,
+	contacto VARCHAR(15),
+    email VARCHAR(100),
+    morada VARCHAR(100) NOT NULL
 );
 
 
 CREATE TABLE IF NOT exists Produtos (
     ID_Produto INT PRIMARY KEY AUTO_INCREMENT,
-    Nome VARCHAR(100) NOT NULL,
-    Preco DECIMAL(10,2) NOT NULL
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL
 );
 
 
@@ -96,14 +97,14 @@ INSERT INTO tipouser (descricao) VALUES
 ('Cliente');
 
 
-INSERT INTO Utilizador (Nome, Email, Password, Contacto, id_tipouser) VALUES
-('Pedro Silva', 'pedro@email.com', 'senha123', '912345678', 1),
-('Ana Costa', 'ana@email.com', 'senha456', '913456789', 2);
+INSERT INTO Utilizador (Nome, Email, Password, id_tipouser) VALUES
+('Pedro Silva', 'pedro@email.com', 'senha123', 1),
+('Ana Costa', 'ana@email.com', 'senha456', 2);
 
 
-INSERT INTO Fornecedores (Nome, Contacto, Email) VALUES
-('Fornecedor A', '917654321', 'fornA@email.com'),
-('Fornecedor B', '918765432', 'fornB@email.com');
+INSERT INTO Fornecedores (Nome, Contacto, Email, Morada) VALUES
+('Fornecedor A', '917654321', 'fornA@email.com', 'Bairro da Casinha'),
+('Fornecedor B', '918765432', 'fornB@email.com', 'Fria Aleixo');
 
 INSERT INTO Produtos (Nome, Preco) VALUES
 ('Relógio Clássico', 120.00),

@@ -12,51 +12,21 @@
 <body>
 
 <div class="sidebar">
-    <div class="logo">Puro Encanto</div>
+    <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">Puro Encanto</div>
+    <hr>
     <a href="dashboard.html"><i class="bi bi-grid"></i> Dashboard</a>
-    <a href="funcionario.html"><i class="bi bi-people"></i> Funcionário</a>
+    <a href="funcionario.html"><i class="bi bi-people"></i> Fornecedores</a>
     <a href="#"><i class="bi bi-journal"></i> Balancete</a>
+    <a href="#"><i class="bi bi-journal"></i> Rendimentos</a>
     <a href="#"><i class="bi bi-box-arrow-in-right"></i>Perfil</a>
 </div>
 <div class="content">
     <!-- Topbar -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4>Dashboard</h4>
+        <h4>Fornecedores</h4>
         <div class="d-flex align-items-center">
             <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="User">
             <span>Manuel Silvestre</span>
-        </div>
-    </div>
-
-    <!-- Cards -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card p-3">
-                <h6>Online Signups</h6>
-                <h4>71,503</h4>
-                <canvas id="chart1" height="80"></canvas>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card p-3">
-                <h6>New Visitors Today</h6>
-                <h4>9,503</h4>
-                <canvas id="chart2" height="80"></canvas>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card p-3">
-                <h6>Monthly Total Order</h6>
-                <h4>71,503</h4>
-                <canvas id="chart3" height="80"></canvas>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card p-3">
-                <h6>Total Revenue This Year</h6>
-                <h4>9,503</h4>
-                <canvas id="chart4" height="80"></canvas>
-            </div>
         </div>
     </div>
 
@@ -64,26 +34,21 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card p-3">
-                <h5>Adicionar Funcionário</h5>
+                <h5>Adicionar Fornecedores</h5>
                 <form>
                     <div class="row mb-2">
-                        <div class="col"><input type="text" class="form-control" placeholder="Número"></div>
-                        <div class="col"><input type="text" class="form-control" placeholder="Nome"></div>
-                        <div class="col"><input type="number" class="form-control" placeholder="Idade"></div>
+                        <div class="col"><input type="text" class="form-control" placeholder="Nome" id="nome"></div>
+                        <div class="col"><input type="text" class="form-control" placeholder="Contacto" id="contacto"></div>
+                        <div class="col"><input type="number" class="form-control" placeholder="Email" id="email"></div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col"><input type="tel" class="form-control" placeholder="Telefone"></div>
-                        <div class="col"><input type="email" class="form-control" placeholder="Email"></div>
                         <div class="col">
-                            <select class="form-control">
-                                <option>Clube</option>
-                                <option>Clube 1</option>
-                                <option>Clube 2</option>
-                            </select>
+                            <input type="text" class="form-control" placeholder="NIF" id="nif">
+
                         </div>
                     </div>
                     <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Morada">
+                        <input type="text" class="form-control" placeholder="Morada" id="morada">
                     </div>
                     <button type="submit" class="btn btn-primary">Registar</button>
                 </form>
@@ -94,12 +59,34 @@
             <div class="card p-3">
                 <h5>Importar Dados (CSV)</h5>
                 <input type="file" class="form-control mb-3">
-                <button class="btn btn-success">Importar Sessões</button>
+                <button class="btn btn-success">Importar Fornecedores</button>
             </div>
         </div>
     </div>
 </div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Fornecedores</h5>
 
+                <table class="table table-striped" id="tblFornecedores">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">NIF</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Remover</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listagemFuncionarios">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx1 = document.getElementById('chart1').getContext('2d');
@@ -114,6 +101,6 @@
     const ctx4 = document.getElementById('chart4').getContext('2d');
     new Chart(ctx4, { type: 'line', data: { labels: ['', '', '', '', '', '', ''], datasets: [{ data: [2,3,2,4,3,4,2], backgroundColor: 'rgba(28,200,138,0.3)', borderColor: '#1cc88a', fill: true }] }, options: { plugins: { legend: { display: false }}, scales: { x: { display: false }, y: { display: false }}} });
 </script>
-
+    <script src="asset/js/funcionario.js"></script>
 </body>
 </html>
