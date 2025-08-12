@@ -105,12 +105,12 @@ class Fornecedores1{
         return ($msg);
     }
 
-    function removerFornecedores($num){
+    function removerFornecedores($ID_Fornecedor){
         global $conn;
         $msg = "";
         $flag = true;
 
-        $sql = "DELETE FROM jogadores WHERE num = ".$num;
+        $sql = "DELETE FROM Fornecedores WHERE ID_Fornecedor = ".$ID_Fornecedor;
 
         if ($conn->query($sql) === TRUE) {
             $msg = "Removido com Sucesso";
