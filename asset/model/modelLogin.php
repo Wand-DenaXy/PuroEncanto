@@ -5,17 +5,17 @@ require_once 'connection.php';
 
 class Login{
 
-    function registaUser($username, $pw, $tpUser){
+    function registaUser($username, $email,$pw,$tpUser){
     
         global $conn;
         $msg = "";
         $flag = false;
 
-        $pw = md5($pw);
+        // $pw = md5($pw);
 
-        $stmt = $conn->prepare("INSERT INTO utilizador (user, pw, idtpuser) 
+        $stmt = $conn->prepare("INSERT INTO utilizador (nome, email, password, id_tipouser) 
         VALUES (?, ?, ?, ?);");
-        $stmt->bind_param("ssis", $username, $pw, $tpUser);
+        $stmt->bind_param("sssi", $username, $pw, $email,$tpUser);
 
         $stmt->execute();
 
@@ -34,48 +34,45 @@ class Login{
 
     }
 
-    function login($username, $pw){
+function login($username, $pw){
+    global $conn;
+    $msg = "";
+    $flag = true;
+    session_start();
 
-        global $conn;
-        $msg = "";
-        $flag = true;
-        session_start();
+    $stmt = $conn->prepare("SELECT * FROM Utilizador WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $pw);
+    $stmt->execute();
 
-        $pw = md5($pw);
+    $result = $stmt->get_result();
 
-        $stmt = $conn->prepare("SELECT * FROM utilizador WHERE user LIKE ? AND pw LIKE ?;");
-        $stmt->bind_param("ss", $username, $pw);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            $msg = "Bemvindo ".$row['user'];
-            $_SESSION['utilizador'] = $row['user'];
-            $_SESSION['tipo'] = $row['idtpuser'];
-            $_SESSION['foto'] = $row['foto'];
-        }else{
-            $flag = false;
-            $msg = "Erro! Dados Inválidos"; 
-        }
-
-        $stmt->close();
-        $conn->close();
-        
-        return (json_encode(array(
-            "msg" => $msg,
-            "flag" => $flag
-        )));
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        $_SESSION['utilizador'] = $row['nome'];
+        $_SESSION['email'] = $row['email'];
+        // $_SESSION['password'] = $row['password'];
+        $_SESSION['tpUser'] = $row['id_tipouser'];
+    } else {
+        $flag = false;
+        $msg = "Erro! Dados Inválidos";
     }
 
-    function logout(){
+    $stmt->close();
+    $conn->close();
 
-        session_start();
-        session_destroy();
+    return json_encode(array(
+        "msg" => $msg,
+        "flag" => $flag
+    ));
+}
 
-        return("Obrigado!");
-    }
+ function logout(){
+
+     session_start();
+     session_destroy();
+
+     return("Obrigado!");
+ }
 
     function getTiposUser(){
 
