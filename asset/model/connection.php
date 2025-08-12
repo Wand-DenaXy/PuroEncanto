@@ -56,9 +56,7 @@ new Chart(ctx, {
 });
 </script>
 <?php
-// ======================
-// GRÁFICO 2 - Vendas de Serviços
-// ======================
+
 $sql = "SELECT descricao, total_vendas FROM VendasServicos";
 $result = $conn->query($sql);
 
