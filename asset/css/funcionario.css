@@ -1,0 +1,33 @@
+        body {
+            background-color: #f5f6fa;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #1a1f36;
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+        }
+        .sidebar a:hover {
+            background-color: #2d3554;
+        }
+        .sidebar .logo {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+        }
