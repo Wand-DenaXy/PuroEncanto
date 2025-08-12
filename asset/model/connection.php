@@ -38,8 +38,7 @@ new Chart(ctx, {
     type: "line",
     data: {
         labels: <?php echo json_encode($meses); ?>,
-        datasets: [
-            {
+        datasets: [{
                 label: "Gastos",
                 borderColor: "#cb0c9f",
                 data: <?php echo json_encode($gastos); ?>,
@@ -92,11 +91,12 @@ new Chart(ctxPie, {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: { display: true }
+            legend: {
+                display: true
+            }
         }
     }
 });
 </script>
-  die("Connection failed: " . $conn->connect_error);
+die("Connection failed: " . $conn->connect_error);
 }
-

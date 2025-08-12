@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connection.php';
+require_once 'connection2.php';
 
 
 class Login{

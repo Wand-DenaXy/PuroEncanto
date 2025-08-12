@@ -1,40 +1,14 @@
 <?php
-$sql = "SELECT Mes, Rendimentos, Gastos 
-        FROM ResumoFinanceiro 
-        WHERE Ano = 2025 
-        ORDER BY Mes";
-$result = $conn->query($sql);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "puroencanto";
 
-$meses = [];
-$rendimentos = [];
-$gastos = [];
+// Criar ligação
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-while($row = $result->fetch_assoc()) {
-    // Converte número do mês para abreviação
-    $meses[] = date("M", mktime(0, 0, 0, $row['Mes'], 1));
-    $rendimentos[] = (float)$row['Rendimentos'];
-    $gastos[] = (float)$row['Gastos'];
+// Verificar ligação
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
-<script>
-const ctx = document.getElementById("chart-line").getContext("2d");
-new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: <?php echo json_encode($meses); ?>,
-        datasets: [{
-                label: "Gastos",
-                borderColor: "#cb0c9f",
-                data: <?php echo json_encode($gastos); ?>,
-                fill: false
-            },
-            {
-                label: "Rendimentos",
-                borderColor: "#3A416F",
-                data: <?php echo json_encode($rendimentos); ?>,
-                fill: false
-            }
-        ]
-    }
-});
-</script>
