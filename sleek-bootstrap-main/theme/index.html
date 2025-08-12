@@ -55,8 +55,53 @@
       NProgress.configure({ showSpinner: false });
       NProgress.start();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+async function carregarGraficoFinanceiro() {
+    const res = await fetch('dados_financeiro.php');
+    const data = await res.json();
 
-    <div id="toaster"></div>
+    const ctx = document.getElementById('graficoFinanceiro').getContext('2d');
+    new Chart(ctx, {
+        data: {
+            labels: data.labels,
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Gastos',
+                    data: data.gastos,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    type: 'bar',
+                    label: 'Rendimentos',
+                    data: data.rendimentos,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: value => value.toLocaleString() + ' €'
+                    }
+                }
+            }
+        }
+    });
+}
+
+carregarGraficoFinanceiro();
+</script>
+
+
 
     <!-- ====================================
     ——— WRAPPER
@@ -105,12 +150,11 @@
                     </div>
                   </ul>
                 </li>
-
-                <li class="has-sub">
+                <li class="has-sub ">
                   <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#app"
                     aria-expanded="false" aria-controls="app">
                     <i class="mdi mdi-pencil-box-multiple"></i>
-                    <span class="nav-text">Funcionario</span> <b class="caret"></b>
+                    <span class="nav-text">Funcionarios</span> <b class="caret"></b>
                   </a>
 
                   <ul class="collapse " id="app" data-parent="#sidebar-menu">
@@ -118,24 +162,6 @@
                       <li class="">
                         <a class="sidenav-item-link" href="chat.html">
                           <span class="nav-text">Chat</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="contacts.html">
-                          <span class="nav-text">Contacts</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="team.html">
-                          <span class="nav-text">Team</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="calendar.html">
-                          <span class="nav-text">Calendar</span>
                         </a>
                       </li>
                     </div>
@@ -410,52 +436,6 @@
                 </li>
 
                 <li class="has-sub ">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#widgets"
-                    aria-expanded="false" aria-controls="widgets">
-                    <i class="mdi mdi-widgets"></i>
-                    <span class="nav-text">Widgets</span> <b class="caret"></b>
-                  </a>
-
-                  <ul class="collapse " id="widgets" data-parent="#sidebar-menu">
-                    <div class="sub-menu">
-                      <li class="">
-                        <a class="sidenav-item-link" href="general-widget.html">
-                          <span class="nav-text">General Widget</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="chart-widget.html">
-                          <span class="nav-text">Chart Widget</span>
-                        </a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <li class="has-sub ">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#charts"
-                    aria-expanded="false" aria-controls="charts">
-                    <i class="mdi mdi-chart-pie"></i>
-                    <span class="nav-text">Charts</span> <b class="caret"></b>
-                  </a>
-
-                  <ul class="collapse " id="charts" data-parent="#sidebar-menu">
-                    <div class="sub-menu">
-                      <li class="">
-                        <a class="sidenav-item-link" href="chartjs.html">
-                          <span class="nav-text">ChartJS</span>
-                        </a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <!-- <li class="section-title">
-                  Pages
-                </li> -->
-
-                <li class="has-sub ">
                   <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#pages"
                     aria-expanded="false" aria-controls="pages">
                     <i class="mdi mdi-image-filter-none"></i>
@@ -510,152 +490,11 @@
                     </div>
                   </ul>
                 </li>
-
-                <li class="has-sub ">
-                  <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#documentation"
-                    aria-expanded="false" aria-controls="documentation">
-                    <i class="mdi mdi-book-open-page-variant"></i>
-                    <span class="nav-text">Documentation</span> <b class="caret"></b>
-                  </a>
-
-                  <ul class="collapse " id="documentation" data-parent="#sidebar-menu">
-                    <div class="sub-menu">
-                      <li class="section-title">
-                        Getting Started
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="introduction.html">
-                          <span class="nav-text">Introduction</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="quick-start.html">
-                          <span class="nav-text">Quick Start</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="customization.html">
-                          <span class="nav-text">Customization</span>
-                        </a>
-                      </li>
-
-                      <li class="section-title">
-                        Layouts
-                      </li>
-
-                      <li class="has-sub ">
-                        <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#header-variations" aria-expanded="false" aria-controls="header-variations">
-                          <span class="nav-text">Header Variations</span> <b class="caret"></b>
-                        </a>
-
-                        <ul class="collapse " id="header-variations">
-                          <div class="sub-menu">
-                            <li class="">
-                              <a href="header-fixed.html">Header Fixed</a>
-                            </li>
-
-                            <li class="">
-                              <a href="header-static.html">Header Static</a>
-                            </li>
-
-                            <li class="">
-                              <a href="header-light.html">Header Light</a>
-                            </li>
-
-                            <li class="">
-                              <a href="header-dark.html">Header Dark</a>
-                            </li>
-                          </div>
-                        </ul>
-                      </li>
-
-                      <li class="has-sub ">
-                        <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#sidebar-variations" aria-expanded="false" aria-controls="sidebar-variations">
-                          <span class="nav-text">Sidebar Variations</span> <b class="caret"></b>
-                        </a>
-
-                        <ul class="collapse " id="sidebar-variations">
-                          <div class="sub-menu">
-                            <li class="">
-                              <a href="sidebar-fixed-default.html">Sidebar Fixed Default</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-fixed-minified.html">Sidebar Fixed Minified</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-fixed-offcanvas.html">Sidebar Fixed Offcanvas</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-static-default.html">Sidebar Static Default</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-static-minified.html">Sidebar Static Minified</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-static-offcanvas.html">Sidebar Static Offcanvas</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-with-footer.html">Sidebar With Footer</a>
-                            </li>
-
-                            <li class="">
-                              <a href="sidebar-without-footer.html">Sidebar Without Footer</a>
-                            </li>
-
-                            <li class="">
-                              <a href="right-sidebar.html">Right Sidebar</a>
-                            </li>
-                          </div>
-                        </ul>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="rtl.html">
-                          <span class="nav-text">RTL Direction</span>
-                        </a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-
-                <!-- <li class="section-title">
-                  Documentation
-                </li> -->
               </ul>
-            </div>
-
-            <div class="sidebar-footer">
-              <hr class="separator mb-0" />
-              <div class="sidebar-footer-content">
-                <h6 class="text-uppercase">
-                  Cpu Uses <span class="float-right">40%</span>
-                </h6>
-
-                <div class="progress progress-xs">
-                  <div class="progress-bar active" style="width: 40%;" role="progressbar"></div>
-                </div>
-
-                <h6 class="text-uppercase">
-                  Memory Uses <span class="float-right">65%</span>
-                </h6>
-
-                <div class="progress progress-xs">
-                  <div class="progress-bar progress-bar-warning" style="width: 65%;" role="progressbar"></div>
-                </div>
-              </div>
+            
             </div>
           </div>
         </aside>
-
 
           <!-- ====================================
         ——— PAGE WRAPPER
@@ -1292,6 +1131,9 @@
     </tr>
   </tbody>
 </table>
+
+
+
                             </div>
                           </div>
                         </div>
@@ -1317,6 +1159,52 @@
   </div> <!-- End Wrapper -->
 
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+async function carregarGraficoFinanceiro() {
+    const res = await fetch('dados_financeiro.php');
+    const data = await res.json();
+
+    const ctx = document.getElementById('graficoFinanceiro').getContext('2d');
+    new Chart(ctx, {
+        data: {
+            labels: data.labels,
+            datasets: [
+                {
+                    type: 'bar',
+                    label: 'Gastos',
+                    data: data.gastos,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    type: 'bar',
+                    label: 'Rendimentos',
+                    data: data.rendimentos,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: value => value.toLocaleString() + ' €'
+                    }
+                }
+            }
+        }
+    });
+}
+
+carregarGraficoFinanceiro();
+</script>
+
     <!-- <script type="module">
       import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
 
@@ -1328,6 +1216,8 @@
     <script src="assets/plugins/jquery/jquery.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/plugins/simplebar/simplebar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
  
     <script src='assets/plugins/charts/Chart.min.js'></script>
     <script src='assets/js/chart.js'></script>

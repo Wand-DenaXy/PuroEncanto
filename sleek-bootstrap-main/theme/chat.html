@@ -26,11 +26,13 @@
     
     
     <link href='assets/plugins/toastr/toastr.min.css' rel='stylesheet'>
+
     <script src="assets/js/lib/bootstrap.js"></script>
     <script src="assets/js/lib/jquery.js"></script>
     <script src="assets/js/lib/datatables.js"></script>
     <script src="assets/js/lib/sweatalert.js"></script>
     
+
     
     
     
@@ -114,6 +116,8 @@
                     aria-expanded="false" aria-controls="app">
                     <i class="mdi mdi-pencil-box-multiple"></i>
                     <span class="nav-text">Funcionario</span> <b class="caret"></b>
+
+                    <span class="nav-text">Funcionarios</span> <b class="caret"></b>
                   </a>
 
                   <ul class="collapse " id="app" data-parent="#sidebar-menu">
@@ -121,24 +125,6 @@
                       <li class="">
                         <a class="sidenav-item-link" href="chat.html">
                           <span class="nav-text">Chat</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="contacts.html">
-                          <span class="nav-text">Contacts</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="team.html">
-                          <span class="nav-text">Team</span>
-                        </a>
-                      </li>
-
-                      <li class="">
-                        <a class="sidenav-item-link" href="calendar.html">
-                          <span class="nav-text">Calendar</span>
                         </a>
                       </li>
                     </div>
@@ -897,7 +883,26 @@
                       <br>
                       <button class="btn btn-success mt-2" onclick="uploadCSV()">Importar Sessões</button>
                     </div>
+                          <h2>Sales Of The Year</h2>
+                        </div>
+   
+                      </div>
+			</div>
 
+			<div class="col-xl-4 col-md-12">
+				
+                  <!-- Doughnut Chart -->
+                  <div class="card card-default">
+                    <div class="card-header justify-content-center">
+                      <h2>Importar Dados (CSV)</h2>
+                      </div>
+                      <br>
+                      <div class="mb-3">
+                      <input type="file" class="form-control" id="ficheiroCSV">
+                      <br>
+                      <br>
+                      <button class="btn btn-success mt-2" onclick="uploadCSV()">Importar Sessões</button>
+                    </div>
 			</div>
 		</div>
 
