@@ -1,18 +1,20 @@
 CREATE DATABASE IF NOT EXISTS PuroEncanto;
 USE PuroEncanto;
 
-CREATE TABLE IF NOT EXISTS tipouser (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    descricao VARCHAR(50) NOT NULL
+
+CREATE TABLE TipoUtilizador (
+    ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
+    Tipo VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Utilizador (
+CREATE TABLE Utilizador (
     ID_Utilizador INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    id_tipouser INT,
-    FOREIGN KEY (id_tipouser) REFERENCES tipouser(id)
+    Contacto VARCHAR(15),
+    ID_TipoUtilizador INT,
+    FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
         ON DELETE SET NULL
 );
 
@@ -26,14 +28,15 @@ CREATE TABLE IF NOT EXISTS Fornecedores (
 );
 
 
-CREATE TABLE IF NOT exists Produtos (
+CREATE TABLE Produtos (
     ID_Produto INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    preco DECIMAL(10,2) NOT NULL
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL,
+    Stock INT NOT NULL
 );
 
 
-CREATE TABLE IF NOT exists Fornecimento (
+CREATE TABLE Fornecimento (
     ID_Fornecimento INT PRIMARY KEY AUTO_INCREMENT,
     Data DATE NOT NULL,
     Quantidade INT NOT NULL,
@@ -46,13 +49,14 @@ CREATE TABLE IF NOT exists Fornecimento (
 );
 
 
-CREATE TABLE IF NOT exists Servicos (
+CREATE TABLE Servicos (
     ID_Servico INT PRIMARY KEY AUTO_INCREMENT,
     Descricao VARCHAR(255) NOT NULL,
     Preco DECIMAL(10,2) NOT NULL
 );
 
-CREATE TABLE IF NOT exists Venda (
+
+CREATE TABLE Venda (
     ID_Venda INT PRIMARY KEY AUTO_INCREMENT,
     Data DATE NOT NULL,
     ValorTotal DECIMAL(10,2) NOT NULL,
@@ -61,7 +65,8 @@ CREATE TABLE IF NOT exists Venda (
         ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT exists Rendimento (
+
+CREATE TABLE Rendimento (
     ID_Rendimento INT PRIMARY KEY AUTO_INCREMENT,
     Valor DECIMAL(10,2) NOT NULL,
     Data DATE NOT NULL,
@@ -70,19 +75,19 @@ CREATE TABLE IF NOT exists Rendimento (
         ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT exists Gastos (
+CREATE TABLE Gastos (
     ID_Gasto INT PRIMARY KEY AUTO_INCREMENT,
     Descricao VARCHAR(255),
     Valor DECIMAL(10,2) NOT NULL,
     Data DATE NOT NULL
 );
 
-CREATE TABLE IF NOT exists TiposEventos (
+CREATE TABLE TiposEventos (
     ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT exists Eventos (
+CREATE TABLE Eventos (
     ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
     Data DATE NOT NULL,
@@ -92,23 +97,52 @@ CREATE TABLE IF NOT exists Eventos (
         ON DELETE SET NULL
 );
 
-INSERT INTO tipouser (descricao) VALUES 
+CREATE TABLE IF NOT EXISTS ResumoFinanceiro (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Ano INT NOT NULL,
+    Mes INT NOT NULL,
+    Rendimentos DECIMAL(10,2) NOT NULL,
+    Gastos DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE visitantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip VARCHAR(50),
+    ultima_atividade DATETIME,
+    total_visitas INT DEFAULT 1
+);
+
+CREATE TABLE visitas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip VARCHAR(50),
+    ultima_atividade TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS VendasServicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    total_vendas DECIMAL(10,2) NOT NULL
+);
+
+
+INSERT INTO TipoUtilizador (Tipo) VALUES 
 ('Administrador'), 
-('Cliente');
+('Funcionário');
 
-
-INSERT INTO Utilizador (Nome, Email, Password, id_tipouser) VALUES
-('Pedro Silva', 'pedro@email.com', 'senha123', 1),
-('Ana Costa', 'ana@email.com', 'senha456', 2);
+-- Utilizadores
+INSERT INTO Utilizador (Nome, Email, Password, Contacto, ID_TipoUtilizador) VALUES
+('Pedro Silva', 'pedro@email.com', 'senha123', '912345678', 1),
+('Ana Costa', 'ana@email.com', 'senha456', '913456789', 2);
 
 
 INSERT INTO Fornecedores (Nome, Contacto, Email, Morada) VALUES
 ('Fornecedor A', '917654321', 'fornA@email.com', 'Bairro da Casinha'),
 ('Fornecedor B', '918765432', 'fornB@email.com', 'Fria Aleixo');
 
-INSERT INTO Produtos (Nome, Preco) VALUES
-('Relógio Clássico', 120.00),
-('Relógio Moderno', 180.50);
+
+INSERT INTO Produtos (Nome, Preco, Stock) VALUES
+('Relógio Clássico', 120.00, 15),
+('Relógio Moderno', 180.50, 10);
 
 
 INSERT INTO Fornecimento (Data, Quantidade, ID_Fornecedor, ID_Produto) VALUES
@@ -119,7 +153,6 @@ INSERT INTO Fornecimento (Data, Quantidade, ID_Fornecedor, ID_Produto) VALUES
 INSERT INTO Servicos (Descricao, Preco) VALUES
 ('Limpeza de relógio', 25.00),
 ('Reparação de bracelete', 40.00);
-
 
 INSERT INTO Venda (Data, ValorTotal, ID_Utilizador) VALUES
 ('2025-08-05', 200.00, 1);
@@ -133,7 +166,6 @@ INSERT INTO Gastos (Descricao, Valor, Data) VALUES
 ('Compra de material de limpeza', 35.00, '2025-08-02'),
 ('Publicidade online', 50.00, '2025-08-04');
 
-
 INSERT INTO TiposEventos (Nome) VALUES
 ('Promoção'),
 ('Feira');
@@ -142,5 +174,16 @@ INSERT INTO Eventos (Nome, Data, Localizacao, ID_TipoEvento) VALUES
 ('Black Friday', '2025-11-29', 'Loja Principal', 1),
 ('Feira de Natal', '2025-12-10', 'Centro Comercial', 2);
 
-select * from tipouser;
+INSERT INTO ResumoFinanceiro (Ano, Mes, Rendimentos, Gastos)
+VALUES 
+(2025, 4, 75292.00, 243.02), -- Janeiro (exemplo)
+(2025, 5, 10000.00, 3000.00), -- Fevereiro (exemplo)
+(2025, 6, 15000.00, 5000.00); -- Março (exemplo)
 
+
+INSERT INTO VendasServicos (descricao, total_vendas) VALUES
+('PE_Bolo', 4410),
+('PE_Catering Serviço', 28200),
+('PE_Decoração Serviço', 4300),
+('PE_Insuflável Serviço', 2450),
+('PE_Máq Pipocas Serviço', 9000);

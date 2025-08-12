@@ -1,4 +1,4 @@
-<?php include 'contador.php'; ?>
+
 
 
 <?php
@@ -54,32 +54,19 @@ $conn->close();
 </div>
 
 <div class="content">
-    <!-- Cards -->
-     <div class="col-md-3">
-    <div class="card p-3">
-        <h6>Visitantes Online</h6>
-        <h4 id="visitantesOnline">0</h4>
-    </div>
-</div>
 
-<div class="col-md-3">
-    <div class="card p-3">
-        <h6>Total de Visitantes</h6>
-        <h4 id="totalVisitantes">0</h4>
-    </div>
-</div>
-    <div class="row mb-4">
+<div class="row mb-4">
         <div class="col-md-3">
             <div class="card p-3">
-                <h6> Signups</h6>
-                <h4>71,503</h4>
+                <h6>Signups</h6>
+                <h4>153</h4>
                 <canvas id="chart1" height="80"></canvas>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card p-3">
-                <h6>New Visitors Today</h6>
-                <h4>9,503</h4>
+                <h6>Novos Visitantes</h6>
+                <h4>34</h4>
                 <canvas id="chart2" height="80"></canvas>
             </div>
         </div>
@@ -99,86 +86,125 @@ $conn->close();
         </div>
     </div>
 
-    <!-- CSV Import -->
-    <div class="col-md-6">
-        <div class="card p-3">
+
+    <div class="row mb-4">
+        <div class="col-md-9">
+            <div class="card p-3 h-100">
             <h5>Importar Dados (CSV)</h5>
             <input type="file" class="form-control mb-3">
             <button class="btn btn-success">Importar Sessões</button>
         </div>
-    </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card p-3 mb-3" >
+                <h6>Visitantes Online</h6>
+                <h4 id="visitantesOnline">0</h4>
+            </div>
+            <div class="card p-3">
+                <h6>Total de Visitantes</h6>
+                <h4 id="totalVisitantes">0</h4>
+            </div>
+        </div>
+        
+<br>
+    <br>
+   <div class="row mb-4">
     <br>
     <div class="col-md-6">
-        <div class="card p-3">
-            <div>
-                <div class="card draggable">
-                    <div class="card-header pb-0">
-                        <h6>Gastos vs Rendimentos</h6>
-                        <p class="text-sm">
+        <br>
+        <div class="card p-3 h-100">
+            <div class="card draggable">
+                <div class="card-header pb-0">
+                    <h6>Gastos vs Rendimentos</h6>
+                    <p class="text-sm">
                         <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                         <span class="font-weight-bold">Detalhes</span> de 2025
-                        </p>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="chart">
-                            <canvas id="chart-line" class="chart-canvas chart-line" height="300"></canvas>
-                        </div>
+                    </p>
+                </div>
+                <div class="card-body p-3">
+                    <div style="height: 350px;">
+                        <canvas id="chart-line" class="chart-canvas chart-line"></canvas>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico Total de vendas de serviços -->
+    <div class="col-md-6">
+        <br>
+    <div class="card">
+        <div class="card-body">
+          
+    
+            <?php include 'contador.php'; ?>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-// Dados vindos do PHP
-const meses = <?php echo json_encode($meses); ?>;
-const gastos = <?php echo json_encode($gastos); ?>;
-const rendimentos = <?php echo json_encode($rendimentos); ?>;
 
-// Criar gráfico
-const ctxLine = document.getElementById("chart-line").getContext("2d");
-new Chart(ctxLine, {
-    type: "line",
-    data: {
-        labels: meses,
-        datasets: [
-            {
-                label: "Gastos",
-                borderColor: "#cb0c9f",
-                backgroundColor: "rgba(203,12,159,0.2)",
-                data: gastos,
-                fill: true,
-                tension: 0.4
-            },
-            {
-                label: "Rendimentos",
-                borderColor: "#3A416F",
-                backgroundColor: "rgba(20,23,39,0.2)",
-                data: rendimentos,
-                fill: true,
-                tension: 0.4
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: true
-            }
+
+
+<script>
+    const meses = <?php echo json_encode($meses); ?>;
+    const gastos = <?php echo json_encode($gastos); ?>;
+    const rendimentos = <?php echo json_encode($rendimentos); ?>;
+
+    const ctxLine = document.getElementById("chart-line").getContext("2d");
+    new Chart(ctxLine, {
+        type: "line",
+        data: {
+            labels: meses,
+            datasets: [
+                {
+                    label: "Gastos",
+                    borderColor: "#cb0c9f",
+                    backgroundColor: "rgba(203,12,159,0.2)",
+                    data: gastos,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: "Rendimentos",
+                    borderColor: "#3A416F",
+                    backgroundColor: "rgba(20,23,39,0.2)",
+                    data: rendimentos,
+                    fill: true,
+                    tension: 0.4
+                }
+            ]
         },
-        interaction: {
-            intersect: false,
-            mode: "index"
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true }
+            },
+            interaction: {
+                intersect: false,
+                mode: "index"
+            }
         }
-    }
-});
+    });
 </script>
 
-<!-- Os outros gráficos mantêm-se -->
+<script>
+function atualizarVisitantes() {
+    fetch('visitantes.php')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('visitantesOnline').textContent = data.online;
+            document.getElementById('totalVisitantes').textContent = data.total;
+        });
+}
+
+setInterval(atualizarVisitantes, 5000);
+atualizarVisitantes();
+</script>
+
 <script>
     const ctx1 = document.getElementById('chart1').getContext('2d');
     new Chart(ctx1, { type: 'bar', data: { labels: ['', '', '', '', '', '', ''], datasets: [{ data: [5,6,4,7,8,5,4], backgroundColor: '#4e73df' }] }, options: { plugins: { legend: { display: false }}, scales: { x: { display: false }, y: { display: false }}} });
