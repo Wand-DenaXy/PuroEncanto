@@ -9,7 +9,7 @@ function registaFornecedores(){
     dados.append("morada", $('#morada').val());
 
     $.ajax({
-    url: "asset/controller/controllerClube.php",
+    url: "asset/controller/controllerFornecedores.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -23,7 +23,7 @@ function registaFornecedores(){
         let obj = JSON.parse(msg);
         if(obj.flag){
             alerta("Fornecedores",obj.msg,"success");
-            getListaClubes();
+            getListaFornecedores();
         }else{
             alerta("Fornecedores",obj.msg,"error");    
         }
@@ -36,9 +36,9 @@ function registaFornecedores(){
 }
 
 function getListaFornecedores(){
-
-    if ( $.fn.DataTable.isDataTable('#tblFornecedores') ) {
-        $('#tblFornecedores').DataTable().destroy();
+    
+    if ( $.fn.DataTable.isDataTable('#listagemFuncionarios') ) {
+        $('#listagemFuncionarios').DataTable().destroy();
     }
 
     let dados = new FormData();
@@ -57,8 +57,8 @@ function getListaFornecedores(){
     
     .done(function( msg ) {
 
-        $('#listagemClubes').html(msg);
-        $('#tblClubes').DataTable();
+        $('#listagemFuncionarios').html(msg);
+        $('#tblFornecedores').DataTable();
         
     })
     
@@ -71,7 +71,7 @@ function removerFornecedores(id){
 
     let dados = new FormData();
     dados.append("op", 3);
-    dados.append("id", id);
+    dados.append("ID_Fornecedor", id);
 
     $.ajax({
     url: "asset/controller/controllerFornecedores.php",
@@ -87,10 +87,10 @@ function removerFornecedores(id){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Clubes",obj.msg,"success");
-            getListaClubes();    
+            alerta("Fornecedores",obj.msg,"success");
+            getListaFornecedores();    
         }else{
-            alerta("Clubes",obj.msg,"error");    
+            alerta("Fornecedores",obj.msg,"error");    
         }
         
     })
@@ -109,7 +109,7 @@ function getDadosFornecedores(id){
     dados.append("id", id);
 
     $.ajax({
-    url: "asset/controller/controllerClube.php",
+    url: "asset/controller/controllerFornecedores.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -154,7 +154,7 @@ function guardaEditFornecedores(id){
     dados.append("id", id);
 
     $.ajax({
-    url: "assets/controller/controllerClube.php",
+    url: "asset/controller/controllerFornecedores.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -168,7 +168,7 @@ function guardaEditFornecedores(id){
         let obj = JSON.parse(msg);
         if(obj.flag){
             alerta("Clube",obj.msg,"success");
-            getListaClubes();
+            getListaFornecedores();
             $('#formEditClube').modal('hide')    
         }else{
             alerta("Clube",obj.msg,"error");    
@@ -197,6 +197,6 @@ function alerta(titulo,msg,icon){
 
 
 $(function() {
-    getListaClubes();
+    getListaFornecedores();
 });
 

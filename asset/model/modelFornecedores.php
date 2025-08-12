@@ -2,19 +2,18 @@
 
 require_once 'connection.php';
 
-class Fornecedores{
+class Fornecedores1{
 
-    function registaFornecedores($nome, $contacto, $email, $NIF, $morada){
+    function registaFornecedores($nome, $contacto, $email, $nif, $morada){
     
         global $conn;
         $msg = "";
         $flag = false;
 
-        // $pw = md5($pw);
-
         $stmt = $conn->prepare("INSERT INTO Fornecedores (nome, contacto, email, NIF,morada) 
         VALUES (?, ?, ?, ?,?);");
-        $stmt->bind_param("sssss", $nome, $contacto, $email,$NIF,$morada);
+        $stmt->bind_param("sssss", $nome, $contacto, $email, $nif, $morada);
+
 
         $stmt->execute();
 
@@ -71,20 +70,20 @@ class Fornecedores{
         global $conn;
         $msg = "";
 
-        $sql = "SELECT Fornecedores.* as Fornecedores FROM Fornecedores";
+        $sql = "SELECT * FROM Fornecedores";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $msg .= "<tr>";
-                $msg .= "<th scope='row'>".$row['id']."</th>";
+                $msg .= "<th scope='row'>".$row['ID_Fornecedor']."</th>";
                 $msg .= "<th scope='row'>".$row['nome']."</th>";
                 $msg .= "<td>".$row['contacto']."</td>";
                 $msg .= "<td>".$row['email']."</td>";
                 $msg .= "<td>".$row['nif']."</td>";
                 $msg .= "<td>".$row['morada']."</td>";
-                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosJogador(".$row['num'].")'><i class='fa fa-pencil'></i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='removerJogador(".$row['num'].")'><i class='fa fa-trash'></i></button></td>";
+                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Fornecedor'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
+                $msg .= "<td><button class='btn btn-danger' onclick ='removerFornecedores(".$row['ID_Fornecedor'].")'><i class='fa fa-trash'>Remover</i></button></td>";
                 $msg .= "</tr>";
             }
         } else {
