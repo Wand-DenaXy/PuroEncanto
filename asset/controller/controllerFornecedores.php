@@ -26,15 +26,14 @@ if ($_POST['op'] == 1) {
     $resp = $func->getDadosFornecedores($_POST['ID_Fornecedor']);
     echo $resp;
 
-} elseif ($_POST['op'] == 5) {
+}elseif ($_POST['op'] == 5) {
     $resp = $func->guardaEditFornecedores(
-        $_POST['numFornecedor'], 
+        $_POST['ID_Fornecedor'],   // ID_Fornecedor
         $_POST['nome'],
         $_POST['contacto'],
         $_POST['email'],
         $_POST['nif'],
-        $_POST['morada'],
-        $_POST['numOld']
+        $_POST['morada']
     );
     echo $resp;
 }

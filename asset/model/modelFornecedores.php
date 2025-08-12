@@ -134,7 +134,7 @@ class Fornecedores1{
         $msg = "";
         $row = "";
 
-        $sql = "SELECT * FROM jogadores WHERE num =".$num;
+        $sql = "SELECT * FROM Fornecedores WHERE ID_Fornecedor =".$numID_Fornecedor;
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -149,19 +149,20 @@ class Fornecedores1{
     }
 
 
-    function guardaEditFornecedores($numJogador, $nome, $idade, $telefone, $email, $morada, $clube, $numOld, $foto){
+    function guardaEditFornecedores($ID_Fornecedor, $nome, $contacto, $nif,$morada,$email){
         
         global $conn;
         $msg = "";
         $flag = true;
         $sql = "";
 
-        // if($resp['flag']){
-        //     $sql = "UPDATE jogadores SET num = '".$numJogador."',nome = '".$nome."', idade = '".$idade."',tel = '".$telefone."',email = '".$email."',morada = '".$morada."', foto = '".$resp['target']."' WHERE num =".$numOld;
-        // }else{
-        //     $sql = "UPDATE jogadores SET num = '".$numJogador."',nome = '".$nome."', idade = '".$idade."',tel = '".$telefone."',email = '".$email."',morada = '".$morada."' WHERE num =".$numOld;
-
-        // }
+    $sql = "UPDATE Fornecedores 
+            SET nome = '".$nome."', 
+                contacto = '".$contacto."', 
+                email = '".$email."', 
+                nif = '".$nif."', 
+                morada = '".$morada."' 
+            WHERE ID_Fornecedor = ".$ID_Fornecedor;
 
         if ($conn->query($sql) === TRUE) {
             $msg = "Editado com Sucesso";
