@@ -121,17 +121,18 @@ function getDadosFornecedores(id){
     .done(function( msg ) {
 
         let obj = JSON.parse(msg);
+        $('#numFornecedorEdit').val(obj.ID_Fornecedor);
         $('#nomeEdit').val(obj.nome);    
-        $('#nmClube').html(obj.nome);  
-        $('#anoFundacaoEdit').val(obj.anoF);
+        $('#nmFornecedor').html(obj.nome);  
+        $('#contactoEdit').val(obj.contacto);
         $('#telefoneEdit').val(obj.telefone);
         $('#emailEdit').val(obj.email);
-        $('#localidadeEdit').val(obj.localidade);
-        $('#logoAtual').attr('src', obj.logo);
+        $('#nifEdit').val(obj.nif);
+        $('#moradaEdit').val(obj.morada);
 
-       $('#btnGuardar').attr("onclick","guardaEditClube("+obj.id+")") 
+       $('#btnGuardar').attr("onclick","guardaEditFornecedor("+obj.id+")") 
         
-       $('#formEditClube').modal('show')
+       $('#formEditFornecedor').modal('show')
     })
     
     .fail(function( jqXHR, textStatus ) {
@@ -141,46 +142,38 @@ function getDadosFornecedores(id){
     
 }
 
-function guardaEditFornecedores(id){
-
+function guardaEditFornecedores(id) {
     let dados = new FormData();
     dados.append("op", 5);
+    dados.append("ID_Fornecedor", $('#numFornecedorEdit').val());
     dados.append("nome", $('#nomeEdit').val());
-    dados.append("anoFundacao", $('#anoFundacaoEdit').val());
-    dados.append("telefone", $('#telefoneEdit').val());
+    dados.append("contacto", $('#contactoEdit').val());
     dados.append("email", $('#emailEdit').val());
-    dados.append("localidade", $('#localidadeEdit').val());
-    dados.append("logotipo", $('#logotipoEdit').prop('files')[0]);
+    dados.append("nif", $('#nifEdit').val());
+    dados.append("morada", $('#moradaEdit').val());
     dados.append("id", id);
-
     $.ajax({
-    url: "asset/controller/controllerFornecedores.php",
-    method: "POST",
-    data: dados,
-    dataType: "html",
-    cache: false,
-    contentType: false,
-    processData: false
+        url: "asset/controller/controllerFornecedores.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
     })
-    
-    .done(function( msg ) {
-
+    .done(function(msg) {
         let obj = JSON.parse(msg);
-        if(obj.flag){
-            alerta("Clube",obj.msg,"success");
+        if(obj.flag) {
+            alerta("Fornecedor", obj.msg, "success");
             getListaFornecedores();
-            $('#formEditClube').modal('hide')    
-        }else{
-            alerta("Clube",obj.msg,"error");    
+            $('#formEditFornecedores').modal('hide');
+        } else {
+            alerta("Fornecedor", obj.msg, "error");
         }
-        
     })
-    
-    .fail(function( jqXHR, textStatus ) {
-    alert( "Request failed: " + textStatus );
+    .fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
     });
-
-
 }
 
 
