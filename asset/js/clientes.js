@@ -1,15 +1,14 @@
-function registaFornecedores(){
+function registaClientes(){
 
     let dados = new FormData();
     dados.append("op", 1);
-    dados.append("nome", $('#nome').val());
-    dados.append("contacto", $('#contacto').val());
-    dados.append("email", $('#email').val());
-    dados.append("nif", $('#nif').val());
-    dados.append("morada", $('#morada').val());
+    dados.append("nome", $('#nomeCliente').val());
+    dados.append("nif", $('#nifCliente').val());
+    dados.append("morada", $('#moradaCliente').val());
+    dados.append("IBAN", $('#IBANCliente').val());
 
     $.ajax({
-    url: "asset/controller/controllerFornecedores.php",
+    url: "asset/controller/controllerClientes.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -22,10 +21,10 @@ function registaFornecedores(){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Fornecedores",obj.msg,"success");
+            alerta("Clientes",obj.msg,"success");
             getListaFornecedores();
         }else{
-            alerta("Fornecedores",obj.msg,"error");    
+            alerta("Clientes",obj.msg,"error");    
         }
         
     })
@@ -35,10 +34,10 @@ function registaFornecedores(){
     });
 }
 
-function getListaFornecedores(){
+function getListaClientes(){
     
-    if ( $.fn.DataTable.isDataTable('#listagemFuncionarios') ) {
-        $('#listagemFuncionarios').DataTable().destroy();
+    if ( $.fn.DataTable.isDataTable('#listagemClientes') ) {
+        $('#listagemClientes').DataTable().destroy();
     }
 
     let dados = new FormData();
@@ -46,7 +45,7 @@ function getListaFornecedores(){
 
 
     $.ajax({
-    url: "asset/controller/controllerFornecedores.php",
+    url: "asset/controller/controllerClientes.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -57,8 +56,8 @@ function getListaFornecedores(){
     
     .done(function( msg ) {
 
-        $('#listagemFuncionarios').html(msg);
-        $('#tblFornecedores').DataTable();
+        $('#listagemClientes').html(msg);
+        $('#tblClientes ').DataTable();
         
     })
     
@@ -67,14 +66,14 @@ function getListaFornecedores(){
     });
 }
 
-function removerFornecedores(id){
+function removerClientes(id){
 
     let dados = new FormData();
     dados.append("op", 3);
-    dados.append("ID_Fornecedor", id);
+    dados.append("ID_Cliente", id);
 
     $.ajax({
-    url: "asset/controller/controllerFornecedores.php",
+    url: "asset/controller/controllerClientes.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -87,10 +86,10 @@ function removerFornecedores(id){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Fornecedores",obj.msg,"success");
+            alerta("Clientes",obj.msg,"success");
             getListaFornecedores();    
         }else{
-            alerta("Fornecedores",obj.msg,"error");    
+            alerta("Clientes",obj.msg,"error");    
         }
         
     })
@@ -101,7 +100,7 @@ function removerFornecedores(id){
 
 }
 
-function getDadosFornecedores(id){
+function getDadosClientes(id){
 
 
     let dados = new FormData();
@@ -109,7 +108,7 @@ function getDadosFornecedores(id){
     dados.append("id", id);
 
     $.ajax({
-    url: "asset/controller/controllerFornecedores.php",
+    url: "asset/controller/controllerClientes.php",
     method: "POST",
     data: dados,
     dataType: "html",
@@ -121,14 +120,11 @@ function getDadosFornecedores(id){
     .done(function( msg ) {
 
         let obj = JSON.parse(msg);
-        $('#numFornecedorEdit').val(obj.ID_Fornecedor);
+        $('#numFornecedorEdit').val(obj.ID_Cliente);
         $('#nomeEdit').val(obj.nome);    
-        $('#nmFornecedor').html(obj.nome);  
-        $('#contactoEdit').val(obj.contacto);
-        $('#telefoneEdit').val(obj.telefone);
-        $('#emailEdit').val(obj.email);
-        $('#nifEdit').val(obj.nif);
-        $('#moradaEdit').val(obj.morada);
+        $('#nmFornecedor').html(obj.nif);  
+        $('#contactoEdit').val(obj.morada);
+        $('#telefoneEdit').val(obj.IBAN);
 
        $('#btnGuardar').attr("onclick","guardaEditFornecedor("+obj.id+")") 
         
@@ -142,18 +138,20 @@ function getDadosFornecedores(id){
     
 }
 
-function guardaEditFornecedores(id) {
+function guardaEditClientes(id) {
     let dados = new FormData();
     dados.append("op", 5);
-    dados.append("ID_Fornecedor", $('#numFornecedorEdit').val());
-    dados.append("nome", $('#nomeEdit').val());
-    dados.append("contacto", $('#contactoEdit').val());
-    dados.append("email", $('#emailEdit').val());
-    dados.append("nif", $('#nifEdit').val());
-    dados.append("morada", $('#moradaEdit').val());
+    dados.append("numFornecedorEdit", $('#numFornecedorEdit').val());
+    dados.append("descricaoEdit", $('#descricaoEdit').val());
+    dados.append("contactoEdit", $('#contactoEdit').val());
+    dados.append("emailEdit", $('#emailEdit').val());
+    dados.append("moradaEdit", $('#moradaEdit').val());
+    dados.append("nifEdit", $('#nifEdit').val());
+    dados.append("total_debitoEdit", $('#total_debitoEdit').val());
     dados.append("id", id);
+
     $.ajax({
-        url: "asset/controller/controllerFornecedores.php",
+        url: "asset/controller/controllerClientes.php",
         method: "POST",
         data: dados,
         dataType: "html",
@@ -162,19 +160,23 @@ function guardaEditFornecedores(id) {
         processData: false
     })
     .done(function(msg) {
+        var myModal = new bootstrap.Modal(document.getElementById('formEditFornecedores'));
+        myModal.show();
         let obj = JSON.parse(msg);
         if(obj.flag) {
             alerta("Fornecedor", obj.msg, "success");
             getListaFornecedores();
-            $('#formEditFornecedores').modal('hide');
+            myModal.hide();
         } else {
             alerta("Fornecedor", obj.msg, "error");
         }
+        console.log(msg);
     })
     .fail(function(jqXHR, textStatus) {
         alert("Request failed: " + textStatus);
     });
 }
+
 
 
 function alerta(titulo,msg,icon){
@@ -190,6 +192,6 @@ function alerta(titulo,msg,icon){
 
 
 $(function() {
-    getListaFornecedores();
+    getListaClientes();
 });
 

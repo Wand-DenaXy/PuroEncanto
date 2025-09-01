@@ -1,33 +1,98 @@
-        body {
-            background-color: #f5f6fa;
-        }
-        .sidebar {
-            height: 100vh;
-            background-color: #1a1f36;
-            color: white;
-            padding-top: 20px;
-            position: fixed;
-        }
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 10px 20px;
-        }
-        .sidebar a:hover {
-            background-color: #2d3554;
-        }
-        .sidebar .logo {
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-        .content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-        .card {
-            border: none;
-            border-radius: 10px;
-        }
+body {
+    background-color: #f5f6fa;
+}
+.sidebar {
+    height: 100vh;
+    width: 180px;
+    background-color: black; 
+    color: #fff;
+    padding-top: 20px;
+    position: fixed;
+    box-shadow: 6px 0 10px rgba(0,0,0,0.30);
+}
+
+.sidebar .logo {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: white; 
+}
+
+.sidebar .logo img {
+    height: 40px;
+    width: 40px;
+    margin-bottom: 5px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 12px 20px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background-color: #ffb14b; 
+    color: #1a1f36; 
+    border-left: 4px solid #ffd549; 
+    font-weight: bold;
+}
+
+.sidebar a.active {
+    background-color: #cc8e48; 
+    border-left: 4px solid #ffd549;
+    font-weight: bold;
+    color: #ffd549; 
+}
+.content {
+    margin-left: 120px;
+    padding: 20px;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+.logo img
+{
+    height: 40px;
+    width: 40px;
+}
+#graficoRendimentos
+{
+    width: 50%;
+}
+.graficosservicos
+{
+    width: 100%;
+    height: 100%;
+}
+.row
+{
+    display: flex;
+    justify-content: center;
+}
+.grafico4
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.titulo
+{
+    margin-left: 60px;
+}
+.logotitulo
+{
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+
+}
+#graficoUtilizado {
+  background-color: black;
+  border-radius: 10px;
+}

@@ -20,21 +20,15 @@ CREATE TABLE Utilizador (
 
 
 CREATE TABLE IF NOT EXISTS Fornecedores (
-    ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-	contacto VARCHAR(15),
-    email VARCHAR(100),
-    nif VARCHAR(100),
-    morada VARCHAR(100) NOT NULL
+	ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
+    descricao VARCHAR(100) NOT NULL,
+    contacto VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    morada VARCHAR(100) NOT NULL,
+    nif VARCHAR(100) NOT NULL,
+    total_debito DECIMAL(15,2)
 );
-
-
-CREATE TABLE Produtos (
-    ID_Produto INT PRIMARY KEY AUTO_INCREMENT,
-    Nome VARCHAR(100) NOT NULL,
-    Preco DECIMAL(10,2) NOT NULL,
-    Stock INT NOT NULL
-);
+select * from Fornecedores;
 
 
 CREATE TABLE Fornecimento (
@@ -44,16 +38,7 @@ CREATE TABLE Fornecimento (
     ID_Fornecedor INT,
     ID_Produto INT,
     FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
-        ON DELETE CASCADE,
-    FOREIGN KEY (ID_Produto) REFERENCES Produtos(ID_Produto)
         ON DELETE CASCADE
-);
-
-
-CREATE TABLE Servicos (
-    ID_Servico INT PRIMARY KEY AUTO_INCREMENT,
-    Descricao VARCHAR(255) NOT NULL,
-    Preco DECIMAL(10,2) NOT NULL
 );
 
 
@@ -65,7 +50,7 @@ CREATE TABLE Venda (
     FOREIGN KEY (ID_Utilizador) REFERENCES Utilizador(ID_Utilizador)
         ON DELETE SET NULL
 );
-
+select * from venda;
 
 CREATE TABLE Rendimento (
     ID_Rendimento INT PRIMARY KEY AUTO_INCREMENT,
@@ -88,29 +73,12 @@ CREATE TABLE TiposEventos (
     Nome VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Eventos (
-    ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
-    Nome VARCHAR(100) NOT NULL,
-    Data DATE NOT NULL,
-    Localizacao VARCHAR(100),
-    ID_TipoEvento INT,
-    FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento)
-        ON DELETE SET NULL
-);
-
 CREATE TABLE IF NOT EXISTS ResumoFinanceiro (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Ano INT NOT NULL,
     Mes INT NOT NULL,
     Rendimentos DECIMAL(10,2) NOT NULL,
     Gastos DECIMAL(10,2) NOT NULL
-);
-
-CREATE TABLE visitantes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ip VARCHAR(50),
-    ultima_atividade DATETIME,
-    total_visitas INT DEFAULT 1
 );
 
 CREATE TABLE visitas (
@@ -122,10 +90,53 @@ CREATE TABLE visitas (
 CREATE TABLE IF NOT EXISTS VendasServicos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     descricao VARCHAR(100) NOT NULL,
+    data varchar(100) not null,
     total_vendas DECIMAL(10,2) NOT NULL
 );
-
-
+CREATE TABLE PacotesConvidados (
+    ID_Pacote INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    numConvidados INT NOT NULL,
+    preco DECIMAL(10,2) NOT NULL
+);
+CREATE TABLE Servicos (
+    ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL
+);
+CREATE TABLE Clientes (
+    ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    nif VARCHAR(20) NOT NULL,
+    morada VARCHAR(150) NOT NULL,
+    IBAN VARCHAR(34) NOT NULL
+);
+#É o stock ne?
+CREATE TABLE Equipamentos (
+    ID_Equipamento INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    valor DOUBLE(10,2) NOT NULL
+);
+CREATE TABLE Eventos (
+    ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
+    ID_Cliente INT NOT NULL,
+    Data DATE NOT NULL, #Marcação do Evento
+    ID_TipoEvento INT,
+    ID_Pacote INT,
+    FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento),
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+    FOREIGN KEY (ID_Pacote) REFERENCES PacotesConvidados(ID_Pacote)
+);
+select * from PacotesConvidados;
+select * from TiposEventos;
+CREATE TABLE Eventos_Servicos (
+    ID_Evento INT NOT NULL,
+    ID_Servico INT NOT NULL,
+    PRIMARY KEY (ID_Evento, ID_Servico),
+    FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
+    FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
+);
+select * from servicos;
 INSERT INTO TipoUtilizador (Tipo) VALUES 
 ('Administrador'), 
 ('Funcionário');
@@ -135,25 +146,35 @@ INSERT INTO Utilizador (Nome, Email, Password, Contacto, ID_TipoUtilizador) VALU
 ('Pedro Silva', 'pedro@email.com', 'senha123', '912345678', 1),
 ('Ana Costa', 'ana@email.com', 'senha456', '913456789', 2);
 
+INSERT INTO Fornecedores (descricao, total_debito, contacto, email, morada, nif)
+VALUES
+('PE_Netrow', 1274.90, '910000001', 'penetrow@fornecedor.com', 'Morada de PE_Netrow', '123456781'),
+('PE_Senhic', 11725.01, '910000002', 'peseenhic@fornecedor.com', 'Morada de PE_Senhic', '123456782'),
+('PE_SuperContente', 5135.13, '910000003', 'pesupercontente@fornecedor.com', 'Morada de PE_SuperContente', '123456783'),
+('PE_SnacksdaCarolina', 28388.53, '910000004', 'pesnacksdacarolina@fornecedor.com', 'Morada de PE_SnacksdaCarolina', '123456784'),
+('PE_DreamMarketing', 250.00, '910000005', 'pedreammarketing@fornecedor.com', 'Morada de PE_DreamMarketing', '123456785'),
+('PE_LetsPrint', 265.00, '910000006', 'peletsprint@fornecedor.com', 'Morada de PE_LetsPrint', '123456786'),
+('PE_Meletec', 2640.00, '910000007', 'pemeletec@fornecedor.com', 'Morada de PE_Meletec', '123456787'),
+('PE_Interprev', 180.00, '910000008', 'peinterprev@fornecedor.com', 'Morada de PE_Interprev', '123456788'),
+('PE_Nachua', 5430.09, '910000009', 'penachua@fornecedor.com', 'Morada de PE_Nachua', '123456789'),
+('PE_StandRitual', 10790.05, '910000010', 'pestandritual@fornecedor.com', 'Morada de PE_StandRitual', '123456790'),
+('PE_INSTITUTO REGISTO E NOTARIADO', 325.00, '910000011', 'peinstitutoregistonotariado@fornecedor.com', 'Morada de PE_INSTITUTO REGISTO E NOTARIADO', '123456791'),
+('PE_MeninosProg', 900.00, '910000012', 'pemeninosprog@fornecedor.com', 'Morada de PE_MeninosProg', '123456792'),
+('PE_MadalenaBrandao', 600.00, '910000013', 'pemadalenabrandao@fornecedor.com', 'Morada de PE_MadalenaBrandao', '123456793'),
+('PE_LuisaNoites', 2850.00, '910000014', 'peluisanoites@fornecedor.com', 'Morada de PE_LuisaNoites', '123456794'),
+('PE_TiagoTardes', 2580.00, '910000015', 'petiagotardes@fornecedor.com', 'Morada de PE_TiagoTardes', '123456795');
 
-INSERT INTO Fornecedores (Nome, Contacto, Email, nif,Morada) VALUES
-('Fornecedor A', '917654321', 'fornA@email.com', '232042837','Bairro da Casinha'),
-('Fornecedor B', '918765432', 'fornB@email.com', '250825392','Fria Aleixo');
-
-
-INSERT INTO Produtos (Nome, Preco, Stock) VALUES
-('Relógio Clássico', 120.00, 15),
-('Relógio Moderno', 180.50, 10);
+select* from clientes;
+SELECT descricao, total_debito FROM Fornecedores WHERE ID_Fornecedor BETWEEN 1 AND 15 ORDER BY total_debito desc;
+select * from Fornecedores;
+INSERT INTO TiposEventos (Nome) VALUES
+('Empresarial'), ('Casamento'), ('Infantil'), ('Aniversário');
+select * from TiposEventos;
 
 
 INSERT INTO Fornecimento (Data, Quantidade, ID_Fornecedor, ID_Produto) VALUES
 ('2025-08-01', 5, 1, 1),
 ('2025-08-03', 3, 2, 2);
-
-
-INSERT INTO Servicos (Descricao, Preco) VALUES
-('Limpeza de relógio', 25.00),
-('Reparação de bracelete', 40.00);
 
 INSERT INTO Venda (Data, ValorTotal, ID_Utilizador) VALUES
 ('2025-08-05', 200.00, 1);
@@ -162,29 +183,481 @@ INSERT INTO Venda (Data, ValorTotal, ID_Utilizador) VALUES
 INSERT INTO Rendimento (Valor, Data, ID_Venda) VALUES
 (200.00, '2025-08-05', 1);
 
-
-INSERT INTO Gastos (Descricao, Valor, Data) VALUES
-('Compra de material de limpeza', 35.00, '2025-08-02'),
-('Publicidade online', 50.00, '2025-08-04');
-
-INSERT INTO TiposEventos (Nome) VALUES
-('Promoção'),
-('Feira');
-
-INSERT INTO Eventos (Nome, Data, Localizacao, ID_TipoEvento) VALUES
-('Black Friday', '2025-11-29', 'Loja Principal', 1),
-('Feira de Natal', '2025-12-10', 'Centro Comercial', 2);
-
 INSERT INTO ResumoFinanceiro (Ano, Mes, Rendimentos, Gastos)
 VALUES 
-(2025, 4, 75292.00, 243.02), -- Janeiro (exemplo)
-(2025, 5, 10000.00, 3000.00), -- Fevereiro (exemplo)
-(2025, 6, 15000.00, 5000.00); -- Março (exemplo)
+(2025, 4, 75292.00, 243.02),
+(2025, 5, 10000.00, 3000.00), 
+(2025, 6, 15000.00, 5000.00); 
 
 
 INSERT INTO VendasServicos (descricao, total_vendas) VALUES
-('PE_Bolo', 4410),
-('PE_Catering Serviço', 28200),
-('PE_Decoração Serviço', 4300),
-('PE_Insuflável Serviço', 2450),
-('PE_Máq Pipocas Serviço', 9000);
+('PE_Insuflável', 983.33),
+('PE_Máquina Pipocas', 393.33),
+('PE_Insuflável', 14750.00),
+('PE_Site', 14583.33),
+('PE_INSUFLÁVEL', 966.66),
+('PE_Máquina Pipocas', 386.66),
+('PE_Insuflável', 14500.00),
+('PE_Site', 14166.66),
+('PE_INSUFLÁVEL', 949.99),
+('PE_Máquina Pipocas', 379.99),
+('PE_Insuflável', 14250.00),
+('PE_Carrinha (20000)', 20000.00),
+('PE_Carrinha (15000)', 15000.00),
+('PE_Site', 13749.99);
+
+select * from VendasServicos;
+
+SELECT descricao, SUM(total_vendas) AS total
+            FROM VendasServicos
+            GROUP BY descricao
+            ORDER BY total DESC;
+
+            
+
+
+INSERT INTO Clientes (Nome, NIF, Morada, IBAN) VALUES
+('XPTO, Lda', '532622448', 'Rua das Margaridas, n5', 'PT50007946838624313088068'),
+('Maria Almeida', '299446263', 'Rua das Madalenas, n9', 'PT50001410030198503475689'),
+('MoveIT', '556986032', 'Trv dos Filosofos, n8', 'PT50002346819984071468008'),
+('Criação&Gestão', '542707578', 'Av Ru Ru, n91', 'PT50016088457776442648436'),
+('Joaquim Telheiras', '229595510', 'Rua Caladinho, n21', 'PT50003345984078304917235'),
+('Inês Teixeira', '266126405', 'Rua da Ines, n66', 'PT50019115765258156742636'),
+('Pesca e Come', '528545060', 'Av Peixe, n1', 'PT50006580580032769976712'),
+('RunAway', '568473078', 'Trv RunJá, n23', 'PT50016048754065845149420'),
+('José Miguel', '292690134', 'Rua Karina, n71', 'PT50003317771816964715222'),
+('Jéssica Sousa', '256359300', 'Rua da Perfeição, n3', 'PT50016068493577443429429'),
+('Pedro Abreu', '278498981', 'Rua dos Doidos, n1', 'PT50016022008286536563236'),
+('Mármores Ilimitados', '555855600', 'Av das Pedras, n22', 'PT50007606953843295506885'),
+('Constança Mello', '296196010', 'Av das Constanças, n8', 'PT50001079336360081382909'),
+('Patrícia Pereira', '210305061', 'Rua A, n51', 'PT50019343340776115726645'),
+('Margarida Lopes', '250560070', 'Av ABC, n23', 'PT50001419726370388245196'),
+('Leandro Silva', '220885087', 'Rua do Amor, n5', 'PT50002512925026550060008'),
+('Tiago Fonseca', '213306557', 'Av das Saidas, n3', 'PT50003391465185316392498'),
+('OnTheWay', '582390508', 'Trv dos Horrores, n46', 'PT50018969083313776881484'),
+('SorrisosFelizes', '591169398', 'Trv do Porto, n5', 'PT50006564456901236553511'),
+('Daniela Dias', '200046080', 'Rua do Rui, n444', 'PT50006513930465670397957'),
+('Carlos Vieira', '242224024', 'Av do Calculo, n56', 'PT50002510454645858090855'),
+('Heitor Sobral', '234736968', 'Trv das Noirias, n12', 'PT50001057598885414760088'),
+('Franscisco Torres', '292977000', 'Rua Patricias, n16', 'PT50006515256136005925144'),
+('PipocasDoces', '588566098', 'Av das Pipocas, n17', 'PT50018925309607492737431'),
+('Carolina Domingos', '280610653', 'Av da Prisão, n1', 'PT50007921438900560646816'),
+('Sofia Jesus', '297128493', 'Trv Jorgino, n33', 'PT50007642593033411297219'),
+('Manuel Doido', '257229426', 'Rua Palula, n6', 'PT50019163924325602445927'),
+('Laura Tavares', '226419665', 'Av Paulistas, n7', 'PT50007642397440734369335'),
+('Marta Rita', '296398721', 'Trv do Porto, n9', 'PT50016039312537527589323'),
+('António Sinhaca', '228824460', 'Rua das Ruas, n5', 'PT50016048343866711151107'),
+('Oculos do Caramelo', '539134228', 'Rua das Ruas, n45', 'PT50001408110993143881269'),
+('João Silva', '276261658', 'Trv das Gajas, n14', 'PT50003339640608584931338'),
+('Ana Fonseca', '274805812', 'Rua Mada, n9', 'PT50001878540879090667774'),
+('Frederico Sousa', '264679377', 'Trv BB, n13', 'PT50019127796779043931426'),
+('Joana Albuquerque', '278366503', 'Rua CC, n4', 'PT50018906180867476722845'),
+('Gustavo Gonçalves', '244764298', 'Rua FT, n6', 'PT50000795278449692719827'),
+('PhoneStuff', '572052405', 'Rua GHTY, n5', 'PT50003338867952196092373'),
+('Tiago Tavares', '256739510', 'Av dos Sonhos, n66', 'PT50007661025545873249292'),
+('Yuri Veloso', '246027290', 'Av São Martinho, n2', 'PT50003552184890235797724'),
+('Henrique Pedreira', '271413646', 'Rua Yuri Almeida, n7', 'PT50019171407309545072793'),
+('Bruno Pereira', '277613086', 'Av São Pedro, n55', 'PT50019376072232678831677'),
+('DameOuro', '548546070', 'Rua Santo António, n26', 'PT50002386214908984826016'),
+('ViagensFelizes', '550149392', 'Rua São João, n17', 'PT50007931414295313898681'),
+('Fátima Sobral', '244517436', 'Av Fatinha, n8', 'PT50003312853252123650507'),
+('Pedro Dias', '205678807', 'Trv das Noites, n31', 'PT50018908711398644179450'),
+('LetsDance', '561615306', 'Tvr Sentado, n12', 'PT50002395388024784655069'),
+('Ivandro Almeida', '231811349', 'Rua Ivinho, n4', 'PT50006532949430957665073');
+
+select count(*) as total from Clientes;
+-- Inserindo os pacotes
+INSERT INTO PacotesConvidados (descricao, numConvidados, preco) VALUES
+('Pacote 20 convidados', 20, 200.00),
+('Pacote 40 convidados', 40, 350.00),
+('Pacote 60 convidados', 60, 500.00),
+('Pacote 80 convidados', 80, 650.00),
+('Pacote 100 convidados', 100, 800.00),
+('Pacote 120 convidados', 120, 950.00),
+('Pacote 140 convidados', 140, 1100.00),
+('Pacote 160 convidados', 160, 1250.00),
+('Pacote 180 convidados', 180, 1400.00),
+('Pacote 200 convidados', 200, 1550.00);
+select * from clientes;
+
+INSERT INTO Servicos (nome, preco) VALUES
+('Bolo', 86.10),
+('Catering', 246.00),
+('Decoração', 123.00),
+('Insuflável',123.00),
+('Pipocas',369.00);
+
+select * from eventos;
+-- Abril
+INSERT INTO Eventos (ID_Cliente, Data, ID_TipoEvento, ID_Pacote) VALUES
+(1, '2025-04-01', 1, 1),  -- XPTO, LDA | Empresarial | 20p
+(4, '2025-04-02', 1, 3),  -- Criação&Gestão | Empresarial | 60p
+(8, '2025-04-03', 1, 5),  -- RunAway | Empresarial | 100p
+(12, '2025-04-04', 1, 2), -- Mármores ilimitados | Empresarial | 40p
+(14, '2025-04-05', 2, 2), -- Patrícia Pereira | Infantil | 40p
+(16, '2025-04-06', 3, 1), -- Leandro Silva | Aniversário | 20p
+(19, '2025-04-07', 1, 2), -- Sorrisos Felizes | Empresarial | 40p
+(24, '2025-04-08', 1, 3), -- Pipocas Doces | Empresarial | 60p
+(26, '2025-04-09', 2, 1), -- Sofia Jesus | Infantil | 20p
+(29, '2025-04-10', 4, 2), -- Marta Rita | Casamento | 40p
+(33, '2025-04-11', 2, 1), -- Ana Fonseca | Infantil | 20p
+(37, '2025-04-12', 1, 3), -- PhoneStuff | Empresarial | 60p
+(40, '2025-04-13', 4, 2), -- Henrique Pedreira | Casamento | 40p
+(2, '2025-04-14', 2, 2),  -- Maria Almeida | Infantil | 40p
+(5, '2025-04-15', 3, 1),  -- Joaquim Telheiras | Aniversário | 20p
+(2, '2025-04-16', 2, 2),  -- Maria Almeida | Infantil | 40p
+(5, '2025-04-17', 4, 1),  -- Joaquim Telheiras | Casamento | 20p
+(9, '2025-04-18', 2, 1),  -- José Miguel | Infantil | 20p
+(13, '2025-04-19', 3, 1), -- Constança Mello | Aniversário | 20p
+(15, '2025-04-20', 4, 3), -- Margarida Lopes | Casamento | 60p
+(21, '2025-04-21', 3, 1), -- Carlos Vieira | Aniversário | 20p
+(27, '2025-04-22', 3, 1), -- Manuel Doido | Aniversário | 20p
+(31, '2025-04-23', 1, 1), -- Óculos do Caramelo | Empresarial | 20p
+(34, '2025-04-24', 3, 1), -- Frederico Sousa | Aniversário | 20p
+(41, '2025-04-25', 2, 3), -- Bruno Pereira | Infantil | 60p
+(43, '2025-04-26', 1, 3), -- Viagens Felizes | Empresarial | 60p
+(47, '2025-04-27', 4, 1), -- Ivandro Almeida | Casamento | 20p
+(3, '2025-04-28', 1, 3),  -- MoveIt | Empresarial | 60p
+(6, '2025-04-29', 3, 3),  -- Inês Teixeira | Aniversário | 60p
+(9, '2025-04-30', 2, 1),  -- José Miguel | Infantil | 20p
+(38, '2025-04-01', 4, 2), -- Tiago Tavares | Casamento | 20p
+(11, '2025-04-02', 2, 4), -- Pedro Dias | Aniversário | 80p
+(1, '2025-04-03', 1, 4),  -- XPTO, LDA | Empresarial | 80p
+(4, '2025-04-04', 1, 3),  -- Criação&Gestão | Empresarial | 60p
+(7, '2025-04-05', 1, 2),  -- Pesca e Come | Empresarial | 40p
+(10, '2025-04-06', 2, 1), -- Jéssica Sousa | Infantil | 20p
+(7, '2025-04-07', 1, 1),  -- Pesca e Come | Empresarial | 20p
+(11, '2025-04-08', 2, 1), -- Pedro Dias | Infantil | 20p
+(18, '2025-04-09', 1, 1), -- OnTheWay | Empresarial | 20p
+(23, '2025-04-10', 2, 1), -- Francisco Torres | Infantil | 20p
+(32, '2025-04-11', 2, 2), -- João Silva | Infantil | 40p
+(39, '2025-04-12', 3, 2), -- Yuri Veloso | Aniversário | 40p
+(42, '2025-04-13', 1, 2), -- DameOuro | Empresarial | 40p
+(44, '2025-04-14', 2, 3), -- Fátima Sobral | Infantil | 60p
+(46, '2025-04-15', 1, 2), -- LetsDance | Empresarial | 40p
+(8, '2025-04-16', 1, 1);  -- RunAway | Empresarial | 20p
+#--------------------------------------------------------------------------------------
+#Abril
+-- XPTO, LDA | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(1,1),(1,2),(1,3);
+
+-- Criação&Gestão | CDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(2,2),(2,3),(2,4),(2,5);
+
+-- RunAway | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(3,1),(3,2),(3,3),(3,4),(3,5);
+
+-- Mármores ilimitados | CDI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(4,2),(4,3),(4,4);
+
+-- Patrícia Pereira | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(5,1),(5,2),(5,3);
+
+-- Leandro Silva | CD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(6,2),(6,3);
+
+-- Sorrisos Felizes | CDP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(7,2),(7,3),(7,5);
+
+-- Pipocas Doces | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(8,1),(8,2),(8,3),(8,4),(8,5);
+
+-- Sofia Jesus | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(9,3);
+
+-- Marta Rita | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(10,1),(10,2);
+
+-- Ana Fonseca | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(11,1),(11,2);
+
+-- PhoneStuff | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(12,1),(12,2),(12,3),(12,4),(12,5);
+
+-- Henrique Pedreira | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(13,2);
+
+-- Maria Almeida | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(14,1),(14,2),(14,3);
+
+-- Joaquim Telheiras | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(15,1),(15,2),(15,3);
+
+-- Maria Almeida | CD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(16,2),(16,3);
+
+-- Joaquim Telheiras | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(17,1),(17,2);
+
+-- José Miguel | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(18,3);
+
+-- Constança Mello | CD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(19,2),(19,3);
+
+-- Margarida Lopes | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(20,1),(20,2),(20,3),(20,4),(20,5);
+
+-- Carlos Vieira | CDI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(21,1),(21,2),(21,4);
+
+-- Manuel Doido | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(22,1),(22,2);
+
+-- Óculos do Caramelo | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(23,3);
+
+-- Frederico Sousa | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(24,1),(24,4);
+
+-- Bruno Pereira | DI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(25,1),(25,4);
+
+-- Viagens Felizes | CDP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(26,2),(26,3),(26,5);
+
+-- Ivandro Almeida | DI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(27,1),(27,4);
+
+-- MoveIt | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(28,1),(28,2);
+
+-- Inês Teixeira | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(29,1),(29,2),(29,3),(29,4),(29,5);
+
+-- José Miguel | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES 
+(30,1),(30,2),(30,3);
+
+-- Maio
+INSERT INTO Eventos (ID_Cliente, Data, ID_TipoEvento, ID_Pacote) VALUES
+(44, '2025-05-01', 4, 6),  -- Fátima Sobral | Aniversário | 120p
+(41, '2025-05-02', 2, 1),  -- Bruno Pereira | Casamento | 20p
+(33, '2025-05-03', 1, 3),  -- Ana Fonseca | Empresarial | 60p
+(29, '2025-05-04', 3, 4),  -- Marta Rita | Infantil | 80p
+(27, '2025-05-05', 3, 2),  -- Manuel Doido | Infantil | 40p
+(23, '2025-05-06', 2, 6),  -- Francisco Torres | Casamento | 80p
+(19, '2025-05-07', 4, 2),  -- Sorrisos Felizes | Aniversário | 40p
+(13, '2025-05-08', 1, 3),  -- Constança Mello | Empresarial | 60p
+(7, '2025-05-09', 4, 5),   -- Pesca e Come | Aniversário | 100p
+(1, '2025-05-10', 1, 1),   -- XPTO, Lda | Empresarial | 20p
+(44, '2025-05-11', 3, 1),  -- Fátima Sobral | Infantil | 20p
+(42, '2025-05-12', 1, 5),  -- DameOuro | Empresarial | 100p
+(41, '2025-05-13', 3, 3),  -- Bruno Pereira | Infantil | 60p
+(46, '2025-05-14', 1, 4),  -- LetsDance | Empresarial | 80p
+(40, '2025-05-15', 1, 2),  -- Henrique Pedreira | Empresarial | 40p
+(38, '2025-05-16', 4, 1),  -- Tiago Tavares | Aniversário | 20p
+(36, '2025-05-17', 2, 1),  -- Gustavo Gonçalves | Casamento | 20p
+(32, '2025-05-18', 2, 1),  -- João Silva | Casamento | 20p
+(28, '2025-05-19', 3, 1),  -- Laura Tavares | Infantil | 20p
+(26, '2025-05-20', 3, 1),  -- Sofia Jesus | Infantil | 20p
+(22, '2025-05-21', 1, 3),  -- Heitor Sobral | Empresarial | 60p
+(16, '2025-05-22', 4, 3),  -- Leandro Silva | Aniversário | 60p
+(9,  '2025-05-23', 2, 6),  -- José Miguel | Casamento | 80p
+(8,  '2025-05-24', 4, 1),  -- RunAway | Aniversário | 20p
+(3,  '2025-05-25', 1, 6),  -- MoveIt | Empresarial | 120p
+(47, '2025-05-26', 2, 2),  -- Ivandro Almeida | Casamento | 40p
+(40, '2025-05-27', 2, 2),  -- Henrique Pedreira | Casamento | 40p
+(43, '2025-05-28', 1, 5),  -- Viagens Felizes | Empresarial | 100p
+(39, '2025-05-29', 2, 3),  -- Yuri Veloso | Casamento | 60p
+(37, '2025-05-30', 1, 1),  -- PhoneStuff | Empresarial | 20p
+(35, '2025-05-31', 4, 3),  -- Joana Albuquerque | Aniversário | 60p
+(30, '2025-05-30', 3, 1),  -- António Sinhaca | Infantil | 20p
+(25, '2025-05-01', 4, 3),  -- Carolina Domingos | Aniversário | 60p
+(10, '2025-05-02', 3, 6),  -- Jéssica Sousa | Infantil | 20p
+(21, '2025-05-03', 2, 6),  -- Carlos Vieira | Casamento | 120p
+(18, '2025-05-04', 4, 2),  -- OnTheWay | Aniversário | 40p
+(15, '2025-05-05', 2, 1),  -- Margarida Lopes | Casamento | 20p
+(12, '2025-05-06', 4, 1),  -- Mármores Ilimitados | Aniversário | 20p
+(10, '2025-05-07', 3, 6),  -- Jéssica Sousa | Infantil | 120p
+(6,  '2025-05-08', 4, 3),  -- Inês Teixeira | Aniversário | 60p
+(2,  '2025-05-09', 3, 3),  -- Maria Almeida | Infantil | 60p
+(43, '2025-05-10', 1, 2),  -- Viagens Felizes | Empresarial | 20p
+(39, '2025-05-11', 4, 6),  -- Yuri Veloso | Aniversário | 120p
+(47, '2025-05-12', 3, 2),  -- Ivandro Almeida | Infantil | 40p
+(45, '2025-05-13', 2, 1),  -- Pedro Dias | Casamento | 20p
+(42, '2025-05-14', 1, 3),  -- DameOuro | Empresarial | 60p
+(34, '2025-05-15', 3, 2),  -- Frederico Sousa | Infantil | 40p
+(31, '2025-05-16', 1, 1),  -- Óculos do Caramelo | Empresarial | 20p
+(24, '2025-05-17', 1, 2),  -- Pipocas Doces | Empresarial | 40p
+(38, '2025-05-18', 4, 4),  -- Tiago Tavares | Aniversário | 80p
+(35, '2025-05-19', 3, 5),  -- Joana Albuquerque | Infantil | 100p
+(20, '2025-05-20', 4, 1),  -- Daniela Dias | Aniversário | 20p
+(17, '2025-05-21', 3, 1),  -- Tiago Fonseca | Infantil | 20p
+(14, '2025-05-22', 2, 2),  -- Patrícia Pereira | Casamento | 40p
+(45, '2025-05-23', 4, 1),  -- Pedro Dias | Aniversário | 20p
+(5,  '2025-05-24', 2, 1),  -- Joaquim Telheiras | Casamento | 20p
+(4,  '2025-05-25', 1, 1),  -- Criação&Gestão | Empresarial | 20p
+(46, '2025-05-26', 1, 1),  -- LetsDance | Empresarial | 20p
+(45, '2025-05-27', 4, 6),  -- Pedro Dias | Aniversário | 120p
+(38, '2025-05-28', 2, 5);  -- Tiago Tavares | Casamento | 100p
+#Maio
+-- Eventos_Servicos Maio
+-- Fátima Sobral | Aniversário | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (1,1),(1,2),(1,3),(1,4),(1,5);
+-- Bruno Pereira | Casamento | DP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (2,3),(2,4);
+-- Ana Fonseca | Empresarial | B
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (3,1);
+-- Marta Rita | Infantil | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (4,2);
+-- Manuel Doido | Infantil | B
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (5,1);
+-- Francisco Torres | Casamento | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (6,1),(6,2),(6,3);
+-- Sorrisos Felizes | Aniversário | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (7,1),(7,2),(7,3),(7,4),(7,5);
+-- Constança Mello | Empresarial | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (8,1),(8,2),(8,3);
+-- Pesca e Come | Aniversário | CDI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (9,2),(9,3),(9,4);
+-- XPTO, Lda | Empresarial | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (10,3);
+-- Fátima Sobral | Infantil | CD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (11,2),(11,3);
+-- DameOuro | Empresarial | CIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (12,1),(12,4),(12,5);
+-- Bruno Pereira | Infantil | CDI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (13,2),(13,3),(13,4);
+-- LetsDance | Empresarial | CDP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (14,2),(14,3),(14,5);
+-- Henrique Pedreira | Empresarial | B
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (15,1);
+-- Tiago Tavares | Aniversário | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (16,1),(16,2),(16,3);
+-- Gustavo Gonçalves | Casamento | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (17,1),(17,2),(17,3);
+-- João Silva | Casamento | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (18,3);
+-- Laura Tavares | Infantil | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (19,1),(19,2),(19,3),(19,4),(19,5);
+-- Sofia Jesus | Infantil | DI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (20,3),(20,4);
+-- Heitor Sobral | Empresarial | B
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (21,1);
+-- Leandro Silva | Aniversário | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (22,1),(22,2),(22,3),(22,4),(22,5);
+-- José Miguel | Casamento | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (23,1),(23,2),(23,3);
+-- RunAway | Aniversário | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (24,1),(24,2);
+-- MoveIt | Empresarial | BCDIP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (25,1),(25,2),(25,3),(25,4),(25,5);
+-- Ivandro Almeida | Casamento | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (26,1),(26,3);
+-- Henrique Pedreira | Casamento | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (27,1),(27,2);
+-- Viagens Felizes | Empresarial | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (28,2);
+-- Yuri Veloso | Casamento | CDI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (29,2),(29,3),(29,4);
+-- PhoneStuff | Empresarial | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (30,3);
+-- Joana Albuquerque | Aniversário | CD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (31,2),(31,3);
+-- António Sinhaca | Infantil | B
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (32,1);
+-- Carolina Domingos | Aniversário | BCP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (33,1),(33,2),(33,5);
+-- Jéssica Sousa | Infantil | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (34,1),(34,3);
+-- Carlos Vieira | Casamento | CDI
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (35,2),(35,3),(35,4);
+-- OnTheWay | Aniversário | BC
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (36,1),(36,2);
+-- Margarida Lopes | Casamento | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (37,2);
+-- Mármores Ilimitados | Aniversário | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (38,3);
+-- Jéssica Sousa | Infantil | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (39,1),(39,3);
+-- Inês Teixeira | Aniversário | BCP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (40,1),(40,2),(40,5);
+-- Maria Almeida | Infantil | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (41,1),(41,2),(41,3);
+-- Viagens Felizes | Empresarial | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (42,1),(42,2),(42,3);
+-- Yuri Veloso | Aniversário | BCP
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (43,1),(43,2),(43,5);
+-- Ivandro Almeida | Infantil | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (44,1),(44,3);
+-- Pedro Dias | Casamento | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (45,3);
+-- DameOuro | Empresarial | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (46,2);
+-- Frederico Sousa | Infantil | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (47,2);
+-- Óculos do Caramelo | Empresarial | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (48,3);
+-- Pipocas Doces | Empresarial | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (49,2);
+-- Tiago Tavares | Aniversário | C
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (50,2);
+-- Joana Albuquerque | Infantil | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (51,1),(51,3);
+-- Daniela Dias | Aniversário | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (52,3);
+-- Tiago Fonseca | Infantil | B
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (53,1);
+-- Patrícia Pereira | Casamento | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (54,1),(54,2),(54,3);
+-- Pedro Dias | Aniversário | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (55,3);
+-- Joaquim Telheiras | Casamento | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (56,3);
+-- Criação&Gestão | Empresarial | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (57,3);
+-- LetsDance | Empresarial | D
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (58,3);
+-- Pedro Dias | Aniversário | BCD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (59,1),(59,2),(59,3);
+-- Tiago Tavares | Casamento | BD
+INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico) VALUES (60,1),(60,3);
+
+SELECT Servicos.nome as Nome, COUNT(*) AS Usado 
+FROM Servicos,Eventos_Servicos,Eventos 
+WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico AND Eventos.ID_Evento = Eventos_Servicos.ID_Evento AND 
+MONTH(Eventos.data) = 4 
+GROUP BY Servicos.nome 
+ORDER BY Usado DESC;
+
+
+select * from clientes;
+select * from Eventos;
+
+
+select * from Eventos_Servicos;
+select * from Eventos;
+
+
+select * from eventos;
+SELECT descricao, total_debito FROM Fornecedores WHERE ID_Fornecedor ORDER BY total_debito desc;
