@@ -27,13 +27,11 @@ if ($_POST['op'] == 1) {
 
 }elseif ($_POST['op'] == 5) {
     $resp = $func->guardaEditClientes(
-        $_POST['numFornecedorEdit'],
-        $_POST['descricaoEdit'],
-        $_POST['contactoEdit'],
-        $_POST['emailEdit'],
-        $_POST['moradaEdit'],
-        $_POST['nifEdit'],
-        $_POST['total_debitoEdit']
+        $_POST['nomeClienteEdit'],
+        $_POST['nifClienteEdit'],
+        $_POST['moradaClienteEdit'],
+        $_POST['IBANClienteEdit'],
+        $_POST['ID_Cliente'],
     );
     echo $resp;
 }

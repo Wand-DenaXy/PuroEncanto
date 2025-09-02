@@ -118,5 +118,51 @@ function registaClientes($nome, $nif, $morada, $IBAN){
 
         return($resp);
     }
+        function getDadosClientes($ID_Cliente){
+        global $conn;
+        $msg = "";
+        $row = "";
+
+        $sql = "SELECT * FROM Clientes WHERE ID_Cliente =".$ID_Cliente;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+        }
+
+        $conn->close();
+
+        return (json_encode($row));
+
+    }
+
+
+    function guardaEditClientes($nome, $nif, $morada, $IBAN,$ID_Cliente){
+        
+        global $conn;
+        $msg = "";
+        $flag = true;
+        $sql = "";
+
+
+        $sql = "UPDATE Clientes SET nome = '".$nome."', nif = '".$nif."',morada = '".$morada."',IBAN = '".$IBAN."' WHERE ID_Cliente =".$ID_Cliente;
+
+        if ($conn->query($sql) === TRUE) {
+            $msg = "Editado com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+          
+        $conn->close();
+
+        return($resp);
+
+    }
 }
 ?>

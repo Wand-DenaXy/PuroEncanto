@@ -100,12 +100,12 @@ function removerClientes(id){
 
 }
 
-function getDadosClientes(id){
+function getDadosClientes(ID_Cliente){
 
 
     let dados = new FormData();
     dados.append("op", 4);
-    dados.append("id", id);
+    dados.append("ID_Cliente", ID_Cliente);
 
     $.ajax({
     url: "asset/controller/controllerClientes.php",
@@ -120,15 +120,15 @@ function getDadosClientes(id){
     .done(function( msg ) {
 
         let obj = JSON.parse(msg);
-        $('#numFornecedorEdit').val(obj.ID_Cliente);
-        $('#nomeEdit').val(obj.nome);    
-        $('#nmFornecedor').html(obj.nif);  
-        $('#contactoEdit').val(obj.morada);
-        $('#telefoneEdit').val(obj.IBAN);
-
-       $('#btnGuardar').attr("onclick","guardaEditFornecedor("+obj.id+")") 
+        $('#numClienteEdit').val(obj.ID_Cliente);
+        $('#nomeClienteEdit').val(obj.nome);
+        $('#nifClienteEdit').val(obj.nif);
+        $('#moradaClienteEdit').val(obj.morada);
+        $('#IBANClienteEdit').val(obj.IBAN);
+        $('#formEditClientes').modal('show');
+       $('#btnGuardar').attr("onclick","guardaEditClientes("+obj.ID_Cliente+")") 
         
-       $('#formEditFornecedor').modal('show')
+       $('#formEditClientes').modal('show')
     })
     
     .fail(function( jqXHR, textStatus ) {
@@ -138,17 +138,15 @@ function getDadosClientes(id){
     
 }
 
-function guardaEditClientes(id) {
+function guardaEditClientes(ID_Cliente) {
     let dados = new FormData();
     dados.append("op", 5);
-    dados.append("numFornecedorEdit", $('#numFornecedorEdit').val());
-    dados.append("descricaoEdit", $('#descricaoEdit').val());
-    dados.append("contactoEdit", $('#contactoEdit').val());
-    dados.append("emailEdit", $('#emailEdit').val());
-    dados.append("moradaEdit", $('#moradaEdit').val());
-    dados.append("nifEdit", $('#nifEdit').val());
-    dados.append("total_debitoEdit", $('#total_debitoEdit').val());
-    dados.append("id", id);
+    dados.append("numClienteEdit", $('#numClienteEdit').val());
+    dados.append("nomeClienteEdit", $('#nomeClienteEdit').val());
+    dados.append("nifClienteEdit", $('#nifClienteEdit').val());
+    dados.append("moradaClienteEdit", $('#moradaClienteEdit').val());
+    dados.append("IBANClienteEdit", $('#IBANClienteEdit').val());
+    dados.append("ID_Cliente", ID_Cliente);
 
     $.ajax({
         url: "asset/controller/controllerClientes.php",
@@ -160,15 +158,15 @@ function guardaEditClientes(id) {
         processData: false
     })
     .done(function(msg) {
-        var myModal = new bootstrap.Modal(document.getElementById('formEditFornecedores'));
-        myModal.show();
+    $('#formEditClientes').modal('hide');
+        
         let obj = JSON.parse(msg);
         if(obj.flag) {
-            alerta("Fornecedor", obj.msg, "success");
-            getListaFornecedores();
+            alerta("Clientes", obj.msg, "success");
+            getListaClientes();
             myModal.hide();
         } else {
-            alerta("Fornecedor", obj.msg, "error");
+            alerta("Clientes", obj.msg, "error");
         }
         console.log(msg);
     })
@@ -176,7 +174,6 @@ function guardaEditClientes(id) {
         alert("Request failed: " + textStatus);
     });
 }
-
 
 
 function alerta(titulo,msg,icon){
