@@ -221,13 +221,13 @@ function getFornecedoresTop() {
         $msg = "";
         $flag = false;
 
-        $sql = "SELECT Servicos.nome AS Nome, COUNT(*) AS Usado FROM Servicos,Eventos_Servicos WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico GROUP BY Servicos.nome ORDER BY Usado DESC;";
+        $sql = "SELECT MONTH(clientes.data) AS Mes, COUNT(*) AS Total_Clientes FROM clientes WHERE MONTH(clientes.data) IN (4,5,6) GROUP BY MONTH(clientes.data) ORDER BY Mes;";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $dados1[] = $row['Nome'];   
-                $dados2[] = $row['Usado'];
+                $dados1[] = $row['Mes'];   
+                $dados2[] = $row['Total_Clientes'];
             }
             $flag = true;
         } else {
