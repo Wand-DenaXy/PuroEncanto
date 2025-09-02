@@ -265,6 +265,9 @@ function GraficoServicoUtilizadoAbril() {
                                 ticks: {
                                     color: 'white'
                                 },
+                                 grid: {
+                            color: 'white'
+                                }
 
                             },
                                 y: {
@@ -289,51 +292,51 @@ function GraficoServicoUtilizadoAbril() {
     }
 function getClientesDashboard()
 {
-            $.ajax({
-            url: "asset/controller/controllerDashboard.php",
-            type: "POST",
-            data: { op: 6 },
-            dataType: "json",
-            success: function(response) {
-                console.log("Resposta AJAX:", response);
-                if (response.flag) {
-                    const ctx3 = document.getElementById('chart3').getContext('2d');
-                    new Chart(ctx3, {
-                        type: 'line',
-                        data: {
-                            labels: response.dados1,
-                            datasets: [{
-                                label: 'Clientes',
-                                data: response.dados2, 
-                                backgroundColor: 'rgba(78,115,223,0.5)',
-                                borderColor: '#4e73df',
-                                fill: true
-                            }]
-                        },
-                        options: {
-                                        plugins: {
-                                            legend: {
-                                                display: false
-                                            }
+        $.ajax({
+        url: "asset/controller/controllerDashboard.php",
+        type: "POST",
+        data: { op: 9 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx3 = document.getElementById('chart3').getContext('2d');
+                new Chart(ctx3, {
+                    type: 'line',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'Clientes',
+                            data: response.dados2, 
+                            backgroundColor: 'rgba(78,115,223,0.5)',
+                            borderColor: '#4e73df',
+                            fill: true
+                        }]
+                    },
+                    options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            display: false
                                         },
-                                        scales: {
-                                            x: {
-                                                display: false
-                                            },
-                                            y: {
-                                                display: false
-                                            }
+                                        y: {
+                                            display: false
                                         }
                                     }
-                                });
-                } else {
-                    alert(response.msg);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro AJAX:", error);
+                                }
+                            });
+            } else {
+                alert(response.msg);
             }
-        });
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
 }
 
 $(function() {
