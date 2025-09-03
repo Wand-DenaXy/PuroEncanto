@@ -36,4 +36,12 @@ if ($_POST['op'] == 9) {
     $resp = $func->getClientesDashboard();
     echo $resp;
 }
+if ($_POST['op'] == 10) {
+    $resp = $func->GraficoServicoUtilizadoMaio();
+    echo $resp;
+}
+if ($_POST['op'] == 11) {
+    $resp = $func->GraficoServicoUtilizadoJunho();
+    echo $resp;
+}
 ?>
