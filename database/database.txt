@@ -109,6 +109,7 @@ CREATE TABLE Clientes (
     nome VARCHAR(100) NOT NULL,
     nif VARCHAR(20) NOT NULL,
     morada VARCHAR(150) NOT NULL,
+    data date not null,
     IBAN VARCHAR(34) NOT NULL
 );
 #É o stock ne?
@@ -127,11 +128,10 @@ CREATE TABLE Eventos (
     FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
     FOREIGN KEY (ID_Pacote) REFERENCES PacotesConvidados(ID_Pacote)
 );
-select * from PacotesConvidados;
-select * from TiposEventos;
 CREATE TABLE Eventos_Servicos (
     ID_Evento INT NOT NULL,
     ID_Servico INT NOT NULL,
+    data date, #filtragem (mesmo dia da marcação)
     PRIMARY KEY (ID_Evento, ID_Servico),
     FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
     FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
@@ -216,54 +216,54 @@ SELECT descricao, SUM(total_vendas) AS total
             
 
 
-INSERT INTO Clientes (Nome, NIF, Morada, IBAN) VALUES
-('XPTO, Lda', '532622448', 'Rua das Margaridas, n5', 'PT50007946838624313088068'),
-('Maria Almeida', '299446263', 'Rua das Madalenas, n9', 'PT50001410030198503475689'),
-('MoveIT', '556986032', 'Trv dos Filosofos, n8', 'PT50002346819984071468008'),
-('Criação&Gestão', '542707578', 'Av Ru Ru, n91', 'PT50016088457776442648436'),
-('Joaquim Telheiras', '229595510', 'Rua Caladinho, n21', 'PT50003345984078304917235'),
-('Inês Teixeira', '266126405', 'Rua da Ines, n66', 'PT50019115765258156742636'),
-('Pesca e Come', '528545060', 'Av Peixe, n1', 'PT50006580580032769976712'),
-('RunAway', '568473078', 'Trv RunJá, n23', 'PT50016048754065845149420'),
-('José Miguel', '292690134', 'Rua Karina, n71', 'PT50003317771816964715222'),
-('Jéssica Sousa', '256359300', 'Rua da Perfeição, n3', 'PT50016068493577443429429'),
-('Pedro Abreu', '278498981', 'Rua dos Doidos, n1', 'PT50016022008286536563236'),
-('Mármores Ilimitados', '555855600', 'Av das Pedras, n22', 'PT50007606953843295506885'),
-('Constança Mello', '296196010', 'Av das Constanças, n8', 'PT50001079336360081382909'),
-('Patrícia Pereira', '210305061', 'Rua A, n51', 'PT50019343340776115726645'),
-('Margarida Lopes', '250560070', 'Av ABC, n23', 'PT50001419726370388245196'),
-('Leandro Silva', '220885087', 'Rua do Amor, n5', 'PT50002512925026550060008'),
-('Tiago Fonseca', '213306557', 'Av das Saidas, n3', 'PT50003391465185316392498'),
-('OnTheWay', '582390508', 'Trv dos Horrores, n46', 'PT50018969083313776881484'),
-('SorrisosFelizes', '591169398', 'Trv do Porto, n5', 'PT50006564456901236553511'),
-('Daniela Dias', '200046080', 'Rua do Rui, n444', 'PT50006513930465670397957'),
-('Carlos Vieira', '242224024', 'Av do Calculo, n56', 'PT50002510454645858090855'),
-('Heitor Sobral', '234736968', 'Trv das Noirias, n12', 'PT50001057598885414760088'),
-('Franscisco Torres', '292977000', 'Rua Patricias, n16', 'PT50006515256136005925144'),
-('PipocasDoces', '588566098', 'Av das Pipocas, n17', 'PT50018925309607492737431'),
-('Carolina Domingos', '280610653', 'Av da Prisão, n1', 'PT50007921438900560646816'),
-('Sofia Jesus', '297128493', 'Trv Jorgino, n33', 'PT50007642593033411297219'),
-('Manuel Doido', '257229426', 'Rua Palula, n6', 'PT50019163924325602445927'),
-('Laura Tavares', '226419665', 'Av Paulistas, n7', 'PT50007642397440734369335'),
-('Marta Rita', '296398721', 'Trv do Porto, n9', 'PT50016039312537527589323'),
-('António Sinhaca', '228824460', 'Rua das Ruas, n5', 'PT50016048343866711151107'),
-('Oculos do Caramelo', '539134228', 'Rua das Ruas, n45', 'PT50001408110993143881269'),
-('João Silva', '276261658', 'Trv das Gajas, n14', 'PT50003339640608584931338'),
-('Ana Fonseca', '274805812', 'Rua Mada, n9', 'PT50001878540879090667774'),
-('Frederico Sousa', '264679377', 'Trv BB, n13', 'PT50019127796779043931426'),
-('Joana Albuquerque', '278366503', 'Rua CC, n4', 'PT50018906180867476722845'),
-('Gustavo Gonçalves', '244764298', 'Rua FT, n6', 'PT50000795278449692719827'),
-('PhoneStuff', '572052405', 'Rua GHTY, n5', 'PT50003338867952196092373'),
-('Tiago Tavares', '256739510', 'Av dos Sonhos, n66', 'PT50007661025545873249292'),
-('Yuri Veloso', '246027290', 'Av São Martinho, n2', 'PT50003552184890235797724'),
-('Henrique Pedreira', '271413646', 'Rua Yuri Almeida, n7', 'PT50019171407309545072793'),
-('Bruno Pereira', '277613086', 'Av São Pedro, n55', 'PT50019376072232678831677'),
-('DameOuro', '548546070', 'Rua Santo António, n26', 'PT50002386214908984826016'),
-('ViagensFelizes', '550149392', 'Rua São João, n17', 'PT50007931414295313898681'),
-('Fátima Sobral', '244517436', 'Av Fatinha, n8', 'PT50003312853252123650507'),
-('Pedro Dias', '205678807', 'Trv das Noites, n31', 'PT50018908711398644179450'),
-('LetsDance', '561615306', 'Tvr Sentado, n12', 'PT50002395388024784655069'),
-('Ivandro Almeida', '231811349', 'Rua Ivinho, n4', 'PT50006532949430957665073');
+INSERT INTO Clientes (Nome, NIF, Morada, data, IBAN) VALUES
+('XPTO, Lda', '532622448', 'Rua das Margaridas, n5', '2025-04-05', 'PT50007946838624313088068'),
+('Maria Almeida', '299446263', 'Rua das Madalenas, n9', '2025-04-12', 'PT50001410030198503475689'),
+('MoveIT', '556986032', 'Trv dos Filosofos, n8', '2025-04-25', 'PT50002346819984071468008'),
+('Criação&Gestão', '542707578', 'Av Ru Ru, n91', '2025-05-01', 'PT50016088457776442648436'),
+('Joaquim Telheiras', '229595510', 'Rua Caladinho, n21', '2025-05-08', 'PT50003345984078304917235'),
+('Inês Teixeira', '266126405', 'Rua da Ines, n66', '2025-05-19', 'PT50019115765258156742636'),
+('Pesca e Come', '528545060', 'Av Peixe, n1', '2025-05-25', 'PT50006580580032769976712'),
+('RunAway', '568473078', 'Trv RunJá, n23', '2025-06-03', 'PT50016048754065845149420'),
+('José Miguel', '292690134', 'Rua Karina, n71', '2025-06-07', 'PT50003317771816964715222'),
+('Jéssica Sousa', '256359300', 'Rua da Perfeição, n3', '2025-06-11', 'PT50016068493577443429429'),
+('Pedro Abreu', '278498981', 'Rua dos Doidos, n1', '2025-06-15', 'PT50016022008286536563236'),
+('Mármores Ilimitados', '555855600', 'Av das Pedras, n22', '2025-06-20', 'PT50007606953843295506885'),
+('Constança Mello', '296196010', 'Av das Constanças, n8', '2025-04-06', 'PT50001079336360081382909'),
+('Patrícia Pereira', '210305061', 'Rua A, n51', '2025-04-18', 'PT50019343340776115726645'),
+('Margarida Lopes', '250560070', 'Av ABC, n23', '2025-04-27', 'PT50001419726370388245196'),
+('Leandro Silva', '220885087', 'Rua do Amor, n5', '2025-05-02', 'PT50002512925026550060008'),
+('Tiago Fonseca', '213306557', 'Av das Saidas, n3', '2025-05-09', 'PT50003391465185316392498'),
+('OnTheWay', '582390508', 'Trv dos Horrores, n46', '2025-05-14', 'PT50018969083313776881484'),
+('SorrisosFelizes', '591169398', 'Trv do Porto, n5', '2025-05-30', 'PT50006564456901236553511'),
+('Daniela Dias', '200046080', 'Rua do Rui, n444', '2025-06-02', 'PT50006513930465670397957'),
+('Carlos Vieira', '242224024', 'Av do Calculo, n56', '2025-06-09', 'PT50002510454645858090855'),
+('Heitor Sobral', '234736968', 'Trv das Noirias, n12', '2025-06-14', 'PT50001057598885414760088'),
+('Franscisco Torres', '292977000', 'Rua Patricias, n16', '2025-06-18', 'PT50006515256136005925144'),
+('PipocasDoces', '588566098', 'Av das Pipocas, n17', '2025-06-25', 'PT50018925309607492737431'),
+('Carolina Domingos', '280610653', 'Av da Prisão, n1', '2025-04-10', 'PT50007921438900560646816'),
+('Sofia Jesus', '297128493', 'Trv Jorgino, n33', '2025-04-15', 'PT50007642593033411297219'),
+('Manuel Doido', '257229426', 'Rua Palula, n6', '2025-04-22', 'PT50019163924325602445927'),
+('Laura Tavares', '226419665', 'Av Paulistas, n7', '2025-05-05', 'PT50007642397440734369335'),
+('Marta Rita', '296398721', 'Trv do Porto, n9', '2025-05-12', 'PT50016039312537527589323'),
+('António Sinhaca', '228824460', 'Rua das Ruas, n5', '2025-05-18', 'PT50016048343866711151107'),
+('Oculos do Caramelo', '539134228', 'Rua das Ruas, n45', '2025-06-01', 'PT50001408110993143881269'),
+('João Silva', '276261658', 'Trv das Gajas, n14', '2025-06-06', 'PT50003339640608584931338'),
+('Ana Fonseca', '274805812', 'Rua Mada, n9', '2025-06-12', 'PT50001878540879090667774'),
+('Frederico Sousa', '264679377', 'Trv BB, n13', '2025-06-16', 'PT50019127796779043931426'),
+('Joana Albuquerque', '278366503', 'Rua CC, n4', '2025-06-22', 'PT50018906180867476722845'),
+('Gustavo Gonçalves', '244764298', 'Rua FT, n6', '2025-04-08', 'PT50000795278449692719827'),
+('PhoneStuff', '572052405', 'Rua GHTY, n5', '2025-04-14', 'PT50003338867952196092373'),
+('Tiago Tavares', '256739510', 'Av dos Sonhos, n66', '2025-04-29', 'PT50007661025545873249292'),
+('Yuri Veloso', '246027290', 'Av São Martinho, n2', '2025-05-04', 'PT50003552184890235797724'),
+('Henrique Pedreira', '271413646', 'Rua Yuri Almeida, n7', '2025-05-10', 'PT50019171407309545072793'),
+('Bruno Pereira', '277613086', 'Av São Pedro, n55', '2025-05-21', 'PT50019376072232678831677'),
+('DameOuro', '548546070', 'Rua Santo António, n26', '2025-06-04', 'PT50002386214908984826016'),
+('ViagensFelizes', '550149392', 'Rua São João, n17', '2025-06-08', 'PT50007931414295313898681'),
+('Fátima Sobral', '244517436', 'Av Fatinha, n8', '2025-06-19', 'PT50003312853252123650507'),
+('Pedro Dias', '205678807', 'Trv das Noites, n31', '2025-06-23', 'PT50018908711398644179450'),
+('LetsDance', '561615306', 'Tvr Sentado, n12', '2025-04-07', 'PT50002395388024784655069'),
+('Ivandro Almeida', '231811349', 'Rua Ivinho, n4', '2025-05-16', 'PT50006532949430957665073');
 
 select count(*) as total from Clientes;
 -- Inserindo os pacotes
@@ -657,7 +657,15 @@ select * from Eventos;
 
 select * from Eventos_Servicos;
 select * from Eventos;
-
-
+select * from clientes;
+SELECT 
+    MONTHNAME(clientes.data) AS Mes,
+    COUNT(*) AS Total_Clientes
+FROM clientes
+WHERE MONTH(clientes.data) IN (4,5,6)
+GROUP BY MONTH(clientes.data)
+ORDER BY MONTH(clientes.data);
 select * from eventos;
 SELECT descricao, total_debito FROM Fornecedores WHERE ID_Fornecedor ORDER BY total_debito desc;
+
+SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 1 AND 4 ORDER BY total_vendas desc;
