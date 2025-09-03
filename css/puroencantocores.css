@@ -1,6 +1,10 @@
 .text-primary {
     color: #ffd549;
 }
+.cor{
+    
+    background-color: #f7c48a33 ;
+}
 
 a {
     color: #ffb951;
@@ -85,7 +89,7 @@ fieldset[disabled] .btn-xl.active {
 
 .btn-xl .badge {
     color:  #ffb951;
-    background-color: #fff;
+    background-color: #f18117;
 }
 
 
