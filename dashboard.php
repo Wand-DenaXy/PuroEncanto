@@ -112,7 +112,8 @@ $conn->close();
             </div>
             <br>
             <br>
-            <div class="col-md-6">
+            
+            <!-- <div class="col-md-6">
                 <br>
                 <div class="card">
                     <div class="card-body">
@@ -122,7 +123,7 @@ $conn->close();
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
