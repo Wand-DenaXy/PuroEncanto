@@ -154,36 +154,6 @@ function GraficoServicoDashboard() {
     $conn->close();
     return $resp;
 }
-function getFornecedoresTop() {
-    global $conn;
-    $dados1 = [];
-    $dados2 = [];
-    $msg = "";
-    $flag = false;
-
-    $sql = "SELECT descricao, total_debito FROM Fornecedores WHERE ID_Fornecedor ORDER BY total_debito desc;";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $dados1[] = $row['descricao'];   
-            $dados2[] = $row['total_debito'];
-        }
-        $flag = true;
-    } else {
-        $msg = "Nenhum Serviço encontrado.";
-    }
-
-    $resp = json_encode(array(
-        "flag" => $flag,
-        "msg" => $msg,
-        "dados1" => $dados1,
-        "dados2" => $dados2
-    ));
-
-    $conn->close();
-    return $resp;
-}
 function GraficoServicoUtilizadoAbril() {
         global $conn;
         $dados1 = [];
@@ -274,24 +244,125 @@ function GraficoServicoUtilizadoJunho() {
         $conn->close();
         return $resp;
 }
-        function getClientesDashboard() {
+        function getGastosDashboard() {
         global $conn;
         $dados1 = [];
         $dados2 = [];
         $msg = "";
         $flag = false;
 
-        $sql = "SELECT MONTH(clientes.data) AS Mes, COUNT(*) AS Total_Clientes FROM clientes WHERE MONTH(clientes.data) IN (4,5,6) GROUP BY MONTH(clientes.data) ORDER BY Mes;";
+        $sql = "SELECT 
+    CASE MONTH(Data)
+        WHEN 1 THEN 'Janeiro'
+        WHEN 2 THEN 'Fevereiro'
+        WHEN 3 THEN 'Março'
+        WHEN 4 THEN 'Abril'
+        WHEN 5 THEN 'Maio'
+        WHEN 6 THEN 'Junho'
+        WHEN 7 THEN 'Julho'
+        WHEN 8 THEN 'Agosto'
+        WHEN 9 THEN 'Setembro'
+        WHEN 10 THEN 'Outubro'
+        WHEN 11 THEN 'Novembro'
+        WHEN 12 THEN 'Dezembro'
+    END AS Mes,
+    SUM(Valor) AS TotalGastos
+FROM Gastos
+GROUP BY MONTH(Data)
+ORDER BY MONTH(Data);";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $dados1[] = $row['Mes'];   
-                $dados2[] = $row['Total_Clientes'];
+                $dados2[] = $row['TotalGastos'];
             }
             $flag = true;
         } else {
-            $msg = "Nenhum Serviço encontrado.";
+            $msg = "Nenhum Gastos encontrado.";
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg,
+            "dados1" => $dados1,
+            "dados2" => $dados2
+        ));
+
+        $conn->close();
+        return $resp;
+    }
+    function getRedimentosDashboard() {
+        global $conn;
+        $dados1 = [];
+        $dados2 = [];
+        $msg = "";
+        $flag = false;
+
+        $sql = "SELECT 
+    CASE MONTH(Data)
+        WHEN 1 THEN 'Janeiro'
+        WHEN 2 THEN 'Fevereiro'
+        WHEN 3 THEN 'Março'
+        WHEN 4 THEN 'Abril'
+        WHEN 5 THEN 'Maio'
+        WHEN 6 THEN 'Junho'
+        WHEN 7 THEN 'Julho'
+        WHEN 8 THEN 'Agosto'
+        WHEN 9 THEN 'Setembro'
+        WHEN 10 THEN 'Outubro'
+        WHEN 11 THEN 'Novembro'
+        WHEN 12 THEN 'Dezembro'
+    END AS Mes,
+    SUM(Valor) AS TotalRendimentos
+FROM Rendimento
+GROUP BY MONTH(Data)
+ORDER BY MONTH(Data);";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $dados1[] = $row['Mes'];   
+                $dados2[] = $row['TotalRendimentos'];
+            }
+            $flag = true;
+        } else {
+            $msg = "Nenhum Gastos encontrado.";
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg,
+            "dados1" => $dados1,
+            "dados2" => $dados2
+        ));
+
+        $conn->close();
+        return $resp;
+    }
+    function GraficoDiferencaDashboard() {
+        global $conn;
+        $dados1 = [];
+        $dados2 = [];
+        $msg = "";
+        $flag = false;
+
+        $sql = "SELECT ResumoFinanceiro.descricao AS Meses, IFNULL(SUM(Rendimento.valor),2) - IFNULL(SUM(Gastos.valor),2) AS Saldo
+                FROM ResumoFinanceiro,Gastos,Rendimento
+                where Rendimento.ID_Rendimento = ResumoFinanceiro.ID_Rendimento AND Gastos.ID_Gasto = ResumoFinanceiro.ID_Gasto
+                GROUP BY MONTH(Rendimento.Data), ResumoFinanceiro.descricao
+                ORDER BY MONTH(Rendimento.Data);";
+                
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $dados1[] = $row['Meses'];   
+                $dados2[] = $row['Saldo'];
+            }
+            $flag = true;
+        } else {
+            $msg = "Nenhum Resumo Finaceiro encontrado.";
         }
 
         $resp = json_encode(array(

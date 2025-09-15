@@ -1,43 +1,35 @@
 <?php
 
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "puroencanto";
+require_once 'asset/model/connection2.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-  die("Erro na ligação: " . $conn->connect_error);
-}
-
-$sql = "SELECT Mes, Rendimentos, Gastos 
-        FROM ResumoFinanceiro 
-        WHERE Ano = 2025 
-        ORDER BY Mes";
-$result = $conn->query($sql);
 
 $meses = [];
 $rendimentos = [];
 $gastos = [];
 
-while($row = $result->fetch_assoc()) {
-    $meses[] = date("M", mktime(0, 0, 0, $row['Mes'], 1));
-    $rendimentos[] = (float)$row['Rendimentos'];
-    $gastos[] = (float)$row['Gastos'];
-}
+//
 $sqlFornecedores = "SELECT COUNT(*) AS totalFornecedores FROM Fornecedores";
 $resultFornecedores = $conn->query($sqlFornecedores);
 
 if ($row = $resultFornecedores->fetch_assoc()) {
 $totalFornecedores = $row['totalFornecedores'];
 }
-$sqlClientes = "SELECT COUNT(*) AS totalClientes FROM Clientes;";
-$resultClientes = $conn->query($sqlClientes);
+//Gastos
+$sqlGastos = "SELECT SUM(gastos.valor) As Gastos from gastos;";
+$resultGastos = $conn->query($sqlGastos);
 
-if ($row = $resultClientes->fetch_assoc()) {
-$totalClientes = $row['totalClientes'];
+if ($row = $resultGastos->fetch_assoc()) {
+$totalGastos = $row['Gastos'];
 }
+//Rendimentos
+$sqlRendimentos = "SELECT SUM(Rendimento.valor) As Rendimento from Rendimento;";
+$resultRendimentos = $conn->query($sqlRendimentos);
+
+if ($row = $resultRendimentos->fetch_assoc()) {
+$totalRendimentos = $row['Rendimento'];
+}
+$saldo = $totalRendimentos - $totalGastos;
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -68,10 +60,10 @@ $conn->close();
             <p class="logotitulo">Puro Encanto</p>
         </div>
         <a href="dashboard.php" class="active"><i class="bi bi-grid"></i> Dashboard</a>
+        <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Serviços</a>
         <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
-        <a href="#"><i class="bi bi-journal"></i> Rendimentos</a>
         <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
     </div>
     <div class="content">
@@ -82,29 +74,29 @@ $conn->close();
             <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="card p-3">
-                        <h6>Equipamentos</h6>
+                        <h6>Total Ativo</h6>
                         <h4>153</h4>
                         <canvas id="chart1" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
-                        <h6>Gastos vs Rendimentos</h6>
-                        <h4><br></h4>
+                        <h6>Redimentos</h6>
+                        <h4><?php echo $totalRendimentos; ?></h4>
                         <canvas id="chart2" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
-                        <h6>Clientes</h6>
-                        <h4><?php echo $totalClientes; ?></h4>
+                        <h6>Gastos</h6>
+                        <h4><?php echo -$totalGastos; ?></h4>
                         <canvas id="chart3" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
-                        <h6>Fornecedores</h6>
-                        <h4><?php echo $totalFornecedores; ?></h4>
+                        <h6>Receita</h6>
+                        <h4><?php echo $saldo; ?></h4>
                         <canvas id="chart4" height="80"></canvas>
                     </div>
                 </div>
@@ -161,42 +153,6 @@ $conn->close();
                 }
             }
         });
-
-
-        const meses = <?php echo json_encode($meses); ?>;
-        const gastos = <?php echo json_encode($gastos); ?>;
-        const rendimentos = <?php echo json_encode($rendimentos); ?>;
-        const ctx2 = document.getElementById('chart2').getContext('2d');
-        new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: meses,
-                datasets: [{
-                    data: gastos,
-                    borderColor: '#f6c23e',
-                    backgroundColor: 'transparent'
-                }, {
-                    data: rendimentos,
-                    borderColor: '#36b9cc',
-                    backgroundColor: 'transparent'
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        display: false
-                    },
-                    y: {
-                        display: false
-                    }
-                }
-            }
-        });
         </script>
         <script src="asset/js/graficos.js"></script>
         <script src="asset/js/dashboard.js"></script>
@@ -204,8 +160,9 @@ $conn->close();
         $(document).ready(function() {
             GraficoServico();
             GraficoServicoDashboard();
-            getFornecedoresTop();
-            getClientesDashboard();
+            GraficoDiferencaDashboard();
+            getGastosDashboard();
+            getRedimentosDashboard();
         });
         </script>
 </body>

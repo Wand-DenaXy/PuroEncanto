@@ -25,7 +25,7 @@ if ($_POST['op'] == 6) {
     echo $resp;
 }
 if ($_POST['op'] == 7) {
-    $resp = $func->getFornecedoresTop();
+    $resp = $func->GraficoDiferencaDashboard();
     echo $resp;
 }
 if ($_POST['op'] == 8) {
@@ -33,7 +33,7 @@ if ($_POST['op'] == 8) {
     echo $resp;
 }
 if ($_POST['op'] == 9) {
-    $resp = $func->getClientesDashboard();
+    $resp = $func->getGastosDashboard();
     echo $resp;
 }
 if ($_POST['op'] == 10) {
@@ -44,4 +44,9 @@ if ($_POST['op'] == 11) {
     $resp = $func->GraficoServicoUtilizadoJunho();
     echo $resp;
 }
+if ($_POST['op'] == 12) {
+    $resp = $func->getRedimentosDashboard();
+    echo $resp;
+}
+
 ?>

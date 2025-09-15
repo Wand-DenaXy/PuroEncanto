@@ -25,16 +25,16 @@
             <p class="logotitulo">Puro Encanto</p>
         </div>
         <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
+        <a href="gastoserendimentos.html" class="active"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Serviços</a>
-        <a href="fornecedores.html" class="active"><i class="bi bi-people"></i> Fornecedores</a>
+        <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
     </div>
     <div class="content">
         <!-- Topbar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Fornecedores</h4>
+            <h4>Gastos e Rendimentos</h4>
             <div class="d-flex align-items-center">
                 <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="User">
                 <span>Manuel Silvestre</span>
@@ -42,73 +42,151 @@
         </div>
         <hr>
         <!-- Form and CSV Import -->
+<div class="container mt-4">
+    <div class="row">
+        <!-- Coluna Gastos -->
+        <div class="col-md-6">
+            <!-- Card Adicionar Gastos -->
+            <div class="card p-4 mb-4" style="min-height: 180px;">
+                <h5>Adicionar Gastos</h5>
+                <form>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Descrição" id="descricaoGasto">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Valor" id="valorGasto">
+                        </div>
+                        <div class="col">
+                            <input type="date" class="form-control" placeholder="Data" id="dataGasto">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="registaGastos()">Registar</button>
+                </form>
+            </div>
+
+            <!-- Tabela Gastos -->
+            <div class="card mb-4" style="min-height: 400px;">
+                <div class="card-body">
+                    <h5 class="card-title">Gastos</h5>
+                    <div style="overflow-x:auto;">
+                        <table class="table table-striped table-hover" id="tblGastos">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Remover</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listagemGastos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="card p-4 mb-4" style="min-height: 180px;">
+                <h5>Adicionar Rendimentos</h5>
+                <form>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Descrição" id="descricaoRendimento">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Valor" id="valorRendimento">
+                        </div>
+                        <div class="col">
+                            <input type="date" class="form-control" placeholder="Data" id="dataRendimento">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="registaRendimentos()">Registar</button>
+                </form>
+            </div>
+
+            <div class="card mb-4" style="min-height: 400px;">
+                <div class="card-body">
+                    <h5 class="card-title">Rendimentos</h5>
+                    <div style="overflow-x:auto;">
+                        <table class="table table-striped table-hover" id="tblRendimentos">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Remover</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listagemRendimentos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         <div class="row">
             <div class="col-md-6">
                 <div class="card p-3">
-                    <h5>Adicionar Fornecedores</h5>
+                    <h5>Adicionar Resumo Financeiro</h5>
                     <form>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Nome" id="descricao">
+                                <input type="text" class="form-control" placeholder="Descrição" id="descricaoResumo">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="contacto" id="contacto">
+                                <select name="" id="selectRendimentos"></select>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Email" id="email">
+                                <select name="" id="selectGastos"></select>
                             </div>
                             <div class="col">
-                                <input type="email" class="form-control" placeholder="Morada" id="morada">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="NIF" id="nif">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="total de Debito" id="total_debito">
-                            </div>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="registaFornecedores()">Registar</button>
+                        <button type="button" class="btn btn-primary" onclick="registaResumo()">Registar</button>
 
                     </form>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Importar Fornecedores (CSV)</h5>
-                    <input type="file" class="form-control mb-3">
-                    <button class="btn btn-success" onclick="importarSessoesCSV()">Importar Fornecedores</button>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Fornecedores</h5>
+                <h5 class="card-title">Resumo Financeiro</h5>
 
-                <table class="table table-striped" id="tblFornecedores">
+                <table class="table table-striped" id="tblResumo">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Contacto</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Morada</th>
-                            <th scope="col">NIF</th>
-                            <th scope="col">Total Debito</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Rendimentos</th>
+                            <th scope="col">Gastos</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Remover</th>
                         </tr>
                     </thead>
-                    <tbody id="listagemFuncionarios">
+                    <tbody id="listagemResumo">
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+
+
+
+  
+</div>
 <div class="modal fade" id="formEditFornecedores" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -160,6 +238,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
@@ -167,8 +246,9 @@
         </div>
     </div>
 </div>
-
+    <script src="asset/js/gastoserendimentos.js"></script>
     <script src="asset/js/fornecedores.js"></script>
+    
 </body>
 
 </html>

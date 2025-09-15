@@ -1,4 +1,4 @@
-function getFornecedoresTop() {
+function GraficoDiferencaDashboard() {
     $.ajax({
         url: "asset/controller/controllerDashboard.php",
         type: "POST",
@@ -13,10 +13,10 @@ function getFornecedoresTop() {
                     data: {
                         labels: response.dados1,
                         datasets: [{
-                            label: 'Fornecedores',
+                            label: 'Diferença dos Rendimentos e Gastos',
                             data: response.dados2,
-                            backgroundColor: 'rgba(28,200,138,0.3)',
-                            borderColor: '#1cc88a',
+                            backgroundColor: 'rgba(78,115,223,0.5)',
+                            borderColor: '#4e73df',
                             borderWidth: 2,
                             fill: true,
                             tension: 0.3
@@ -74,11 +74,31 @@ function getFornecedoresTop() {
                         },
                         options: {
                             responsive: true,
+                                                                                plugins: {
+                            title: {
+                                display: true,
+                                text: 'Serviços mais utilizados - Abril',
+                                color: 'white',
+                                font: {
+                                    size: 18
+                                }
+                            },
+                              legend: {
+                                labels: {
+                                    color: 'white'
+                                }
+                            }
+                        },
                             scales: {
                                 y: {
                                     beginAtZero: true,
                                     ticks: {
                                         callback: value => value + " €"
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                color: 'white'
                                     }
                                 }
                             }
@@ -117,11 +137,31 @@ function getFornecedoresTop() {
                         },
                         options: {
                             responsive: true,
+                                                    plugins: {
+                            title: {
+                                display: true,
+                                text: 'Serviços mais utilizados - Maio',
+                                color: 'white',
+                                font: {
+                                    size: 18
+                                }
+                            },
+                              legend: {
+                                labels: {
+                                    color: 'white'
+                                }
+                            }
+                        },
                             scales: {
                                 y: {
                                     beginAtZero: true,
                                     ticks: {
                                         callback: value => value + " €"
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                color: 'white'
                                     }
                                 }
                             }
@@ -151,7 +191,7 @@ function getFornecedoresTop() {
                         data: {
                             labels: response.dados1,
                             datasets: [{
-                                label: 'Mês de Maio',
+                                label: 'Mês de Junho',
                                 data: response.dados2, 
                                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -160,12 +200,32 @@ function getFornecedoresTop() {
                         },
                         options: {
                             responsive: true,
+                                                                                plugins: {
+                            title: {
+                                display: true,
+                                text: 'Serviços mais utilizados - Junho',
+                                color: 'white',
+                                font: {
+                                    size: 18
+                                }
+                            },
+                              legend: {
+                                labels: {
+                                    color: 'white'
+                                }
+                            }
+                        },
                             scales: {
                                 y: {
                                     beginAtZero: true,
                                     suggestedMax: Math.max(...response.dados2) * 1.1,
                                     ticks: {
                                         callback: value => value + " €"
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                color: 'white'
                                     }
                                 }
                             }
@@ -266,7 +326,7 @@ function GraficoServicoUtilizadoAbril() {
                                     color: 'white'
                                 },
                                  grid: {
-                            color: 'white'
+                                    color: 'white'
                                 }
 
                             },
@@ -396,7 +456,7 @@ function GraficoServicoUtilizadoJunho() {
                                     color: 'white'
                                 },
                                  grid: {
-                            color: 'white'
+                                    color: 'white'
                                 }
 
                             },
@@ -420,7 +480,7 @@ function GraficoServicoUtilizadoJunho() {
             }
         });
 }
-function getClientesDashboard()
+function getGastosDashboard()
 {
         $.ajax({
         url: "asset/controller/controllerDashboard.php",
@@ -436,10 +496,10 @@ function getClientesDashboard()
                     data: {
                         labels: response.dados1,
                         datasets: [{
-                            label: 'Clientes',
+                            label: 'Gastos',
                             data: response.dados2, 
-                            backgroundColor: 'rgba(78,115,223,0.5)',
-                            borderColor: '#4e73df',
+                            backgroundColor: 'rgba(231,74,59,0.5)',
+                            borderColor: '#e74a3b',
                             fill: true
                         }]
                     },
@@ -468,10 +528,106 @@ function getClientesDashboard()
         }
     });
 }
-
+function getRedimentosDashboard()
+{
+        $.ajax({
+        url: "asset/controller/controllerDashboard.php",
+        type: "POST",
+        data: { op: 12 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx3 = document.getElementById('chart2').getContext('2d');
+                new Chart(ctx3, {
+                    type: 'line',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'Redimentos',
+                            data: response.dados2, 
+                            backgroundColor: 'rgba(28,200,138,0.5)',
+                            borderColor: '#1cc88a',
+                            fill: true
+                        }]
+                    },
+                    options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            display: false
+                                        },
+                                        y: {
+                                            display: false
+                                        }
+                                    }
+                                }
+                            });
+            } else {
+                alert(response.msg);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
+}
+function getRedimentosDashboard()
+{
+        $.ajax({
+        url: "asset/controller/controllerDashboard.php",
+        type: "POST",
+        data: { op: 12 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx3 = document.getElementById('chart2').getContext('2d');
+                new Chart(ctx3, {
+                    type: 'line',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'Redimentos',
+                            data: response.dados2, 
+                            backgroundColor: 'rgba(28,200,138,0.5)',
+                            borderColor: '#1cc88a',
+                            fill: true
+                        }]
+                    },
+                    options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            display: false
+                                        },
+                                        y: {
+                                            display: false
+                                        }
+                                    }
+                                }
+                            });
+            } else {
+                alert(response.msg);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
+}
 $(function() {
     GraficoServico();
     getServicosDashboard();
     GraficoServicoUtilizadoAbril();
-    getClientesDashboard();
+    getGastosDashboard();
+    getRedimentosDashboard();
 });
