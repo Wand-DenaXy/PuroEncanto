@@ -71,7 +71,6 @@ $conn->close();
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Serviços</a>
         <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
-        <a href="#"><i class="bi bi-journal"></i> Rendimentos</a>
         <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
     </div>
     <div class="content">
@@ -120,7 +119,8 @@ $conn->close();
             </div>
             <br>
             <br>
-            <div class="col-md-6">
+            
+            <!-- <div class="col-md-6">
                 <br>
                 <div class="card">
                     <div class="card-body">
@@ -130,7 +130,7 @@ $conn->close();
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
