@@ -131,7 +131,14 @@ li {
     background-color: #ff6b6b;
 }
 
+.nav-login a {
+  font-size: 20px; /* controla tamanho só do link do login */
+}
 
+.nav-login a .fa-user {
+    padding-left: 200px;
+  font-size: 24px; /* tamanho real do ícone */
+}
 .navbar-default .nav li a {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -139,6 +146,12 @@ li {
     letter-spacing: 1px;
     color: #000000;
     font-size: 12px;
+}
+
+.navbar-default .navbar-nav > li > a .fa-user {
+    font-size: 22px;   
+    vertical-align: middle; 
+    color: #000; 
 }
 
 
