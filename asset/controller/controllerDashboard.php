@@ -48,5 +48,17 @@ if ($_POST['op'] == 12) {
     $resp = $func->getRedimentosDashboard();
     echo $resp;
 }
+if ($_POST['op'] == 13) {
+    $resp = $func->getDividasReceber();
+    echo $resp;
+}
+if ($_POST['op'] == 14) {
+    $resp = $func->pagarDividasReceber($_POST['ID_Divida']);
+    echo $resp;
+}
+if ($_POST['op'] == 15) {
+    $resp = $func->recusarDividasReceber($_POST['ID_Divida']);
+    echo $resp;
+}
 
 ?>

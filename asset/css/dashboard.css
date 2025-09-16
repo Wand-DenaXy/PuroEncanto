@@ -96,3 +96,13 @@ body {
   background-color: black;
   border-radius: 10px;
 }
+.time {
+    position: absolute;
+    bottom: 20px;  /* Posiciona a div 20px da parte inferior da sidebar */
+    left: 50%;
+    transform: translateX(-50%);  /* Centraliza horizontalmente */
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+}

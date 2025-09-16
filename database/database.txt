@@ -6,7 +6,12 @@
 		ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
 		Tipo VARCHAR(50) NOT NULL
 	);
-
+Create table Funcionarios
+(
+	ID_Funcionario INT PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(250),
+    NIF varchar(250)
+);
 	CREATE TABLE Utilizador (
 		ID_Utilizador INT PRIMARY KEY AUTO_INCREMENT,
 		Nome VARCHAR(100) NOT NULL,
@@ -130,7 +135,29 @@
     FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
     FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
 );
+CREATE TABLE DividasAPagar (
+    ID_Divida INT PRIMARY KEY AUTO_INCREMENT,
+    Tipo VARCHAR(50) NOT NULL,            -- Tipo de dívida: Fornecedor, Cliente, Funcionário, Outros
+    Valor DECIMAL(15, 2) NOT NULL,        -- Valor da dívida
+    Estado VARCHAR(50) DEFAULT 'Em aberto', -- Estado da dívida (Ex: Em aberto, Pago, Atrasado)
+    
+    -- Referências para fornecedores, clientes e funcionários, mas podem ser NULL
+    ID_Fornecedor INT NULL,               -- Referência ao fornecedor, se a dívida for de fornecedor
+    ID_Cliente INT NULL,                  -- Referência ao cliente, se a dívida for de cliente
+    ID_Funcionario INT NULL,              -- Referência ao funcionário, se a dívida for de funcionário
+    
+    -- Chaves estrangeiras para garantir a integridade referencial
+    FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
+);
 	select * from servicos;
+    	INSERT INTO Funcionarios (nome,nif) VALUES 
+	("António Dias Alegres","250941392"), 
+	("Luisa Noites","293389047"),
+    ("Tiago Tardes","240378326");
+    
+
 	INSERT INTO TipoUtilizador (Tipo) VALUES 
 	('Administrador'), 
 	('Funcionário');
@@ -1266,7 +1293,22 @@ FROM Gastos
 GROUP BY MONTH(Data)
 ORDER BY MONTH(Data);
 
+select * from DividasAPagar;
 
+INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Fornecedor)
+VALUES ('Fornecedor', 1000.00,'Em aberto', 1);  -- Referência ao fornecedor
+
+INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Cliente)
+VALUES ('Cliente', 500.00,'Em aberto', 2);  -- Referência ao cliente
+
+INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Funcionario)
+VALUES ('Funcionario', 300.00,'Em aberto', 3);  -- Referência ao funcionário
+
+INSERT INTO DividasAPagar (Tipo, Valor, Estado)
+VALUES ('Outros', 150.00, 'Em aberto');  -- Não associada a nenhum fornecedor, cliente ou funcionário
+
+INSERT INTO DividasAPagar (Tipo, Valor, Estado)
+VALUES ('Sigma', 200.00, 'Pago');  -- Não associada a nenhum fornecedor, cliente ou funcionário
 
 SELECT 
     CASE MONTH(Data)

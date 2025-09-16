@@ -61,3 +61,23 @@ body {
     height: 40px;
     width: 40px;
 }
+.swal2-popup.custom-toast {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  width: 400px  !important; 
+}
+.swal2-popup.toast-error {
+  background-color: #f44336 !important;
+  color: white !important;
+  width: 400px !important;
+}
+.time {
+    position: absolute;
+    bottom: 20px;  /* Posiciona a div 20px da parte inferior da sidebar */
+    left: 50%;
+    transform: translateX(-50%);  /* Centraliza horizontalmente */
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+}

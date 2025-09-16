@@ -61,10 +61,12 @@ $conn->close();
         </div>
         <a href="dashboard.php" class="active"><i class="bi bi-grid"></i> Dashboard</a>
         <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
-        <a href="servicosadmin.html"><i class="bi bi-grid"></i>Serviços</a>
+        <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
         <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
+
+         <div class="time" id="time"></div>
     </div>
     <div class="content">
 
@@ -112,18 +114,54 @@ $conn->close();
             </div>
             <br>
             <br>
-            
-            <!-- <div class="col-md-6">
-                <br>
-                <div class="card">
-                    <div class="card-body">
+        <div>
 
-
-                        <?php include 'contador.php'; ?>
-                    </div>
+                <div class="container mt-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Dividas a Pagar</h5>
+                                <table class="table table-striped" id="tblPagar">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Tipo</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Pagar</th>
+                                            <th scope="col">Recusar</th>
+                                            <th scope="col">Informações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listagemPagar">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                 </div>
-            </div>
-        </div> -->
+                        <div class="container mt-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Dividas a Receber</h5>
+
+                                <table class="table table-striped" id="tblReceber">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Tipo</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Receber</th>
+                                            <th scope="col">Recusar</th>
+                                            <th scope="col">Informações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listagemReceber">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -164,6 +202,7 @@ $conn->close();
             GraficoDiferencaDashboard();
             getGastosDashboard();
             getRedimentosDashboard();
+            getDividasReceber();
         });
         </script>
 </body>
