@@ -66,7 +66,7 @@ $conn->close();
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
-         <div class="time" id="time"></div>
+        <div class="time" id="time"></div>
     </div>
     <div class="content">
 
@@ -114,97 +114,97 @@ $conn->close();
             </div>
             <br>
             <br>
-        <div>
+            <div>
 
                 <div class="container mt-1">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Dividas a Pagar</h5>
-                                <table class="table table-striped" id="tblPagar">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Valor</th>
-                                            <th scope="col">Estado</th>
-                                            <th scope="col">Pagar</th>
-                                            <th scope="col">Recusar</th>
-                                            <th scope="col">Informações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listagemPagar">
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dividas a Pagar</h5>
+                            <table class="table table-striped" id="tblPagar">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Pagar</th>
+                                        <th scope="col">Recusar</th>
+                                        <th scope="col">Informações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listagemPagar">
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
                 </div>
-                        <div class="container mt-1">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Dividas a Receber</h5>
+                <div class="container mt-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dividas a Receber</h5>
 
-                                <table class="table table-striped" id="tblReceber">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Tipo</th>
-                                            <th scope="col">Valor</th>
-                                            <th scope="col">Estado</th>
-                                            <th scope="col">Receber</th>
-                                            <th scope="col">Recusar</th>
-                                            <th scope="col">Informações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listagemReceber">
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-striped" id="tblReceber">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Receber</th>
+                                        <th scope="col">Recusar</th>
+                                        <th scope="col">Informações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listagemReceber">
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
                 </div>
-        </div>
+            </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <script>
-        const ctx1 = document.getElementById('chart1').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['', '', '', '', '', '', ''],
-                datasets: [{
-                    data: [5, 6, 4, 7, 8, 5, 4],
-                    backgroundColor: '#4e73df'
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+            <script>
+            const ctx1 = document.getElementById('chart1').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['', '', '', '', '', '', ''],
+                    datasets: [{
+                        data: [5, 6, 4, 7, 8, 5, 4],
+                        backgroundColor: '#4e73df'
+                    }]
                 },
-                scales: {
-                    x: {
-                        display: false
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     },
-                    y: {
-                        display: false
+                    scales: {
+                        x: {
+                            display: false
+                        },
+                        y: {
+                            display: false
+                        }
                     }
                 }
-            }
-        });
-        </script>
-        <script src="asset/js/graficos.js"></script>
-        <script src="asset/js/dashboard.js"></script>
-        <script>
-        $(document).ready(function() {
-            GraficoServico();
-            GraficoServicoDashboard();
-            GraficoDiferencaDashboard();
-            getGastosDashboard();
-            getRedimentosDashboard();
-            getDividasReceber();
-        });
-        </script>
+            });
+            </script>
+            <script src="asset/js/graficos.js"></script>
+            <script src="asset/js/dashboard.js"></script>
+            <script>
+            $(document).ready(function() {
+                GraficoServico();
+                GraficoServicoDashboard();
+                GraficoDiferencaDashboard();
+                getGastosDashboard();
+                getRedimentosDashboard();
+                getDividasReceber();
+            });
+            </script>
 </body>
 
 </html>
