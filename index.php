@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,42 +55,54 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="index.html">Puro Encanto</a>
-            </div>
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand page-scroll" href="index.html">Puro Encanto</a>
+    </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#feature">O que oferecemos?</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Galeria</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="sobre.html">Sobre nós</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="servico.html">Serviços</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+    <!-- Links + Ícone -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!-- Links normais -->
+      <ul class="nav navbar-nav">
+        <li><a class="page-scroll" href="#feature">O que oferecemos?</a></li>
+        <li><a class="page-scroll" href="#portfolio">Galeria</a></li>
+        <li><a class="page-scroll" href="sobre.html">Sobre nós</a></li>
+        <li><a class="page-scroll" href="servico.html">Serviços</a></li>
+      </ul>
+
+      <!-- Ícone canto direito -->
+     <!-- Ícone canto direito -->
+<ul class="nav navbar-nav navbar-right">
+<?php if(isset($_SESSION['utilizador'])): ?>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-user fa-2x"></i> <?php echo $_SESSION['utilizador']; ?> <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="controllerLogin.php?op=3">Logout</a></li>
+        </ul>
+    </li>
+<?php else: ?>
+    <li class="nav-login">
+        <a href="login.php">
+            <i class="fa fa-user fa-2x"></i>
+        </a>
+    </li>
+<?php endif; ?>
+</ul>
+
+    </div>
+  </div>
+</nav>
+
 
     
     
