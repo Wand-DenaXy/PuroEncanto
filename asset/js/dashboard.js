@@ -624,10 +624,135 @@ function getRedimentosDashboard()
         }
     });
 }
+function getDividasReceber(){
+    
+    if ( $.fn.DataTable.isDataTable('#listagemPagar') ) {
+        $('#listagemPagar').DataTable().destroy();
+    }
+
+    let dados = new FormData();
+    dados.append("op", 13);
+
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        $('#listagemPagar').html(msg);
+        $('#tblPagar').DataTable();
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+}
+function pagarDividasReceber(id){
+
+    let dados = new FormData();
+    dados.append("op", 14);
+    dados.append("ID_Divida", id);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta("Divida Recebida!",obj.msg,"success");
+            getDividasReceber();    
+        }else{
+            alerta("Divida",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
+function recusarDividasReceber(id)
+{
+
+    let dados = new FormData();
+    dados.append("op", 15);
+    dados.append("ID_Divida", id);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta("Divida Recusada!",obj.msg,"success");
+            getDividasReceber();    
+        }else{
+            alerta("Divida",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+
+}
+function Timer()
+{
+     function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+
+        document.getElementById('time').textContent = timeString;
+    }
+
+    setInterval(updateTime, 1000);
+}
+function alerta(titulo,msg,icon){
+    Swal.fire({
+        position: 'center',
+        icon: icon,
+        title: titulo,
+        text: msg,
+        showConfirmButton: true,
+
+      })
+}
 $(function() {
     GraficoServico();
     getServicosDashboard();
     GraficoServicoUtilizadoAbril();
     getGastosDashboard();
     getRedimentosDashboard();
+    Timer();
+    getDividasReceber();
 });

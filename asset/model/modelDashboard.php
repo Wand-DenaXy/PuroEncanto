@@ -31,6 +31,98 @@ class Dashboard {
         $conn->close();
         return $resp;
     }
+    function getDividasReceber(){
+
+        global $conn;
+        $msg = "";
+
+        $sql = "SELECT * from DividasAPagar where DividasAPagar.Estado Like 'Em Aberto';";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $msg .= "<tr>";
+                $msg .= "<th scope='row'>".$row['ID_Divida']."</th>";
+                $msg .= "<th scope='row'>".$row['Tipo']."</th>";
+                $msg .= "<td>".$row['Valor']."</td>";
+                $msg .= "<td>".$row['Estado']."</td>";
+                $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
+                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";
+                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Divida'].")'><i class='fa fa-pencil'>Info</i></button></td>";            
+                $msg .= "</tr>";
+            }
+        } else {
+            $msg .= "<tr>";
+            $msg .= "<td>Sem Registos</td>";
+            $msg .= "<th scope='row'></th>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "</tr>";
+        }
+        $conn->close();
+
+        return ($msg);
+    }
+function pagarDividasReceber($ID_Divida)
+{
+    global $conn;
+    $dados1 = [];
+    $dados2 = [];
+    $msg = "";
+    $flag = false;
+
+    $sql = "UPDATE DividasAPagar SET Estado = 'Pago' WHERE ID_Divida = $ID_Divida";
+
+        if ($conn->query($sql) === TRUE) {
+            $flag = true;
+            $msg = "Pago com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+    $conn->close();
+    return $resp;
+
+}
+function recusarDividasReceber($ID_Divida)
+{
+    global $conn;
+    $dados1 = [];
+    $dados2 = [];
+    $msg = "";
+    $flag = false;
+
+    $sql = "UPDATE DividasAPagar SET Estado = 'Recusado' WHERE ID_Divida = $ID_Divida";
+
+        if ($conn->query($sql) === TRUE) {
+            $flag = true;
+            $msg = "Recusado com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+    $conn->close();
+    return $resp;
+
+}
 function getServicoUsados() {
     global $conn;
     $dados1 = [];

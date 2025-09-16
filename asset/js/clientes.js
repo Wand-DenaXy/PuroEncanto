@@ -22,7 +22,7 @@ function registaClientes(){
         let obj = JSON.parse(msg);
         if(obj.flag){
             alerta("Clientes",obj.msg,"success");
-            getListaFornecedores();
+            getListaClientes();
         }else{
             alerta("Clientes",obj.msg,"error");    
         }
@@ -86,8 +86,8 @@ function removerClientes(id){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Clientes",obj.msg,"success");
-            getListaFornecedores();    
+            alerta2(obj.msg,"success");
+            getListaClientes();    
         }else{
             alerta("Clientes",obj.msg,"error");    
         }
@@ -162,7 +162,7 @@ function guardaEditClientes(ID_Cliente) {
         
         let obj = JSON.parse(msg);
         if(obj.flag) {
-            alerta("Clientes", obj.msg, "success");
+            alerta2(obj.msg,"success");
             getListaClientes();
             myModal.hide();
         } else {
@@ -186,9 +186,49 @@ function alerta(titulo,msg,icon){
 
       })
 }
+function alerta2(msg,icon)
+{
+  let customClass = '';
+  if (icon === 'success') {
+    customClass = 'toast-success';
+  } else if (icon === 'error') {
+    customClass = 'toast-error';
+  }
+  const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+      customClass: {
+      popup: 'custom-toast'
+    },
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: icon,
+  title: msg
+});
+}
+function Timer()
+{
+     function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
 
+        document.getElementById('time').textContent = timeString;
+    }
 
+    setInterval(updateTime, 1000);
+}
 $(function() {
+    Timer();
     getListaClientes();
 });
 

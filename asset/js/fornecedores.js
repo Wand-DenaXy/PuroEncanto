@@ -26,6 +26,7 @@ function registaFornecedores(){
             alerta("Fornecedores",obj.msg,"success");
             getListaFornecedores();
         }else{
+            alerta2(obj.msg,"error");
             alerta("Fornecedores",obj.msg,"error");    
         }
         
@@ -38,8 +39,8 @@ function registaFornecedores(){
 
 function getListaFornecedores(){
     
-    if ( $.fn.DataTable.isDataTable('#listagemFuncionarios') ) {
-        $('#listagemFuncionarios').DataTable().destroy();
+    if ( $.fn.DataTable.isDataTable('#listagemFornecedores') ) {
+        $('#listagemFornecedores').DataTable().destroy();
     }
 
     let dados = new FormData();
@@ -58,7 +59,7 @@ function getListaFornecedores(){
     
     .done(function( msg ) {
 
-        $('#listagemFuncionarios').html(msg);
+        $('#listagemFornecedores').html(msg);
         $('#tblFornecedores').DataTable();
         
     })
@@ -88,7 +89,7 @@ function removerFornecedores(id){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Fornecedores",obj.msg,"success");
+            alerta2(obj.msg,"success");
             getListaFornecedores();    
         }else{
             alerta("Fornecedores",obj.msg,"error");    
@@ -169,9 +170,11 @@ function guardaEditFornecedores(ID_Fornecedor) {
         let obj = JSON.parse(msg);
         if(obj.flag) {
             alerta("Fornecedor", obj.msg, "success");
+            alerta2(obj.msg,"success");
             getListaFornecedores();
             myModal.hide();
         } else {
+            alerta2(obj.msg,"error");
             alerta("Fornecedor", obj.msg, "error");
         }
         console.log(msg);
@@ -277,9 +280,49 @@ function alerta(titulo,msg,icon){
 
       })
 }
+function alerta2(msg,icon)
+{
+  let customClass = '';
+  if (icon === 'success') {
+    customClass = 'toast-success';
+  } else if (icon === 'error') {
+    customClass = 'toast-error';
+  }
+  const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+      customClass: {
+      popup: 'custom-toast'
+    },
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: icon,
+  title: msg
+});
+}
+function Timer()
+{
+     function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
 
+        document.getElementById('time').textContent = timeString;
+    }
 
+    setInterval(updateTime, 1000);
+}
 $(function() {
     getListaFornecedores();
+    Timer();
 });
 
