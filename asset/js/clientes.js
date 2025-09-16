@@ -122,8 +122,8 @@ function getDadosClientes(ID_Cliente){
         let obj = JSON.parse(msg);
         $('#numClienteEdit').val(obj.ID_Cliente);
         $('#nomeClienteEdit').val(obj.nome);
+        $('#EmailClienteEdit').val(obj.Email);
         $('#nifClienteEdit').val(obj.nif);
-        $('#moradaClienteEdit').val(obj.morada);
         $('#IBANClienteEdit').val(obj.IBAN);
         $('#formEditClientes').modal('show');
        $('#btnGuardar').attr("onclick","guardaEditClientes("+obj.ID_Cliente+")") 
@@ -143,8 +143,8 @@ function guardaEditClientes(ID_Cliente) {
     dados.append("op", 5);
     dados.append("numClienteEdit", $('#numClienteEdit').val());
     dados.append("nomeClienteEdit", $('#nomeClienteEdit').val());
+    dados.append("EmailClienteEdit", $('#EmailClienteEdit').val());
     dados.append("nifClienteEdit", $('#nifClienteEdit').val());
-    dados.append("moradaClienteEdit", $('#moradaClienteEdit').val());
     dados.append("IBANClienteEdit", $('#IBANClienteEdit').val());
     dados.append("ID_Cliente", ID_Cliente);
 

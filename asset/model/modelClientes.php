@@ -61,7 +61,7 @@ function registaClientes($nome, $nif, $morada, $IBAN){
         global $conn;
         $msg = "";
 
-        $sql = "SELECT * FROM Clientes";
+        $sql = "SELECT * from Clientes where ID_TipoUtilizador = 1;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -69,8 +69,8 @@ function registaClientes($nome, $nif, $morada, $IBAN){
                 $msg .= "<tr>";
                 $msg .= "<th scope='row'>".$row['ID_Cliente']."</th>";
                 $msg .= "<th scope='row'>".$row['nome']."</th>";
+                $msg .= "<td>".$row['Email']."</td>";
                 $msg .= "<td>".$row['nif']."</td>";
-                $msg .= "<td>".$row['morada']."</td>";
                 $msg .= "<td>".$row['IBAN']."</td>";
                 $msg .= "<td><button class='btn btn-warning' onclick ='getDadosClientes(".$row['ID_Cliente'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
                 $msg .= "<td><button class='btn btn-danger' onclick ='removerClientes(".$row['ID_Cliente'].")'><i class='fa fa-trash'>Remover</i></button></td>";
@@ -137,7 +137,7 @@ function registaClientes($nome, $nif, $morada, $IBAN){
     }
 
 
-    function guardaEditClientes($nome, $nif, $morada, $IBAN,$ID_Cliente){
+    function guardaEditClientes($nome, $email,$nif,$IBAN,$ID_Cliente){
         
         global $conn;
         $msg = "";
@@ -145,7 +145,7 @@ function registaClientes($nome, $nif, $morada, $IBAN){
         $sql = "";
 
 
-        $sql = "UPDATE Clientes SET nome = '".$nome."', nif = '".$nif."',morada = '".$morada."',IBAN = '".$IBAN."' WHERE ID_Cliente =".$ID_Cliente;
+        $sql = "UPDATE Clientes SET nome = '".$nome."', email = '".$email."',nif = '".$nif."',IBAN = '".$IBAN."' WHERE ID_Cliente =".$ID_Cliente;
 
         if ($conn->query($sql) === TRUE) {
             $msg = "Editado com Sucesso";
