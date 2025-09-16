@@ -17,16 +17,8 @@
 		FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
 			ON DELETE SET NULL
 	);
-CREATE TABLE IF NOT EXISTS Balancete (
-		ID_Balancete INT PRIMARY KEY AUTO_INCREMENT,
-		descricao VARCHAR(100) NOT NULL,
-		codigo_conta VARCHAR(5) NOT NULL,
-		ID_Cliente int,
-		ID_Fornecedor int,
-		FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor),
-		FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-		saldo DECIMAL(15,2)
-	);
+
+
 
 	CREATE TABLE IF NOT EXISTS Fornecedores (
 		ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
@@ -128,6 +120,16 @@ CREATE TABLE IF NOT EXISTS Balancete (
 		FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
 		FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
 	);
+    CREATE TABLE Balancete (
+    ID_Balancete INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    codigo_conta VARCHAR(5) NOT NULL,
+    ID_Cliente INT,
+    ID_Fornecedor INT,
+    saldo DECIMAL(15,2),
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+    FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
+);
 	select * from servicos;
 	INSERT INTO TipoUtilizador (Tipo) VALUES 
 	('Administrador'), 
