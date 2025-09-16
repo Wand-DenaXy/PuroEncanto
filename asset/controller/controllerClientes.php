@@ -28,8 +28,8 @@ if ($_POST['op'] == 1) {
 }elseif ($_POST['op'] == 5) {
     $resp = $func->guardaEditClientes(
         $_POST['nomeClienteEdit'],
+        $_POST['EmailClienteEdit'],
         $_POST['nifClienteEdit'],
-        $_POST['moradaClienteEdit'],
         $_POST['IBANClienteEdit'],
         $_POST['ID_Cliente'],
     );
