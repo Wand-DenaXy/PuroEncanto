@@ -153,8 +153,9 @@ CREATE TABLE DividasAPagar (
     
 
 	INSERT INTO TipoUtilizador (Tipo) VALUES 
-	('Administrador'), 
-	('Funcionário');
+	('Cliente'),
+	('Administrador');
+
 
 INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES
 ('XPTO, Lda', 'xpto@email.com', '532622448', 'pass123', 'PT50007946838624313088068', 1),
