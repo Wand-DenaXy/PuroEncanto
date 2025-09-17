@@ -153,6 +153,55 @@ function getServicoUsados() {
     $conn->close();
     return $resp;
 }
+function GraficoTotalAtivoDashboard() {
+    global $conn;
+    $dados1 = [];
+    $dados2 = [];
+    $msg = "";
+    $flag = false;
+
+        $sql = "SELECT 
+        CASE MONTH(Data)
+            WHEN 1 THEN 'Janeiro'
+            WHEN 2 THEN 'Fevereiro'
+            WHEN 3 THEN 'Março'
+            WHEN 4 THEN 'Abril'
+            WHEN 5 THEN 'Maio'
+            WHEN 6 THEN 'Junho'
+            WHEN 7 THEN 'Julho'
+            WHEN 8 THEN 'Agosto'
+            WHEN 9 THEN 'Setembro'
+            WHEN 10 THEN 'Outubro'
+            WHEN 11 THEN 'Novembro'
+            WHEN 12 THEN 'Dezembro'
+        END AS Mes,
+        SUM(Valor) AS TotalAtivo
+        FROM TotalAtivo
+        GROUP BY MONTH(Data)
+        ORDER BY MONTH(Data);";
+
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $dados1[] = $row['Mes'];   
+            $dados2[] = $row['TotalAtivo'];
+        }
+        $flag = true;
+    } else {
+        $msg = "Nenhum Grafico encontrado.";
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg,
+        "dados1" => $dados1,
+        "dados2" => $dados2
+    ));
+
+    $conn->close();
+    return $resp;
+}
 function getServicoUsadosMaio() {
     global $conn;
     $dados1 = [];

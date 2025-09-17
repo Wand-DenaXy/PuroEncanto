@@ -723,6 +723,54 @@ function recusarDividasReceber(id)
 
 
 }
+function GraficoTotalAtivoDashboard() {
+    $.ajax({
+        url: "asset/controller/controllerDashboard.php",
+        type: "POST",
+        data: { op: 16 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx3 = document.getElementById('chart1').getContext('2d');
+                new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'TotalAtivo',
+                            data: response.dados2,
+                            backgroundColor: 'rgba(233, 116, 81, 0.6)',
+                            borderColor: '#8B4513',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            } else {
+                alert(response.msg);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
+}
+
 function Timer()
 {
      function updateTime() {
@@ -747,12 +795,22 @@ function alerta(titulo,msg,icon){
 
       })
 }
+function carregarDashboard() {         
+    setTimeout(GraficoServico, 100);   // prioridade 1
+    setTimeout(GraficoTotalAtivoDashboard, 200);
+    setTimeout(GraficoDiferencaDashboard, 200);   // prioridade 2
+    setTimeout(getGastosDashboard, 400);          // prioridade 3
+    setTimeout(getRedimentosDashboard, 600);      // prioridade 4
+    setTimeout(getDividasReceber, 800); 
+    setTimeout(GraficoServicoDashboard, 900);             // prioridade 5
+}
 $(function() {
-    GraficoServico();
-    getServicosDashboard();
-    GraficoServicoUtilizadoAbril();
-    getGastosDashboard();
-    getRedimentosDashboard();
-    Timer();
-    getDividasReceber();
+    // GraficoServico();
+    // getServicosDashboard();
+    // GraficoServicoUtilizadoAbril();
+    // getGastosDashboard();
+    // getRedimentosDashboard();
+    // Timer();
+    // getDividasReceber();
+    // getTotalAtivoDashboard();
 });

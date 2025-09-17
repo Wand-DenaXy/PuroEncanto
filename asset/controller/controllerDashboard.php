@@ -60,5 +60,10 @@ if ($_POST['op'] == 15) {
     $resp = $func->recusarDividasReceber($_POST['ID_Divida']);
     echo $resp;
 }
+if ($_POST['op'] == 16) {
+    $resp = $func->GraficoTotalAtivoDashboard();
+    echo $resp;
+}
+
 
 ?>

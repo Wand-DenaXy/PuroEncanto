@@ -10,10 +10,10 @@ Create table Funcionarios
 (
 	ID_Funcionario INT PRIMARY KEY AUTO_INCREMENT,
     nome varchar(250),
+	telefone int,
+    salario int,
     NIF varchar(250)
 );
-
-
 
 	CREATE TABLE IF NOT EXISTS Fornecedores (
 		ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
@@ -25,7 +25,12 @@ Create table Funcionarios
 		total_debito DECIMAL(15,2)
 	);
 	select * from Fornecedores;
-
+	CREATE TABLE IF NOT EXISTS TotalAtivo (
+		ID_TotalAtivo  INT PRIMARY KEY AUTO_INCREMENT,
+		descricao VARCHAR(100) NOT NULL,
+		valor DECIMAL(10,2) NOT NULL,
+		data VARCHAR(100) NOT NULL
+);
 
 	CREATE TABLE Fornecimento (
 		ID_Fornecimento INT PRIMARY KEY AUTO_INCREMENT,
@@ -146,12 +151,16 @@ CREATE TABLE DividasAPagar (
     FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
 );
 	select * from servicos;
-    	INSERT INTO Funcionarios (nome,nif) VALUES 
-	("António Dias Alegres","250941392"), 
-	("Luisa Noites","293389047"),
-    ("Tiago Tardes","240378326");
+    	INSERT INTO Funcionarios (nome,telefone,salario ,nif) VALUES 
+	("António Dias Alegres",920123345,885,"250941392"), 
+	("Luisa Noites",920123343,960,"293389047"),
+    ("Tiago Tardes",920123317,840,"240378326");
     
-
+INSERT INTO TotalAtivo  (descricao,valor,data) VALUES 
+	("Abril - TotalAtivo",64592.89,'2025-04-05'), 
+	("Maio - TotalAtivo",47213.06,'2025-05-05'),
+    ("Junho -  TotalAtivo",59615.99,'2025-06-05');
+    
 	INSERT INTO TipoUtilizador (Tipo) VALUES 
 	('Cliente'),
 	('Administrador');
@@ -1319,8 +1328,25 @@ FROM Rendimento
 GROUP BY MONTH(Data)
 ORDER BY MONTH(Data);
 
-                
-                
+SELECT 
+    CASE MONTH(Data)
+        WHEN 1 THEN 'Janeiro'
+        WHEN 2 THEN 'Fevereiro'
+        WHEN 3 THEN 'Março'
+        WHEN 4 THEN 'Abril'
+        WHEN 5 THEN 'Maio'
+        WHEN 6 THEN 'Junho'
+        WHEN 7 THEN 'Julho'
+        WHEN 8 THEN 'Agosto'
+        WHEN 9 THEN 'Setembro'
+        WHEN 10 THEN 'Outubro'
+        WHEN 11 THEN 'Novembro'
+        WHEN 12 THEN 'Dezembro'
+    END AS Mes,
+    SUM(Valor) AS TotalAtivo
+FROM TotalAtivo
+GROUP BY MONTH(Data)
+ORDER BY MONTH(Data);
 
 
 

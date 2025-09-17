@@ -29,6 +29,15 @@ $resultRendimentos = $conn->query($sqlRendimentos);
 if ($row = $resultRendimentos->fetch_assoc()) {
 $totalRendimentos = $row['Rendimento'];
 }
+
+$sqlTotalAtivo = "SELECT * FROM TotalAtivo ORDER BY data DESC LIMIT 1";
+$resultTotalAtivo = $conn->query($sqlTotalAtivo);
+
+if ($row = $resultTotalAtivo->fetch_assoc()) {
+    $totalTotalAtivo = $row['valor'];
+}
+
+
 $saldo = $totalRendimentos - $totalGastos;
 $conn->close();
 ?>
@@ -59,14 +68,15 @@ $conn->close();
         <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
             <p class="logotitulo">Puro Encanto</p>
         </div>
-        <a href="dashboard.php" class="active"><i class="bi bi-grid"></i> Dashboard</a>
+        <a href="dashboard.php"  class="active"><i class="bi bi-grid"></i> Dashboard</a>
         <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
         <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
+        <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
         <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
-        <div class="time" id="time"></div>
+         <div class="time" id="time"></div>
     </div>
     <div class="content">
 
@@ -77,7 +87,7 @@ $conn->close();
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Total Ativo</h6>
-                        <h4>153</h4>
+                        <h4><?php echo $totalTotalAtivo; ?></h4>
                         <canvas id="chart1" height="80"></canvas>
                     </div>
                 </div>
@@ -164,45 +174,11 @@ $conn->close();
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-            <script>
-            const ctx1 = document.getElementById('chart1').getContext('2d');
-            new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: ['', '', '', '', '', '', ''],
-                    datasets: [{
-                        data: [5, 6, 4, 7, 8, 5, 4],
-                        backgroundColor: '#4e73df'
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            display: false
-                        },
-                        y: {
-                            display: false
-                        }
-                    }
-                }
-            });
-            </script>
             <script src="asset/js/graficos.js"></script>
             <script src="asset/js/dashboard.js"></script>
             <script>
             $(document).ready(function() {
-                GraficoServico();
-                GraficoServicoDashboard();
-                GraficoDiferencaDashboard();
-                getGastosDashboard();
-                getRedimentosDashboard();
-                getDividasReceber();
+                carregarDashboard();
             });
             </script>
 </body>

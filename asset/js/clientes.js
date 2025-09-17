@@ -3,8 +3,9 @@ function registaClientes(){
     let dados = new FormData();
     dados.append("op", 1);
     dados.append("nome", $('#nomeCliente').val());
+    dados.append("email", $('#EmailCliente').val());
     dados.append("nif", $('#nifCliente').val());
-    dados.append("morada", $('#moradaCliente').val());
+    dados.append("password", $('#passwordCliente').val());
     dados.append("IBAN", $('#IBANCliente').val());
 
     $.ajax({

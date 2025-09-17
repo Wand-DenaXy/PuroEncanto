@@ -4,13 +4,13 @@ require_once 'connection2.php';
 
 class Clientes{
 
-function registaClientes($nome, $nif, $morada, $IBAN){
+function registaClientes($nome, $email, $nif, $password,$IBAN){
     global $conn;
     $msg = "";
     $flag = false;
 
-    $stmt = $conn->prepare("INSERT INTO Clientes (nome, nif, morada, IBAN) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $nome, $nif, $morada, $IBAN);
+    $stmt = $conn->prepare("INSERT INTO Clientes (nome, email, nif, password,IBAN) VALUES (?, ?, ?, ?,?)");
+    $stmt->bind_param("sssss", $nome, $email, $nif,$password ,$IBAN);
 
     if($stmt->execute()){
         $msg = "Registado com sucesso!";
