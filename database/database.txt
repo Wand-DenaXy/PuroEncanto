@@ -12,16 +12,6 @@ Create table Funcionarios
     nome varchar(250),
     NIF varchar(250)
 );
-	CREATE TABLE Utilizador (
-		ID_Utilizador INT PRIMARY KEY AUTO_INCREMENT,
-		Nome VARCHAR(100) NOT NULL,
-		Email VARCHAR(100) NOT NULL,
-		Password VARCHAR(255) NOT NULL,
-		Contacto VARCHAR(15),
-		ID_TipoUtilizador INT,
-		FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
-			ON DELETE SET NULL
-	);
 
 
 
@@ -93,14 +83,18 @@ Create table Funcionarios
 		nome VARCHAR(50) NOT NULL,
 		preco DECIMAL(10,2) NOT NULL
 	);
-	CREATE TABLE Clientes (
-		ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
-		nome VARCHAR(100) NOT NULL,
-		nif VARCHAR(20) NOT NULL,
-		morada VARCHAR(150) NOT NULL,
-		IBAN VARCHAR(34) NOT NULL,
-        total_debito DECIMAL(15,2)
-	);
+CREATE TABLE Clientes (
+    ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    nif VARCHAR(100) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    IBAN VARCHAR(255) NOT NULL,
+    ID_TipoUtilizador INT default 1,
+    FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
+        ON DELETE SET NULL
+);
+
 	#É o stock ne?
 	CREATE TABLE Equipamentos (
 		ID_Equipamento INT AUTO_INCREMENT PRIMARY KEY,
@@ -162,11 +156,54 @@ CREATE TABLE DividasAPagar (
 	('Administrador'), 
 	('Funcionário');
 
-	-- Utilizadores
-	INSERT INTO Utilizador (Nome, Email, Password, Contacto, ID_TipoUtilizador) VALUES
-	('Pedro Silva', 'pedro@email.com', 'senha123', '912345678', 1),
-	('Ana Costa', 'ana@email.com', 'senha456', '913456789', 2);
-
+INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES
+('XPTO, Lda', 'xpto@email.com', '532622448', 'pass123', 'PT50007946838624313088068', 1),
+('Maria Almeida', 'maria.almeida@email.com', '299446263', 'pass123', 'PT50001410030198503475689', 1),
+('MoveIT', 'moveit@email.com', '556986032', 'pass123', 'PT50002346819984071468008', 1),
+('Criação&Gestão', 'criacao.gestao@email.com', '542707578', 'pass123', 'PT50016088457776442648436', 1),
+('Joaquim Telheiras', 'joaquim.telheiras@email.com', '229595510', 'pass123', 'PT50003345984078304917235', 1),
+('Inês Teixeira', 'ines.teixeira@email.com', '266126405', 'pass123', 'PT50019115765258156742636', 1),
+('Pesca e Come', 'pescaecome@email.com', '528545060', 'pass123', 'PT50006580580032769976712', 1),
+('RunAway', 'runaway@email.com', '568473078', 'pass123', 'PT50016048754065845149420', 1),
+('José Miguel', 'jose.miguel@email.com', '292690134', 'pass123', 'PT50003317771816964715222', 1),
+('Jéssica Sousa', 'jessica.sousa@email.com', '256359300', 'pass123', 'PT50016068493577443429429', 1),
+('Pedro Abreu', 'pedro.abreu@email.com', '278498981', 'pass123', 'PT50016022008286536563236', 1),
+('Mármores Ilimitados', 'marmores@email.com', '555855600', 'pass123', 'PT50007606953843295506885', 1),
+('Constança Mello', 'constanca.mello@email.com', '296196010', 'pass123', 'PT50001079336360081382909', 1),
+('Patrícia Pereira', 'patricia.pereira@email.com', '210305061', 'pass123', 'PT50019343340776115726645', 1),
+('Margarida Lopes', 'margarida.lopes@email.com', '250560070', 'pass123', 'PT50001419726370388245196', 1),
+('Leandro Silva', 'leandro.silva@email.com', '220885087', 'pass123', 'PT50002512925026550060008', 1),
+('Tiago Fonseca', 'tiago.fonseca@email.com', '213306557', 'pass123', 'PT50003391465185316392498', 1),
+('OnTheWay', 'ontheway@email.com', '582390508', 'pass123', 'PT50018969083313776881484', 1),
+('SorrisosFelizes', 'sorrisos@email.com', '591169398', 'pass123', 'PT50006564456901236553511', 1),
+('Daniela Dias', 'daniela.dias@email.com', '200046080', 'pass123', 'PT50006513930465670397957', 1),
+('Carlos Vieira', 'carlos.vieira@email.com', '242224024', 'pass123', 'PT50002510454645858090855', 1),
+('Heitor Sobral', 'heitor.sobral@email.com', '234736968', 'pass123', 'PT50001057598885414760088', 1),
+('Franscisco Torres', 'francisco.torres@email.com', '292977000', 'pass123', 'PT50006515256136005925144', 1),
+('PipocasDoces', 'pipocas@email.com', '588566098', 'pass123', 'PT50018925309607492737431', 1),
+('Carolina Domingos', 'carolina.domingos@email.com', '280610653', 'pass123', 'PT50007921438900560646816', 1),
+('Sofia Jesus', 'sofia.jesus@email.com', '297128493', 'pass123', 'PT50007642593033411297219', 1),
+('Manuel Doido', 'manuel.doido@email.com', '257229426', 'pass123', 'PT50019163924325602445927', 1),
+('Laura Tavares', 'laura.tavares@email.com', '226419665', 'pass123', 'PT50007642397440734369335', 1),
+('Marta Rita', 'marta.rita@email.com', '296398721', 'pass123', 'PT50016039312537527589323', 1),
+('António Sinhaca', 'antonio.sinhaca@email.com', '228824460', 'pass123', 'PT50016048343866711151107', 1),
+('Oculos do Caramelo', 'oculos@email.com', '539134228', 'pass123', 'PT50001408110993143881269', 1),
+('João Silva', 'joao.silva@email.com', '276261658', 'pass123', 'PT50003339640608584931338', 1),
+('Ana Fonseca', 'ana.fonseca@email.com', '274805812', 'pass123', 'PT50001878540879090667774', 1),
+('Frederico Sousa', 'frederico.sousa@email.com', '264679377', 'pass123', 'PT50019127796779043931426', 1),
+('Joana Albuquerque', 'joana.albuquerque@email.com', '278366503', 'pass123', 'PT50018906180867476722845', 1),
+('Gustavo Gonçalves', 'gustavo.goncalves@email.com', '244764298', 'pass123', 'PT50000795278449692719827', 1),
+('PhoneStuff', 'phonestuff@email.com', '572052405', 'pass123', 'PT50003338867952196092373', 1),
+('Tiago Tavares', 'tiago.tavares@email.com', '256739510', 'pass123', 'PT50007661025545873249292', 1),
+('Yuri Veloso', 'yuri.veloso@email.com', '246027290', 'pass123', 'PT50003552184890235797724', 1),
+('Henrique Pedreira', 'henrique.pedreira@email.com', '271413646', 'pass123', 'PT50019171407309545072793', 1),
+('Bruno Pereira', 'bruno.pereira@email.com', '277613086', 'pass123', 'PT50019376072232678831677', 1),
+('DameOuro', 'dameouro@email.com', '548546070', 'pass123', 'PT50002386214908984826016', 1),
+('ViagensFelizes', 'viagensfelizes@email.com', '550149392', 'pass123', 'PT50007931414295313898681', 1),
+('Fátima Sobral', 'fatima.sobral@email.com', '244517436', 'pass123', 'PT50003312853252123650507', 1),
+('Pedro Dias', 'pedro.dias@email.com', '205678807', 'pass123', 'PT50018908711398644179450', 1),
+('LetsDance', 'letsdance@email.com', '561615306', 'pass123', 'PT50002395388024784655069', 1),
+('Ivandro Almeida', 'ivandro.almeida@email.com', '231811349', 'pass123', 'PT50006532949430957665073', 1);
 	INSERT INTO Fornecedores (descricao, total_debito, contacto, email, morada, nif)
 	VALUES
 	('PE_Netrow', 1274.90, '910000001', 'penetrow@fornecedor.com', 'Morada de PE_Netrow', '123456781'),
@@ -235,57 +272,8 @@ CREATE TABLE DividasAPagar (
 				GROUP BY descricao
 				ORDER BY total DESC;
 
-				
+			
 
-
-	INSERT INTO Clientes (Nome, NIF, Morada, IBAN) VALUES
-	('XPTO, Lda', '532622448', 'Rua das Margaridas, n5', 'PT50007946838624313088068'),
-	('Maria Almeida', '299446263', 'Rua das Madalenas, n9', 'PT50001410030198503475689'),
-	('MoveIT', '556986032', 'Trv dos Filosofos, n8', 'PT50002346819984071468008'),
-	('Criação&Gestão', '542707578', 'Av Ru Ru, n91', 'PT50016088457776442648436'),
-	('Joaquim Telheiras', '229595510', 'Rua Caladinho, n21', 'PT50003345984078304917235'),
-	('Inês Teixeira', '266126405', 'Rua da Ines, n66', 'PT50019115765258156742636'),
-	('Pesca e Come', '528545060', 'Av Peixe, n1', 'PT50006580580032769976712'),
-	('RunAway', '568473078', 'Trv RunJá, n23', 'PT50016048754065845149420'),
-	('José Miguel', '292690134', 'Rua Karina, n71', 'PT50003317771816964715222'),
-	('Jéssica Sousa', '256359300', 'Rua da Perfeição, n3', 'PT50016068493577443429429'),
-	('Pedro Abreu', '278498981', 'Rua dos Doidos, n1', 'PT50016022008286536563236'),
-	('Mármores Ilimitados', '555855600', 'Av das Pedras, n22', 'PT50007606953843295506885'),
-	('Constança Mello', '296196010', 'Av das Constanças, n8', 'PT50001079336360081382909'),
-	('Patrícia Pereira', '210305061', 'Rua A, n51', 'PT50019343340776115726645'),
-	('Margarida Lopes', '250560070', 'Av ABC, n23', 'PT50001419726370388245196'),
-	('Leandro Silva', '220885087', 'Rua do Amor, n5', 'PT50002512925026550060008'),
-	('Tiago Fonseca', '213306557', 'Av das Saidas, n3', 'PT50003391465185316392498'),
-	('OnTheWay', '582390508', 'Trv dos Horrores, n46', 'PT50018969083313776881484'),
-	('SorrisosFelizes', '591169398', 'Trv do Porto, n5', 'PT50006564456901236553511'),
-	('Daniela Dias', '200046080', 'Rua do Rui, n444', 'PT50006513930465670397957'),
-	('Carlos Vieira', '242224024', 'Av do Calculo, n56', 'PT50002510454645858090855'),
-	('Heitor Sobral', '234736968', 'Trv das Noirias, n12', 'PT50001057598885414760088'),
-	('Franscisco Torres', '292977000', 'Rua Patricias, n16', 'PT50006515256136005925144'),
-	('PipocasDoces', '588566098', 'Av das Pipocas, n17', 'PT50018925309607492737431'),
-	('Carolina Domingos', '280610653', 'Av da Prisão, n1', 'PT50007921438900560646816'),
-	('Sofia Jesus', '297128493', 'Trv Jorgino, n33', 'PT50007642593033411297219'),
-	('Manuel Doido', '257229426', 'Rua Palula, n6', 'PT50019163924325602445927'),
-	('Laura Tavares', '226419665', 'Av Paulistas, n7', 'PT50007642397440734369335'),
-	('Marta Rita', '296398721', 'Trv do Porto, n9', 'PT50016039312537527589323'),
-	('António Sinhaca', '228824460', 'Rua das Ruas, n5',  'PT50016048343866711151107'),
-	('Oculos do Caramelo', '539134228', 'Rua das Ruas, n45', 'PT50001408110993143881269'),
-	('João Silva', '276261658', 'Trv das Gajas, n14','PT50003339640608584931338'),
-	('Ana Fonseca', '274805812', 'Rua Mada, n9', 'PT50001878540879090667774'),
-	('Frederico Sousa', '264679377', 'Trv BB, n13',  'PT50019127796779043931426'),
-	('Joana Albuquerque', '278366503', 'Rua CC, n4',  'PT50018906180867476722845'),
-	('Gustavo Gonçalves', '244764298', 'Rua FT, n6',  'PT50000795278449692719827'),
-	('PhoneStuff', '572052405', 'Rua GHTY, n5',  'PT50003338867952196092373'),
-	('Tiago Tavares', '256739510', 'Av dos Sonhos, n66',  'PT50007661025545873249292'),
-	('Yuri Veloso', '246027290', 'Av São Martinho, n2',  'PT50003552184890235797724'),
-	('Henrique Pedreira', '271413646', 'Rua Yuri Almeida, n7',  'PT50019171407309545072793'),
-	('Bruno Pereira', '277613086', 'Av São Pedro, n55',  'PT50019376072232678831677'),
-	('DameOuro', '548546070', 'Rua Santo António, n26',  'PT50002386214908984826016'),
-	('ViagensFelizes', '550149392', 'Rua São João, n17','PT50007931414295313898681'),
-	('Fátima Sobral', '244517436', 'Av Fatinha, n8','PT50003312853252123650507'),
-	('Pedro Dias', '205678807', 'Trv das Noites, n31', 'PT50018908711398644179450'),
-	('LetsDance', '561615306', 'Tvr Sentado, n12',  'PT50002395388024784655069'),
-	('Ivandro Almeida', '231811349', 'Rua Ivinho, n4','PT50006532949430957665073');
 
 
 	select count(*) as total from Clientes;
@@ -371,7 +359,7 @@ CREATE TABLE DividasAPagar (
 	(44, '2025-04-25', 3, 3),  -- Fátima Sobral | Infantil | 60
 	(46, '2025-04-26', 1, 2),  -- LetsDance | Empresarial | 40
 	(8, '2025-04-27', 1, 1);   -- RunAway | Empresarial | 20
-
+    
 	#Abril
 	-- Inserir serviços para cada evento com datas
 	-- Evento 1: BCD (2025-04-01)
