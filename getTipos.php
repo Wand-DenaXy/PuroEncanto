@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require 'asset/model/connection2.php';
 
 $result = $conn->query("SELECT ID_TipoUtilizador, Tipo FROM TipoUtilizador");
 $tipos = [];

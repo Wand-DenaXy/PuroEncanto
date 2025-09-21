@@ -1,39 +1,60 @@
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Puro Encanto</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- Font Awesome CSS -->
     <link href="css/font-awesome.min.css" rel="stylesheet">
+    
+    
     <!-- Animate CSS -->
-    <link href="css/animate.css" rel="stylesheet">
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/owl.theme.css">
-    <link rel="stylesheet" href="css/owl.transitions.css">
+    <link href="css/animate.css" rel="stylesheet" >
+    
+    <!-- Owl-Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css" >
+    <link rel="stylesheet" href="css/owl.theme.css" >
+    <link rel="stylesheet" href="css/owl.transitions.css" >
+
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    
+    <!-- Colors CSS -->
     <link rel="stylesheet" type="text/css" href="css/puroencantocores.css">
-    <!-- Google Fonts -->
+    <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-
-    <!-- jQuery e Modernizer -->
+    
+    
+    <!-- Modernizer js -->
     <script src="js/modernizr.custom.js"></script>
-</head>
-<body class="index">
 
-<!-- Navbar -->
+    
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="index">
+    
+
+    <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header page-scroll">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -41,45 +62,40 @@ session_start();
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand page-scroll" href="index.php">Puro Encanto</a>
+      <a class="navbar-brand page-scroll" href="index.html">Puro Encanto</a>
     </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!-- Links principais -->
-      <ul class="nav navbar-nav">
-        <li><a class="page-scroll" href="#feature">O que oferecemos?</a></li>
-        <li><a class="page-scroll" href="#portfolio">Galeria</a></li>
-        <li><a class="page-scroll" href="sobre.html">Sobre nós</a></li>
-        <li><a class="page-scroll" href="servico.html">Serviços</a></li>
-      </ul>
-
-      <!-- Perfil / Login -->
       <ul class="nav navbar-nav navbar-right">
-      <?php if(isset($_SESSION['cliente_nome'])): ?>
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-user fa-2x"></i>
-                  <?php echo htmlspecialchars($_SESSION['cliente_nome']); ?>
-                  <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                  <li><a href="dashboard.php">Dashboard</a></li>
-                  <li><a href="perfil.php?id=<?php echo $_SESSION['cliente_id']; ?>">Perfil</a></li>
-                  <li><a href="controllerLogin.php?op=3">Logout</a></li>
-
-              </ul>
-          </li>
-      <?php else: ?>
-          <li class="nav-login">
-              <a href="login.php">
-                  <i class="fa fa-user fa-2x"></i>
-              </a>
-          </li>
-      <?php endif; ?>
+        <li class="hidden">
+          <a href="#page-top"></a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#feature">O que oferecemos?</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#portfolio">Galeria</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="sobre.html">Sobre nós</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="servico.html">Serviços</a>
+        </li>
+        <!-- Ícone de perfil no canto direito -->
+        <li>
+          <a class="page-scroll" href="login.html">
+            <i class="fa fa-user fa-3x"></i> <!-- Ícone do Font Awesome -->
+          </a>
+        </li>
       </ul>
     </div>
+    <!-- /.navbar-collapse -->
   </div>
+  <!-- /.container -->
 </nav>
+
 
     
     
@@ -161,7 +177,7 @@ session_start();
         <section id="feature" class="feature-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-magic"></i>
                             <div class="feature-content">
@@ -170,7 +186,7 @@ session_start();
                             </div>
                         </div>
                     </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-gift"></i>
                             <div class="feature-content">
@@ -179,7 +195,16 @@ session_start();
                             </div>
                         </div>
                     </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                     <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="feature">
+                            <i class="fa fa-gift"></i>
+                            <div class="feature-content">
+                                <h4>Máquina de Pipocas</h4>
+                                <p>Fica tudo melhor com pipocas doces</p>
+                            </div>
+                        </div>
+                    </div><!-- /.col-md-3 -->
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-wordpress"></i>
                             <div class="feature-content">
@@ -188,7 +213,7 @@ session_start();
                             </div>
                         </div>
                     </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-plug"></i>
                             <div class="feature-content">
@@ -457,14 +482,6 @@ session_start();
         </div>
     </div>
     <!-- End Pricing Table Section -->
-    
-    
-    
-
-
- 
-
-    
     
 
     <!-- Start Testimonial Section -->

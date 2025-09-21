@@ -13,76 +13,67 @@
 
 <input type="text" id="username" placeholder="Nome"><br><br>
 <input type="email" id="email" placeholder="Email"><br><br>
+<input type="text" id="nif" placeholder="NIF"><br><br>
+<input type="text" id="iban" placeholder="IBAN"><br><br>
 <input type="password" id="password" placeholder="Password"><br><br>
-<input type="text" id="contacto" placeholder="Contacto"><br><br>
 
 <select id="tpUser">
     <option value="">Escolha o tipo</option>
 </select><br><br>
 
-<button onclick="registaUser()">Criar Conta</button>
+<button id="btnRegister" type="button">Criar Conta</button>
 
 <script>
 $(document).ready(function(){
-    // Preenche o select com os tipos da base
-    $.getJSON('getTipos.php', function(tipos){
+    $.getJSON('getTipos.php')
+    .done(function(tipos){
         tipos.forEach(tipo => {
             $('#tpUser').append(`<option value="${tipo.ID_TipoUtilizador}">${tipo.Tipo}</option>`);
         });
+    })
+    .fail(function(xhr){
+        console.error('Erro a carregar tipos:', xhr.responseText);
+        Swal.fire('Erro', 'Não foi possível carregar os tipos de utilizador.', 'error');
     });
+
+    $('#btnRegister').on('click', registaUser);
 });
 
 function registaUser(){
-    const nome = $('#username').val();
-    const email = $('#email').val();
+    const nome = $('#username').val().trim();
+    const email = $('#email').val().trim();
+    const nif = $('#nif').val().trim();
+    const iban = $('#iban').val().trim();
     const password = $('#password').val();
-    const contacto = $('#contacto').val();
     const tipo = $('#tpUser').val();
 
-    if(!nome || !email || !password || !tipo){
+    if(!nome || !email || !nif || !iban || !password || !tipo){
         Swal.fire('Erro', 'Preencha todos os campos obrigatórios!', 'error');
         return;
     }
 
     $.ajax({
-    url: 'registar.php',
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify({nome, email, password, contacto, tipo}),
-    success: function(res){
-        if(res.status === 'success'){
-
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer);
-                    toast.addEventListener('mouseleave', Swal.resumeTimer);
-                }
-            });
-
-            Toast.fire({
-                icon: "success",
-                title: "Conta criada com sucesso!"
-            }).then(() => {
-                
-                window.location.href = 'index.php';
-            });
-
-        } else {
-            Swal.fire('Erro', res.msg, 'error');
+        url: 'registar.php',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({nome, email, nif, iban, password, tipo}),
+        success: function(res){
+            if(res.flag){
+                Swal.fire({
+                    icon: 'success',
+                    title: res.msg,
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(() => window.location.href = 'index.php');
+            } else {
+                Swal.fire('Erro', res.msg, 'error');
+            }
+        },
+        error: function(xhr){
+            Swal.fire('Erro', 'Erro no servidor: ' + xhr.responseText, 'error');
         }
-    },
-    error: function(xhr){
-        Swal.fire('Erro', 'Ocorreu um erro no servidor', 'error');
-        console.log(xhr.responseText);
-    }
-});
-
-
+    });
 }
 </script>
 </body>

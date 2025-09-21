@@ -1,54 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicie Sessão</title>
-    <link rel="stylesheet" href="css/login.css">
-    <script src="asset/js/lib/jquery.js"></script>
-    <script src="asset/js/lib/bootstrap.js"></script>
-    <script src="asset/js/lib/datatables.js"></script>
-    <script src="asset/js/lib/select2.js"></script>
-    <script src="asset/js/lib/sweatalert.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="css/login.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
+<h2>Login</h2>
 
-    <div class="container">
-        <div class="logo">
-            <img src="images/logos/PURO ENCANTO LOGO.png" alt="Logo">
-        </div>
-        <h2>Inicie Sessão</h2>
+<input type="email" id="email" placeholder="Email"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
 
-        <div class="input-group">
-            <input type="email" placeholder="Email address" required id="emailLogin">
-            <i class="fas fa-envelope"></i>
-        </div>
+<button id="btnLogin" type="button">Entrar</button>
+<p>Não tens conta? <a href="registo.html">Regista-te aqui</a></p>
 
-        <div class="input-group">
-            <input type="password" placeholder="Confirm password" required id="passwordLogin">
-            <i class="fas fa-lock"></i>
-        </div>
+<script>
+$(document).ready(function(){
+    $('#btnLogin').on('click', function(){
+        const email = $('#email').val().trim();
+        const password = $('#password').val();
 
-        <button class="btn" onclick="login()">Login</button>
+        if(!email || !password){
+            Swal.fire('Erro', 'Preencha todos os campos!', 'error');
+            return;
+        }
 
-        <div class="or">Or</div>
-
-        <div class="social-login">
-            <div class="social-btn"><strong>G</strong></div>
-            <div class="social-btn"><strong>f</strong></div>
-        </div>
-
-        <div class="footer">
-            Não tem uma Conta? <a href="registo.html">Registe-se</a>
-        </div>
-    </div>
-
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="asset/js/login.js"></script>
-
+        $.ajax({
+            url: 'controllerLogin.php',
+            type: 'POST',
+            dataType: 'json',
+            data: { op: 2, email: email, password: password },
+            success: function(res){
+                if(res.flag){
+                    Swal.fire({
+                        icon: 'success',
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => window.location.href = 'index.php');
+                } else {
+                    Swal.fire('Erro', res.msg, 'error');
+                }
+            },
+            error: function(xhr){
+                Swal.fire('Erro', 'Erro no servidor: '+xhr.responseText, 'error');
+            }
+        });
+    });
+});
+</script>
 </body>
-
 </html>
