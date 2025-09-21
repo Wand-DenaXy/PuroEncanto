@@ -13,7 +13,7 @@ if (isset($_POST['op']) && $_POST['op'] == 1) {
 
 } elseif ((isset($_POST['op']) && $_POST['op'] == 3) || (isset($_GET['op']) && $_GET['op'] == 3)) {
     $resp = $log->logout();
-    header("Location: ../../login.php");
+    header("Location: ../../index.php");
     exit;
 
 } elseif (isset($_POST['op']) && $_POST['op'] == 4) {
