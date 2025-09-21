@@ -1,5 +1,5 @@
 <?php
-require_once 'connection2.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/PuroEncanto_Temp-Main/asset/model/connection2.php';
 
 class Login {
 
@@ -8,10 +8,9 @@ class Login {
         $msg = "";
         $flag = false;
 
-        // Hash seguro para a password
         $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
 
-        // Coloquei nif e IBAN como obrigatórios (se não quiseres, mete valores default temporários)
+        // Valores padrão para NIF e IBAN (ajusta se quiseres campos reais)
         $nif  = "000000000";  
         $iban = "PT50000000000000000000000";
 
@@ -23,12 +22,11 @@ class Login {
             $msg = "Registado com sucesso!";
             $flag = true;
 
-            // iniciar sessão automaticamente após registo
             session_start();
-            $_SESSION['cliente_id']   = $stmt->insert_id;
-            $_SESSION['cliente_nome'] = $username;
+            $_SESSION['cliente_id']    = $stmt->insert_id;
+            $_SESSION['cliente_nome']  = $username;
             $_SESSION['cliente_email'] = $email;
-            $_SESSION['tpUser'] = $tpUser;
+            $_SESSION['tpUser']        = $tpUser;
 
         } else {
             $msg = "Erro ao registar cliente!";
@@ -38,46 +36,41 @@ class Login {
 
         $stmt->close();
         $conn->close();
-
         return $resp;
     }
-function login($email, $pw){
-    global $conn;
-    $flag = true;
-    session_start();
 
-    $stmt = $conn->prepare("SELECT ID_Cliente, nome, Email, Password, ID_TipoUtilizador FROM Clientes WHERE Email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    function login($email, $pw){
+        global $conn;
+        $flag = true;
+        session_start();
 
-    if($result->num_rows > 0){
-        $row = $result->fetch_assoc();
+        $stmt = $conn->prepare("SELECT ID_Cliente, nome, Email, Password, ID_TipoUtilizador FROM Clientes WHERE Email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Aqui está o ponto crítico
-        if(password_verify($pw, $row['Password'])){
-            $_SESSION['cliente_id']   = $row['ID_Cliente'];
-            $_SESSION['cliente_nome'] = $row['nome'];
-            $_SESSION['cliente_email']= $row['Email'];
-            $_SESSION['tpUser']       = $row['ID_TipoUtilizador'];
-
-            $msg = "Login efetuado com sucesso!";
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            if(password_verify($pw, $row['Password'])){
+                $_SESSION['cliente_id']    = $row['ID_Cliente'];
+                $_SESSION['cliente_nome']  = $row['nome'];
+                $_SESSION['cliente_email'] = $row['Email'];
+                $_SESSION['tpUser']        = $row['ID_TipoUtilizador'];
+                $msg = "Login efetuado com sucesso!";
+            } else {
+                $flag = false;
+                $msg = "Password incorreta!";
+            }
         } else {
             $flag = false;
-            $msg = "Password incorreta!";
+            $msg = "Email não encontrado!";
         }
-    } else {
-        $flag = false;
-        $msg = "Email não encontrado!";
+
+        $stmt->close();
+        $conn->close();
+
+        return json_encode(['flag'=>$flag,'msg'=>$msg]);
     }
-
-    $stmt->close();
-    $conn->close();
-
-    return json_encode(['flag'=>$flag,'msg'=>$msg]);
-}
-
-
 
     function logout(){
         session_start();
@@ -105,5 +98,5 @@ function login($email, $pw){
         $conn->close();
         return $msg;
     }
-
 }
+?>
