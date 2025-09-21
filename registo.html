@@ -9,19 +9,27 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-<h2>Registe-se</h2>
 
-<input type="text" id="username" placeholder="Nome"><br><br>
-<input type="email" id="email" placeholder="Email"><br><br>
-<input type="text" id="nif" placeholder="NIF"><br><br>
-<input type="text" id="iban" placeholder="IBAN"><br><br>
-<input type="password" id="password" placeholder="Password"><br><br>
+<div class="login-card">
+    <div class="logo">
+            <img src="images/logos/PURO ENCANTO LOGO.png" width="150px" alt="Logo">
+        </div>
+    <h2>Registe-se</h2>
 
-<select id="tpUser">
-    <option value="">Escolha o tipo</option>
-</select><br><br>
+    <input type="text" id="username" placeholder="Nome">
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="nif" placeholder="NIF">
+    <input type="text" id="iban" placeholder="IBAN">
+    <input type="password" id="password" placeholder="Password">
+    
+    <select id="tpUser">
+        <option value="">Escolha o tipo</option>
+    </select>
 
-<button id="btnRegister" type="button">Criar Conta</button>
+    <button id="btnRegister" type="button">Criar Conta</button>
+
+    <p class="footer">Já tens conta? <a href="login.php">Inicia sessão aqui</a></p>
+</div>
 
 <script>
 $(document).ready(function(){
@@ -30,51 +38,46 @@ $(document).ready(function(){
         tipos.forEach(tipo => {
             $('#tpUser').append(`<option value="${tipo.ID_TipoUtilizador}">${tipo.Tipo}</option>`);
         });
-    })
-    .fail(function(xhr){
-        console.error('Erro a carregar tipos:', xhr.responseText);
-        Swal.fire('Erro', 'Não foi possível carregar os tipos de utilizador.', 'error');
     });
 
-    $('#btnRegister').on('click', registaUser);
-});
+    $('#btnRegister').on('click', function(){
+        const nome = $('#username').val().trim();
+        const email = $('#email').val().trim();
+        const nif = $('#nif').val().trim();
+        const iban = $('#iban').val().trim();
+        const password = $('#password').val();
+        const tipo = $('#tpUser').val();
 
-function registaUser(){
-    const nome = $('#username').val().trim();
-    const email = $('#email').val().trim();
-    const nif = $('#nif').val().trim();
-    const iban = $('#iban').val().trim();
-    const password = $('#password').val();
-    const tipo = $('#tpUser').val();
-
-    if(!nome || !email || !nif || !iban || !password || !tipo){
-        Swal.fire('Erro', 'Preencha todos os campos obrigatórios!', 'error');
-        return;
-    }
-
-    $.ajax({
-        url: 'registar.php',
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify({nome, email, nif, iban, password, tipo}),
-        success: function(res){
-            if(res.flag){
-                Swal.fire({
-                    icon: 'success',
-                    title: res.msg,
-                    showConfirmButton: false,
-                    timer: 2000
-                }).then(() => window.location.href = 'index.php');
-            } else {
-                Swal.fire('Erro', res.msg, 'error');
-            }
-        },
-        error: function(xhr){
-            Swal.fire('Erro', 'Erro no servidor: ' + xhr.responseText, 'error');
+        if(!nome || !email || !nif || !iban || !password || !tipo){
+            Swal.fire('Erro', 'Preencha todos os campos obrigatórios!', 'error');
+            return;
         }
+
+        $.ajax({
+            url: 'registar.php',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify({nome, email, nif, iban, password, tipo}),
+            success: function(res){
+                if(res.flag){
+                    Swal.fire({
+                        icon: 'success',
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => window.location.href = 'login.php');
+                } else {
+                    Swal.fire('Erro', res.msg, 'error');
+                }
+            },
+            error: function(xhr){
+                Swal.fire('Erro', 'Erro no servidor: ' + xhr.responseText, 'error');
+            }
+        });
     });
-}
+});
 </script>
+
 </body>
 </html>
