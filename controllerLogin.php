@@ -1,7 +1,5 @@
 <?php
-
 include_once "../model/modelLogin.php";
-
 $log = new Login();
 
 if((isset($_POST['op']) && $_POST['op'] == 1)){
@@ -14,14 +12,11 @@ if((isset($_POST['op']) && $_POST['op'] == 1)){
 
 }else if((isset($_POST['op']) && $_POST['op'] == 3) || (isset($_GET['op']) && $_GET['op'] == 3)){
     $resp = $log->logout();
-    header("Location: index.php"); // volta ao index depois do logout
+    header("Location: index.php");
     exit;
 
 }else if((isset($_POST['op']) && $_POST['op'] == 4)){
     $resp = $log->getTiposUser();
     echo($resp);
 }
-
-
-
 ?>

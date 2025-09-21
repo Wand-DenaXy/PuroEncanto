@@ -8,17 +8,30 @@ class Login {
         $msg = "";
         $flag = false;
 
-        // $pw = md5($pw); // opcional para encriptar
+        // Hash seguro para a password
+        $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("INSERT INTO utilizador (nome, email, password, id_tipouser) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("sssi", $username, $email, $pw, $tpUser);
+        // Coloquei nif e IBAN como obrigatórios (se não quiseres, mete valores default temporários)
+        $nif  = "000000000";  
+        $iban = "PT50000000000000000000000";
+
+        $stmt = $conn->prepare("INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssi", $username, $email, $nif, $hashedPw, $iban, $tpUser);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){
             $msg = "Registado com sucesso!";
             $flag = true;
+
+            // iniciar sessão automaticamente após registo
+            session_start();
+            $_SESSION['cliente_id']   = $stmt->insert_id;
+            $_SESSION['cliente_nome'] = $username;
+            $_SESSION['cliente_email'] = $email;
+            $_SESSION['tpUser'] = $tpUser;
+
         } else {
-            $msg = "Erro ao registar utilizador!";
+            $msg = "Erro ao registar cliente!";
         }
 
         $resp = json_encode(array("flag" => $flag, "msg" => $msg));
@@ -28,35 +41,43 @@ class Login {
 
         return $resp;
     }
+function login($email, $pw){
+    global $conn;
+    $flag = true;
+    session_start();
 
-    function login($email, $pw){
-        global $conn;
-        $msg = "";
-        $flag = true;
-        session_start();
+    $stmt = $conn->prepare("SELECT ID_Cliente, nome, Email, Password, ID_TipoUtilizador FROM Clientes WHERE Email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        $stmt = $conn->prepare("SELECT * FROM utilizador WHERE email = ? AND password = ?");
-        $stmt->bind_param("ss", $email, $pw);
-        $stmt->execute();
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
 
-        $result = $stmt->get_result();
+        // Aqui está o ponto crítico
+        if(password_verify($pw, $row['Password'])){
+            $_SESSION['cliente_id']   = $row['ID_Cliente'];
+            $_SESSION['cliente_nome'] = $row['nome'];
+            $_SESSION['cliente_email']= $row['Email'];
+            $_SESSION['tpUser']       = $row['ID_TipoUtilizador'];
 
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            $_SESSION['utilizador'] = $row['nome'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['tpUser'] = $row['id_tipouser'];
             $msg = "Login efetuado com sucesso!";
         } else {
             $flag = false;
-            $msg = "Erro! Dados inválidos";
+            $msg = "Password incorreta!";
         }
-
-        $stmt->close();
-        $conn->close();
-
-        return json_encode(array("msg" => $msg, "flag" => $flag));
+    } else {
+        $flag = false;
+        $msg = "Email não encontrado!";
     }
+
+    $stmt->close();
+    $conn->close();
+
+    return json_encode(['flag'=>$flag,'msg'=>$msg]);
+}
+
+
 
     function logout(){
         session_start();
@@ -68,13 +89,13 @@ class Login {
         global $conn;
         $msg = "<option value='-1'>Escolha uma opção</option>";
 
-        $stmt = $conn->prepare("SELECT * FROM tipouser");
+        $stmt = $conn->prepare("SELECT * FROM TipoUtilizador");
         $stmt->execute();
         $result = $stmt->get_result();
 
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                $msg .= "<option value='".$row['id']."'>".$row['descricao']."</option>";
+                $msg .= "<option value='".$row['ID_TipoUtilizador']."'>".$row['Tipo']."</option>";
             }
         } else {
             $msg .= "<option value='-1'>Sem tipos registados</option>";
