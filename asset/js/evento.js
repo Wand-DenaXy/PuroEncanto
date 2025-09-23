@@ -66,7 +66,7 @@ function listarEventos() {
 }
 
 function carregarCalendario() {
-  const Evento_id = $('#filmeSelectCalendar').val();
+  const ID_Cliente = $('#filmeSelectCalendar').val();
 
   const calendarioEl = document.getElementById('calendario');
   calendarioEl.innerHTML = "";
@@ -81,7 +81,7 @@ function carregarCalendario() {
       method: 'POST',
       extraParams: {
         op: 3,
-        ID_Evento: Evento_id
+        ID_Evento: ID_Cliente
       },
       failure: function () {
         alerta("error", "Erro ao carregar sessões");
@@ -90,31 +90,47 @@ function carregarCalendario() {
     select: function (info) {
       Swal.fire({
         title: 'Criar Evento',
-        html:
-          '<input id="swalEvento" class="swal2-input" placeholder="ID do Evento">' +
-          '<input id="swalCliente" class="swal2-input" placeholder="ID do Cliente">',
+    html: `
+      <input id="swalIDCliente" class="swal2-input" placeholder="ID do Cliente">
+      <input id="swalNome" class="swal2-input" placeholder="Nome">
+      <input id="swalIDTipoEvento" class="swal2-input" placeholder="ID Tipo Evento">
+      <input id="swalIDPacote" class="swal2-input" placeholder="ID Pacote">
+    `,
         focusConfirm: false,
-        preConfirm: () => {
-          const Evento_id = document.getElementById('swalEvento').value;
-          const Cliente_id = document.getElementById('swalCliente').value;
-          if (!Evento_id || !Cliente_id) {
-            Swal.showValidationMessage('Preenche todos os campos');
-            return false;
-          }
-          return { Evento_id, Cliente_id };
+      preConfirm: () => {
+        const ID_Cliente = document.getElementById('swalIDCliente').value;
+        const nome = document.getElementById('swalNome').value;
+        const ID_TipoEvento = document.getElementById('swalIDTipoEvento').value;
+        const ID_Pacote = document.getElementById('swalIDPacote').value;
+
+        if (!ID_Cliente || !nome || !ID_TipoEvento || !ID_Pacote) {
+          Swal.showValidationMessage('Preenche todos os campos');
+          return false;
         }
+
+        return {
+          ID_Evento: $('#filmeSelectCalendar').val(), // pega o evento selecionado
+          ID_Cliente,
+          nome,
+          ID_TipoEvento,
+          ID_Pacote
+        };
+      }
       }).then(result => {
         if (result.isConfirmed) {
           const data = info.startStr.split('T')[0];
           const hora = info.startStr.split('T')[1].substring(0, 5);
 
           let dados = new FormData();
-          dados.append('op', 2);
-          dados.append('Evento_id', ID_Evento);
-          dados.append('Cliente_id', result.value.Cliente_id);
-          dados.append('data', data);
+          dados.append('op', 10);
+          dados.append('Evento_id', result.value.ID_Evento);
+          dados.append('ID_Cliente', result.value.ID_Cliente);
+          dados.append('nome', result.value.nome);
           dados.append('hora', hora);
-          dados.append('estado', result.value.Cliente_id);
+          dados.append('estado', 'aceite');
+          dados.append('Data', data);
+          dados.append('ID_TipoEvento', result.value.ID_TipoEvento);
+          dados.append('ID_Pacote', result.value.ID_Pacote);
 
           $.ajax({
             url: 'asset/controller/controllerEventos.php',
@@ -133,4 +149,14 @@ function carregarCalendario() {
   });
 
   calendar.render();
+}
+function alerta(titulo,msg,icon){
+    Swal.fire({
+        position: 'center',
+        icon: icon,
+        title: titulo,
+        text: msg,
+        showConfirmButton: true,
+
+      })
 }
