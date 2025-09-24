@@ -8,30 +8,21 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puro Encanto</title>
-
-    <!-- Bootstrap CSS -->
     <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome CSS -->
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <!-- Animate CSS -->
     <link href="css/animate.css" rel="stylesheet">
-    <!-- Owl Carousel -->
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/owl.theme.css">
     <link rel="stylesheet" href="css/owl.transitions.css">
-    <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/puroencantocores.css">
-    <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 
-    <!-- jQuery e Modernizer -->
     <script src="js/modernizr.custom.js"></script>
 </head>
 <body class="index">
 
-<!-- Navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header page-scroll">
@@ -45,7 +36,7 @@ session_start();
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!-- Links principais -->
+
       <ul class="nav navbar-nav">
         <li><a class="page-scroll" href="#feature">O que oferecemos?</a></li>
         <li><a class="page-scroll" href="#portfolio">Galeria</a></li>
@@ -53,7 +44,6 @@ session_start();
         <li><a class="page-scroll" href="servico.html">Serviços</a></li>
       </ul>
 
-      <!-- Perfil / Login -->
       <ul class="nav navbar-nav navbar-right">
       <?php if(isset($_SESSION['cliente_nome'])): ?>
           <li class="dropdown">
@@ -63,9 +53,10 @@ session_start();
                   <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                  <li><a href="dashboard.php">Dashboard</a></li>
-                  <li><a href="perfil.php?id=<?php echo $_SESSION['cliente_id']; ?>">Perfil</a></li>
-                  <li><a href="controllerLogin.php?op=3">Logout</a></li>
+                  <li><a href="dashboardCliente.php">Dashboard</a></li>
+                  <li><a href="perfil.php">Perfil</a></li>
+                  <li><a href="asset/controller/controllerLogin.php?op=3">Logout</a></li>
+
 
               </ul>
           </li>
@@ -80,8 +71,6 @@ session_start();
     </div>
   </div>
 </nav>
-
-    
     
     
     <!-- Start Home Page Slider -->
