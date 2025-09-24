@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	CREATE DATABASE IF NOT EXISTS PuroEncanto;
 	USE PuroEncanto;
 
@@ -290,6 +291,12 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 			USE PuroEncanto;
 
 
+=======
+			CREATE DATABASE IF NOT EXISTS PuroEncanto;
+			USE PuroEncanto;
+
+
+>>>>>>> Stashed changes
 			CREATE TABLE TipoUtilizador (
 				ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
 				Tipo VARCHAR(50) NOT NULL
@@ -358,6 +365,9 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 				ID_Gasto int,
 				FOREIGN KEY (ID_Gasto) REFERENCES Gastos(ID_Gasto)
 			);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 			
