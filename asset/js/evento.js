@@ -20,7 +20,39 @@ $(function () {
     listarEventos();
     carregarEventosParaCalendario();
 });
+function removerEventos(id){
 
+    let dados = new FormData();
+    dados.append("op", 5);
+    dados.append("ID_Evento", id);
+
+    $.ajax({
+    url: "asset/controller/controllerEventos.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta("Eventos",obj.msg,"sucess");  
+            listarEventos();    
+        }else{
+            alerta("Eventos",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
 function carregarEventosParaCalendario() {
   let dados = new FormData();
   dados.append('op', 1);

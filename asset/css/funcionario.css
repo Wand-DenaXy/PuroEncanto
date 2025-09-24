@@ -1,5 +1,6 @@
 body {
-    background-color: #f5f6fa;
+    background: url('../images/93ea58efdcb1cedd9cecf423b5d6a2a4.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 .sidebar {
     height: 100vh;
@@ -81,3 +82,4 @@ body {
     font-weight: 700;
     padding: 10px;
 }
+

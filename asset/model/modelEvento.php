@@ -72,7 +72,7 @@ function criarSessao($ID_Evento, $ID_Cliente, $nome, $hora, $estado,$Data,$ID_Ti
 
         while ($row = $result->fetch_assoc()) {
             $msg .= "<tr><th scope='row'>{$row['ID_Evento']}</th><td>{$row['Nome']}</td><td>{$row['ID_Cliente']}</td><td>{$row['Data']}</td><td>{$row['hora']}</td><td>{$row['tipo_nome']}</td>";
-            $msg .= "<td><button class='btn btn-danger' onclick='removerFilme({$row['ID_Evento']})'>Remover</button></td>";
+            $msg .= "<td><button class='btn btn-danger' onclick='removerEventos({$row['ID_Evento']})'>Remover</button></td>";
             $msg .= "<td><button class='btn btn-primary' onclick='getDadosfilme({$row['ID_Evento']})'>Editar</button></td></tr>";
         }
 
@@ -84,6 +84,29 @@ function criarSessao($ID_Evento, $ID_Cliente, $nome, $hora, $estado,$Data,$ID_Ti
         $stmt->close();
         $conn->close();
         return $msg;
+    }
+        function removerEventos($ID_Evento){
+        global $conn;
+        $msg = "";
+        $flag = true;
+
+        $sql = "DELETE FROM Eventos WHERE ID_Evento = ".$ID_Evento;
+
+        if ($conn->query($sql) === TRUE) {
+            $msg = "Removido com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+          
+        $conn->close();
+
+        return($resp);
     }
 }
 ?>
