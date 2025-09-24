@@ -15,14 +15,14 @@ $resultFornecedores = $conn->query($sqlFornecedores);
 if ($row = $resultFornecedores->fetch_assoc()) {
 $totalFornecedores = $row['totalFornecedores'];
 }
-//Gastos
+
 $sqlGastos = "SELECT SUM(gastos.valor) As Gastos from gastos;";
 $resultGastos = $conn->query($sqlGastos);
 
 if ($row = $resultGastos->fetch_assoc()) {
 $totalGastos = $row['Gastos'];
 }
-//Rendimentos
+
 $sqlRendimentos = "SELECT SUM(Rendimento.valor) As Rendimento from Rendimento;";
 $resultRendimentos = $conn->query($sqlRendimentos);
 
@@ -75,7 +75,7 @@ $conn->close();
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
         <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-        <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
+        <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
         <div class="time" id="time"></div>
     </div>
