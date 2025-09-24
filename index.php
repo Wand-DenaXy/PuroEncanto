@@ -40,8 +40,9 @@ session_start();
       <ul class="nav navbar-nav">
         <li><a class="page-scroll" href="#feature">O que oferecemos?</a></li>
         <li><a class="page-scroll" href="#portfolio">Galeria</a></li>
-        <li><a class="page-scroll" href="sobre.html">Sobre nós</a></li>
-        <li><a class="page-scroll" href="servico.html">Serviços</a></li>
+        <li><a class="page-scroll" href="#pricing">Serviço</a></li>
+        <li><a class="page-scroll" href="#testimonial">Opiniões</a></li>
+        <li><a class="page-scroll" href="#contact">Contacto</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -199,7 +200,7 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <h1>Quer planear a sua festa, mas não sabe onde? </br>Nós temos a solução!</h1>
-                    <a href="servico.html"><button type="submit" class="btn btn-primary">Ver os nossos serviços</button></a>
+                    <a href="#pricing.html"><button type="submit" class="btn btn-primary">Ver os nossos serviços</button></a>
                 </div>
             </div>
         </div>
@@ -339,7 +340,6 @@ session_start();
                     </div>
                 </div>
             </div>
-                    
             <div class="row">
                         
                 <div class="pricing">
@@ -445,6 +445,11 @@ session_start();
             </div>
         </div>
     </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
     <!-- End Pricing Table Section -->
     
     

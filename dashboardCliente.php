@@ -30,7 +30,7 @@ $conn->close();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Puro Encanto - Dashboard</title>
-<link rel="stylesheet" href="asset/css/dashboard.css">
+<link rel="stylesheet" href="asset/css/calendario.css">
 <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 <script src="asset/js/lib/jquery.js"></script>
@@ -45,8 +45,8 @@ $conn->close();
     <div class="logo"><a href="index.php"><img src="images/logos/PURO ENCANTO LOGO.png" alt=""></a>
         <p class="logotitulo">Puro Encanto</p>
     </div>
-    <a href="dashboardCliente.php"><i class="bi bi-calendar-event"></i> Criar Evento</a>
-    <a href="perfil.php" class="active"><i class="bi bi-person-circle"></i> Perfil</a>
+    <a href="dashboardCliente.php" class="active"><i class="bi bi-calendar-event"></i> Criar Evento</a>
+    <a href="perfil.php"><i class="bi bi-person-circle"></i> Perfil</a>
     <div class="time" id="time"></div>
 </div>
 
