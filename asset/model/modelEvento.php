@@ -7,36 +7,45 @@ class Eventos {
 
 function getTiposEventos() {
     global $conn;
-    $msg = "<option value='-1'>Escolha uma opção</option>";
+    $msg = "<option value='1'>Escolha uma opção</option>";
 
-    $stmt = $conn->prepare("SELECT DISTINCT Clientes.nome AS Nome FROM Clientes,Eventos where Eventos.ID_Cliente = Clientes.ID_Cliente;");
+    $stmt = $conn->prepare("
+                SELECT DISTINCT TiposEventos.ID_TipoEvento, TiposEventos.Nome 
+        FROM TiposEventos,Eventos
+        WHERE TiposEventos.ID_TipoEvento = Eventos.ID_TipoEvento
+    ");
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $msg .= "<option value='{$row['ID_Cliente']}'>{$row['Nome']}</option>";
+            $msg .= "<option value='{$row['ID_TipoEvento']}'>{$row['Nome']}</option>";
         }
     } else {
-        $msg .= "<option value='-1'>Sem tipos registados</option>";
+        $msg .= "<option value='-1'>Sem clientes registados</option>";
     }
 
     $stmt->close();
     $conn->close();
     return $msg;
 }
-function listarSessoesJSON($ID_Cliente) {
+function listarSessoesJSON($ID_Evento) {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM Eventos WHERE ID_Cliente = ?");
-    $stmt->bind_param("i", $ID_Cliente);
+    $stmt = $conn->prepare("
+        SELECT Eventos.*, Clientes.Nome AS ClienteNome 
+        FROM Eventos
+        INNER JOIN Clientes ON Eventos.ID_Cliente = Clientes.ID_Cliente
+        WHERE Eventos.ID_Cliente = ?
+    ");
+    $stmt->bind_param("i", $ID_Evento);
     $stmt->execute();
     $result = $stmt->get_result();
 
     $eventos = [];
     while ($row = $result->fetch_assoc()) {
         $eventos[] = [
-            "title" => "Evento " . $row['ID_Cliente'] . " (" . $row['Nome'] . ")",
-            "start" => $row['data'] . "T" . $row['hora']
+            "title" => "Evento " . $row['ID_Evento'] . " (" . $row['ClienteNome'] . ")", 
+            "start" => $row['Data'] . "T" . $row['hora']
         ];
     }
 

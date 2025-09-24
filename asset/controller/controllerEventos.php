@@ -5,7 +5,7 @@ include_once '../model/modelEvento.php';
 $func = new Eventos();
 
 if ($_POST['op'] == 3) {
-    echo $func->listarSessoesJSON($_POST['ID_Cliente']);
+    echo $func->listarSessoesJSON($_POST['ID_Evento']);
 }
  elseif ($_POST['op'] == 10) {
     echo $func->criarSessao(

@@ -66,7 +66,7 @@ function listarEventos() {
 }
 
 function carregarCalendario() {
-  const ID_Cliente = $('#filmeSelectCalendar').val();
+  const ID_Evento = $('#filmeSelectCalendar').val();
 
   const calendarioEl = document.getElementById('calendario');
   calendarioEl.innerHTML = "";
@@ -81,7 +81,7 @@ function carregarCalendario() {
       method: 'POST',
       extraParams: {
         op: 3,
-        ID_Evento: ID_Cliente
+        ID_Evento: ID_Evento
       },
       failure: function () {
         alerta("error", "Erro ao carregar sessões");
