@@ -102,7 +102,7 @@ $conn->close();
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Gastos</h6>
-                        <h4><?php echo -$totalGastos; ?></h4>
+                        <h4><?php echo $totalGastos; ?></h4>
                         <canvas id="chart3" height="80"></canvas>
                     </div>
                 </div>
