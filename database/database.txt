@@ -1,3 +1,77 @@
+<<<<<<< Updated upstream
+			CREATE DATABASE IF NOT EXISTS PuroEncanto;
+			USE PuroEncanto;
+
+
+			CREATE TABLE TipoUtilizador (
+				ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
+				Tipo VARCHAR(50) NOT NULL
+			);
+		Create table Funcionarios
+		(
+			ID_Funcionario INT PRIMARY KEY AUTO_INCREMENT,
+			nome varchar(250),
+			telefone int,
+			salario int,
+			NIF varchar(250)
+		);
+
+			CREATE TABLE IF NOT EXISTS Fornecedores (
+				ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
+				descricao VARCHAR(100) NOT NULL,
+				contacto VARCHAR(15) NOT NULL,
+				email VARCHAR(100) NOT NULL,
+				morada VARCHAR(100) NOT NULL,
+				nif VARCHAR(100) NOT NULL,
+				total_debito DECIMAL(15,2)
+			);
+			select * from Fornecedores;
+			CREATE TABLE IF NOT EXISTS TotalAtivo (
+				ID_TotalAtivo  INT PRIMARY KEY AUTO_INCREMENT,
+				descricao VARCHAR(100) NOT NULL,
+				valor DECIMAL(10,2) NOT NULL,
+				data VARCHAR(100) NOT NULL
+		);
+
+			CREATE TABLE Fornecimento (
+				ID_Fornecimento INT PRIMARY KEY AUTO_INCREMENT,
+				Data DATE NOT NULL,
+				Quantidade INT NOT NULL,
+				ID_Fornecedor INT,
+				ID_Produto INT,
+				FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
+					ON DELETE CASCADE
+			);
+
+			CREATE TABLE Rendimento (
+				ID_Rendimento INT PRIMARY KEY AUTO_INCREMENT,
+				descricao varchar(100) NOT NULL,
+				Valor DECIMAL(10,2) NOT NULL,
+				Data DATE NOT NULL
+			);
+
+			CREATE TABLE Gastos (
+				ID_Gasto INT PRIMARY KEY AUTO_INCREMENT,
+				descricao varchar(100) NOT NULL,
+				Valor DECIMAL(10,2) NOT NULL,
+				Data DATE NOT NULL
+			);
+
+			CREATE TABLE TiposEventos (
+				ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
+				Nome VARCHAR(100) NOT NULL
+			);
+				
+			select * from TiposEventos;
+			CREATE TABLE IF NOT EXISTS ResumoFinanceiro (
+				ID_Finaceiro INT PRIMARY KEY AUTO_INCREMENT,
+				descricao varchar(200) NULL,
+				ID_Rendimento int,
+				FOREIGN KEY (ID_Rendimento) REFERENCES Rendimento(ID_Rendimento),
+				ID_Gasto int,
+				FOREIGN KEY (ID_Gasto) REFERENCES Gastos(ID_Gasto)
+			);
+=======
 		CREATE DATABASE IF NOT EXISTS PuroEncanto;
 		USE PuroEncanto;
 
@@ -55,8 +129,6 @@
 			Valor DECIMAL(10,2) NOT NULL,
 			Data DATE NOT NULL
 		);
-<<<<<<< Updated upstream
-=======
 
 		CREATE TABLE TiposEventos (
 			ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
@@ -287,100 +359,87 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 				ORDER BY total DESC;
 >>>>>>> Stashed changes
 
-		CREATE TABLE TiposEventos (
-			ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
-			Nome VARCHAR(100) NOT NULL
+			CREATE TABLE IF NOT EXISTS VendasServicos (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				descricao VARCHAR(100) NOT NULL,
+				data varchar(100) not null,
+				total_vendas DECIMAL(10,2) NOT NULL
+			);
+			CREATE TABLE PacotesConvidados (
+				ID_Pacote INT AUTO_INCREMENT PRIMARY KEY,
+				descricao VARCHAR(100) NOT NULL,
+				numConvidados INT NOT NULL,
+				preco DECIMAL(10,2) NOT NULL
+			);
+			CREATE TABLE Servicos (
+				ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
+				nome VARCHAR(50) NOT NULL,
+				preco DECIMAL(10,2) NOT NULL
+			);
+		CREATE TABLE Clientes (
+			ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
+			nome VARCHAR(100) NOT NULL,
+			Email VARCHAR(100) NOT NULL,
+			nif VARCHAR(100) NOT NULL,
+			Password VARCHAR(255) NOT NULL,
+			IBAN VARCHAR(255) NOT NULL,
+			ID_TipoUtilizador INT default 1,
+			FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
+				ON DELETE SET NULL
 		);
-			
-		select * from TiposEventos;
-		CREATE TABLE IF NOT EXISTS ResumoFinanceiro (
-			ID_Finaceiro INT PRIMARY KEY AUTO_INCREMENT,
-			descricao varchar(200) NULL,
-			ID_Rendimento int,
-			FOREIGN KEY (ID_Rendimento) REFERENCES Rendimento(ID_Rendimento),
-			ID_Gasto int,
-			FOREIGN KEY (ID_Gasto) REFERENCES Gastos(ID_Gasto)
-		);
-
-		CREATE TABLE IF NOT EXISTS VendasServicos (
-			id INT AUTO_INCREMENT PRIMARY KEY,
+			#É o stock ne?
+			CREATE TABLE Equipamentos (
+				ID_Equipamento INT AUTO_INCREMENT PRIMARY KEY,
+				descricao VARCHAR(100) NOT NULL,
+				valor DOUBLE(10,2) NOT NULL
+			);
+				CREATE TABLE Eventos (
+					ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
+					ID_Cliente INT NOT NULL,
+					Nome varchar(200),
+					Data DATE NOT NULL,#Marcação do Evento
+					hora time NOT NULL,
+					estado varchar(50),
+					ID_TipoEvento INT,
+					ID_Pacote INT,
+					FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento),
+					FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+					FOREIGN KEY (ID_Pacote) REFERENCES PacotesConvidados(ID_Pacote)
+				);
+			CREATE TABLE Eventos_Servicos (
+				ID_Evento INT NOT NULL,
+				ID_Servico INT NOT NULL,
+				data date, #filtragem (mesmo dia da marcação)
+				PRIMARY KEY (ID_Evento, ID_Servico),
+				FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
+				FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
+			);
+			CREATE TABLE Balancete (
+			ID_Balancete INT AUTO_INCREMENT PRIMARY KEY,
 			descricao VARCHAR(100) NOT NULL,
-			data varchar(100) not null,
-			total_vendas DECIMAL(10,2) NOT NULL
-		);
-		CREATE TABLE PacotesConvidados (
-			ID_Pacote INT AUTO_INCREMENT PRIMARY KEY,
-			descricao VARCHAR(100) NOT NULL,
-			numConvidados INT NOT NULL,
-			preco DECIMAL(10,2) NOT NULL
-		);
-		CREATE TABLE Servicos (
-			ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
-			nome VARCHAR(50) NOT NULL,
-			preco DECIMAL(10,2) NOT NULL
-		);
-	CREATE TABLE Clientes (
-		ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
-		nome VARCHAR(100) NOT NULL,
-		Email VARCHAR(100) NOT NULL,
-		nif VARCHAR(100) NOT NULL,
-		Password VARCHAR(255) NOT NULL,
-		IBAN VARCHAR(255) NOT NULL,
-		ID_TipoUtilizador INT default 1,
-		FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
-			ON DELETE SET NULL
-	);
-
-		#É o stock ne?
-		CREATE TABLE Equipamentos (
-			ID_Equipamento INT AUTO_INCREMENT PRIMARY KEY,
-			descricao VARCHAR(100) NOT NULL,
-			valor DOUBLE(10,2) NOT NULL
-		);
-		CREATE TABLE Eventos (
-			ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
-			ID_Cliente INT NOT NULL,
-			Data DATE NOT NULL, #Marcação do Evento
-			ID_TipoEvento INT,
-			ID_Pacote INT,
-			FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento),
+			codigo_conta VARCHAR(5) NOT NULL,
+			ID_Cliente INT,
+			ID_Fornecedor INT,
+			saldo DECIMAL(15,2),
 			FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-			FOREIGN KEY (ID_Pacote) REFERENCES PacotesConvidados(ID_Pacote)
+			FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
 		);
-		CREATE TABLE Eventos_Servicos (
-			ID_Evento INT NOT NULL,
-			ID_Servico INT NOT NULL,
-			data date, #filtragem (mesmo dia da marcação)
-			PRIMARY KEY (ID_Evento, ID_Servico),
-			FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
-			FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
+		CREATE TABLE DividasAPagar (
+			ID_Divida INT PRIMARY KEY AUTO_INCREMENT,
+			Tipo VARCHAR(50) NOT NULL,            -- Tipo de dívida: Fornecedor, Cliente, Funcionário, Outros
+			Valor DECIMAL(15, 2) NOT NULL,        -- Valor da dívida
+			Estado VARCHAR(50) DEFAULT 'Em aberto', -- Estado da dívida (Ex: Em aberto, Pago, Atrasado)
+			
+			-- Referências para fornecedores, clientes e funcionários, mas podem ser NULL
+			ID_Fornecedor INT NULL,               -- Referência ao fornecedor, se a dívida for de fornecedor
+			ID_Cliente INT NULL,                  -- Referência ao cliente, se a dívida for de cliente
+			ID_Funcionario INT NULL,              -- Referência ao funcionário, se a dívida for de funcionário
+			
+			-- Chaves estrangeiras para garantir a integridade referencial
+			FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor) ON DELETE CASCADE,
+			FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE,
+			FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
 		);
-		CREATE TABLE Balancete (
-		ID_Balancete INT AUTO_INCREMENT PRIMARY KEY,
-		descricao VARCHAR(100) NOT NULL,
-		codigo_conta VARCHAR(5) NOT NULL,
-		ID_Cliente INT,
-		ID_Fornecedor INT,
-		saldo DECIMAL(15,2),
-		FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-		FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
-	);
-	CREATE TABLE DividasAPagar (
-		ID_Divida INT PRIMARY KEY AUTO_INCREMENT,
-		Tipo VARCHAR(50) NOT NULL,            -- Tipo de dívida: Fornecedor, Cliente, Funcionário, Outros
-		Valor DECIMAL(15, 2) NOT NULL,        -- Valor da dívida
-		Estado VARCHAR(50) DEFAULT 'Em aberto', -- Estado da dívida (Ex: Em aberto, Pago, Atrasado)
-		
-		-- Referências para fornecedores, clientes e funcionários, mas podem ser NULL
-		ID_Fornecedor INT NULL,               -- Referência ao fornecedor, se a dívida for de fornecedor
-		ID_Cliente INT NULL,                  -- Referência ao cliente, se a dívida for de cliente
-		ID_Funcionario INT NULL,              -- Referência ao funcionário, se a dívida for de funcionário
-		
-		-- Chaves estrangeiras para garantir a integridade referencial
-		FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor) ON DELETE CASCADE,
-		FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE,
-		FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
-	);
 		select * from servicos;
 			INSERT INTO Funcionarios (nome,telefone,salario ,nif) VALUES 
 		("António Dias Alegres",920123345,885,"250941392"), 
@@ -542,64 +601,64 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 		select * from eventos;
 		-- Abril
 		-- Inserir eventos
-		INSERT INTO Eventos (ID_Cliente, Data, ID_TipoEvento, ID_Pacote) VALUES
-		(1, '2025-04-01', 1, 1),   -- XPTO, LDA | Empresarial | 20
-		(4, '2025-04-02', 1, 3),   -- Criação&Gestão | Empresarial | 60
-		(8, '2025-04-03', 1, 5),   -- RunAway | Empresarial | 100
-		(12, '2025-04-04', 1, 2),  -- Mármores ilimitados | Empresarial | 40
-		(14, '2025-04-05', 3, 2),  -- Patrícia Pereira | Infantil | 40
-		(16, '2025-04-06', 4, 1),  -- Leandro Silva | Aniversário | 20
-		(19, '2025-04-07', 1, 2),  -- Sorrisos Felizes | Empresarial | 40
-		(24, '2025-04-08', 1, 3),  -- Pipocas Doces | Empresarial | 60
-		(26, '2025-04-09', 3, 1),  -- Sofia Jesus | Infantil | 20
-		(29, '2025-04-10', 2, 2),  -- Marta Rita | Casamento | 40
-		(33, '2025-04-11', 3, 1),  -- Ana Fonseca | Infantil | 20
-		(37, '2025-04-12', 1, 3),  -- PhoneStuff | Empresarial | 60
-		(40, '2025-04-13', 2, 2),  -- Henrique Pedreira | Casamento | 40
-		(2, '2025-04-14', 3, 2),   -- Maria Almeida | Infantil | 40
-		(5, '2025-04-15', 4, 1),   -- Joaquim Telheiras | Aniversário | 20
-		(2, '2025-04-16', 3, 2),   -- Maria Almeida | Infantil | 40
-		(5, '2025-04-17', 2, 1),   -- Joaquim Telheiras | Casamento | 20
-		(9, '2025-04-18', 3, 1),   -- José Miguel | Infantil | 20
-		(13, '2025-04-19', 4, 1),  -- Constança Mello | Aniversário | 20
-		(15, '2025-04-20', 2, 3),  -- Margarida Lopes | Casamento | 60
-		(21, '2025-04-21', 4, 1),  -- Carlos Vieira | Aniversário | 20
-		(27, '2025-04-22', 4, 1),  -- Manuel Doido | Aniversário | 20
-		(31, '2025-04-23', 1, 1),  -- Óculos do Caramelo | Empresarial | 20
-		(34, '2025-04-24', 4, 1),  -- Frederico Sousa | Aniversário | 20
-		(41, '2025-04-25', 3, 3),  -- Bruno Pereira | Infantil | 60
-		(43, '2025-04-26', 1, 3),  -- Viagens Felizes | Empresarial | 60
-		(47, '2025-04-27', 2, 1),  -- Ivandro Almeida | Casamento | 20
-		(3, '2025-04-28', 1, 3),   -- MoveIt | Empresarial | 60
-		(6, '2025-04-29', 4, 3),   -- Inês Teixeira | Aniversário | 60
-		(9, '2025-04-30', 3, 1),   -- José Miguel | Infantil | 20
-		(3, '2025-04-01', 1, 2),   -- MoveIT | Empresarial | 40
-		(6, '2025-04-02', 4, 2),   -- Inês Teixeira | Aniversário | 40
-		(10, '2025-04-03', 3, 1),  -- Jéssica Sousa | Infantil | 20
-		(17, '2025-04-04', 3, 2),  -- Tiago Fonseca | Infantil | 40
-		(20, '2025-04-05', 2, 2),  -- Daniela Dias | Casamento | 40
-		(22, '2025-04-06', 2, 1),  -- Heitor Sobral | Casamento | 20
-		(25, '2025-04-07', 2, 1),  -- Carolina Domingos | Casamento | 20
-		(28, '2025-04-08', 3, 5),  -- Laura Tavares | Infantil | 100
-		(30, '2025-04-09', 4, 1),  -- António Sinhaca | Aniversário | 20
-		(35, '2025-04-10', 3, 1),  -- Joana Albuquerque | Infantil | 20
-		(36, '2025-04-11', 3, 3),  -- Gustavo Gonçalves | Infantil | 60
-		(38, '2025-04-12', 2, 1),  -- Tiago Tavares | Casamento | 20
-		(45, '2025-04-13', 4, 4),  -- Pedro Dias | Aniversário | 80
-		(1, '2025-04-14', 1, 4),   -- XPTO, LDA | Empresarial | 80
-		(4, '2025-04-15', 1, 3),   -- Criação&Gestão | Empresarial | 60
-		(7, '2025-04-16', 1, 2),   -- Pesca e Come | Empresarial | 40
-		(10, '2025-04-17', 3, 1),  -- Jéssica Sousa | Infantil | 20
-		(7, '2025-04-18', 1, 1),   -- Pesca e Come | Empresarial | 20
-		(45, '2025-04-19', 3, 1),  -- Pedro Dias | Infantil | 20
-		(18, '2025-04-20', 1, 1),  -- OnTheWay | Empresarial | 20
-		(23, '2025-04-21', 3, 1),  -- Francisco Torres | Infantil | 20
-		(32, '2025-04-22', 3, 2),  -- João Silva | Infantil | 40
-		(39, '2025-04-23', 4, 2),  -- Yuri Veloso | Aniversário | 40
-		(42, '2025-04-24', 1, 2),  -- DameOuro | Empresarial | 40
-		(44, '2025-04-25', 3, 3),  -- Fátima Sobral | Infantil | 60
-		(46, '2025-04-26', 1, 2),  -- LetsDance | Empresarial | 40
-		(8, '2025-04-27', 1, 1);   -- RunAway | Empresarial | 20
+		INSERT INTO Eventos (ID_Cliente,nome,hora,estado, Data, ID_TipoEvento, ID_Pacote) VALUES
+		(1, "XPTO LDA","10:00:00","aceite",'2025-04-01', 1, 1),   -- XPTO, LDA | Empresarial | 20
+		(4, "Criação&Gestão","10:00:00","aceite",'2025-04-02', 1, 3),   -- Criação&Gestão | Empresarial | 60
+		(8, "RunAway","10:00:00","aceite",'2025-04-03', 1, 5),   -- RunAway | Empresarial | 100
+		(12,"Mármores ilimitados","10:00:00","aceite", '2025-04-04', 1, 2),  -- Mármores ilimitados | Empresarial | 40
+		(14, "Patrícia Pereira","10:00:00","aceite",'2025-04-05', 3, 2),  -- Patrícia Pereira | Infantil | 40
+		(16, "Leandro Silva","10:00:00","aceite",'2025-04-06', 4, 1),  -- Leandro Silva | Aniversário | 20
+		(19, "Sorrisos Felizes","10:00:00","aceite",'2025-04-07', 1, 2),  -- Sorrisos Felizes | Empresarial | 40
+		(24, "Pipocas Doces","10:00:00","aceite",'2025-04-08', 1, 3),  -- Pipocas Doces | Empresarial | 60
+		(26, "Sofia Jesus","10:00:00","aceite",'2025-04-09', 3, 1),  -- Sofia Jesus | Infantil | 20
+		(29, "Marta Rita","10:00:00","aceite",'2025-04-10', 2, 2),  -- Marta Rita | Casamento | 40
+		(33, "Ana Fonseca","10:00:00","aceite",'2025-04-11', 3, 1),  -- Ana Fonseca | Infantil | 20
+		(37, "PhoneStuff","10:00:00","aceite",'2025-04-12', 1, 3),  -- PhoneStuff | Empresarial | 60
+		(40, "Henrique Pedreira","10:00:00","aceite",'2025-04-13', 2, 2),  -- Henrique Pedreira | Casamento | 40
+		(2, "Maria Almeida","10:00:00","aceite",'2025-04-14', 3, 2),   -- Maria Almeida | Infantil | 40
+		(5, "Joaquim Telheiras","10:00:00","aceite",'2025-04-15', 4, 1),   -- Joaquim Telheiras | Aniversário | 20
+		(2, "Maria Almeida","10:00:00","aceite",'2025-04-16', 3, 2),   -- Maria Almeida | Infantil | 40
+		(5, "Joaquim Telheiras","10:00:00","aceite",'2025-04-17', 2, 1),   -- Joaquim Telheiras | Casamento | 20
+		(9, "José Miguel","10:00:00","aceite",'2025-04-18', 3, 1),   -- José Miguel | Infantil | 20
+		(13, "Constança Mello","10:00:00","aceite",'2025-04-19', 4, 1),  -- Constança Mello | Aniversário | 20
+		(15, "Margarida Lopes","10:00:00","aceite",'2025-04-20', 2, 3),  -- Margarida Lopes | Casamento | 60
+		(21, "Carlos Vieira","10:00:00","aceite",'2025-04-21', 4, 1),  -- Carlos Vieira | Aniversário | 20
+		(27, "Manuel Doido","10:00:00","aceite",'2025-04-22', 4, 1),  -- Manuel Doido | Aniversário | 20
+		(31, "Óculos do Caramelo","10:00:00","aceite",'2025-04-23', 1, 1),  -- Óculos do Caramelo | Empresarial | 20
+		(34, "Frederico Sousa","10:00:00","aceite",'2025-04-24', 4, 1),  -- Frederico Sousa | Aniversário | 20
+		(41, "Bruno Pereira","10:00:00","aceite",'2025-04-25', 3, 3),  -- Bruno Pereira | Infantil | 60
+		(43, "Viagens Felizes","10:00:00","aceite",'2025-04-26', 1, 3),  -- Viagens Felizes | Empresarial | 60
+		(47, "Ivandro Almeida","10:00:00","aceite",'2025-04-27', 2, 1),  -- Ivandro Almeida | Casamento | 20
+		(3, "MoveIt","10:00:00","aceite",'2025-04-28', 1, 3),   -- MoveIt | Empresarial | 60
+		(6, "Inês Teixeira","10:00:00","aceite",'2025-04-29', 4, 3),   -- Inês Teixeira | Aniversário | 60
+		(9, "José Miguel","10:00:00","aceite",'2025-04-30', 3, 1),   -- José Miguel | Infantil | 20
+		(3, "MoveIT","10:00:00","aceite",'2025-04-01', 1, 2),   -- MoveIT | Empresarial | 40
+		(6, "Inês Teixeira","10:00:00","aceite",'2025-04-02', 4, 2),   -- Inês Teixeira | Aniversário | 40
+		(10, "Jéssica Sousa","10:00:00","aceite",'2025-04-03', 3, 1),  -- Jéssica Sousa | Infantil | 20
+		(17, "Tiago Fonseca","10:00:00","aceite",'2025-04-04', 3, 2),  -- Tiago Fonseca | Infantil | 40
+		(20, "Daniela Dias","10:00:00","aceite",'2025-04-05', 2, 2),  -- Daniela Dias | Casamento | 40
+		(22, "Heitor Sobral","10:00:00","aceite",'2025-04-06', 2, 1),  -- Heitor Sobral | Casamento | 20
+		(25, "Carolina Domingos","10:00:00","aceite",'2025-04-07', 2, 1),  -- Carolina Domingos | Casamento | 20
+		(28, "Laura Tavares","10:00:00","aceite",'2025-04-08', 3, 5),  -- Laura Tavares | Infantil | 100
+		(30, "António Sinhaca","10:00:00","aceite",'2025-04-09', 4, 1),  -- António Sinhaca | Aniversário | 20
+		(35, "Joana Albuquerque","10:00:00","aceite",'2025-04-10', 3, 1),  -- Joana Albuquerque | Infantil | 20
+		(36, "Gustavo Gonçalves","10:00:00","aceite",'2025-04-11', 3, 3),  -- Gustavo Gonçalves | Infantil | 60
+		(38, "Tiago Tavares","10:00:00","aceite",'2025-04-12', 2, 1),  -- Tiago Tavares | Casamento | 20
+		(45, "Pedro Dias","10:00:00","aceite",'2025-04-13', 4, 4),  -- Pedro Dias | Aniversário | 80
+		(1, "XPTO, LDA","10:00:00","aceite",'2025-04-14', 1, 4),   -- XPTO, LDA | Empresarial | 80
+		(4, "Criação&Gestão","10:00:00","aceite",'2025-04-15', 1, 3),   -- Criação&Gestão | Empresarial | 60
+		(7, "Pesca e Come","10:00:00","aceite",'2025-04-16', 1, 2),   -- Pesca e Come | Empresarial | 40
+		(10, "Jéssica Sousa","10:00:00","aceite",'2025-04-17', 3, 1),  -- Jéssica Sousa | Infantil | 20
+		(7, "Pesca e Come","10:00:00","aceite",'2025-04-18', 1, 1),   -- Pesca e Come | Empresarial | 20
+		(45, "Pedro Dias","10:00:00","aceite",'2025-04-19', 3, 1),  -- Pedro Dias | Infantil | 20
+		(18, "OnTheWay","10:00:00","aceite",'2025-04-20', 1, 1),  -- OnTheWay | Empresarial | 20
+		(23, "Francisco Torres","10:00:00","aceite",'2025-04-21', 3, 1),  -- Francisco Torres | Infantil | 20
+		(32, "João Silva","10:00:00","aceite",'2025-04-22', 3, 2),  -- João Silva | Infantil | 40
+		(39, "Yuri Veloso","10:00:00","aceite",'2025-04-23', 4, 2),  -- Yuri Veloso | Aniversário | 40
+		(42, "DameOuro","10:00:00","aceite",'2025-04-24', 1, 2),  -- DameOuro | Empresarial | 40
+		(44, "Fátima Sobral","10:00:00","aceite",'2025-04-25', 3, 3),  -- Fátima Sobral | Infantil | 60
+		(46, "LetsDance","10:00:00","aceite",'2025-04-26', 1, 2),  -- LetsDance | Empresarial | 40
+		(8, "RunAway","10:00:00","aceite",'2025-04-27', 1, 1);   -- RunAway | Empresarial | 20
 		
 		#Abril
 		-- Inserir serviços para cada evento com datas
@@ -832,67 +891,67 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 		(57,3,'2025-04-27');
 
 		-- Maio
-		INSERT INTO Eventos (ID_Cliente, Data, ID_TipoEvento, ID_Pacote) VALUES
-		(44, '2025-05-01', 4, 6),   -- ID_Evento 58 | Fátima Sobral | Aniversário | 120p
-		(41, '2025-05-02', 2, 1),   -- ID_Evento 59 | Bruno Pereira | Casamento | 20p
-		(33, '2025-05-03', 1, 3),   -- ID_Evento 60 | Ana Fonseca | Empresarial | 60p
-		(29, '2025-05-04', 3, 4),   -- ID_Evento 61 | Marta Rita | Infantil | 80p
-		(27, '2025-05-05', 3, 2),   -- ID_Evento 62 | Manuel Doido | Infantil | 40p
-		(23, '2025-05-06', 2, 6),   -- ID_Evento 63 | Francisco Torres | Casamento | 80p
-		(19, '2025-05-07', 4, 2),   -- ID_Evento 64 | Sorrisos Felizes | Aniversário | 40p
-		(13, '2025-05-08', 1, 3),   -- ID_Evento 65 | Constança Mello | Empresarial | 60p
-		(7, '2025-05-09', 4, 5),    -- ID_Evento 66 | Pesca e Come | Aniversário | 100p
-		(1, '2025-05-10', 1, 1),    -- ID_Evento 67 | XPTO, Lda | Empresarial | 20p
-		(44, '2025-05-11', 3, 1),   -- ID_Evento 68 | Fátima Sobral | Infantil | 20p
-		(42, '2025-05-12', 1, 5),   -- ID_Evento 69 | DameOuro | Empresarial | 100p
-		(41, '2025-05-13', 3, 3),   -- ID_Evento 70 | Bruno Pereira | Infantil | 60p
-		(46, '2025-05-14', 1, 4),   -- ID_Evento 71 | LetsDance | Empresarial | 80p
-		(40, '2025-05-15', 1, 2),   -- ID_Evento 72 | Henrique Pedreira | Empresarial | 40p
-		(38, '2025-05-16', 4, 1),   -- ID_Evento 73 | Tiago Tavares | Aniversário | 20p
-		(36, '2025-05-17', 2, 1),   -- ID_Evento 74 | Gustavo Gonçalves | Casamento | 20p
-		(32, '2025-05-18', 2, 1),   -- ID_Evento 75 | João Silva | Casamento | 20p
-		(28, '2025-05-19', 3, 1),   -- ID_Evento 76 | Laura Tavares | Infantil | 20p
-		(26, '2025-05-20', 3, 1),   -- ID_Evento 77 | Sofia Jesus | Infantil | 20p
-		(22, '2025-05-21', 1, 3),   -- ID_Evento 78 | Heitor Sobral | Empresarial | 60p
-		(16, '2025-05-22', 4, 3),   -- ID_Evento 79 | Leandro Silva | Aniversário | 60p
-		(9,  '2025-05-23', 2, 6),   -- ID_Evento 80 | José Miguel | Casamento | 80p
-		(8,  '2025-05-24', 4, 1),   -- ID_Evento 81 | RunAway | Aniversário | 20p
-		(3,  '2025-05-25', 1, 6),   -- ID_Evento 82 | MoveIt | Empresarial | 120p
-		(47, '2025-05-26', 2, 2),   -- ID_Evento 83 | Ivandro Almeida | Casamento | 40p
-		(40, '2025-05-27', 2, 2),   -- ID_Evento 84 | Henrique Pedreira | Casamento | 40p
-		(43, '2025-05-28', 1, 5),   -- ID_Evento 85 | Viagens Felizes | Empresarial | 100p
-		(39, '2025-05-29', 2, 3),   -- ID_Evento 86 | Yuri Veloso | Casamento | 60p
-		(37, '2025-05-30', 1, 1),   -- ID_Evento 87 | PhoneStuff | Empresarial | 20p
-		(35, '2025-05-31', 4, 3),   -- ID_Evento 88 | Joana Albuquerque | Aniversário | 60p
-		(30, '2025-05-30', 3, 1),   -- ID_Evento 89 | António Sinhaca | Infantil | 20p
-		(25, '2025-05-01', 4, 3),   -- ID_Evento 90 | Carolina Domingos | Aniversário | 60p
-		(10, '2025-05-02', 3, 6),   -- ID_Evento 91 | Jéssica Sousa | Infantil | 20p
-		(21, '2025-05-03', 2, 6),   -- ID_Evento 92 | Carlos Vieira | Casamento | 120p
-		(18, '2025-05-04', 4, 2),   -- ID_Evento 93 | OnTheWay | Aniversário | 40p
-		(15, '2025-05-05', 2, 1),   -- ID_Evento 94 | Margarida Lopes | Casamento | 20p
-		(12, '2025-05-06', 4, 1),   -- ID_Evento 95 | Mármores Ilimitados | Aniversário | 20p
-		(10, '2025-05-07', 3, 6),   -- ID_Evento 96 | Jéssica Sousa | Infantil | 120p
-		(6,  '2025-05-08', 4, 3),   -- ID_Evento 97 | Inês Teixeira | Aniversário | 60p
-		(2,  '2025-05-09', 3, 3),   -- ID_Evento 98 | Maria Almeida | Infantil | 60p
-		(43, '2025-05-10', 1, 2),   -- ID_Evento 99 | Viagens Felizes | Empresarial | 20p
-		(39, '2025-05-11', 4, 6),   -- ID_Evento 100 | Yuri Veloso | Aniversário | 120p
-		(47, '2025-05-12', 3, 2),   -- ID_Evento 101 | Ivandro Almeida | Infantil | 40p
-		(45, '2025-05-13', 2, 1),   -- ID_Evento 102 | Pedro Dias | Casamento | 20p
-		(42, '2025-05-14', 1, 3),   -- ID_Evento 103 | DameOuro | Empresarial | 60p
-		(34, '2025-05-15', 3, 2),   -- ID_Evento 104 | Frederico Sousa | Infantil | 40p
-		(31, '2025-05-16', 1, 1),   -- ID_Evento 105 | Óculos do Caramelo | Empresarial | 20p
-		(24, '2025-05-17', 1, 2),   -- ID_Evento 106 | Pipocas Doces | Empresarial | 40p
-		(38, '2025-05-18', 4, 4),   -- ID_Evento 107 | Tiago Tavares | Aniversário | 80p
-		(35, '2025-05-19', 3, 5),   -- ID_Evento 108 | Joana Albuquerque | Infantil | 100p
-		(20, '2025-05-20', 4, 1),   -- ID_Evento 109 | Daniela Dias | Aniversário | 20p
-		(17, '2025-05-21', 3, 1),   -- ID_Evento 110 | Tiago Fonseca | Infantil | 20p
-		(14, '2025-05-22', 2, 2),   -- ID_Evento 111 | Patrícia Pereira | Casamento | 40p
-		(45, '2025-05-23', 4, 1),   -- ID_Evento 112 | Pedro Dias | Aniversário | 20p
-		(5,  '2025-05-24', 2, 1),   -- ID_Evento 113 | Joaquim Telheiras | Casamento | 20p
-		(4,  '2025-05-25', 1, 1),   -- ID_Evento 114 | Criação&Gestão | Empresarial | 20p
-		(46, '2025-05-26', 1, 1),   -- ID_Evento 115 | LetsDance | Empresarial | 20p
-		(45, '2025-05-27', 4, 6),   -- ID_Evento 116 | Pedro Dias | Aniversário | 120p
-		(38, '2025-05-28', 2, 5);   -- ID_Evento 117 | Tiago Tavares | Casamento | 100p
+		INSERT INTO Eventos (ID_Cliente,nome,hora,estado, Data, ID_TipoEvento, ID_Pacote) VALUES
+		(44, "Fátima Sobral","10:00:00","aceite",'2025-05-01', 4, 6),   -- ID_Evento 58 | Fátima Sobral | Aniversário | 120p
+		(41, "Bruno Pereira","10:00:00","aceite",'2025-05-02', 2, 1),   -- ID_Evento 59 | Bruno Pereira | Casamento | 20p
+		(33, "Ana Fonseca","10:00:00","aceite",'2025-05-03', 1, 3),   -- ID_Evento 60 | Ana Fonseca | Empresarial | 60p
+		(29, "Marta Rita","10:00:00","aceite",'2025-05-04', 3, 4),   -- ID_Evento 61 | Marta Rita | Infantil | 80p
+		(27,"Manuel Doido","10:00:00","aceite", '2025-05-05', 3, 2),   -- ID_Evento 62 | Manuel Doido | Infantil | 40p
+		(23, "Francisco Torres","10:00:00","aceite",'2025-05-06', 2, 6),   -- ID_Evento 63 | Francisco Torres | Casamento | 80p
+		(19, "Sorrisos Felizes","10:00:00","aceite",'2025-05-07', 4, 2),   -- ID_Evento 64 | Sorrisos Felizes | Aniversário | 40p
+		(13,"Constança Mello","10:00:00","aceite", '2025-05-08', 1, 3),   -- ID_Evento 65 | Constança Mello | Empresarial | 60p
+		(7,"Pesca e Come","10:00:00","aceite", '2025-05-09', 4, 5),    -- ID_Evento 66 | Pesca e Come | Aniversário | 100p
+		(1, "XPTO, Lda","10:00:00","aceite",'2025-05-10', 1, 1),    -- ID_Evento 67 | XPTO, Lda | Empresarial | 20p
+		(44, "Fátima Sobral","10:00:00","aceite",'2025-05-11', 3, 1),   -- ID_Evento 68 | Fátima Sobral | Infantil | 20p
+		(42,"DameOuro","10:00:00","aceite", '2025-05-12', 1, 5),   -- ID_Evento 69 | DameOuro | Empresarial | 100p
+		(41,"Bruno Pereira","10:00:00","aceite", '2025-05-13', 3, 3),   -- ID_Evento 70 | Bruno Pereira | Infantil | 60p
+		(46,"LetsDance","10:00:00","aceite", '2025-05-14', 1, 4),   -- ID_Evento 71 | LetsDance | Empresarial | 80p
+		(40,"Henrique Pedreira","10:00:00","aceite", '2025-05-15', 1, 2),   -- ID_Evento 72 | Henrique Pedreira | Empresarial | 40p
+		(38,"Tiago Tavares","10:00:00","aceite", '2025-05-16', 4, 1),   -- ID_Evento 73 | Tiago Tavares | Aniversário | 20p
+		(36, "Gustavo Gonçalves","10:00:00","aceite",'2025-05-17', 2, 1),   -- ID_Evento 74 | Gustavo Gonçalves | Casamento | 20p
+		(32,"João Silva","10:00:00","aceite", '2025-05-18', 2, 1),   -- ID_Evento 75 | João Silva | Casamento | 20p
+		(28,"Laura Tavares","10:00:00","aceite", '2025-05-19', 3, 1),   -- ID_Evento 76 | Laura Tavares | Infantil | 20p
+		(26,"Sofia Jesus","10:00:00","aceite", '2025-05-20', 3, 1),   -- ID_Evento 77 | Sofia Jesus | Infantil | 20p
+		(22,"Heitor Sobral","10:00:00","aceite", '2025-05-21', 1, 3),   -- ID_Evento 78 | Heitor Sobral | Empresarial | 60p
+		(16, "Leandro Silva","10:00:00","aceite",'2025-05-22', 4, 3),   -- ID_Evento 79 | Leandro Silva | Aniversário | 60p
+		(9, "José Miguel","10:00:00","aceite", '2025-05-23', 2, 6),   -- ID_Evento 80 | José Miguel | Casamento | 80p
+		(8,"RunAway","10:00:00","aceite",  '2025-05-24', 4, 1),   -- ID_Evento 81 | RunAway | Aniversário | 20p
+		(3, "MoveIt","10:00:00","aceite", '2025-05-25', 1, 6),   -- ID_Evento 82 | MoveIt | Empresarial | 120p
+		(47, "Ivandro Almeida","10:00:00","aceite",'2025-05-26', 2, 2),   -- ID_Evento 83 | Ivandro Almeida | Casamento | 40p
+		(40, "Henrique Pedreira","10:00:00","aceite",'2025-05-27', 2, 2),   -- ID_Evento 84 | Henrique Pedreira | Casamento | 40p
+		(43, "Viagens Felizes","10:00:00","aceite",'2025-05-28', 1, 5),   -- ID_Evento 85 | Viagens Felizes | Empresarial | 100p
+		(39,"Yuri Veloso","10:00:00","aceite", '2025-05-29', 2, 3),   -- ID_Evento 86 | Yuri Veloso | Casamento | 60p
+		(37, "PhoneStuff","10:00:00","aceite",'2025-05-30', 1, 1),   -- ID_Evento 87 | PhoneStuff | Empresarial | 20p
+		(35,"Joana Albuquerque","10:00:00","aceite", '2025-05-31', 4, 3),   -- ID_Evento 88 | Joana Albuquerque | Aniversário | 60p
+		(30, "António Sinhaca","10:00:00","aceite",'2025-05-30', 3, 1),   -- ID_Evento 89 | António Sinhaca | Infantil | 20p
+		(25, "Carolina Domingos","10:00:00","aceite",'2025-05-01', 4, 3),   -- ID_Evento 90 | Carolina Domingos | Aniversário | 60p
+		(10, "Jéssica Sousa","10:00:00","aceite",'2025-05-02', 3, 6),   -- ID_Evento 91 | Jéssica Sousa | Infantil | 20p
+		(21, "Carlos Vieira","10:00:00","aceite",'2025-05-03', 2, 6),   -- ID_Evento 92 | Carlos Vieira | Casamento | 120p
+		(18, "OnTheWay","10:00:00","aceite",'2025-05-04', 4, 2),   -- ID_Evento 93 | OnTheWay | Aniversário | 40p
+		(15, "Margarida Lopes","10:00:00","aceite",'2025-05-05', 2, 1),   -- ID_Evento 94 | Margarida Lopes | Casamento | 20p
+		(12, "Mármores Ilimitados","10:00:00","aceite",'2025-05-06', 4, 1),   -- ID_Evento 95 | Mármores Ilimitados | Aniversário | 20p
+		(10, "Jéssica Sousa","10:00:00","aceite",'2025-05-07', 3, 6),   -- ID_Evento 96 | Jéssica Sousa | Infantil | 120p
+		(6,  "Inês Teixeira","10:00:00","aceite",'2025-05-08', 4, 3),   -- ID_Evento 97 | Inês Teixeira | Aniversário | 60p
+		(2, "Maria Almeida","10:00:00","aceite", '2025-05-09', 3, 3),   -- ID_Evento 98 | Maria Almeida | Infantil | 60p
+		(43, "Viagens Felizes","10:00:00","aceite",'2025-05-10', 1, 2),   -- ID_Evento 99 | Viagens Felizes | Empresarial | 20p
+		(39,"Yuri Veloso","10:00:00","aceite", '2025-05-11', 4, 6),   -- ID_Evento 100 | Yuri Veloso | Aniversário | 120p
+		(47,"Ivandro Almeida","10:00:00","aceite", '2025-05-12', 3, 2),   -- ID_Evento 101 | Ivandro Almeida | Infantil | 40p
+		(45,"Pedro Dias","10:00:00","aceite", '2025-05-13', 2, 1),   -- ID_Evento 102 | Pedro Dias | Casamento | 20p
+		(42, "DameOuro","10:00:00","aceite",'2025-05-14', 1, 3),   -- ID_Evento 103 | DameOuro | Empresarial | 60p
+		(34, "Frederico Sousa","10:00:00","aceite",'2025-05-15', 3, 2),   -- ID_Evento 104 | Frederico Sousa | Infantil | 40p
+		(31, "Óculos do Caramelo","10:00:00","aceite",'2025-05-16', 1, 1),   -- ID_Evento 105 | Óculos do Caramelo | Empresarial | 20p
+		(24, "Pipocas Doces","10:00:00","aceite",'2025-05-17', 1, 2),   -- ID_Evento 106 | Pipocas Doces | Empresarial | 40p
+		(38, "Tiago Tavares","10:00:00","aceite",'2025-05-18', 4, 4),   -- ID_Evento 107 | Tiago Tavares | Aniversário | 80p
+		(35, "Joana Albuquerque","10:00:00","aceite",'2025-05-19', 3, 5),   -- ID_Evento 108 | Joana Albuquerque | Infantil | 100p
+		(20, "Daniela Dias","10:00:00","aceite",'2025-05-20', 4, 1),   -- ID_Evento 109 | Daniela Dias | Aniversário | 20p
+		(17, "Tiago Fonseca","10:00:00","aceite",'2025-05-21', 3, 1),   -- ID_Evento 110 | Tiago Fonseca | Infantil | 20p
+		(14,"Patrícia Pereira","10:00:00","aceite", '2025-05-22', 2, 2),   -- ID_Evento 111 | Patrícia Pereira | Casamento | 40p
+		(45, "Pedro Dias","10:00:00","aceite",'2025-05-23', 4, 1),   -- ID_Evento 112 | Pedro Dias | Aniversário | 20p
+		(5,  "Joaquim Telheiras","10:00:00","aceite",'2025-05-24', 2, 1),   -- ID_Evento 113 | Joaquim Telheiras | Casamento | 20p
+		(4, "Criação&Gestão","10:00:00","aceite", '2025-05-25', 1, 1),   -- ID_Evento 114 | Criação&Gestão | Empresarial | 20p
+		(46, "LetsDance","10:00:00","aceite",'2025-05-26', 1, 1),   -- ID_Evento 115 | LetsDance | Empresarial | 20p
+		(45, "Pedro Dias","10:00:00","aceite",'2025-05-27', 4, 6),   -- ID_Evento 116 | Pedro Dias | Aniversário | 120p
+		(38, "Tiago Tavares","10:00:00","aceite",'2025-05-28', 2, 5);   -- ID_Evento 117 | Tiago Tavares | Casamento | 100p
 		#Maio
 		-- Eventos_Servicos Maio com datas
 		-- Evento 58: Fátima Sobral | Aniversário | BCDIP (2025-05-01)
@@ -1137,71 +1196,71 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 
 		#Junho
 		-- Inserir eventos de Junho (continuando a numeração a partir do ID 118)
-		INSERT INTO Eventos (ID_Cliente, Data, ID_TipoEvento, ID_Pacote) VALUES
-		(1, '2025-06-01', 1, 6),    -- ID_Evento 118 | XPTO, Lda | Empresarial | 120p
-		(6, '2025-06-02', 4, 1),    -- ID_Evento 119 | Inês Teixeira | Aniversário | 20p
-		(10, '2025-06-03', 3, 1),   -- ID_Evento 120 | Jéssica Sousa | Infantil | 20p
-		(13, '2025-06-04', 4, 4),   -- ID_Evento 121 | Constança Mello | Aniversário | 80p
-		(17, '2025-06-05', 3, 1),   -- ID_Evento 122 | Tiago Fonseca | Infantil | 20p
-		(23, '2025-06-06', 3, 3),   -- ID_Evento 123 | Francisco Torres | Infantil | 60p
-		(25, '2025-06-07', 2, 2),   -- ID_Evento 124 | Carolina Domingos | Casamento | 40p
-		(29, '2025-06-08', 2, 5),   -- ID_Evento 125 | Marta Rita | Casamento | 100p
-		(33, '2025-06-09', 3, 1),   -- ID_Evento 126 | Ana Fonseca | Infantil | 20p
-		(38, '2025-06-10', 2, 3),   -- ID_Evento 127 | Tiago Tavares | Casamento | 60p
-		(40, '2025-06-11', 2, 6),   -- ID_Evento 128 | Henrique Pedreira | Casamento | 120p
-		(43, '2025-06-12', 1, 6),   -- ID_Evento 129 | ViagensFelizes | Empresarial | 120p
-		(45, '2025-06-13', 4, 4),   -- ID_Evento 130 | Pedro Dias | Aniversário | 80p
-		(1, '2025-06-14', 1, 1),    -- ID_Evento 131 | XPTO, Lda | Empresarial | 20p
-		(5, '2025-06-15', 2, 4),    -- ID_Evento 132 | Joaquim Telheiras | Casamento | 80p
-		(8, '2025-06-16', 1, 2),    -- ID_Evento 133 | RunAway | Empresarial | 40p
-		(45, '2025-06-17', 3, 1),   -- ID_Evento 134 | Pedro Abreu | Infantil | 20p
-		(13, '2025-06-18', 4, 5),   -- ID_Evento 135 | Constança Mello | Aniversário | 100p
-		(4, '2025-06-19', 1, 4),    -- ID_Evento 136 | Criação&gestão | Empresarial | 80p
-		(7, '2025-06-20', 1, 3),    -- ID_Evento 137 | Pesca e Come | Empresarial | 60p
-		(45, '2025-06-21', 3, 2),   -- ID_Evento 138 | Pedro Abreu | Infantil | 40p
-		(14, '2025-06-22', 3, 5),   -- ID_Evento 139 | Patrícia Pereira | Infantil | 100p
-		(18, '2025-06-23', 1, 4),   -- ID_Evento 140 | OnTheWay | Empresarial | 80p
-		(22, '2025-06-24', 2, 1),   -- ID_Evento 141 | Heitor Sobral | Casamento | 20p
-		(26, '2025-06-25', 3, 1),   -- ID_Evento 142 | Sofia Jesus | Infantil | 20p
-		(30, '2025-06-26', 4, 1),   -- ID_Evento 143 | António Sinhaca | Aniversário | 20p
-		(36, '2025-06-27', 3, 5),   -- ID_Evento 144 | Gustavo Gonçalves | Infantil | 100p
-		(41, '2025-06-28', 3, 3),   -- ID_Evento 145 | Bruno Pereira | Infantil | 60p
-		(46, '2025-06-29', 1, 2),   -- ID_Evento 146 | LetsDance | Empresarial | 40p
-		(2, '2025-06-30', 3, 3),    -- ID_Evento 147 | Maria Almeida | Infantil | 60p
-		(6, '2025-06-01', 4, 1),    -- ID_Evento 148 | Inês Teixeira | Aniversário | 20p
-		(9, '2025-06-02', 3, 6),    -- ID_Evento 149 | José Miguel | Infantil | 120p
-		(14, '2025-06-03', 3, 4),   -- ID_Evento 150 | Patrícia Pereira | Infantil | 80p
-		(16, '2025-06-04', 4, 1),   -- ID_Evento 151 | Leandro Silva | Aniversário | 20p
-		(2, '2025-06-05', 3, 5),    -- ID_Evento 152 | Maria Almeida | Infantil | 100p
-		(9, '2025-06-06', 3, 1),    -- ID_Evento 153 | José Miguel | Infantil | 20p
-		(15, '2025-06-07', 2, 6),   -- ID_Evento 154 | Margarida Lopes | Casamento | 120p
-		(19, '2025-06-08', 1, 5),   -- ID_Evento 155 | Sorrisos Felizes | Empresarial | 100p
-		(21, '2025-06-09', 4, 3),   -- ID_Evento 156 | Carlos Vieira | Aniversário | 60p
-		(27, '2025-06-10', 4, 2),   -- ID_Evento 157 | Manuel Doido | Aniversário | 40p
-		(31, '2025-06-11', 1, 1),   -- ID_Evento 158 | Óculos do Caramelo | Empresarial | 20p
-		(34, '2025-06-12', 4, 3),   -- ID_Evento 159 | Frederico Sousa | Aniversário | 60p
-		(35, '2025-06-13', 3, 4),   -- ID_Evento 160 | Joana Albuquerque | Infantil | 80p
-		(42, '2025-06-14', 1, 5),   -- ID_Evento 161 | DameOuro | Empresarial | 100p
-		(44, '2025-06-15', 3, 4),   -- ID_Evento 162 | Fátima Sobral | Infantil | 80p
-		(3, '2025-06-16', 1, 6),    -- ID_Evento 163 | MoveIT | Empresarial | 120p
-		(10, '2025-06-17', 3, 2),   -- ID_Evento 164 | Jéssica Sousa | Infantil | 40p
-		(12, '2025-06-18', 1, 3),   -- ID_Evento 165 | Mármores Ilimitados | Empresarial | 60p
-		(17, '2025-06-19', 3, 1),   -- ID_Evento 166 | Tiago Fonseca | Infantil | 20p
-		(3, '2025-06-20', 1, 1),    -- ID_Evento 167 | MoveIT | Empresarial | 20p
-		(5, '2025-06-21', 2, 1),    -- ID_Evento 168 | Joaquim Telheiras | Casamento | 20p
-		(8, '2025-06-22', 1, 2),    -- ID_Evento 169 | RunAway | Empresarial | 40p
-		(12, '2025-06-23', 1, 3),   -- ID_Evento 170 | Mármores Ilimitados | Empresarial | 60p
-		(16, '2025-06-24', 4, 2),   -- ID_Evento 171 | Leandro Silva | Aniversário | 40p
-		(20, '2025-06-25', 2, 2),   -- ID_Evento 172 | Daniela Dias | Casamento | 40p
-		(24, '2025-06-26', 1, 1),   -- ID_Evento 173 | Pipocas Doces | Empresarial | 20p
-		(28, '2025-06-27', 3, 6),   -- ID_Evento 174 | Laura Tavares | Infantil | 120p
-		(32, '2025-06-28', 3, 1),   -- ID_Evento 175 | João Silva | Infantil | 20p
-		(37, '2025-06-29', 1, 1),   -- ID_Evento 176 | PhoneStuff | Empresarial | 20p
-		(39, '2025-06-30', 4, 2),   -- ID_Evento 177 | Yuri Veloso | Aniversário | 40p
-		(47, '2025-06-01', 2, 1),   -- ID_Evento 178 | Ivandro Almeida | Casamento | 20p
-		(4, '2025-06-02', 1, 3),    -- ID_Evento 179 | Criação&Gestão | Empresarial | 60p
-		(7, '2025-06-03', 1, 6),    -- ID_Evento 180 | Pesca e Come | Empresarial | 120p
-		(15, '2025-06-04', 2, 6);   -- ID_Evento 181 | Margarida Lopes | Casamento | 120p
+		INSERT INTO Eventos (ID_Cliente,nome,hora,estado, Data, ID_TipoEvento, ID_Pacote) VALUES
+		(1,"XPTO, Lda","10:00:00","aceite", '2025-06-01', 1, 6),    -- ID_Evento 118 | XPTO, Lda | Empresarial | 120p
+		(6, "Inês Teixeira","10:00:00","aceite",'2025-06-02', 4, 1),    -- ID_Evento 119 | Inês Teixeira | Aniversário | 20p
+		(10,"Jéssica Sousa","10:00:00","aceite", '2025-06-03', 3, 1),   -- ID_Evento 120 | Jéssica Sousa | Infantil | 20p
+		(13, "Constança Mello","10:00:00","aceite",'2025-06-04', 4, 4),   -- ID_Evento 121 | Constança Mello | Aniversário | 80p
+		(17,"Tiago Fonseca","10:00:00","aceite", '2025-06-05', 3, 1),   -- ID_Evento 122 | Tiago Fonseca | Infantil | 20p
+		(23, "Francisco Torres","10:00:00","aceite",'2025-06-06', 3, 3),   -- ID_Evento 123 | Francisco Torres | Infantil | 60p
+		(25,"Carolina Domingos","10:00:00","aceite", '2025-06-07', 2, 2),   -- ID_Evento 124 | Carolina Domingos | Casamento | 40p
+		(29,"Marta Rita","10:00:00","aceite", '2025-06-08', 2, 5),   -- ID_Evento 125 | Marta Rita | Casamento | 100p
+		(33, "Ana Fonseca","10:00:00","aceite",'2025-06-09', 3, 1),   -- ID_Evento 126 | Ana Fonseca | Infantil | 20p
+		(38,"Tiago Tavares","10:00:00","aceite", '2025-06-10', 2, 3),   -- ID_Evento 127 | Tiago Tavares | Casamento | 60p
+		(40, "Henrique Pedreira","10:00:00","aceite",'2025-06-11', 2, 6),   -- ID_Evento 128 | Henrique Pedreira | Casamento | 120p
+		(43, "ViagensFelizes","10:00:00","aceite",'2025-06-12', 1, 6),   -- ID_Evento 129 | ViagensFelizes | Empresarial | 120p
+		(45,"Pedro Dias","10:00:00","aceite", '2025-06-13', 4, 4),   -- ID_Evento 130 | Pedro Dias | Aniversário | 80p
+		(1, "XPTO, Lda","10:00:00","aceite",'2025-06-14', 1, 1),    -- ID_Evento 131 | XPTO, Lda | Empresarial | 20p
+		(5, "Joaquim Telheiras","10:00:00","aceite",'2025-06-15', 2, 4),    -- ID_Evento 132 | Joaquim Telheiras | Casamento | 80p
+		(8,"RunAway","10:00:00","aceite", '2025-06-16', 1, 2),    -- ID_Evento 133 | RunAway | Empresarial | 40p
+		(45, "Pedro Abreu","10:00:00","aceite",'2025-06-17', 3, 1),   -- ID_Evento 134 | Pedro Abreu | Infantil | 20p
+		(13, "Constança Mello","10:00:00","aceite",'2025-06-18', 4, 5),   -- ID_Evento 135 | Constança Mello | Aniversário | 100p
+		(4, "Criação&gestão","10:00:00","aceite",'2025-06-19', 1, 4),    -- ID_Evento 136 | Criação&gestão | Empresarial | 80p
+		(7, "Pesca e Come","10:00:00","aceite",'2025-06-20', 1, 3),    -- ID_Evento 137 | Pesca e Come | Empresarial | 60p
+		(45, "Pedro Abreu","10:00:00","aceite",'2025-06-21', 3, 2),   -- ID_Evento 138 | Pedro Abreu | Infantil | 40p
+		(14, "Patrícia Pereira","10:00:00","aceite",'2025-06-22', 3, 5),   -- ID_Evento 139 | Patrícia Pereira | Infantil | 100p
+		(18, "OnTheWay","10:00:00","aceite",'2025-06-23', 1, 4),   -- ID_Evento 140 | OnTheWay | Empresarial | 80p
+		(22, "Heitor Sobral","10:00:00","aceite",'2025-06-24', 2, 1),   -- ID_Evento 141 | Heitor Sobral | Casamento | 20p
+		(26,"Sofia Jesus","10:00:00","aceite", '2025-06-25', 3, 1),   -- ID_Evento 142 | Sofia Jesus | Infantil | 20p
+		(30, "António Sinhaca","10:00:00","aceite",'2025-06-26', 4, 1),   -- ID_Evento 143 | António Sinhaca | Aniversário | 20p
+		(36, "Gustavo Gonçalves","10:00:00","aceite",'2025-06-27', 3, 5),   -- ID_Evento 144 | Gustavo Gonçalves | Infantil | 100p
+		(41, "Bruno Pereira","10:00:00","aceite",'2025-06-28', 3, 3),   -- ID_Evento 145 | Bruno Pereira | Infantil | 60p
+		(46, "LetsDance","10:00:00","aceite",'2025-06-29', 1, 2),   -- ID_Evento 146 | LetsDance | Empresarial | 40p
+		(2, "Maria Almeid","10:00:00","aceite",'2025-06-30', 3, 3),    -- ID_Evento 147 | Maria Almeida | Infantil | 60p
+		(6, "Inês Teixeira","10:00:00","aceite",'2025-06-01', 4, 1),    -- ID_Evento 148 | Inês Teixeira | Aniversário | 20p
+		(9,"José Miguel","10:00:00","aceite", '2025-06-02', 3, 6),    -- ID_Evento 149 | José Miguel | Infantil | 120p
+		(14, "Patrícia Pereira","10:00:00","aceite",'2025-06-03', 3, 4),   -- ID_Evento 150 | Patrícia Pereira | Infantil | 80p
+		(16,"Leandro Silva","10:00:00","aceite", '2025-06-04', 4, 1),   -- ID_Evento 151 | Leandro Silva | Aniversário | 20p
+		(2, "Maria Almeida","10:00:00","aceite",'2025-06-05', 3, 5),    -- ID_Evento 152 | Maria Almeida | Infantil | 100p
+		(9, "José Miguel","10:00:00","aceite",'2025-06-06', 3, 1),    -- ID_Evento 153 | José Miguel | Infantil | 20p
+		(15, "Margarida Lopes","10:00:00","aceite",'2025-06-07', 2, 6),   -- ID_Evento 154 | Margarida Lopes | Casamento | 120p
+		(19,"Sorrisos Felizes","10:00:00","aceite", '2025-06-08', 1, 5),   -- ID_Evento 155 | Sorrisos Felizes | Empresarial | 100p
+		(21, "Carlos Vieira","10:00:00","aceite",'2025-06-09', 4, 3),   -- ID_Evento 156 | Carlos Vieira | Aniversário | 60p
+		(27,"Manuel Doido","10:00:00","aceite", '2025-06-10', 4, 2),   -- ID_Evento 157 | Manuel Doido | Aniversário | 40p
+		(31,"Óculos do Caramelo","10:00:00","aceite", '2025-06-11', 1, 1),   -- ID_Evento 158 | Óculos do Caramelo | Empresarial | 20p
+		(34, "Frederico Sousa","10:00:00","aceite",'2025-06-12', 4, 3),   -- ID_Evento 159 | Frederico Sousa | Aniversário | 60p
+		(35, "Joana Albuquerque","10:00:00","aceite",'2025-06-13', 3, 4),   -- ID_Evento 160 | Joana Albuquerque | Infantil | 80p
+		(42, "DameOuro","10:00:00","aceite",'2025-06-14', 1, 5),   -- ID_Evento 161 | DameOuro | Empresarial | 100p
+		(44,"Fátima Sobral","10:00:00","aceite", '2025-06-15', 3, 4),   -- ID_Evento 162 | Fátima Sobral | Infantil | 80p
+		(3, "MoveIT","10:00:00","aceite",'2025-06-16', 1, 6),    -- ID_Evento 163 | MoveIT | Empresarial | 120p
+		(10, "Jéssica Sousa","10:00:00","aceite",'2025-06-17', 3, 2),   -- ID_Evento 164 | Jéssica Sousa | Infantil | 40p
+		(12, "Mármores Ilimitados","10:00:00","aceite",'2025-06-18', 1, 3),   -- ID_Evento 165 | Mármores Ilimitados | Empresarial | 60p
+		(17,"Tiago Fonseca","10:00:00","aceite", '2025-06-19', 3, 1),   -- ID_Evento 166 | Tiago Fonseca | Infantil | 20p
+		(3, "MoveIT","10:00:00","aceite",'2025-06-20', 1, 1),    -- ID_Evento 167 | MoveIT | Empresarial | 20p
+		(5, "Joaquim Telheiras","10:00:00","aceite",'2025-06-21', 2, 1),    -- ID_Evento 168 | Joaquim Telheiras | Casamento | 20p
+		(8, "RunAway","10:00:00","aceite",'2025-06-22', 1, 2),    -- ID_Evento 169 | RunAway | Empresarial | 40p
+		(12, "Mármores Ilimitados","10:00:00","aceite",'2025-06-23', 1, 3),   -- ID_Evento 170 | Mármores Ilimitados | Empresarial | 60p
+		(16, "Leandro Silva","10:00:00","aceite",'2025-06-24', 4, 2),   -- ID_Evento 171 | Leandro Silva | Aniversário | 40p
+		(20, "Daniela Dias","10:00:00","aceite",'2025-06-25', 2, 2),   -- ID_Evento 172 | Daniela Dias | Casamento | 40p
+		(24,"Pipocas Doces","10:00:00","aceite", '2025-06-26', 1, 1),   -- ID_Evento 173 | Pipocas Doces | Empresarial | 20p
+		(28, "Laura Tavares","10:00:00","aceite",'2025-06-27', 3, 6),   -- ID_Evento 174 | Laura Tavares | Infantil | 120p
+		(32,"João Silva","10:00:00","aceite", '2025-06-28', 3, 1),   -- ID_Evento 175 | João Silva | Infantil | 20p
+		(37, "PhoneStuff","10:00:00","aceite",'2025-06-29', 1, 1),   -- ID_Evento 176 | PhoneStuff | Empresarial | 20p
+		(39,"Yuri Veloso","10:00:00","aceite", '2025-06-30', 4, 2),   -- ID_Evento 177 | Yuri Veloso | Aniversário | 40p
+		(47, "Ivandro Almeida","10:00:00","aceite",'2025-06-01', 2, 1),   -- ID_Evento 178 | Ivandro Almeida | Casamento | 20p
+		(4, "Criação&Gestão","10:00:00","aceite",'2025-06-02', 1, 3),    -- ID_Evento 179 | Criação&Gestão | Empresarial | 60p
+		(7, "Pesca e Come","10:00:00","aceite",'2025-06-03', 1, 6),    -- ID_Evento 180 | Pesca e Come | Empresarial | 120p
+		(15, "Margarida Lopes","10:00:00","aceite",'2025-06-04', 2, 6);   -- ID_Evento 181 | Margarida Lopes | Casamento | 120p
 
 		-- Eventos_Servicos Junho com datas
 		-- Evento 118: XPTO, Lda | Empresarial | BCDIP (2025-06-01)
@@ -1525,19 +1584,13 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 	select * from DividasAPagar;
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Fornecedor)
-	VALUES ('Fornecedor', 1000.00,'Em aberto', 1);  -- Referência ao fornecedor
-
-	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Cliente)
-	VALUES ('Cliente', 500.00,'Em aberto', 2);  -- Referência ao cliente
+	VALUES ('Fornecedor', 2233.06,'Em aberto', 1);  -- Referência ao fornecedor
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Funcionario)
-	VALUES ('Funcionario', 300.00,'Em aberto', 3);  -- Referência ao funcionário
+	VALUES ('Funcionario', 5365.8,'Em aberto', 3);  -- Referência ao funcionário
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado)
 	VALUES ('Outros', 150.00, 'Em aberto');  -- Não associada a nenhum fornecedor, cliente ou funcionário
-
-	INSERT INTO DividasAPagar (Tipo, Valor, Estado)
-	VALUES ('Sigma', 200.00, 'Pago');  -- Não associada a nenhum fornecedor, cliente ou funcionário
 
 	SELECT 
 		CASE MONTH(Data)
