@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 	CREATE DATABASE IF NOT EXISTS PuroEncanto;
 	USE PuroEncanto;
 
@@ -284,6 +285,80 @@ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUE
 				FROM VendasServicos
 				GROUP BY descricao
 				ORDER BY total DESC;
+=======
+			CREATE DATABASE IF NOT EXISTS PuroEncanto;
+			USE PuroEncanto;
+
+
+			CREATE TABLE TipoUtilizador (
+				ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
+				Tipo VARCHAR(50) NOT NULL
+			);
+		Create table Funcionarios
+		(
+			ID_Funcionario INT PRIMARY KEY AUTO_INCREMENT,
+			nome varchar(250),
+			telefone int,
+			salario int,
+			NIF varchar(250)
+		);
+
+			CREATE TABLE IF NOT EXISTS Fornecedores (
+				ID_Fornecedor INT PRIMARY KEY AUTO_INCREMENT,
+				descricao VARCHAR(100) NOT NULL,
+				contacto VARCHAR(15) NOT NULL,
+				email VARCHAR(100) NOT NULL,
+				morada VARCHAR(100) NOT NULL,
+				nif VARCHAR(100) NOT NULL,
+				total_debito DECIMAL(15,2)
+			);
+			select * from Fornecedores;
+			CREATE TABLE IF NOT EXISTS TotalAtivo (
+				ID_TotalAtivo  INT PRIMARY KEY AUTO_INCREMENT,
+				descricao VARCHAR(100) NOT NULL,
+				valor DECIMAL(10,2) NOT NULL,
+				data VARCHAR(100) NOT NULL
+		);
+
+			CREATE TABLE Fornecimento (
+				ID_Fornecimento INT PRIMARY KEY AUTO_INCREMENT,
+				Data DATE NOT NULL,
+				Quantidade INT NOT NULL,
+				ID_Fornecedor INT,
+				ID_Produto INT,
+				FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
+					ON DELETE CASCADE
+			);
+
+			CREATE TABLE Rendimento (
+				ID_Rendimento INT PRIMARY KEY AUTO_INCREMENT,
+				descricao varchar(100) NOT NULL,
+				Valor DECIMAL(10,2) NOT NULL,
+				Data DATE NOT NULL
+			);
+
+			CREATE TABLE Gastos (
+				ID_Gasto INT PRIMARY KEY AUTO_INCREMENT,
+				descricao varchar(100) NOT NULL,
+				Valor DECIMAL(10,2) NOT NULL,
+				Data DATE NOT NULL
+			);
+
+			CREATE TABLE TiposEventos (
+				ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
+				Nome VARCHAR(100) NOT NULL
+			);
+				
+			select * from TiposEventos;
+			CREATE TABLE IF NOT EXISTS ResumoFinanceiro (
+				ID_Finaceiro INT PRIMARY KEY AUTO_INCREMENT,
+				descricao varchar(200) NULL,
+				ID_Rendimento int,
+				FOREIGN KEY (ID_Rendimento) REFERENCES Rendimento(ID_Rendimento),
+				ID_Gasto int,
+				FOREIGN KEY (ID_Gasto) REFERENCES Gastos(ID_Gasto)
+			);
+>>>>>>> Stashed changes
 
 			
 
