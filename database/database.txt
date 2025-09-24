@@ -55,6 +55,237 @@
 			Valor DECIMAL(10,2) NOT NULL,
 			Data DATE NOT NULL
 		);
+<<<<<<< Updated upstream
+=======
+
+		CREATE TABLE TiposEventos (
+			ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
+			Nome VARCHAR(100) NOT NULL
+		);
+			
+		select * from TiposEventos;
+		CREATE TABLE IF NOT EXISTS ResumoFinanceiro (
+			ID_Finaceiro INT PRIMARY KEY AUTO_INCREMENT,
+			descricao varchar(200) NULL,
+			ID_Rendimento int,
+			FOREIGN KEY (ID_Rendimento) REFERENCES Rendimento(ID_Rendimento),
+			ID_Gasto int,
+			FOREIGN KEY (ID_Gasto) REFERENCES Gastos(ID_Gasto)
+		);
+
+		CREATE TABLE IF NOT EXISTS VendasServicos (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			descricao VARCHAR(100) NOT NULL,
+			data varchar(100) not null,
+			total_vendas DECIMAL(10,2) NOT NULL
+		);
+		CREATE TABLE PacotesConvidados (
+			ID_Pacote INT AUTO_INCREMENT PRIMARY KEY,
+			descricao VARCHAR(100) NOT NULL,
+			numConvidados INT NOT NULL,
+			preco DECIMAL(10,2) NOT NULL
+		);
+		CREATE TABLE Servicos (
+			ID_Servico INT AUTO_INCREMENT PRIMARY KEY,
+			nome VARCHAR(50) NOT NULL,
+			preco DECIMAL(10,2) NOT NULL
+		);
+	CREATE TABLE Clientes (
+		ID_Cliente INT AUTO_INCREMENT PRIMARY KEY,
+		nome VARCHAR(100) NOT NULL,
+		Email VARCHAR(100) NOT NULL,
+		nif VARCHAR(100) NOT NULL,
+		Password VARCHAR(255) NOT NULL,
+		IBAN VARCHAR(255) NOT NULL,
+		ID_TipoUtilizador INT default 1,
+		FOREIGN KEY (ID_TipoUtilizador) REFERENCES TipoUtilizador(ID_TipoUtilizador)
+			ON DELETE SET NULL
+	);
+		#É o stock ne?
+		CREATE TABLE Equipamentos (
+			ID_Equipamento INT AUTO_INCREMENT PRIMARY KEY,
+			descricao VARCHAR(100) NOT NULL,
+			valor DOUBLE(10,2) NOT NULL
+		);
+			CREATE TABLE Eventos (
+				ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
+				ID_Cliente INT NOT NULL,
+				Nome varchar(200),
+				Data DATE NOT NULL,#Marcação do Evento
+				hora time NOT NULL,
+				estado varchar(50),
+				ID_TipoEvento INT,
+				ID_Pacote INT,
+				FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento),
+				FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+				FOREIGN KEY (ID_Pacote) REFERENCES PacotesConvidados(ID_Pacote)
+			);
+		CREATE TABLE Eventos_Servicos (
+			ID_Evento INT NOT NULL,
+			ID_Servico INT NOT NULL,
+			data date, #filtragem (mesmo dia da marcação)
+			PRIMARY KEY (ID_Evento, ID_Servico),
+			FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
+			FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
+		);
+		CREATE TABLE Balancete (
+		ID_Balancete INT AUTO_INCREMENT PRIMARY KEY,
+		descricao VARCHAR(100) NOT NULL,
+		codigo_conta VARCHAR(5) NOT NULL,
+		ID_Cliente INT,
+		ID_Fornecedor INT,
+		saldo DECIMAL(15,2),
+		FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
+		FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
+	);
+	CREATE TABLE DividasAPagar (
+		ID_Divida INT PRIMARY KEY AUTO_INCREMENT,
+		Tipo VARCHAR(50) NOT NULL,            -- Tipo de dívida: Fornecedor, Cliente, Funcionário, Outros
+		Valor DECIMAL(15, 2) NOT NULL,        -- Valor da dívida
+		Estado VARCHAR(50) DEFAULT 'Em aberto', -- Estado da dívida (Ex: Em aberto, Pago, Atrasado)
+		
+		-- Referências para fornecedores, clientes e funcionários, mas podem ser NULL
+		ID_Fornecedor INT NULL,               -- Referência ao fornecedor, se a dívida for de fornecedor
+		ID_Cliente INT NULL,                  -- Referência ao cliente, se a dívida for de cliente
+		ID_Funcionario INT NULL,              -- Referência ao funcionário, se a dívida for de funcionário
+		
+		-- Chaves estrangeiras para garantir a integridade referencial
+		FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor) ON DELETE CASCADE,
+		FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE,
+		FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
+	);
+	select * from servicos;
+    	INSERT INTO Funcionarios (nome,telefone,salario ,nif) VALUES 
+	("António Dias Alegres",920123345,885,"250941392"), 
+	("Luisa Noites",920123343,960,"293389047"),
+    ("Tiago Tardes",920123317,840,"240378326");
+    
+INSERT INTO TotalAtivo  (descricao,valor,data) VALUES 
+	("Abril - TotalAtivo",64592.89,'2025-04-05'), 
+	("Maio - TotalAtivo",47213.06,'2025-05-05'),
+    ("Junho -  TotalAtivo",59615.99,'2025-06-05');
+    
+	INSERT INTO TipoUtilizador (Tipo) VALUES 
+	('Cliente'),
+	('Administrador');
+
+
+INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES
+('XPTO, Lda', 'xpto@email.com', '532622448', 'pass123', 'PT50007946838624313088068', 1),
+('Maria Almeida', 'maria.almeida@email.com', '299446263', 'pass123', 'PT50001410030198503475689', 1),
+('MoveIT', 'moveit@email.com', '556986032', 'pass123', 'PT50002346819984071468008', 1),
+('Criação&Gestão', 'criacao.gestao@email.com', '542707578', 'pass123', 'PT50016088457776442648436', 1),
+('Joaquim Telheiras', 'joaquim.telheiras@email.com', '229595510', 'pass123', 'PT50003345984078304917235', 1),
+('Inês Teixeira', 'ines.teixeira@email.com', '266126405', 'pass123', 'PT50019115765258156742636', 1),
+('Pesca e Come', 'pescaecome@email.com', '528545060', 'pass123', 'PT50006580580032769976712', 1),
+('RunAway', 'runaway@email.com', '568473078', 'pass123', 'PT50016048754065845149420', 1),
+('José Miguel', 'jose.miguel@email.com', '292690134', 'pass123', 'PT50003317771816964715222', 1),
+('Jéssica Sousa', 'jessica.sousa@email.com', '256359300', 'pass123', 'PT50016068493577443429429', 1),
+('Pedro Abreu', 'pedro.abreu@email.com', '278498981', 'pass123', 'PT50016022008286536563236', 1),
+('Mármores Ilimitados', 'marmores@email.com', '555855600', 'pass123', 'PT50007606953843295506885', 1),
+('Constança Mello', 'constanca.mello@email.com', '296196010', 'pass123', 'PT50001079336360081382909', 1),
+('Patrícia Pereira', 'patricia.pereira@email.com', '210305061', 'pass123', 'PT50019343340776115726645', 1),
+('Margarida Lopes', 'margarida.lopes@email.com', '250560070', 'pass123', 'PT50001419726370388245196', 1),
+('Leandro Silva', 'leandro.silva@email.com', '220885087', 'pass123', 'PT50002512925026550060008', 1),
+('Tiago Fonseca', 'tiago.fonseca@email.com', '213306557', 'pass123', 'PT50003391465185316392498', 1),
+('OnTheWay', 'ontheway@email.com', '582390508', 'pass123', 'PT50018969083313776881484', 1),
+('SorrisosFelizes', 'sorrisos@email.com', '591169398', 'pass123', 'PT50006564456901236553511', 1),
+('Daniela Dias', 'daniela.dias@email.com', '200046080', 'pass123', 'PT50006513930465670397957', 1),
+('Carlos Vieira', 'carlos.vieira@email.com', '242224024', 'pass123', 'PT50002510454645858090855', 1),
+('Heitor Sobral', 'heitor.sobral@email.com', '234736968', 'pass123', 'PT50001057598885414760088', 1),
+('Franscisco Torres', 'francisco.torres@email.com', '292977000', 'pass123', 'PT50006515256136005925144', 1),
+('PipocasDoces', 'pipocas@email.com', '588566098', 'pass123', 'PT50018925309607492737431', 1),
+('Carolina Domingos', 'carolina.domingos@email.com', '280610653', 'pass123', 'PT50007921438900560646816', 1),
+('Sofia Jesus', 'sofia.jesus@email.com', '297128493', 'pass123', 'PT50007642593033411297219', 1),
+('Manuel Doido', 'manuel.doido@email.com', '257229426', 'pass123', 'PT50019163924325602445927', 1),
+('Laura Tavares', 'laura.tavares@email.com', '226419665', 'pass123', 'PT50007642397440734369335', 1),
+('Marta Rita', 'marta.rita@email.com', '296398721', 'pass123', 'PT50016039312537527589323', 1),
+('António Sinhaca', 'antonio.sinhaca@email.com', '228824460', 'pass123', 'PT50016048343866711151107', 1),
+('Oculos do Caramelo', 'oculos@email.com', '539134228', 'pass123', 'PT50001408110993143881269', 1),
+('João Silva', 'joao.silva@email.com', '276261658', 'pass123', 'PT50003339640608584931338', 1),
+('Ana Fonseca', 'ana.fonseca@email.com', '274805812', 'pass123', 'PT50001878540879090667774', 1),
+('Frederico Sousa', 'frederico.sousa@email.com', '264679377', 'pass123', 'PT50019127796779043931426', 1),
+('Joana Albuquerque', 'joana.albuquerque@email.com', '278366503', 'pass123', 'PT50018906180867476722845', 1),
+('Gustavo Gonçalves', 'gustavo.goncalves@email.com', '244764298', 'pass123', 'PT50000795278449692719827', 1),
+('PhoneStuff', 'phonestuff@email.com', '572052405', 'pass123', 'PT50003338867952196092373', 1),
+('Tiago Tavares', 'tiago.tavares@email.com', '256739510', 'pass123', 'PT50007661025545873249292', 1),
+('Yuri Veloso', 'yuri.veloso@email.com', '246027290', 'pass123', 'PT50003552184890235797724', 1),
+('Henrique Pedreira', 'henrique.pedreira@email.com', '271413646', 'pass123', 'PT50019171407309545072793', 1),
+('Bruno Pereira', 'bruno.pereira@email.com', '277613086', 'pass123', 'PT50019376072232678831677', 1),
+('DameOuro', 'dameouro@email.com', '548546070', 'pass123', 'PT50002386214908984826016', 1),
+('ViagensFelizes', 'viagensfelizes@email.com', '550149392', 'pass123', 'PT50007931414295313898681', 1),
+('Fátima Sobral', 'fatima.sobral@email.com', '244517436', 'pass123', 'PT50003312853252123650507', 1),
+('Pedro Dias', 'pedro.dias@email.com', '205678807', 'pass123', 'PT50018908711398644179450', 1),
+('LetsDance', 'letsdance@email.com', '561615306', 'pass123', 'PT50002395388024784655069', 1),
+('Ivandro Almeida', 'ivandro.almeida@email.com', '231811349', 'pass123', 'PT50006532949430957665073', 1);
+	INSERT INTO Fornecedores (descricao, total_debito, contacto, email, morada, nif)
+	VALUES
+	('PE_Netrow', 1274.90, '910000001', 'penetrow@fornecedor.com', 'Morada de PE_Netrow', '123456781'),
+	('PE_Senhic', 11725.01, '910000002', 'peseenhic@fornecedor.com', 'Morada de PE_Senhic', '123456782'),
+	('PE_SuperContente', 5135.13, '910000003', 'pesupercontente@fornecedor.com', 'Morada de PE_SuperContente', '123456783'),
+	('PE_SnacksdaCarolina', 28388.53, '910000004', 'pesnacksdacarolina@fornecedor.com', 'Morada de PE_SnacksdaCarolina', '123456784'),
+	('PE_DreamMarketing', 250.00, '910000005', 'pedreammarketing@fornecedor.com', 'Morada de PE_DreamMarketing', '123456785'),
+	('PE_LetsPrint', 265.00, '910000006', 'peletsprint@fornecedor.com', 'Morada de PE_LetsPrint', '123456786'),
+	('PE_Meletec', 2640.00, '910000007', 'pemeletec@fornecedor.com', 'Morada de PE_Meletec', '123456787'),
+	('PE_Interprev', 180.00, '910000008', 'peinterprev@fornecedor.com', 'Morada de PE_Interprev', '123456788'),
+	('PE_Nachua', 5430.09, '910000009', 'penachua@fornecedor.com', 'Morada de PE_Nachua', '123456789'),
+	('PE_StandRitual', 10790.05, '910000010', 'pestandritual@fornecedor.com', 'Morada de PE_StandRitual', '123456790'),
+	('PE_INSTITUTO REGISTO E NOTARIADO', 325.00, '910000011', 'peinstitutoregistonotariado@fornecedor.com', 'Morada de PE_INSTITUTO REGISTO E NOTARIADO', '123456791'),
+	('PE_MeninosProg', 900.00, '910000012', 'pemeninosprog@fornecedor.com', 'Morada de PE_MeninosProg', '123456792'),
+	('PE_MadalenaBrandao', 600.00, '910000013', 'pemadalenabrandao@fornecedor.com', 'Morada de PE_MadalenaBrandao', '123456793'),
+	('PE_LuisaNoites', 2850.00, '910000014', 'peluisanoites@fornecedor.com', 'Morada de PE_LuisaNoites', '123456794'),
+	('PE_TiagoTardes', 2580.00, '910000015', 'petiagotardes@fornecedor.com', 'Morada de PE_TiagoTardes', '123456795');
+
+	select* from clientes;
+	SELECT descricao, total_debito FROM Fornecedores WHERE ID_Fornecedor BETWEEN 1 AND 15 ORDER BY total_debito desc;
+	select * from Fornecedores;
+	INSERT INTO TiposEventos (Nome) VALUES
+	('Empresarial'), ('Casamento'), ('Infantil'), ('Aniversário');
+	select * from TiposEventos;
+	select * from gastos;
+
+	INSERT INTO Fornecimento (Data, Quantidade, ID_Fornecedor, ID_Produto) VALUES
+	('2025-08-01', 5, 1, 1),
+	('2025-08-03', 3, 2, 2);
+
+
+	INSERT INTO Rendimento (descricao,Valor, Data) VALUES
+	('Abril - Rendimento',48360.00, '2025-04-05'),
+	('Maio - Rendimento',53780.00, '2025-05-05'),
+	('Junho - Rendimento',75292.00, '2025-06-05');
+	INSERT INTO Gastos (descricao,Valor, Data) VALUES
+	('Abril - Gastos',21407.18, '2025-05-05'),
+	('Maio - Gastos',27328.2, '2025-04-05'),
+	('Junho - Gastos',29382.73, '2025-06-05');
+	INSERT INTO ResumoFinanceiro (descricao, ID_Rendimento, ID_Gasto) VALUES
+	('Resumo Financeiro - Abril 2025', 1, 2),
+	('Resumo Financeiro - Maio 2025', 2, 1), 
+	('Resumo Financeiro - Junho 2025', 3, 3);
+
+
+	INSERT INTO VendasServicos (descricao, total_vendas) VALUES
+	('PE_Insuflável', 983.33),
+	('PE_Máquina Pipocas', 393.33),
+	('PE_Insuflável', 14750.00),
+	('PE_Site', 14583.33),
+	('PE_INSUFLÁVEL', 966.66),
+	('PE_Máquina Pipocas', 386.66),
+	('PE_Insuflável', 14500.00),
+	('PE_Site', 14166.66),
+	('PE_INSUFLÁVEL', 949.99),
+	('PE_Máquina Pipocas', 379.99),
+	('PE_Insuflável', 14250.00),
+	('PE_Carrinha (20000)', 20000.00),
+	('PE_Carrinha (15000)', 15000.00),
+	('PE_Site', 13749.99);
+
+	select * from VendasServicos;
+
+	SELECT descricao, SUM(total_vendas) AS total
+				FROM VendasServicos
+				GROUP BY descricao
+				ORDER BY total DESC;
+>>>>>>> Stashed changes
 
 		CREATE TABLE TiposEventos (
 			ID_TipoEvento INT PRIMARY KEY AUTO_INCREMENT,
