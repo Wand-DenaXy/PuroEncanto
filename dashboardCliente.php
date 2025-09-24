@@ -90,7 +90,7 @@ $conn->close();
     </table>
 </div>
 
-<div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
+<<div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -99,21 +99,28 @@ $conn->close();
       </div>
       <div class="modal-body">
         <form id="formEvento">
+          <!-- Nome do Evento -->
           <div class="mb-3">
-            <label for="nome" class="form-label">Nome do Evento</label>
+            <label for="nome" class="form-label"><strong>Nome do Evento</strong></label>
             <select id="nome" name="Nome" class="form-control" required>
               <optgroup label="Manhã">
-                <option value="Casamentos">Casamentos</option>
-                <option value="Festas">Festas</option>
+                <option value="Casamentos"><strong>Casamentos</strong></option>
+                <option value="Festas"><strong>Festas</strong></option>
+                <option value="Aniversários"><strong>Aniversários</strong></option>
+                <option value="Empresarial"><strong>Empresarial</strong></option>
               </optgroup>
             </select>
           </div>
+
+          <!-- Data -->
           <div class="mb-3">
-            <label for="data" class="form-label">Data</label>
-            <input type="date" class="form-control" id="data" required>
+            <label for="data" class="form-label"><strong>Data</strong></label>
+            <input type="date" class="form-control" id="data" name="data" required>
           </div>
+
+          <!-- Hora -->
           <div class="mb-3">
-            <label for="hora">Hora</label>
+            <label for="hora" class="form-label"><strong>Hora</strong></label>
             <select id="hora" name="hora" class="form-control" required>
               <optgroup label="Manhã">
                 <option value="09:00">09:00</option>
@@ -128,12 +135,46 @@ $conn->close();
               </optgroup>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
+
+          <div class="mb-3">
+            <label class="form-label"><strong>Serviços Adicionais</strong></label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="catering" name="servicos" value="Catering">
+              <label class="form-check-label" for="catering">Catering - 246€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="insuflaveis" name="servicos" value="Insufláveis">
+              <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="pipocas" name="servicos" value="Máquina de Pipocas">
+              <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="bolos" name="servicos" value="Bolos">
+              <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="decoracao" name="servicos" value="Decoração">
+              <label class="form-check-label" for="decoracao">Decoração - 123€</label>
+            </div>
+            <br>
+            <h4>Pacotes</h4>
+            
+          </div>
+          <div class="form-check">
+            <h5>Numero de Convidados</h5>
+                <input type="number" name="" id="">
+            </div>
+            <div class="form-check">
+            </div>
+          <button type="submit" class="btn btn-primary">Criar Evento<hr>Preço: 131 €</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
