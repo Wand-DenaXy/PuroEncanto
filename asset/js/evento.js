@@ -7,19 +7,24 @@ function getTiposEventos() {
     method: "POST",
     data: dados,
     contentType: false,
-    processData: false,
-    success: function (msg) {
-      $('#filmeSelectCalendar').html(msg);
-      //$('#tipoFilmeEdit').html(msg);
-    }
+    processData: false
+  })
+  .done(function (msg) {
+    $('#filmeSelectCalendar').html(msg);
+  })
+  .fail(function () {
+    alerta("Eventos", "Erro ao carregar tipos de eventos", "error");
   });
 }
 
 $(function () {
-    getTiposEventos();
+  getTiposEventos()
     listarEventos();
-    carregarEventosParaCalendario();
-});
+    setTimeout(() => {
+      carregarCalendario();
+    }, 1000);
+  });
+
 function removerEventos(id){
 
     let dados = new FormData();

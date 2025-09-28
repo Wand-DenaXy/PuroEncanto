@@ -339,6 +339,212 @@ function registaResumo(){
     alert( "Request failed: " + textStatus );
     });
 }
+function getDadosGastos(ID_Gasto){
+
+
+    let dados = new FormData();
+    dados.append("op", 12);
+    dados.append("ID_Gasto", ID_Gasto);
+
+    $.ajax({
+    url: "asset/controller/controllergastoserendimentos.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        $('#numGastosEdit').val(obj.ID_Gasto);
+        $('#descricaoGastosEdit').val(obj.descricao);
+        $('#ValorGastosEdit').val(obj.Valor);
+        $('#dataGatosEdit').val(obj.Data);
+        $('#formEditGastos').modal('show');
+       $('#btnGuardar').attr("onclick","guardaEditGastos("+obj.ID_Gasto+")") 
+        
+       $('#formEditGastos').modal('show')
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    }); 
+}
+function guardaEditRendimento(ID_Rendimento) {
+    let dados = new FormData();
+    dados.append("op", 15);
+    dados.append("descricaoRendimentoEdit", $('#descricaoRendimentoEdit').val());
+    dados.append("ValorRendimentoEdit", $('#ValorRendimentoEdit').val());
+    dados.append("dataRendimentoEdit", $('#dataRendimentoEdit').val());
+    dados.append("ID_Rendimento", ID_Rendimento);
+
+    $.ajax({
+        url: "asset/controller/controllergastoserendimentos.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+    .done(function(msg) {
+    $('#formEditRendimento').modal('hide');
+        
+        let obj = JSON.parse(msg);
+        if(obj.flag) {
+            alerta("Rendimento", obj.msg, "success");
+            alerta2(obj.msg,"success");
+            getListaRendimentos();
+        } else {
+            alerta2(obj.msg,"error");
+            alerta("Rendimento", obj.msg, "error");
+        }
+        console.log(msg);
+    })
+    .fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
+}
+function getDadosRendimentos(ID_Rendimento){
+
+
+    let dados = new FormData();
+    dados.append("op", 14);
+    dados.append("ID_Rendimento", ID_Rendimento);
+
+    $.ajax({
+    url: "asset/controller/controllergastoserendimentos.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        $('#numRendimentoEdit').val(obj.ID_Rendimento);
+        $('#descricaoRendimentoEdit').val(obj.descricao);
+        $('#ValorRendimentoEdit').val(obj.Valor);
+        $('#dataRendimentoEdit').val(obj.Data);
+        $('#formEditRendimento').modal('show');
+    $('#btnGuardar1').attr("onclick","guardaEditRendimento("+obj.ID_Rendimento+")") 
+        
+    $('#formEditRendimento').modal('show')
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    }); 
+}
+function guardaEditResumo(ID_Finaceiro) {
+    let dados = new FormData();
+    dados.append("op", 16);
+    dados.append("descricaoResumoEdit", $('#descricaoResumoEdit').val());
+    dados.append("ID_Finaceiro", ID_Finaceiro);
+
+    $.ajax({
+        url: "asset/controller/controllergastoserendimentos.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+    .done(function(msg) {
+    $('#formEditResumo').modal('hide');
+        
+        let obj = JSON.parse(msg);
+        if(obj.flag) {
+            alerta("Resumo", obj.msg, "success");
+            alerta2(obj.msg,"success");
+            getListaResumo();
+        } else {
+            alerta2(obj.msg,"error");
+            alerta("Resumo", obj.msg, "error");
+        }
+        console.log(msg);
+    })
+    .fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
+}
+function getDadosResumo(ID_Finaceiro){
+
+
+    let dados = new FormData();
+    dados.append("op", 17);
+    dados.append("ID_Finaceiro", ID_Finaceiro);
+
+    $.ajax({
+    url: "asset/controller/controllergastoserendimentos.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        $('#numResumoEdit').val(obj.ID_Finaceiro);
+        $('#descricaoResumoEdit').val(obj.descricao);
+        $('#ID_Gastos').val(obj.ID_Gasto);
+        $('#ID_Rendimentos').val(obj.ID_Rendimento);
+        $('#formEditResumo').modal('show');
+        $('#btnGuarda99').attr("onclick","guardaEditResumo("+obj.ID_Finaceiro+")") 
+        
+    $('#formEditResumo').modal('show')
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    }); 
+}
+function guardaEditGastos(ID_Gasto) {
+    let dados = new FormData();
+    dados.append("op", 13);
+    dados.append("descricaoGastosEdit", $('#descricaoGastosEdit').val());
+    dados.append("ValorGastosEdit", $('#ValorGastosEdit').val());
+    dados.append("dataGatosEdit", $('#dataGatosEdit').val());
+    dados.append("ID_Gasto", ID_Gasto);
+
+    $.ajax({
+        url: "asset/controller/controllergastoserendimentos.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+    .done(function(msg) {
+    $('#formEditGastos').modal('hide');
+        
+        let obj = JSON.parse(msg);
+        if(obj.flag) {
+            alerta("Gastos", obj.msg, "success");
+            alerta2(obj.msg,"success");
+            getListaGastos();
+            myModal.hide();
+        } else {
+            alerta2(obj.msg,"error");
+            alerta("Gastos", obj.msg, "error");
+        }
+        console.log(msg);
+    })
+    .fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
+}
 function GraficoDiferencaDashboard(){
 
     let dados = new FormData();
@@ -386,6 +592,43 @@ function Timer()
     }
 
     setInterval(updateTime, 1000);
+}
+function alerta2(msg,icon)
+{
+  let customClass = '';
+  if (icon === 'success') {
+    customClass = 'toast-success';
+  } else if (icon === 'error') {
+    customClass = 'toast-error';
+  }
+  const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+      customClass: {
+      popup: 'custom-toast'
+    },
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: icon,
+  title: msg
+});
+}
+function alerta(titulo,msg,icon){
+    Swal.fire({
+        position: 'center',
+        icon: icon,
+        title: titulo,
+        text: msg,
+        showConfirmButton: true,
+
+      })
 }
 $(function() {
     getListaRendimentos();

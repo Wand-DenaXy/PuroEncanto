@@ -1,0 +1,139 @@
+     body {
+        background: url('../images/93ea58efdcb1cedd9cecf423b5d6a2a4.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+.sidebar {
+    height: 100vh;
+    width: 180px;
+    background-color: black; 
+    color: #fff;
+    padding-top: 20px;
+    position: fixed;
+    box-shadow: 6px 0 10px rgba(0,0,0,0.30);
+}
+
+.sidebar .logo {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: white; 
+}
+
+.sidebar .logo img {
+    height: 40px;
+    width: 40px;
+    margin-bottom: 5px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 12px 20px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background-color: #ffb14b; 
+    color: #1a1f36; 
+    border-left: 4px solid #ffd549; 
+    font-weight: bold;
+}
+
+.sidebar a.active {
+    background-color: #cc8e48; 
+    border-left: 4px solid #ffd549;
+    font-weight: bold;
+    color: #ffd549; 
+}
+.content {
+    margin-left: 120px;
+    padding: 20px;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+.logo img
+{
+    height: 40px;
+    width: 40px;
+}
+
+
+.row
+{
+    display: flex;
+    justify-content: center;
+}
+
+.titulo
+{
+    margin-left: 60px;
+}
+.logotitulo
+{
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+
+}
+.time {
+    position: absolute;
+    bottom: 20px;  /* Posiciona a div 20px da parte inferior da sidebar */
+    left: 50%;
+    transform: translateX(-50%);  /* Centraliza horizontalmente */
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+}
+
+ .mb-4 {
+        text-align: center;
+    }
+
+    .profile-card {
+        max-width: 600px;
+        margin: 50px auto;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background: white;
+        overflow: hidden;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #6c63ff, #836fff);
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .profile-header h2 {
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .profile-body {
+        padding: 30px;
+    }
+
+    .profile-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .profile-item i {
+        font-size: 1.5rem;
+        color: #6c63ff;
+        margin-right: 15px;
+    }
+
+    .profile-item p {
+        margin: 0;
+        font-size: 1rem;
+    }

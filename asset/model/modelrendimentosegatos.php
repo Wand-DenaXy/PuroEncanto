@@ -87,6 +87,52 @@ function removerGastos($ID_Gasto){
 
         return($resp);
     }
+    function getDadosGastos($ID_Gasto){
+    global $conn;
+    $msg = "";
+    $row = "";
+
+    $sql = "SELECT * FROM Gastos WHERE ID_Gasto =".$ID_Gasto;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    }
+
+    $conn->close();
+
+    return (json_encode($row));
+
+}
+
+
+function guardaEditGastos($descricao, $Valor,$Data,$ID_Gasto){
+    
+    global $conn;
+    $msg = "";
+    $flag = true;
+    $sql = "";
+
+
+    $sql = "UPDATE Gastos SET descricao = '".$descricao."', Valor = '".$Valor."',Data = '".$Data."' WHERE ID_Gasto =".$ID_Gasto;
+
+    if ($conn->query($sql) === TRUE) {
+        $msg = "Editado com Sucesso";
+    } else {
+        $flag = false;
+        $msg = "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg
+    ));
+        
+    $conn->close();
+
+    return($resp);
+
+}
 function registaRendimentos($descricao,$Valor, $Data){
     global $conn;
     $msg = "";
@@ -170,6 +216,98 @@ function removerRendimentos($ID_Rendimento){
 
         return($resp);
     }
+        function getDadosRendimentos($ID_Rendimento){
+    global $conn;
+    $msg = "";
+    $row = "";
+
+    $sql = "SELECT * FROM Rendimento WHERE ID_Rendimento =".$ID_Rendimento;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    }
+
+    $conn->close();
+
+    return (json_encode($row));
+
+}
+
+
+function guardaEditRendimento($descricao, $Valor,$Data,$ID_Rendimento){
+    
+    global $conn;
+    $msg = "";
+    $flag = true;
+    $sql = "";
+
+
+    $sql = "UPDATE Rendimento SET descricao = '".$descricao."', Valor = '".$Valor."',Data = '".$Data."' WHERE ID_Rendimento =".$ID_Rendimento;
+
+    if ($conn->query($sql) === TRUE) {
+        $msg = "Editado com Sucesso";
+    } else {
+        $flag = false;
+        $msg = "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg
+    ));
+        
+    $conn->close();
+
+    return($resp);
+
+}
+function getDadosResumo($ID_Finaceiro){
+    global $conn;
+    $msg = "";
+    $row = "";
+
+    $sql = "SELECT * FROM ResumoFinanceiro WHERE ID_Finaceiro =".$ID_Finaceiro;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    }
+
+    $conn->close();
+
+    return (json_encode($row));
+
+}
+
+
+function guardaEditResumo($descricao,$ID_Finaceiro){
+    
+    global $conn;
+    $msg = "";
+    $flag = true;
+    $sql = "";
+
+
+    $sql = "UPDATE ResumoFinanceiro SET descricao = '".$descricao."' WHERE ID_Finaceiro =".$ID_Finaceiro;
+
+    if ($conn->query($sql) === TRUE) {
+        $msg = "Editado com Sucesso";
+    } else {
+        $flag = false;
+        $msg = "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg
+    ));
+        
+    $conn->close();
+
+    return($resp);
+
+}
 function getListaResumo(){
 
     global $conn;
