@@ -24,9 +24,9 @@ session_start();
 
 <body>
     <div class="sidebar">
-        <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
+        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
             <p class="logotitulo">Puro Encanto</p>
-        </div>
+        </div></a>
         <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
         <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
@@ -45,15 +45,9 @@ session_start();
 
         <div class="profile-card">
             <div class="profile-header">
-                <h2 id="nomePerfil"></h2>
-                <p id="perfilAdmin">Admin Puro Encanto</p>
+                <p id="perfilAdmin"></p>
             </div>
             <div class="profile-body">
-                <div class=" text-center mt-4">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerfilModal">
-                        <i class="bi bi-pencil"></i> Editar Perfil
-                    </button>
-                </div>
             </div>
         </div>
     </div>

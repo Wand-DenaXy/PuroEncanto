@@ -65,9 +65,9 @@ $conn->close();
 <body>
 
     <div class="sidebar">
-        <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
+        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
             <p class="logotitulo">Puro Encanto</p>
-        </div>
+        </div></a>
         <a href="dashboard.php" class="active"><i class="bi bi-grid"></i> Dashboard</a>
         <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
@@ -75,7 +75,7 @@ $conn->close();
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
         <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-        <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
+        <a href="perfilAdmin.php" ><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
         <div class="time" id="time"></div>
     </div>
