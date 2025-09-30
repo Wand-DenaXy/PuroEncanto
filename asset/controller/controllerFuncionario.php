@@ -6,12 +6,10 @@ $func = new Funcionario();
 
 if ($_POST['op'] == 1) {
     $resp = $func->registaFuncionario(
-        $_POST['descricao'],
-        $_POST['contacto'],
-        $_POST['email'],
-        $_POST['morada'],
-        $_POST['nif'],
-        $_POST['total_debito']
+        $_POST['nome'],
+        $_POST['telefone'],
+        $_POST['salario'],
+        $_POST['NIF']
     );
     echo $resp;
 

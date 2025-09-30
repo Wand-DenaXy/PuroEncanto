@@ -2,12 +2,10 @@ function registaFuncionario(){
 
     let dados = new FormData();
     dados.append("op", 1);
-    dados.append("descricao", $('#descricao').val());
-    dados.append("contacto", $('#contacto').val());
-    dados.append("email", $('#email').val());
-    dados.append("morada", $('#morada').val());
-    dados.append("nif", $('#nif').val());
-    dados.append("total_debito", $('#total_debito').val());
+    dados.append("nome", $('#nomeFuncionario').val());
+    dados.append("telefone", $('#contactoFuncionario').val());
+    dados.append("salario", $('#salarioFuncionario').val());
+    dados.append("NIF", $('#NIFFuncionario').val());
 
     $.ajax({
     url: "asset/controller/controllerFuncionario.php",
@@ -39,7 +37,7 @@ function registaFuncionario(){
 
 function getListaFuncionario(){
     
-    if ( $.fn.DataTable.isDataTable('#tblFuncionario') ) {
+    if ( $.fn.DataTable.isDataTable('#listagemFuncionario') ) {
         $('#listagemFuncionario').DataTable().destroy();
     }
 
@@ -68,7 +66,6 @@ function getListaFuncionario(){
     alert( "Request failed: " + textStatus );
     });
 }
-
 function removerFuncionario(id){
 
     let dados = new FormData();
@@ -101,6 +98,43 @@ function removerFuncionario(id){
     alert( "Request failed: " + textStatus );
     });
 
+}
+function alerta(titulo,msg,icon){
+    Swal.fire({
+        position: 'center',
+        icon: icon,
+        title: titulo,
+        text: msg,
+        showConfirmButton: true,
+
+      })
+}
+function alerta2(msg,icon)
+{
+  let customClass = '';
+  if (icon === 'success') {
+    customClass = 'toast-success';
+  } else if (icon === 'error') {
+    customClass = 'toast-error';
+  }
+  const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+      customClass: {
+      popup: 'custom-toast'
+    },
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: icon,
+  title: msg
+});
 }
 $(function() {
     getListaFuncionario();
