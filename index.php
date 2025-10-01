@@ -18,7 +18,7 @@ session_start();
     <link href="css/responsive.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/puroencantocores.css">
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-
+a
     <script src="js/modernizr.custom.js"></script>
 </head>
 <body class="index">
