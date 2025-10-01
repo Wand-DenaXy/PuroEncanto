@@ -151,7 +151,7 @@ session_start();
         <section id="feature" class="feature-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-magic"></i>
                             <div class="feature-content">
@@ -160,7 +160,7 @@ session_start();
                             </div>
                         </div>
                     </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-gift"></i>
                             <div class="feature-content">
@@ -168,17 +168,28 @@ session_start();
                                 <p>Fazemos o seu bolo com que sempre sonhou!</p>
                             </div>
                         </div>
+                        
                     </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="feature">
+                            <i class="fa fa-gift"></i>
+                            <div class="feature-content">
+                                <h4>Máquina de Pipocas</h4>
+                                <p>Fazemos o seu bolo com que sempre sonhou!</p>
+                            </div>
+                        </div>
+                        
+                    </div><!-- /.col-md-3 -->
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-wordpress"></i>
                             <div class="feature-content">
                                 <h4>Insuflável</h4>
-                                <p>Festa com crianças? Temos a solução perfeita para não faltar diversão!</p>
+                                <p>Festa com crianças? Temos a solução  perfeita para não faltar diversão!</p>
                             </div>
                         </div>
                     </div><!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="feature">
                             <i class="fa fa-plug"></i>
                             <div class="feature-content">
@@ -227,7 +238,7 @@ session_start();
                         <ul id="portfolio-list">
                             <li>
                                 <div class="portfolio-item">
-                                    <img src="images/Decoração.jpg" class="img-responsive" alt="" />
+                                    <img src="images/Decoração.jpg" class="img-responsive" height="100px" with="10px" alt="" />
                                     <div class="portfolio-caption">
                                         <h4>Decoração</h4>
                                         <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
@@ -237,7 +248,7 @@ session_start();
                             </li>
                             <li>
                                 <div class="portfolio-item">
-                                    <img src="images/Cateringg.jpg" class="img-responsive" alt="" />
+                                    <img src="images/premium_photo-1663099598927-4d0db938250d (1).jpg" class="img-responsive" alt="" />
                                     <div class="portfolio-caption">
                                         <h4>Catering</h4>
                                         <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
@@ -247,7 +258,7 @@ session_start();
                             </li>
                             <li>
                                 <div class="portfolio-item">
-                                    <img src="images/portfolio/img3.jpg" class="img-responsive" alt="" />
+                                    <img src="images/candles-cake-cake-sweet-wallpaper-preview.jpg" class="img-responsive" alt="" />
                                     <div class="portfolio-caption">
                                         <h4>Bolos</h4>
                                         <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
@@ -257,7 +268,7 @@ session_start();
                             </li>
                             <li>
                                 <div class="portfolio-item">
-                                    <img src="images/insufláveis.jpg" class="img-responsive" alt="" />
+                                    <img src="images/4d75f888fd630bcb810c29665425cb08.jpg" class="img-responsive" alt="" />
                                     <div class="portfolio-caption">
                                         <h4>Insufláveis</h4>
                                         <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
@@ -267,9 +278,9 @@ session_start();
                             </li>
                             <li>
                                 <div class="portfolio-item">
-                                    <img src="images/portfolio/img5.jpg" class="img-responsive" alt="" />
+                                    <img src="images/1.jpg" height="100px" class="img-responsive" alt="" />
                                     <div class="portfolio-caption">
-                                        <h4>Portfolio Title</h4>
+                                        <h4>Casamentos</h4>
                                         <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
                                         <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                     </div>
@@ -277,9 +288,9 @@ session_start();
                             </li>
                             <li>
                                 <div class="portfolio-item">
-                                    <img src="images/portfolio/img6.jpg" class="img-responsive" alt="" />
+                                    <img src="images/8c59e46694d92a60666d6b7e173de650.jpg" class="img-responsive" alt="" />
                                     <div class="portfolio-caption">
-                                        <h4>Portfolio Title</h4>
+                                        <h4>Festas Empresariais</h4>
                                         <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i class="fa fa-magic"></i></a>
                                         <a href="#" class="link-2"><i class="fa fa-link"></i></a>
                                     </div>
@@ -313,12 +324,66 @@ session_start();
                         </div>
                     </div>
                     <div class="row">
-                        
-                        <div class="col-md-6">
-                            <img src="images/portfolio/img1.jpg" class="img-responsive" alt="..">
+                        <h2><strong>Decoração</strong></h2>
+                        <div class="col-md-4">
+                            <img src="images/wedding-party-decoration-dinner-set.jpg" class="img-responsive" alt="..">
                         </div>
-                        <div class="col-md-6">
-                            <img src="images/portfolio/img1.jpg" class="img-responsive" alt="..">
+                        <div class="col-md-4 w-100">
+                            <img src="images/36799969-ai-gerado-aniversario-festa-decoracao-em-a-mesa-gratis-foto.jpg" class="img-responsive" alt="..">
+                        </div>
+                         <div class="col-md-4 w-100 h-100">
+                            <img src="images/ebe4481cc2f3da51a9b4aced3edc6b16.jpg" class="img-responsive" alt="..">
+                        </div>
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <h2><strong>Catering</strong></h2>
+                        <div class="col-md-4">
+                            <img src="images/90b8e2092a439e79a8644dfcf56089ca.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/05c7115cce1c2b9d3ed169dfd738264c.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/800_5e0ba7d35b7dc.jpg" class="img-responsive" alt="..">
+                        </div>
+                        
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <h2><strong>Bolos</strong></h2>
+                        <div class="col-md-4 w-50">
+                            <img src="images/85d05eef8a30c26354a53212792abcee.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/87feffe684f8a884d1881a7e8cceb54e.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/7d04481bd1ccb741adf3ac7b67825db0.jpg" class="img-responsive" alt="..">
+                        </div>
+                        
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <h2><strong>Insufláveis</strong></h2>
+                        <div class="col-md-4 w-50">
+                            <img src="images/66cf408bcc299cf69dcd0631d13b2c38.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/c3e83ba55a19a1ffb07c142bfb564215.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/20edc6174ce72c0b608459e58959ecf5.jpg" class="img-responsive" alt="..">
+                        </div>
+                        
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <h2><strong>Casamentos</strong></h2>
+                        <div class="col-md-4 w-50">
+                            <img src="images/7f484044e7c2848f5f66028ffc6b683b.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/e9d54c65473460121c6a98e22df61b2e.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-4">
+                            <img src="images/6caef9dd8fae6216ff47e4cdfab7f254.jpg" class="img-responsive" alt="..">
                         </div>
                         
                     </div><!-- /.row -->
@@ -334,8 +399,8 @@ session_start();
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="section-title text-center">
-                            <h3>Serviços</h3>
-                            <p class="white-text">Duis aute irure dolor in reprehenderit in voluptate</p>
+                            <h3>Pacotes</h3>
+                        <br>
                         </div>
                     </div>
                 </div>
@@ -437,11 +502,7 @@ session_start();
                                     <a href="servico.html" class="btn-system btn-small">Comprar</a>
                                 </div>
                             </div>
-                        </div>
-                    
-                        
-						
-						
+                        </div>	
             </div>
         </div>
     </div>
@@ -451,14 +512,6 @@ session_start();
         <br>
 
     <!-- End Pricing Table Section -->
-    
-    
-    
-
-
- 
-
-    
     
 
     <!-- Start Testimonial Section -->
