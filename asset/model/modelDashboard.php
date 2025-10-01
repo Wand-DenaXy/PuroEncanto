@@ -4,33 +4,6 @@ require_once 'connection2.php';
 
 class Dashboard {
 
-    function getFornecedoresDebito() {
-        global $conn;
-        $dados = [];
-        $msg = "";
-        $flag = false;
-
-        $sql = "SELECT descricao, total_debito FROM Fornecedores ORDER BY total_debito DESC";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $dados[] = $row;
-            }
-            $flag = true;
-        } else {
-            $msg = "Nenhum fornecedor encontrado.";
-        }
-
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg,
-            "dados" => $dados
-        ));
-
-        $conn->close();
-        return $resp;
-    }
     function getDividasReceber(){
 
         global $conn;

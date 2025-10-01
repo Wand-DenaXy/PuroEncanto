@@ -1,3 +1,6 @@
+function formatarValoresComEuro(valores) {
+    return valores.map(value => '€' + parseFloat(value));
+}
 function GraficoDiferencaDashboard() {
     $.ajax({
         url: "asset/controller/controllerDashboard.php",
@@ -754,6 +757,7 @@ function GraficoTotalAtivoDashboard() {
                         scales: {
                             x: {
                                 display: false
+                                
                             },
                             y: {
                                 display: false
@@ -804,13 +808,6 @@ function carregarDashboard() {
     setTimeout(getDividasReceber, 800); 
     setTimeout(GraficoServicoDashboard, 900);             // prioridade 5
 }
+
 $(function() {
-    // GraficoServico();
-    // getServicosDashboard();
-    // GraficoServicoUtilizadoAbril();
-    // getGastosDashboard();
-    // getRedimentosDashboard();
-    // Timer();
-    // getDividasReceber();
-    // getTotalAtivoDashboard();
 });

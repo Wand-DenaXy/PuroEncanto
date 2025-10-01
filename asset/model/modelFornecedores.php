@@ -16,15 +16,23 @@ class Fornecedores1{
 
 
         $stmt->execute();
+       $stmt1 = $conn->prepare("INSERT INTO DividasAPagar (Tipo, Valor, Estado,ID_Fornecedor) 
+            VALUES (?, ?, ?,?);");
+            $ID_Fornecedor = $conn->insert_id;
+            $tipo = "Fornecedor";
+            $estado = "Em aberto";
+            $stmt1->bind_param("sdsi", $tipo, $total_debito, $estado, $ID_Fornecedor);
+            $stmt1->execute();
+            
+            $msg = "Registado com sucesso!";
+            $flag = true;
+            
+            $resp = json_encode(array(
+                "flag" => $flag,
+                "msg" => $msg
+            ));
 
-        $msg = "Registado com sucesso!";
-        $flag = true;
-        
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg
-        ));
-
+        $stmt1->close();
         $stmt->close();
         $conn->close();
 
