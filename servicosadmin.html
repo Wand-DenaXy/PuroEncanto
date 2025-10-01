@@ -47,18 +47,6 @@
                         <div class="card p-3" style="background-color: black;">
                             <canvas id="graficoRendimentos"></canvas>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card p-3" style="background-color: black;">
-                            <canvas id="graficoRendimentos2"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-md-5"  >
-                    <br>
-                        <div class="card p-3" style="background-color: black;">
-                            <canvas id="graficoRendimentos3" ></canvas>
-                        </div>
-                    </div>
             </div>
         </div>
         <div class="content">
@@ -89,14 +77,11 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-        <script src="asset/js/graficos.js"></script>
         <script src="asset/js/dashboard.js"></script>
         <script src="asset/js/fornecedores.js"></script>
         <script>
         $(document).ready(function() {
             GraficoServico();
-            GraficoServicoMaio();
-            GraficoServicoJunho();
             getFornecedoresAbril();
             GraficoServicoUtilizadoAbril();
             GraficoServicoUtilizadoMaio();

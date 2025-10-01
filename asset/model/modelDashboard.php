@@ -130,7 +130,7 @@ function getServicoUsados() {
     $msg = "";
     $flag = false;
 
-    $sql = "SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 1 AND 4 ORDER BY total_vendas desc;";
+    $sql = "SELECT descricao, total_vendas FROM VendasServicos ORDER BY total_vendas desc;";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
@@ -202,66 +202,6 @@ function GraficoTotalAtivoDashboard() {
     $conn->close();
     return $resp;
 }
-function getServicoUsadosMaio() {
-    global $conn;
-    $dados1 = [];
-    $dados2 = [];
-    $msg = "";
-    $flag = false;
-
-    $sql = "SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 5 AND 8 ORDER BY total_vendas desc;";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $dados1[] = $row['descricao'];   
-            $dados2[] = $row['total_vendas'];
-        }
-        $flag = true;
-    } else {
-        $msg = "Nenhum Serviço encontrado.";
-    }
-
-    $resp = json_encode(array(
-        "flag" => $flag,
-        "msg" => $msg,
-        "dados1" => $dados1,
-        "dados2" => $dados2
-    ));
-
-    $conn->close();
-    return $resp;
-}
-    function getServicoUsadosJunho() {
-        global $conn;
-        $dados1 = [];
-        $dados2 = [];
-        $msg = "";
-        $flag = false;
-
-        $sql = "SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 9 AND 14 ORDER BY total_vendas desc;";
-        $result = $conn->query($sql);
-        
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $dados1[] = $row['descricao'];   
-                $dados2[] = $row['total_vendas'];
-            }
-            $flag = true;
-        } else {
-            $msg = "Nenhum Serviço encontrado.";
-        }
-
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg,
-            "dados1" => $dados1,
-            "dados2" => $dados2
-        ));
-
-        $conn->close();
-        return $resp;
-    }
 function GraficoServicoDashboard() {
     global $conn;
     $dados1 = [];

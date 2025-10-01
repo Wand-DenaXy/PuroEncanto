@@ -65,7 +65,7 @@ function GraficoDiferencaDashboard() {
                         data: {
                             labels: response.dados1,
                             datasets: [{
-                                label: 'Mês de Abril',
+                                label: 'Trimestral',
                                 data: response.dados2  , 
                                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -74,10 +74,10 @@ function GraficoDiferencaDashboard() {
                         },
                         options: {
                             responsive: true,
-                                                                                plugins: {
+                            plugins: {
                             title: {
                                 display: true,
-                                text: 'Serviços mais utilizados - Abril',
+                                text: 'Serviço que mais rendeu - Trimestral',
                                 color: 'white',
                                 font: {
                                     size: 18
@@ -89,6 +89,7 @@ function GraficoDiferencaDashboard() {
                                 }
                             }
                         },
+                        
                             scales: {
                                 y: {
                                     beginAtZero: true,
@@ -97,11 +98,14 @@ function GraficoDiferencaDashboard() {
                                     }
                                 },
                                 x: {
-                                    grid: {
-                                color: 'white'
-                                    }
+                                ticks: {
+                                    color: 'white'
+                                },
+                                 grid: {
+                                    color: 'white'
                                 }
-                            }
+                            },
+                        }
                         }
                     });
                 } else {
@@ -113,133 +117,6 @@ function GraficoDiferencaDashboard() {
             }
         });
     }
-        function GraficoServicoMaio() {
-        $.ajax({
-            url: "asset/controller/controllerDashboard.php",
-            type: "POST",
-            data: { op: 4 },
-            dataType: "json",
-            success: function(response) {
-                console.log("Resposta AJAX:", response);
-                if (response.flag) {
-                    const ctx = document.getElementById('graficoRendimentos2').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: response.dados1,
-                            datasets: [{
-                                label: 'Mês de Maio',
-                                data: response.dados2, 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                                                    plugins: {
-                            title: {
-                                display: true,
-                                text: 'Serviços mais utilizados - Maio',
-                                color: 'white',
-                                font: {
-                                    size: 18
-                                }
-                            },
-                              legend: {
-                                labels: {
-                                    color: 'white'
-                                }
-                            }
-                        },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        callback: value => value + " €"
-                                    }
-                                },
-                                x: {
-                                    grid: {
-                                color: 'white'
-                                    }
-                                }
-                            }
-                        }
-                    });
-                } else {
-                    alert(response.msg);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro AJAX:", error);
-            }
-        });
-    }
-    function GraficoServicoJunho() {
-        $.ajax({
-            url: "asset/controller/controllerDashboard.php",
-            type: "POST",
-            data: { op: 5 },
-            dataType: "json",
-            success: function(response) {
-                console.log("Resposta AJAX:", response);
-                if (response.flag) {
-                    const ctx = document.getElementById('graficoRendimentos3').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: response.dados1,
-                            datasets: [{
-                                label: 'Mês de Junho',
-                                data: response.dados2, 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                                                                                plugins: {
-                            title: {
-                                display: true,
-                                text: 'Serviços mais utilizados - Junho',
-                                color: 'white',
-                                font: {
-                                    size: 18
-                                }
-                            },
-                              legend: {
-                                labels: {
-                                    color: 'white'
-                                }
-                            }
-                        },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    suggestedMax: Math.max(...response.dados2) * 1.1,
-                                    ticks: {
-                                        callback: value => value + " €"
-                                    }
-                                },
-                                x: {
-                                    grid: {
-                                color: 'white'
-                                    }
-                                }
-                            }
-                        }
-                    });
-                } else {
-                    alert(response.msg);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro AJAX:", error);
-            }
-        });
-}
     function GraficoServicoDashboard() {
         $.ajax({
             url: "asset/controller/controllerDashboard.php",
@@ -804,13 +681,3 @@ function carregarDashboard() {
     setTimeout(getDividasReceber, 800); 
     setTimeout(GraficoServicoDashboard, 900);             // prioridade 5
 }
-$(function() {
-    // GraficoServico();
-    // getServicosDashboard();
-    // GraficoServicoUtilizadoAbril();
-    // getGastosDashboard();
-    // getRedimentosDashboard();
-    // Timer();
-    // getDividasReceber();
-    // getTotalAtivoDashboard();
-});

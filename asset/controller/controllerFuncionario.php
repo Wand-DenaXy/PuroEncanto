@@ -22,4 +22,18 @@ if ($_POST['op'] == 1) {
     echo $resp;
 
 }
+ elseif ($_POST['op'] == 4) {
+    $resp = $func->getDadosFuncionario($_POST['ID_Funcionario']);
+    echo $resp;
+
+}elseif ($_POST['op'] == 5) {
+    $resp = $func->guardaEditFuncionario(
+        $_POST['nomeEdit'],
+        $_POST['telefoneEdit'],
+        $_POST['salarioEdit'],
+        $_POST['nifEdit'],
+        $_POST['ID_Funcionario']
+    );
+    echo $resp;
+}
 ?>

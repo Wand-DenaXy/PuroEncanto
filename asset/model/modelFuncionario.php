@@ -78,7 +78,7 @@ class Funcionario{
                 $msg .= "<td>".$row['salario']."</td>";
                 $msg .= "<td>".$row['telefone']."</td>";
                 $msg .= "<td>".$row['NIF']."</td>";
-                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Funcionario'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
+                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
                 $msg .= "<td><button class='btn btn-danger' onclick ='removerFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-trash'>Remover</i></button></td>";
                 $msg .= "</tr>";
             }
@@ -100,7 +100,52 @@ class Funcionario{
 
         return ($msg);
     }
+        function getDadosFuncionario($ID_Funcionario){
+        global $conn;
+        $msg = "";
+        $row = "";
 
+        $sql = "SELECT * FROM Funcionarios WHERE ID_Funcionario =".$ID_Funcionario;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+        }
+
+        $conn->close();
+
+        return (json_encode($row));
+
+    }
+
+
+    function guardaEditFuncionario($nome, $telfone, $salario, $nif,$ID_Funcionario){
+        
+        global $conn;
+        $msg = "";
+        $flag = true;
+        $sql = "";
+
+
+        $sql = "UPDATE Funcionarios SET nome = '".$nome."', telefone = '".$telfone."',salario = '".$salario."',nif = '".$nif."' WHERE ID_Funcionario =".$ID_Funcionario;
+
+        if ($conn->query($sql) === TRUE) {
+            $msg = "Editado com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+          
+        $conn->close();
+
+        return($resp);
+
+    }
     function removerFuncionario($ID_Funcionario){
         global $conn;
         $msg = "";
