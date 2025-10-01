@@ -135,40 +135,56 @@ $conn->close();
               </optgroup>
             </select>
           </div>
+          <!-- Serviços -->
+<div class="mb-3">
+  <label class="form-label"><strong>Serviços Adicionais</strong></label>
+  <div class="form-check">
+    <input class="form-check-input servico" type="checkbox" id="catering" value="246">
+    <label class="form-check-label" for="catering">Catering - 246€</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
+    <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
+    <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
+    <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
+    <label class="form-check-label" for="decoracao">Decoração - 123€</label>
+  </div>
+</div>
 
-          <div class="mb-3">
-            <label class="form-label"><strong>Serviços Adicionais</strong></label>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="catering" name="servicos" value="Catering">
-              <label class="form-check-label" for="catering">Catering - 246€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="insuflaveis" name="servicos" value="Insufláveis">
-              <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="pipocas" name="servicos" value="Máquina de Pipocas">
-              <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="bolos" name="servicos" value="Bolos">
-              <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="decoracao" name="servicos" value="Decoração">
-              <label class="form-check-label" for="decoracao">Decoração - 123€</label>
-            </div>
-            <br>
-            <h4>Pacotes</h4>
-            
-          </div>
-          <div class="form-check">
-            <h5>Numero de Convidados</h5>
-                <input type="number" name="" id="">
-            </div>
-            <div class="form-check">
-            </div>
-          <button type="submit" class="btn btn-primary">Criar Evento<hr>Preço: 131 €</button>
+<!-- Numero de convidados -->
+<!-- Pacote de Convidados -->
+<div class="mb-3">
+  <label for="pacote" class="form-label"><strong>Pacote de Convidados</strong></label>
+  <select id="pacote" name="pacote" class="form-control" required>
+    <option value="">-- Seleciona um Pacote --</option>
+    <option value="1" data-preco="200">Pacote 20 convidados - 200€</option>
+    <option value="2" data-preco="350">Pacote 40 convidados - 350€</option>
+    <option value="3" data-preco="500">Pacote 60 convidados - 500€</option>
+    <option value="4" data-preco="650">Pacote 80 convidad os - 650€</option>
+    <option value="5" data-preco="800">Pacote 100 convidados - 800€</option>
+    <option value="6" data-preco="950">Pacote 120 convidados - 950€</option>
+    <option value="7" data-preco="1100">Pacote 140 convidados - 1100€</option>
+    <option value="8" data-preco="1250">Pacote 160 convidados - 1250€</option>
+    <option value="9" data-preco="1400">Pacote 180 convidados - 1400€</option>
+    <option value="10" data-preco="1550">Pacote 200 convidados - 1550€</option>
+  </select>
+</div>
+
+
+<!-- Preço Dinâmico -->
+<h4 id="precoTotal">Preço: 0 €</h4>
+
+<button type="submit" class="btn btn-primary">Criar Evento</button>
+
         </form>
       </div>
     </div>
@@ -206,42 +222,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
     $('#formEvento').on('submit', function(e) {
-        e.preventDefault();
-        var nome = $('#nome').val();
-        var data = $('#data').val();
-        var hora = $('#hora').val();
-        if(nome && data && hora){
-            var horaInt = parseInt(hora.split(':')[0]);
-            if( (horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17) ){
-                $.ajax({
-                    url: 'salvarEvento.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: { nome: nome, data: data, hora: hora },
-                    success: function(res){
-                        if(res.flag){
-                            calendar.addEvent({ title: nome, start: data+"T"+hora });
-                            $('#tabelaEventos').prepend(
-                                `<tr data-id="${res.id}"><td>${nome}</td><td>${data}</td><td>${hora}</td><td>Pendente</td>
-                                <td><button class="btn btn-danger btn-sm cancelarEvento">Cancelar</button></td></tr>`
-                            );
-                            $('#eventoModal').modal('hide');
-                            $('#formEvento')[0].reset();
-                            Swal.fire('Sucesso', res.msg, 'success');
-                        } else {
-                            Swal.fire('Erro', res.msg, 'error');
-                        }
+    e.preventDefault();
+    var nome = $('#nome').val();       // Tipo de evento (Casamento, Festa...)
+    var data = $('#data').val();
+    var hora = $('#hora').val();
+    var pacote = $('#pacote').val();   // ID do pacote selecionado
+    var precoTotal = calcularPreco();  // função que soma pacote + serviços
+
+    if(nome && data && hora && pacote){
+        var horaInt = parseInt(hora.split(':')[0]);
+        if( (horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17) ){
+            $.ajax({
+                url: 'salvarEvento.php',
+                type: 'POST',
+                dataType: 'json',
+                data: { 
+                    nome: nome, 
+                    data: data, 
+                    hora: hora, 
+                    pacote: pacote, 
+                    preco: precoTotal,
+                    tipo: nome   
+                },
+                success: function(res){
+                    if(res.flag){
+                        calendar.addEvent({ title: nome, start: data+"T"+hora });
+                        $('#tabelaEventos').prepend(
+                            `<tr data-id="${res.id}">
+                                <td>${nome}</td>
+                                <td>${data}</td>
+                                <td>${hora}</td>
+                                <td>Pendente</td>
+                                <td><button class="btn btn-danger btn-sm cancelarEvento">Cancelar</button></td>
+                            </tr>`
+                        );
+                        $('#eventoModal').modal('hide');
+                        $('#formEvento')[0].reset();
+                        Swal.fire('Sucesso', res.msg, 'success')
+                            .then(() => window.location.href = 'checkout.php');
+                    } else {
+                        Swal.fire('Erro', res.msg, 'error');
                     }
-                });
-            } else {
-                Swal.fire('Horário inválido', 'Só pode marcar eventos das 9h às 13h ou das 14h às 17h.', 'warning');
-            }
+                }
+            });
+        } else {
+            Swal.fire('Horário inválido', 'Só pode marcar eventos das 9h às 13h ou das 14h às 17h.', 'warning');
         }
-    });
+    } else {
+        Swal.fire('Erro', 'Preenche todos os campos obrigatórios!', 'warning');
+    }
+});
+
 
     $(document).on('click', '.cancelarEvento', function(){
     var row = $(this).closest('tr');
@@ -263,7 +295,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 data: { id: idEvento },
                 success: function(res){
                     if(res.flag){
-                        // Remove da tabela e do calendário
                         row.remove();
                         var evCal = calendar.getEventById(idEvento);
                         if(evCal) evCal.remove();
@@ -282,6 +313,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+
+let precoBase = 100; 
+let precoPorConvidado = 10;
+function calcularPreco() {
+    let total = 0;
+    let pacote = $('#pacote option:selected');
+    if (pacote.length > 0 && pacote.val() !== "") {
+        total += parseFloat(pacote.data('preco'));
+    }
+
+    $('.servico:checked').each(function() {
+        total += parseFloat($(this).val());
+    });
+
+    $('#precoTotal').text("Preço: " + total.toFixed(2) + " €");
+    return total;
+}
+
+$(document).on('change', '.servico, #pacote', calcularPreco);
+
+$('#eventoModal').on('shown.bs.modal', calcularPreco);
+
+
 </script>
 </body>
 </html>
