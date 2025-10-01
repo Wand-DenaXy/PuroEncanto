@@ -4,29 +4,34 @@ require_once 'connection2.php';
 
 class Funcionario{
 
-    function registaFuncionario($nome, $telefone, $NIF){
+    function registaFuncionario($nome, $telefone, $salario,$NIF){
     
         global $conn;
         $msg = "";
         $flag = false;
+                $stmt = $conn->prepare("INSERT INTO Funcionarios (nome, telefone, salario,NIF) 
+            VALUES (?, ?, ?,?);");
+            $stmt->bind_param("siis", $nome, $telefone, $salario,$NIF);
 
-        $stmt = $conn->prepare("INSERT INTO Funcionarios (nome, telefone, NIF) 
-        VALUES (?, ?, ?);");
-        $stmt->bind_param("sis", $nome, $telefone, $NIF, $morada, $nif,$total_debito);
-
-
-        $stmt->execute();
-
-        $msg = "Registado com sucesso!";
-        $flag = true;
-        
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg
-        ));
-
-        $stmt->close();
-        $conn->close();
+            $stmt->execute();
+            $stmt1 = $conn->prepare("INSERT INTO DividasAPagar (Tipo, Valor, Estado,ID_Funcionario) 
+            VALUES (?, ?, ?,?);");
+            $ID_Funcionario = $conn->insert_id;
+            $tipo = "Funcionario";
+            $estado = "Em aberto";
+            $stmt1->bind_param("sdsi", $tipo, $salario, $estado, $ID_Funcionario);
+            $stmt1->execute();
+            
+            $msg = "Registado com sucesso!";
+            $flag = true;
+            
+            $resp = json_encode(array(
+                "flag" => $flag,
+                "msg" => $msg
+            ));
+            $stmt1->close();
+            $stmt->close();
+            $conn->close();
 
         return($resp);
 
@@ -70,10 +75,11 @@ class Funcionario{
                 $msg .= "<tr>";
                 $msg .= "<th scope='row'>".$row['ID_Funcionario']."</th>";
                 $msg .= "<th scope='row'>".$row['nome']."</th>";
+                $msg .= "<td>".$row['salario']."</td>";
                 $msg .= "<td>".$row['telefone']."</td>";
                 $msg .= "<td>".$row['NIF']."</td>";
                 $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Funcionario'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='removerFornecedores(".$row['ID_Funcionario'].")'><i class='fa fa-trash'>Remover</i></button></td>";
+                $msg .= "<td><button class='btn btn-danger' onclick ='removerFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-trash'>Remover</i></button></td>";
                 $msg .= "</tr>";
             }
         } else {

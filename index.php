@@ -54,7 +54,7 @@ session_start();
                   <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                  <li><a href="dashboardCliente.php">Dashboard</a></li>
+                  <li><a href="dashboard.php">Dashboard</a></li>
                   <li><a href="perfil.php">Perfil</a></li>
                   <li><a href="asset/controller/controllerLogin.php?op=3">Logout</a></li>
 

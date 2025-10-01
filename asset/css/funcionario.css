@@ -25,7 +25,33 @@ body {
     width: 40px;
     margin-bottom: 5px;
 }
-
+.logotitulo
+{
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+    .btinfoperfil
+    {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background-color: #b68f5c;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .btinfoperfil:hover {
+    background-color: #a37542;
+    transform: translateY(-2px);
+}
+#inputLabels input:focus,
+#inputLabels select:focus {
+    border-color: #b68f5c;
+    box-shadow: 0 0 8px rgba(182, 143, 92, 0.4);
+    outline: none;
+}
 .sidebar a {
     color: #fff;
     text-decoration: none;

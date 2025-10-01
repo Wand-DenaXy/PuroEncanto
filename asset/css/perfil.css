@@ -106,12 +106,46 @@
     }
 
     .profile-header {
-        background: linear-gradient(135deg, #6c63ff, #836fff);
+        background: linear-gradient(135deg, #b68f5c, #c49a63);
         color: white;
-        padding: 30px;
+        padding: 15px;
         text-align: center;
     }
-
+    .profile-header p {
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+    }
+    .infoperfil
+    {
+        color: #b68f5c;
+        font-weight: 600;
+        font-size: 15px;
+    }
+#login-card input:focus,
+#login-card select:focus {
+    border-color: #b68f5c;
+    box-shadow: 0 0 8px rgba(182, 143, 92, 0.4);
+    outline: none;
+}
+    .btinfoperfil
+    {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background-color: #b68f5c;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .btinfoperfil:hover {
+    background-color: #a37542;
+    transform: translateY(-2px);
+}
     .profile-header h2 {
         margin: 0;
         font-weight: bold;

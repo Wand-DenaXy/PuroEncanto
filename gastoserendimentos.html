@@ -21,19 +21,19 @@
 
 <body>
     <div class="sidebar">
-        <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
+        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
             <p class="logotitulo">Puro Encanto</p>
-        </div>
+        </div></a>
         <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="gastoserendimentos.html"  class="active"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
+        <a href="gastoserendimentos.html" class="active"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
         <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
         <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-        <a href="#"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
+        <a href="perfilAdmin.php" ><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
-         <div class="time" id="time"></div>
+        <div class="time" id="time"></div>
     </div>
     <div class="content">
         <!-- Topbar -->
@@ -65,7 +65,7 @@
                             <input type="date" class="form-control" placeholder="Data" id="dataGasto">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100" onclick="registaGastos()">Registar</button>
+                    <button type="button" class="btinfoperfil" onclick="registaGastos()">Registar</button>
                 </form>
             </div>
 
@@ -108,7 +108,7 @@
                             <input type="date" class="form-control" placeholder="Data" id="dataRendimento">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100" onclick="registaRendimentos()">Registar</button>
+                    <button type="button" class="btinfoperfil" onclick="registaRendimentos()">Registar</button>
                 </form>
             </div>
 
