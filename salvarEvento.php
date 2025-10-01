@@ -7,6 +7,7 @@ $nome = $_POST['nome'] ?? '';
 $data = $_POST['data'] ?? '';
 $hora = $_POST['hora'] ?? '';
 
+
 $flag = false;
 $msg  = "Erro ao guardar evento!";
 
