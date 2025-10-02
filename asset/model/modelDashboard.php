@@ -153,6 +153,7 @@ function getServicoUsados() {
     $conn->close();
     return $resp;
 }
+
 function GraficoTotalAtivoDashboard() {
     global $conn;
     $dados1 = [];
