@@ -36,4 +36,12 @@ if ($_POST['op'] == 1) {
     );
     echo $resp;
 }
+elseif ($_POST['op'] == 6) {
+    $resp = $func->PagarSalarioFuncionario($_POST['ID_Funcionario']);
+    echo $resp;
+}
+
+
+
+    
 ?>

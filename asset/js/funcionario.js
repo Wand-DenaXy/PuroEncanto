@@ -99,6 +99,39 @@ function removerFuncionario(id){
     });
 
 }
+function PagarSalarioFuncionario(id){
+
+    let dados = new FormData();
+    dados.append("op", 6);
+    dados.append("ID_Funcionario", id);
+
+    $.ajax({
+    url: "asset/controller/controllerFuncionario.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta2(obj.msg,"success");
+            getListaFuncionario();    
+        }else{
+            alerta("Funcinario",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
 function alerta(titulo,msg,icon){
     Swal.fire({
         position: 'center',

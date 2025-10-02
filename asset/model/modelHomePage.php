@@ -16,15 +16,16 @@ class Homepage {
         if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
                 if($tpUser == 2)
-                {
-                    
+                {     
                     $msg .= "<li><a href='dashboard.php'>Dashboard</a></li>";
+                    $msg .= "<li><a href='perfilAdmin.php'>Perfil</a></li>";
                 }
                 else
                 {
                     $msg .= "<li><a href='dashboardCliente.php'>Dashboard</a></li>";
+                    $msg .= "<li><a href='perfilCliente.php'>Perfil</a></li>";
                 }
-                $msg .= "<li><a href='perfil.php'>Perfil</a></li>";
+                
                 $msg .= "<li><a href='asset/controller/controllerLogin.php?op=3'>Logout</a></li>";
             }
             
