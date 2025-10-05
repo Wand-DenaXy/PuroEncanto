@@ -104,10 +104,10 @@ $conn->close();
             <label for="nome" class="form-label"><strong>Nome do Evento</strong></label>
             <select id="nome" name="Nome" class="form-control" required>
               <optgroup label="Manhã">
-                <option value="Casamentos"><strong>Casamentos</strong></option>
-                <option value="Festas"><strong>Festas</strong></option>
-                <option value="Aniversários"><strong>Aniversários</strong></option>
-                <option value="Empresarial"><strong>Empresarial</strong></option>
+                <option value="1">Casamentos</option>
+                <option value="2">Festas</option>
+                <option value="3">Aniversários</option>
+                <option value="4">Empresarial</option>Fvar
               </optgroup>
             </select>
           </div>
@@ -180,7 +180,6 @@ $conn->close();
 </div>
 
 
-<!-- Preço Dinâmico -->
 <h4 id="precoTotal">Preço: 0 €</h4>
 
 <button type="submit" class="btn btn-primary">Criar Evento</button>
@@ -222,50 +221,80 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-    $('#formEvento').on('submit', function(e) {
+  $('#formEvento').on('submit', function(e) {
     e.preventDefault();
-    var nome = $('#nome').val();       // Tipo de evento (Casamento, Festa...)
+
+    var tipoId = $('#nome').val();
+    var tipoNome = $('#nome option:selected').text();
     var data = $('#data').val();
     var hora = $('#hora').val();
-    var pacote = $('#pacote').val();   // ID do pacote selecionado
-    var precoTotal = calcularPreco();  // função que soma pacote + serviços
+    var pacote = $('#pacote').val();
 
-    if(nome && data && hora && pacote){
+    // Pega os serviços selecionados
+    var servicosSelecionados = [];
+    $('.servico:checked').each(function() {
+        servicosSelecionados.push($(this).val());
+    });
+
+    if(tipoId && data && hora && pacote){
         var horaInt = parseInt(hora.split(':')[0]);
         if( (horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17) ){
+
             $.ajax({
                 url: 'salvarEvento.php',
                 type: 'POST',
                 dataType: 'json',
-                data: { 
-                    nome: nome, 
-                    data: data, 
-                    hora: hora, 
-                    pacote: pacote, 
-                    preco: precoTotal,
-                    tipo: nome   
+                data: {
+                    nome: tipoNome,
+                    id_tipoevento: tipoId,
+                    data: data,
+                    hora: hora,
+                    id_pacote: pacote,
+                    servicos: servicosSelecionados
                 },
                 success: function(res){
+                    console.log("Resposta do servidor:", res);
+
                     if(res.flag){
-                        calendar.addEvent({ title: nome, start: data+"T"+hora });
+                        // Adiciona evento ao calendário
+                        calendar.addEvent({ 
+                            title: tipoNome, 
+                            start: data+"T"+hora,
+                            id: res.id
+                        });
+
                         $('#tabelaEventos').prepend(
                             `<tr data-id="${res.id}">
-                                <td>${nome}</td>
+                                <td>${tipoNome}</td>
                                 <td>${data}</td>
                                 <td>${hora}</td>
                                 <td>Pendente</td>
                                 <td><button class="btn btn-danger btn-sm cancelarEvento">Cancelar</button></td>
                             </tr>`
                         );
+
                         $('#eventoModal').modal('hide');
                         $('#formEvento')[0].reset();
-                        Swal.fire('Sucesso', res.msg, 'success')
-                            .then(() => window.location.href = 'checkout.php');
+
+                        Swal.fire({
+                            title: 'Evento criado!',
+                            text: 'Preço total: ' + res.debug.precoTotal.toFixed(2) + ' €',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href = 'checkout.php?preco=' + res.debug.precoTotal;
+                        });
+
                     } else {
                         Swal.fire('Erro', res.msg, 'error');
+                        console.error("DEBUG do PHP:", res.debug || res);
                     }
+                },
+                error: function(xhr, status, error){
+                    console.error("Erro AJAX:", status, error, xhr.responseText);
+                    Swal.fire('Erro', 'Servidor retornou erro: '+xhr.responseText, 'error');
                 }
             });
+
         } else {
             Swal.fire('Horário inválido', 'Só pode marcar eventos das 9h às 13h ou das 14h às 17h.', 'warning');
         }
@@ -273,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Swal.fire('Erro', 'Preenche todos os campos obrigatórios!', 'warning');
     }
 });
+
 
 
     $(document).on('click', '.cancelarEvento', function(){
