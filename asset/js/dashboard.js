@@ -147,7 +147,7 @@ function GraficoDiferencaDashboard() {
                                     beginAtZero: true,
                                     
                                     ticks: {
-                                        callback: value => value + " €"
+                                        callback: value => value + ""
                                     }
                                 }
                             }

@@ -166,7 +166,7 @@ class Funcionario{
             "msg" => $msg
         ));
           
-        $conn->close();
+        $conn->close(); 
 
         return($resp);
 

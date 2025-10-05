@@ -47,8 +47,7 @@ class Dashboard {
                 $msg .= "<td>".$row['Valor']."</td>";
                 $msg .= "<td>".$row['Estado']."</td>";
                 $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";
-                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Divida'].")'><i class='fa fa-pencil'>Info</i></button></td>";            
+                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
                 $msg .= "</tr>";
             }
         } else {
@@ -210,10 +209,9 @@ function GraficoServicoDashboard() {
     $msg = "";
     $flag = false;
 
-    $sql = "SELECT descricao, SUM(total_vendas) AS total
-            FROM VendasServicos
-            GROUP BY descricao
-            ORDER BY total DESC";
+    $sql = "SELECT Servicos.nome as descricao, COUNT(*) AS total FROM Servicos, Eventos_Servicos, Eventos WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico AND Eventos.ID_Evento = Eventos_Servicos.ID_Evento
+    GROUP BY Servicos.nome
+    ORDER BY total DESC;";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

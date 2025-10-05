@@ -26,7 +26,7 @@ class Perfil{
                 $msg .= "<div class='profile-item'>";
                 $msg .= "<p><strong>IBAN: </strong><span class='infoperfil'>" . $row['IBAN'] . "</span></p>";
                 $msg .= "</div>";
-                $msg .= "<button class='btinfoperfil' data-bs-toggle='modal' data-bs-target='#editarPerfilModal'>";
+                $msg .= "<button class='btinfoperfil' onclick='getDadosPerfilEdit(".$row['ID_Cliente'].")'>";
                 $msg .= "Editar Perfil";
                 $msg .= "</button>";
             }
@@ -79,6 +79,51 @@ class Perfil{
         $conn->close();
         
         return ($msg);
+
+    }
+    function getDadosPerfilEdit($ID_Cliente){
+        global $conn;
+        $msg = "";
+        $row = "";
+
+        $sql = "SELECT * FROM Clientes WHERE ID_Cliente =".$ID_Cliente;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+        }
+
+        $conn->close();
+
+        return (json_encode($row));
+
+    }
+
+    function guardaEditPerfil($nome, $email, $nif, $password,$IBAN,$ID_Cliente){
+        
+        global $conn;
+        $msg = "";
+        $flag = true;
+        $sql = "";
+
+
+        $sql = "UPDATE Clientes SET nome = '".$nome."', email = '".$email."',nif = '".$nif."',password = '".$password."',IBAN = '".$IBAN."' WHERE ID_Cliente =".$ID_Cliente;
+
+        if ($conn->query($sql) === TRUE) {
+            $msg = "Editado com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+          
+        $conn->close();
+
+        return($resp);
 
     }
 }

@@ -65,9 +65,11 @@ $conn->close();
 <body>
 
     <div class="sidebar">
-        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
-            <p class="logotitulo">Puro Encanto</p>
-        </div></a>
+        <a href="index.php" style="background-color: transparent;border-left: none;">
+            <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
+                <p class="logotitulo">Puro Encanto</p>
+            </div>
+        </a>
         <a href="dashboard.php" class="active"><i class="bi bi-grid"></i> Dashboard</a>
         <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
@@ -75,7 +77,7 @@ $conn->close();
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
         <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-        <a href="perfilAdmin.php" ><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
+        <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
         <div class="time" id="time"></div>
     </div>
@@ -88,28 +90,28 @@ $conn->close();
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Total Ativo</h6>
-                        <h4><?php echo $totalTotalAtivo; ?></h4>
+                        <h4><?php echo $totalTotalAtivo; ?>€</h4>
                         <canvas id="chart1" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Redimentos</h6>
-                        <h4><?php echo $totalRendimentos; ?></h4>
+                        <h4><?php echo $totalRendimentos; ?>€</h4>
                         <canvas id="chart2" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Gastos</h6>
-                        <h4><?php echo $totalGastos; ?></h4>
+                        <h4><?php echo $totalGastos; ?>€</h4>
                         <canvas id="chart3" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Receita</h6>
-                        <h4><?php echo $saldo; ?></h4>
+                        <h4><?php echo $saldo; ?>€</h4>
                         <canvas id="chart4" height="80"></canvas>
                     </div>
                 </div>
@@ -140,7 +142,6 @@ $conn->close();
                                         <th scope="col">Estado</th>
                                         <th scope="col">Pagar</th>
                                         <th scope="col">Recusar</th>
-                                        <th scope="col">Informações</th>
                                     </tr>
                                 </thead>
                                 <tbody id="listagemPagar">
@@ -163,7 +164,6 @@ $conn->close();
                                         <th scope="col">Estado</th>
                                         <th scope="col">Receber</th>
                                         <th scope="col">Recusar</th>
-                                        <th scope="col">Informações</th>
                                     </tr>
                                 </thead>
                                 <tbody id="listagemReceber">
@@ -173,7 +173,6 @@ $conn->close();
                     </div>
                 </div>
             </div>
-
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="asset/js/graficos.js"></script>
             <script src="asset/js/dashboard.js"></script>
