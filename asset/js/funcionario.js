@@ -99,6 +99,39 @@ function removerFuncionario(id){
     });
 
 }
+function PagarSalarioFuncionario(id){
+
+    let dados = new FormData();
+    dados.append("op", 6);
+    dados.append("ID_Funcionario", id);
+
+    $.ajax({
+    url: "asset/controller/controllerFuncionario.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta2(obj.msg,"success");
+            getListaFuncionario();    
+        }else{
+            alerta("Funcinario",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
 function alerta(titulo,msg,icon){
     Swal.fire({
         position: 'center',
@@ -135,6 +168,82 @@ Toast.fire({
   icon: icon,
   title: msg
 });
+}
+function getDadosFuncionario(ID_Funcionario){
+
+
+    let dados = new FormData();
+    dados.append("op", 4);
+    dados.append("ID_Funcionario", ID_Funcionario);
+
+    $.ajax({
+    url: "asset/controller/controllerFuncionario.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        $('#numFuncionarioEdit').val(obj.ID_Funcionario);
+        $('#nomeEdit').val(obj.nome);
+        $('#telefoneEdit').val(obj.telefone);
+        $('#salarioEdit').val(obj.salario);
+        $('#nifEdit').val(obj.NIF);
+        $('#formEditFornecedores').modal('show');
+       $('#btnGuardar').attr("onclick","guardaEditFuncionario("+obj.ID_Funcionario+")") 
+        
+       $('#formEditFuncionario').modal('show')
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+    
+}
+
+function guardaEditFuncionario(ID_Funcionario) {
+    let dados = new FormData();
+    dados.append("op", 5);
+    dados.append("numFuncionarioEdit", $('#numFuncionarioEdit').val());
+    dados.append("nomeEdit", $('#nomeEdit').val());
+    dados.append("telefoneEdit", $('#telefoneEdit').val());
+    dados.append("salarioEdit", $('#salarioEdit').val());
+    dados.append("nifEdit", $('#nifEdit').val());
+    dados.append("ID_Funcionario", ID_Funcionario);
+
+    $.ajax({
+        url: "asset/controller/controllerFuncionario.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
+    })
+    .done(function(msg) {
+    $('#formEditFuncionario').modal('hide');
+        
+        let obj = JSON.parse(msg);
+        if(obj.flag) {
+            alerta("Fornecedor", obj.msg, "success");
+            alerta2(obj.msg,"success");
+            getListaFornecedores();
+            myModal.hide();
+        } else {
+            alerta2(obj.msg,"error");
+            alerta("Fornecedor", obj.msg, "error");
+        }
+        console.log(msg);
+    })
+    .fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
 }
 $(function() {
     getListaFuncionario();

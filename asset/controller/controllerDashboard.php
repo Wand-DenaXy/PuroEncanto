@@ -12,14 +12,6 @@ if ($_POST['op'] == 3) {
     $resp = $func->getServicoUsados();
     echo $resp;
 }
-if ($_POST['op'] == 4) {
-    $resp = $func->getServicoUsadosMaio();
-    echo $resp;
-}
-if ($_POST['op'] == 5) {
-    $resp = $func->getServicoUsadosJunho();
-    echo $resp;
-}
 if ($_POST['op'] == 6) {
     $resp = $func->GraficoServicoDashboard();
     echo $resp;
@@ -64,6 +56,7 @@ if ($_POST['op'] == 16) {
     $resp = $func->GraficoTotalAtivoDashboard();
     echo $resp;
 }
+
 
 
 ?>
