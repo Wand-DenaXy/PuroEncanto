@@ -13,7 +13,6 @@ $response = [
     'debug' => []
 ];
 
-// Verifica se cliente está logado
 if (!isset($_SESSION['cliente_id'])) {
     $response['msg'] = 'Erro: cliente não está logado.';
     echo json_encode($response);
@@ -35,7 +34,6 @@ if ($hora) {
 
 $response['debug']['POST'] = $_POST;
 
-// 1️⃣ Verificar se cliente existe
 $stmtCheckCliente = $conn->prepare("SELECT COUNT(*) as cnt FROM clientes WHERE ID_Cliente = ?");
 $stmtCheckCliente->bind_param("i", $idCliente);
 $stmtCheckCliente->execute();
@@ -48,14 +46,12 @@ if ($res['cnt'] == 0) {
     exit;
 }
 
-// 2️⃣ Verificar campos obrigatórios
 if (!$nome || !$data || !$hora || !$idTipoEvento || !$idPacote) {
     $response['msg'] = "Campos obrigatórios em falta.";
     echo json_encode($response);
     exit;
 }
 
-// 3️⃣ Verificar se data/hora já têm evento
 $stmtCheck = $conn->prepare("SELECT COUNT(*) as cnt FROM eventos WHERE Data = ? AND hora = ?");
 $stmtCheck->bind_param("ss", $data, $hora);
 $stmtCheck->execute();
@@ -68,7 +64,6 @@ if ($rowCheck['cnt'] > 0) {
     exit;
 }
 
-// 4️⃣ Buscar preço do pacote
 $stmtPacote = $conn->prepare("SELECT preco FROM pacotesconvidados WHERE ID_Pacote = ?");
 $stmtPacote->bind_param("i", $idPacote);
 $stmtPacote->execute();
@@ -76,7 +71,6 @@ $resPacote = $stmtPacote->get_result()->fetch_assoc();
 $stmtPacote->close();
 $precoPacote = $resPacote['preco'] ?? 0;
 
-// 5️⃣ Calcular preço dos serviços selecionados
 $precoServicos = 0;
 if(is_array($servicos)){
     foreach($servicos as $s){
@@ -90,13 +84,11 @@ if(is_array($servicos)){
     }
 }
 
-// 6️⃣ Preço total
 $precoTotal = $precoPacote + $precoServicos;
 $response['debug']['precoPacote'] = $precoPacote;
 $response['debug']['precoServicos'] = $precoServicos;
 $response['debug']['precoTotal'] = $precoTotal;
 
-// 7️⃣ Inserir evento
 $stmt = $conn->prepare("
     INSERT INTO eventos 
     (ID_Cliente, Nome, Data, hora, estado, ID_TipoEvento, ID_Pacote, PrecoTotal)
