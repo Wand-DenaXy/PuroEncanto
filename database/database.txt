@@ -105,7 +105,7 @@
 				descricao VARCHAR(100) NOT NULL,
 				valor DOUBLE(10,2) NOT NULL
 			);
-				CREATE TABLE Eventos (
+			CREATE TABLE Eventos (
 					ID_Evento INT PRIMARY KEY AUTO_INCREMENT,
 					ID_Cliente INT NOT NULL,
 					Nome varchar(200),
@@ -114,6 +114,7 @@
 					estado varchar(50),
 					ID_TipoEvento INT,
 					ID_Pacote INT,
+					precoTotal DOUBLE,
 					FOREIGN KEY (ID_TipoEvento) REFERENCES TiposEventos(ID_TipoEvento),
 					FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
 					FOREIGN KEY (ID_Pacote) REFERENCES PacotesConvidados(ID_Pacote)
@@ -1287,13 +1288,13 @@
 	select * from DividasAPagar;
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Fornecedor)
-	VALUES ('Fornecedor', 2233.06,'Em aberto', 1);  -- Referência ao fornecedor
+	VALUES ('Fornecedor', 2233.06,'Em aberto', 1);
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Funcionario)
-	VALUES ('Funcionario', 5365.8,'Em aberto', 3);  -- Referência ao funcionário
+	VALUES ('Funcionario', 5365.8,'Em aberto', 3);
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado)
-	VALUES ('Outros', 150.00, 'Em aberto');  -- Não associada a nenhum fornecedor, cliente ou funcionário
+	VALUES ('Outros', 150.00, 'Em aberto');
 
 	SELECT 
 		CASE MONTH(Data)
