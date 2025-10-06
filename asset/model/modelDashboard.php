@@ -4,7 +4,7 @@ require_once 'connection2.php';
 
 class Dashboard {
 
-    function getDividasReceber(){
+    function getDividasPagar(){
 
         global $conn;
         $msg = "";
@@ -17,10 +17,10 @@ class Dashboard {
                 $msg .= "<tr>";
                 $msg .= "<th scope='row'>".$row['ID_Divida']."</th>";
                 $msg .= "<th scope='row'>".$row['Tipo']."</th>";
-                $msg .= "<td>".$row['Valor']."</td>";
+                $msg .= "<td>".$row['Valor']."€</td>";
                 $msg .= "<td>".$row['Estado']."</td>";
-                $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
+                $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasPagar(".$row['ID_Divida'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
+                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasPagar(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
                 $msg .= "</tr>";
             }
         } else {
@@ -41,7 +41,46 @@ class Dashboard {
 
         return ($msg);
     }
-function pagarDividasReceber($ID_Divida)
+        function getDividasReceber(){
+
+        global $conn;
+        $msg = "";
+
+        $sql = "SELECT  TiposEventos.nome AS NomeEvento,Eventos.* from TiposEventos,Eventos where Eventos.Estado Like 'Pendente' group by Eventos.ID_Evento;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $msg .= "<tr>";
+                $msg .= "<th scope='row'>".$row['ID_Evento']."</th>";
+                $msg .= "<th scope='row'>".$row['NomeEvento']."</th>";
+                $msg .= "<td>".$row['Data']."</td>";
+                $msg .= "<td>".$row['hora']."</td>";
+                $msg .= "<td>".$row['precoTotal']."€</td>";
+                $msg .= "<td>".$row['estado']."</td>";
+                $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
+                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
+                $msg .= "</tr>";
+            }
+        } else {
+            $msg .= "<tr>";
+            $msg .= "<td>Sem Registos</td>";
+            $msg .= "<th scope='row'></th>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "<td></td>";
+            $msg .= "</tr>";
+        }
+        $conn->close();
+
+        return ($msg);
+    }
+function pagarDividasPagar($ID_Divida)
 {
     global $conn;
     $dados1 = [];
@@ -68,7 +107,57 @@ function pagarDividasReceber($ID_Divida)
     return $resp;
 
 }
-function recusarDividasReceber($ID_Divida)
+function pagarDividasReceber($ID_Evento)
+{
+    global $conn;
+    $msg = "";
+    $flag = false;
+
+    $sql = "UPDATE Eventos SET Estado = 'aceite' WHERE ID_Evento = $ID_Evento";
+
+        if ($conn->query($sql) === TRUE) {
+            $flag = true;
+            $msg = "Pago com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+    $conn->close();
+    return $resp;
+
+}
+function recusarDividasReceber($ID_Evento)
+{
+    global $conn;
+    $msg = "";
+    $flag = false;
+
+    $sql = "UPDATE Eventos SET estado = 'Recusado' WHERE ID_Evento = $ID_Evento";
+
+        if ($conn->query($sql) === TRUE) {
+            $flag = true;
+            $msg = "Recusado com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+    $conn->close();
+    return $resp;
+
+}
+function recusarDividasPagar($ID_Divida)
 {
     global $conn;
     $dados1 = [];

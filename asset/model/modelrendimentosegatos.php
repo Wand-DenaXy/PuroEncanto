@@ -43,7 +43,7 @@ function getListaGastos(){
             $msg .= "<tr>";
             $msg .= "<th scope='row'>".$row['ID_Gasto']."</th>";
             $msg .= "<th scope='row'>".$row['descricao']."</th>";
-            $msg .= "<td>".$row['Valor']."</td>";
+            $msg .= "<td>".$row['Valor']."€</td>";
             $msg .= "<td>".$row['Data']."</td>";
             $msg .= "<td><button class='btn btn-warning' onclick ='getDadosGastos(".$row['ID_Gasto'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
             $msg .= "<td><button class='btn btn-danger' onclick ='removerGastos(".$row['ID_Gasto'].")'><i class='fa fa-trash'>Remover</i></button></td>";
@@ -172,7 +172,7 @@ function registaRendimentos($descricao,$Valor, $Data){
             $msg .= "<tr>";
             $msg .= "<th scope='row'>".$row['ID_Rendimento']."</th>";
             $msg .= "<th scope='row'>".$row['descricao']."</th>";
-            $msg .= "<td>".$row['Valor']."</td>";
+            $msg .= "<td>".$row['Valor']."€</td>";
             $msg .= "<td>".$row['Data']."</td>";
             $msg .= "<td><button class='btn btn-warning' onclick ='getDadosRendimentos(".$row['ID_Rendimento'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
             $msg .= "<td><button class='btn btn-danger' onclick ='removerRendimentos(".$row['ID_Rendimento'].")'><i class='fa fa-trash'>Remover</i></button></td>";

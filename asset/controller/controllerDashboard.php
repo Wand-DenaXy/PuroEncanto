@@ -3,11 +3,6 @@ include_once '../model/modelDashboard.php';
 
 $func = new Dashboard();
 
-
-if ($_POST['op'] == 2) {
-    $resp = $func->getFornecedoresDebito();
-    echo $resp;
-}
 if ($_POST['op'] == 3) {
     $resp = $func->getServicoUsados();
     echo $resp;
@@ -41,22 +36,33 @@ if ($_POST['op'] == 12) {
     echo $resp;
 }
 if ($_POST['op'] == 13) {
-    $resp = $func->getDividasReceber();
+    $resp = $func->getDividasPagar();
     echo $resp;
 }
 if ($_POST['op'] == 14) {
-    $resp = $func->pagarDividasReceber($_POST['ID_Divida']);
+    $resp = $func->pagarDividasPagar($_POST['ID_Divida']);
     echo $resp;
 }
 if ($_POST['op'] == 15) {
-    $resp = $func->recusarDividasReceber($_POST['ID_Divida']);
+    $resp = $func->recusarDividasPagar($_POST['ID_Divida']);
     echo $resp;
 }
 if ($_POST['op'] == 16) {
     $resp = $func->GraficoTotalAtivoDashboard();
     echo $resp;
 }
-
+if ($_POST['op'] == 17) {
+    $resp = $func->getDividasReceber();
+    echo $resp;
+}
+if ($_POST['op'] == 18) {
+    $resp = $func->recusarDividasReceber($_POST['ID_Evento']);
+    echo $resp;
+}
+if ($_POST['op'] == 19) {
+    $resp = $func->pagarDividasReceber($_POST['ID_Evento']);
+    echo $resp;
+}
 
 
 ?>
