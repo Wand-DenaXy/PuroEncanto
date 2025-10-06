@@ -215,7 +215,7 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <h1>Quer planear a sua festa, mas não sabe onde? </br>Nós temos a solução!</h1>
-                    <a href="#pricing.html"><button type="submit" class="btn btn-primary">Ver os nossos
+                    <a href="#pricing"><button type="submit" class="btn btn-primary">Ver os nossos
                             serviços</button></a>
                 </div>
             </div>
@@ -333,8 +333,8 @@ session_start();
             <div class="container">
                 <div class="row">
                     <div class="section-title text-center">
-                        <h3>Portfolio Details</h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                        <h3>Galeria</h3>
+                        <p>Algumas imagens da nossa galeria!</p>
                     </div>
                 </div>
                 <div class="row">
@@ -543,11 +543,10 @@ session_start();
                         <div class="testimonial-content">
                             <img src="images/testimonial/face_1.png" alt="">
                             <div class="testimonial-author">
-                                <div class="author">John Doe</div>
-                                <div class="designation">Organization Founder</div>
+                                <div class="author">José Miguel</div>
                             </div>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque<br>
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
+                            <p>Excelente serviço! Adorei poder organizar tudo pela app, foi muito prático e rápido. A
+                                festa ficou linda e os convidados adoraram. Recomendo a 100%!</p>
                         </div>
                     </div>
                     <!-- Testimonial 2 -->
@@ -555,11 +554,11 @@ session_start();
                         <div class="testimonial-content">
                             <img src="images/testimonial/face_2.png" alt="">
                             <div class="testimonial-author">
-                                <div class="author">Jane Doe</div>
-                                <div class="designation">Lead Developer</div>
+                                <div class="author">Margarida Lopes</div>
                             </div>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia<br>
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                            <p>A experiência foi fantástica! O Puro Encanto cuidou de todos os detalhes com
+                                profissionalismo e carinho. A decoração e as pipocas foram um sucesso entre as crianças!
+                            </p>
                         </div>
                     </div>
                     <!-- Testimonial 3 -->
@@ -567,11 +566,11 @@ session_start();
                         <div class="testimonial-content">
                             <img src="images/testimonial/face_3.png" alt="">
                             <div class="testimonial-author">
-                                <div class="author">John Doe</div>
-                                <div class="designation">Honorable Customer</div>
+                                <div class="author">Carlos Vieira</div>
                             </div>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit<br> anim laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>Foi uma experiência incrível! Houve alguns contratempos no início, mas a Puro Encanto
+                                transformou a adversidade em encanto — literalmente. A dedicação e a calma da equipa
+                                fizeram toda a diferença.</p>
                         </div>
                     </div>
                 </div>
@@ -595,29 +594,33 @@ session_start();
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                   <form action="send_mail.php" method="post">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <input type="text" name="name" class="form-control" placeholder="Your Name *" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="Your Email *" required>
-            </div>
-            <div class="form-group">
-                <input type="tel" name="phone" class="form-control" placeholder="Your Phone *" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <textarea name="message" class="form-control" placeholder="Your Message *" required></textarea>
-            </div>
-        </div>
-        <div class="col-lg-12 text-center">
-            <button type="submit" class="btn btn-primary">Send Message</button>
-        </div>
-    </div>
-</form>
+                    <form action="send_mail.php" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name *"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control" placeholder="Your Email *"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="phone" class="form-control" placeholder="Your Phone *"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control" placeholder="Your Message *"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
 
 
 
@@ -629,40 +632,31 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-xs-12">
-                    <span class="copyright">Copyright &copy; <a href="http://guardiantheme.com">GuardinTheme</a>
-                        2015</span>
-                </div>
-            </div>
-        </div>
-        <footer class="style-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <span class="copyright">Copyright &copy; <a href="index.php">Puro Encanto</a> 2025</span>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="footer-social text-center">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="copyright">Copyright &copy; <a href="index.php">Puro Encanto</a> 2025</span>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <div class="footer-link">
-                        <ul class="pull-right">
-                            <li><a href="#">Privacy Policy</a>
-                            </li>
-                            <li><a href="#">Terms of Use</a>
-                            </li>
+                    <div class="footer-social text-center">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="footer-link">
+                    <ul class="pull-right">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
     </footer>
     </section>
@@ -693,7 +687,7 @@ session_start();
     <script src="js/jquery.fitvids.js"></script>
     <script src="js/styleswitcher.js"></script>
 
-   
+
 
     <!-- Custom Theme JavaScript -->
     <script src="js/script.js"></script>

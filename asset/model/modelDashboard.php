@@ -72,8 +72,6 @@ class Dashboard {
             $msg .= "<td></td>";
             $msg .= "<td></td>";
             $msg .= "<td></td>";
-            $msg .= "<td></td>";
-            $msg .= "<td></td>";
             $msg .= "</tr>";
         }
         $conn->close();
