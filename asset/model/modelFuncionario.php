@@ -75,7 +75,7 @@ class Funcionario{
                 $msg .= "<tr>";
                 $msg .= "<th scope='row'>".$row['ID_Funcionario']."</th>";
                 $msg .= "<th scope='row'>".$row['nome']."</th>";
-                $msg .= "<td>".$row['salario']."</td>";
+                $msg .= "<td>".$row['salario']."€</td>";
                 $msg .= "<td>".$row['telefone']."</td>";
                 $msg .= "<td>".$row['NIF']."</td>";
                 $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-pencil'>Editar</i></button></td>";

@@ -82,7 +82,7 @@ class Fornecedores1{
                 $msg .= "<td>".$row['email']."</td>";
                 $msg .= "<td>".$row['morada']."</td>";
                 $msg .= "<td>".$row['nif']."</td>";
-                $msg .= "<td>".$row['total_debito']."</td>";
+                $msg .= "<td>".$row['total_debito']."€</td>";
                 $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Fornecedor'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
                 $msg .= "<td><button class='btn btn-danger' onclick ='removerFornecedores(".$row['ID_Fornecedor'].")'><i class='fa fa-trash'>Remover</i></button></td>";
                 $msg .= "</tr>";

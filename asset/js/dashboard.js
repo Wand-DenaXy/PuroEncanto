@@ -135,7 +135,7 @@ function GraficoDiferencaDashboard() {
                         data: {
                             labels: response.dados1,
                             datasets: [{
-                                label: 'Total do Serviços Pagos',
+                                label: 'Total dos Serviços mais pedidos',
                                 data: response.dados2, 
                                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -504,7 +504,7 @@ function getRedimentosDashboard()
         }
     });
 }
-function getDividasReceber(){
+function getDividasPagar(){
     
     if ( $.fn.DataTable.isDataTable('#listagemPagar') ) {
         $('#listagemPagar').DataTable().destroy();
@@ -535,7 +535,7 @@ function getDividasReceber(){
     alert( "Request failed: " + textStatus );
     });
 }
-function pagarDividasReceber(id){
+function pagarDividasPagar(id){
 
     let dados = new FormData();
     dados.append("op", 14);
@@ -555,7 +555,104 @@ function pagarDividasReceber(id){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Divida Recebida!",obj.msg,"success");
+            alerta("Divida Aceita!",obj.msg,"success");
+            getDividasPagar();    
+        }else{
+            alerta("Divida",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
+function getDividasReceber(){
+    
+    if ( $.fn.DataTable.isDataTable('#listagemReceber') ) {
+        $('#listagemReceber').DataTable().destroy();
+    }
+
+    let dados = new FormData();
+    dados.append("op", 17);
+
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        $('#listagemReceber').html(msg);
+        $('#tblReceber').DataTable();
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+}
+function recusarDividasReceber(id)
+{
+
+    let dados = new FormData();
+    dados.append("op", 18);
+    dados.append("ID_Divida", id);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta("Divida Recusada!",obj.msg,"success");
+            getDividasReceber();    
+        }else{
+            alerta("Divida",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+}
+function pagarDividasReceber(id){
+
+    let dados = new FormData();
+    dados.append("op", 19);
+    dados.append("ID_Divida", id);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta("Divida Aceita!",obj.msg,"success");
             getDividasReceber();    
         }else{
             alerta("Divida",obj.msg,"error");    
@@ -568,7 +665,7 @@ function pagarDividasReceber(id){
     });
 
 }
-function recusarDividasReceber(id)
+function recusarDividasPagar(id)
 {
 
     let dados = new FormData();
@@ -590,7 +687,7 @@ function recusarDividasReceber(id)
         let obj = JSON.parse(msg);
         if(obj.flag){
             alerta("Divida Recusada!",obj.msg,"success");
-            getDividasReceber();    
+            getDividasPagar();    
         }else{
             alerta("Divida",obj.msg,"error");    
         }
@@ -683,5 +780,6 @@ function carregarDashboard() {
     setTimeout(getGastosDashboard, 400);          // prioridade 3
     setTimeout(getRedimentosDashboard, 600);      // prioridade 4
     setTimeout(getDividasReceber, 800); 
+    setTimeout(getDividasPagar, 800); 
     setTimeout(GraficoServicoDashboard, 900);             // prioridade 5
 }

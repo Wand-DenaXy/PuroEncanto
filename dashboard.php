@@ -160,6 +160,8 @@ $conn->close();
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Tipo</th>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Hora</th>
                                         <th scope="col">Valor</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Receber</th>
