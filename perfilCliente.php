@@ -20,74 +20,84 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puro Encanto - Perfil</title>
-<link rel="stylesheet" href="asset/css/dashboard.css">
-<link rel="stylesheet" href="asset/css/lib/bootstrap.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<script src="asset/js/lib/jquery.js"></script>
-<script src="asset/js/lib/bootstrap.js"></script>
 
-<style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puro Encanto - Perfil</title>
+    <link rel="stylesheet" href="asset/css/dashboard.css">
+    <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="asset/js/lib/jquery.js"></script>
+    <script src="asset/js/lib/bootstrap.js"></script>
+
+    <style>
     .mb-4 {
         text-align: center;
-      }  
+    }
+
     body {
         background-color: #f8f9fa;
     }
+
     .profile-card {
         max-width: 600px;
         margin: 50px auto;
         border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         background: white;
         overflow: hidden;
     }
+
     .profile-header {
         background: linear-gradient(135deg, #6c63ff, #836fff);
         color: white;
         padding: 30px;
         text-align: center;
     }
+
     .profile-header h2 {
         margin: 0;
         font-weight: bold;
     }
+
     .profile-body {
         padding: 30px;
     }
+
     .profile-item {
         display: flex;
         align-items: center;
         margin-bottom: 15px;
     }
+
     .profile-item i {
         font-size: 1.5rem;
         color: #6c63ff;
         margin-right: 15px;
     }
+
     .profile-item p {
         margin: 0;
         font-size: 1rem;
     }
-</style>
+    </style>
 </head>
+
 <body>
-<div class="sidebar">
-    <div class="logo"><a href="index.php"><img src="images/logos/PURO ENCANTO LOGO.png" alt=""></a>
-        <p class="logotitulo">Puro Encanto</p>
+    <div class="sidebar">
+        <div class="logo"><a href="index.php"><img src="images/logos/PURO ENCANTO LOGO.png" alt=""></a>
+            <p class="logotitulo">Puro Encanto</p>
+        </div>
+        <a href="dashboardCliente.php"><i class="bi bi-calendar-event"></i> Criar Evento</a>
+        <a href="perfil.php" class="active"><i class="bi bi-person-circle"></i> Perfil</a>
+        <div class="time" id="time"></div>
     </div>
-    <a href="dashboardCliente.php"><i class="bi bi-calendar-event"></i> Criar Evento</a>
-    <a href="perfil.php" class="active"><i class="bi bi-person-circle"></i> Perfil</a>
-    <div class="time" id="time"></div>
-</div>
 
-<div class="content" style="margin-left:250px; padding:20px;">
-    <h2 class="mb-4">O meu Perfil</h2>
+    <div class="content" style="margin-left:250px; padding:20px;">
+        <h2 class="mb-4">O meu Perfil</h2>
 
-    <?php if ($cliente): ?>
+        <?php if ($cliente): ?>
         <div class="profile-card">
             <div class="profile-header">
                 <h2><?= htmlspecialchars($cliente['nome']) ?></h2>
@@ -113,51 +123,57 @@ $conn->close();
                 </div>
             </div>
         </div>
-    <?php else: ?>
+        <?php else: ?>
         <p>Não foi possível carregar os dados do perfil.</p>
-    <?php endif; ?>
-</div>
-
-<!-- Modal Editar Perfil -->
-<div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form action="updatePerfil.php" method="POST">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editarPerfilModalLabel">Editar Perfil</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="ID_Cliente" value="<?= $idCliente ?>">
-
-          <div class="mb-3">
-            <label class="form-label">Nome</label>
-            <input type="text" name="nome" class="form-control" value="<?= htmlspecialchars($cliente['nome']) ?>" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="Email" class="form-control" value="<?= htmlspecialchars($cliente['Email']) ?>" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">NIF</label>
-            <input type="text" name="nif" class="form-control" value="<?= htmlspecialchars($cliente['nif']) ?>" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">IBAN</label>
-            <input type="text" name="IBAN" class="form-control" value="<?= htmlspecialchars($cliente['IBAN']) ?>" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-success">Guardar</button>
-        </div>
-      </form>
+        <?php endif; ?>
     </div>
-  </div>
-</div>
+
+    <!-- Modal Editar Perfil -->
+    <div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="updatePerfil.php" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editarPerfilModalLabel">Editar Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="ID_Cliente" value="<?= $idCliente ?>">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" name="nome" class="form-control"
+                                value="<?= htmlspecialchars($cliente['nome']) ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="Email" class="form-control"
+                                value="<?= htmlspecialchars($cliente['Email']) ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">NIF</label>
+                            <input type="text" name="nif" class="form-control"
+                                value="<?= htmlspecialchars($cliente['nif']) ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">IBAN</label>
+                            <input type="text" name="IBAN" class="form-control"
+                                value="<?= htmlspecialchars($cliente['IBAN']) ?>" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>

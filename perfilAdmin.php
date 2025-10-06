@@ -24,9 +24,11 @@ session_start();
 
 <body>
     <div class="sidebar">
-        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
-            <p class="logotitulo">Puro Encanto</p>
-        </div></a>
+        <a href="index.php" style="background-color: transparent;border-left: none;">
+            <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
+                <p class="logotitulo">Puro Encanto</p>
+            </div>
+        </a>
         <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
         <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
         <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
@@ -52,48 +54,50 @@ session_start();
         </div>
     </div>
 
-    <!-- Modal Editar Perfil -->
-    <div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="formEditPerfil" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <form action="updatePerfil.php" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editarPerfilModalLabel">Editar Perfil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PerfilModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="card">
+                            <h5 class="card-header">Perfil</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Editar Perfil</h5>
+                                <form class="row g-6">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <label for="nomeEdit" class="form-label">Nome</label>
+                                            <input type="text" class="form-control" id="nomeEdit">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="emailEdit" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="emailEdit">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="NIFEdit" class="form-label">NIF</label>
+                                            <input type="text" class="form-control" id="NIFEdit">
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="IBANEdit" class="form-label">IBAN</label>
+                                            <input type="text" class="form-control" id="IBANEdit">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="ID_Cliente" value="<?= $idCliente ?>">
-
-                        <div class="mb-3">
-                            <label class="form-label">Nome</label>
-                            <input type="text" name="nome" class="form-control"
-                                value="<?= htmlspecialchars($cliente['nome']) ?>" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="Email" class="form-control"
-                                value="<?= htmlspecialchars($cliente['Email']) ?>" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">NIF</label>
-                            <input type="text" name="nif" class="form-control"
-                                value="<?= htmlspecialchars($cliente['nif']) ?>" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">IBAN</label>
-                            <input type="text" name="IBAN" class="form-control"
-                                value="<?= htmlspecialchars($cliente['IBAN']) ?>" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                    </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        style="padding: 12px;border-radius: 10px;font-size: 16px;font-weight: bold;">Fechar</button>
+                    <button type="button" class='btinfoperfil2' id="btnGuardar">Guardar</button>
+                </div>
             </div>
         </div>
     </div>

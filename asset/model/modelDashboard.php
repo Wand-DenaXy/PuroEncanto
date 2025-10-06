@@ -20,8 +20,7 @@ class Dashboard {
                 $msg .= "<td>".$row['Valor']."</td>";
                 $msg .= "<td>".$row['Estado']."</td>";
                 $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";
-                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFornecedores(".$row['ID_Divida'].")'><i class='fa fa-pencil'>Info</i></button></td>";            
+                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Divida'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
                 $msg .= "</tr>";
             }
         } else {
@@ -103,7 +102,7 @@ function getServicoUsados() {
     $msg = "";
     $flag = false;
 
-    $sql = "SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 1 AND 4 ORDER BY total_vendas desc;";
+    $sql = "SELECT descricao, total_vendas FROM VendasServicos ORDER BY total_vendas desc;";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
@@ -126,6 +125,7 @@ function getServicoUsados() {
     $conn->close();
     return $resp;
 }
+
 function GraficoTotalAtivoDashboard() {
     global $conn;
     $dados1 = [];
@@ -175,66 +175,6 @@ function GraficoTotalAtivoDashboard() {
     $conn->close();
     return $resp;
 }
-function getServicoUsadosMaio() {
-    global $conn;
-    $dados1 = [];
-    $dados2 = [];
-    $msg = "";
-    $flag = false;
-
-    $sql = "SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 5 AND 8 ORDER BY total_vendas desc;";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $dados1[] = $row['descricao'];   
-            $dados2[] = $row['total_vendas'];
-        }
-        $flag = true;
-    } else {
-        $msg = "Nenhum Serviço encontrado.";
-    }
-
-    $resp = json_encode(array(
-        "flag" => $flag,
-        "msg" => $msg,
-        "dados1" => $dados1,
-        "dados2" => $dados2
-    ));
-
-    $conn->close();
-    return $resp;
-}
-    function getServicoUsadosJunho() {
-        global $conn;
-        $dados1 = [];
-        $dados2 = [];
-        $msg = "";
-        $flag = false;
-
-        $sql = "SELECT descricao, total_vendas FROM VendasServicos WHERE ID BETWEEN 9 AND 14 ORDER BY total_vendas desc;";
-        $result = $conn->query($sql);
-        
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $dados1[] = $row['descricao'];   
-                $dados2[] = $row['total_vendas'];
-            }
-            $flag = true;
-        } else {
-            $msg = "Nenhum Serviço encontrado.";
-        }
-
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg,
-            "dados1" => $dados1,
-            "dados2" => $dados2
-        ));
-
-        $conn->close();
-        return $resp;
-    }
 function GraficoServicoDashboard() {
     global $conn;
     $dados1 = [];
@@ -242,10 +182,9 @@ function GraficoServicoDashboard() {
     $msg = "";
     $flag = false;
 
-    $sql = "SELECT descricao, SUM(total_vendas) AS total
-            FROM VendasServicos
-            GROUP BY descricao
-            ORDER BY total DESC";
+    $sql = "SELECT Servicos.nome as descricao, COUNT(*) AS total FROM Servicos, Eventos_Servicos, Eventos WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico AND Eventos.ID_Evento = Eventos_Servicos.ID_Evento
+    GROUP BY Servicos.nome
+    ORDER BY total DESC;";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

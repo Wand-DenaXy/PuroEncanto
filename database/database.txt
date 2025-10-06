@@ -262,20 +262,11 @@
 
 
 		INSERT INTO VendasServicos (descricao, total_vendas) VALUES
-		('PE_Insuflável', 983.33),
-		('PE_Máquina Pipocas', 393.33),
-		('PE_Insuflável', 14750.00),
-		('PE_Site', 14583.33),
-		('PE_INSUFLÁVEL', 966.66),
-		('PE_Máquina Pipocas', 386.66),
-		('PE_Insuflável', 14500.00),
-		('PE_Site', 14166.66),
-		('PE_INSUFLÁVEL', 949.99),
-		('PE_Máquina Pipocas', 379.99),
-		('PE_Insuflável', 14250.00),
-		('PE_Carrinha (20000)', 20000.00),
-		('PE_Carrinha (15000)', 15000.00),
-		('PE_Site', 13749.99);
+		('PE_Catering Serviço', 106800.00),
+		('PE_Máq Pipocas Serviço', 29050.00),
+		('PE_Bolo', 21082.00),
+		('PE_Decoração Serviço', 13300.00),
+		('PE_Insuflável Serviço', 7200.00);
 
 		select * from VendasServicos;
 
