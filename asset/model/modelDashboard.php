@@ -269,15 +269,13 @@ function GraficoServicoDashboard() {
     $msg = "";
     $flag = false;
 
-    $sql = "SELECT Servicos.nome as descricao, COUNT(*) AS total FROM Servicos, Eventos_Servicos, Eventos WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico AND Eventos.ID_Evento = Eventos_Servicos.ID_Evento
-    GROUP BY Servicos.nome
-    ORDER BY total DESC;";
+    $sql = "SELECT * FROM Balancete";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $dados1[] = $row['descricao'];
-            $dados2[] = $row['total'];
+            $dados2[] = $row['saldo'];
         }
         $flag = true;
     } else {

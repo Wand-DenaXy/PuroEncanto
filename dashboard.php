@@ -116,15 +116,36 @@ $conn->close();
                     </div>
                 </div>
             </div>
-            <div class="grafico4">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-body">
+ <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="btn-group" role="group" aria-label="Botões de gráficos">
+                    <button class="btn btn-outline-primary" id="btnGrafico1">Gráfico de Rendimentos 1</button>
+                    <button class="btn btn-outline-primary" id="btnGrafico2">Gráfico de Rendimentos 2</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal com Gráficos -->
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                    <div id="conteudoGraficos" class="grafico-container">
+                        <div class="grafico" id="grafico1">
+                            <h5>Balancete</h5>
                             <canvas id="graficoRendimentos4"></canvas>
+                        </div>
+                        <div class="grafico" id="grafico2" style="display: none;">
+                            <h5>Gráfico 2</h5>
+                            <canvas id="graficoRendimentos2"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
             <br>
             <br>
             <div>
