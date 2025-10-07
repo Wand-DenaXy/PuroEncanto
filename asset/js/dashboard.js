@@ -120,51 +120,64 @@ function GraficoDiferencaDashboard() {
             }
         });
     }
-    function GraficoServicoDashboard() {
-        $.ajax({
-            url: "asset/controller/controllerDashboard.php",
-            type: "POST",
-            data: { op: 6 },
-            dataType: "json",
-            success: function(response) {
-                console.log("Resposta AJAX:", response);
-                if (response.flag) {
-                    const ctx = document.getElementById('graficoRendimentos4').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: response.dados1,
-                            datasets: [{
-                                label: 'Total dos Serviços mais pedidos',
-                                data: response.dados2, 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                
-                                y: {
-                                    beginAtZero: true,
-                                    
-                                    ticks: {
-                                        callback: value => value + ""
-                                    }
-                                }
+function GraficoServicoDashboard() {
+    $.ajax({
+        url: "asset/controller/controllerDashboard.php",
+        type: "POST",
+        data: { op: 6 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx = document.getElementById('graficoRendimentos4').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'Total dos Serviços mais pedidos',
+                            data: response.dados2,
+                            backgroundColor: [
+                                '#FF6347', '#4682B4', '#32CD32', '#FF4500', '#8A2BE2', '#FFD700', '#DC143C',
+                                '#FF8C00', '#00BFFF', '#FF1493', '#20B2AA', '#D2691E', '#ADFF2F', '#A52A2A', '#7FFF00',
+                                '#B22222', '#9932CC', '#FF69B4', '#4B0082', '#FA8072'
+                            ],
+                            borderColor: [
+                                '#FF6347', '#4682B4', '#32CD32', '#FF4500', '#8A2BE2', '#FFD700', '#DC143C',
+                                '#FF8C00', '#00BFFF', '#FF1493', '#20B2AA', '#D2691E', '#ADFF2F', '#A52A2A', '#7FFF00',
+                                '#B22222', '#9932CC', '#FF69B4', '#4B0082', '#FA8072'
+                            ], 
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top', 
+                            },
+                            tooltip: {
+                                enabled: true 
                             }
+                        },
+                        cutout: '70%', 
+                        animation: {
+                            animateScale: true, 
+                            animateRotate: true 
                         }
-                    });
-                } else {
-                    alert(response.msg);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro AJAX:", error);
+                    }
+                });
+            } else {
+                alert(response.msg);
             }
-        });
-    }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
+}
+
+
 function GraficoServicoUtilizadoAbril() {
         $.ajax({
             url: "asset/controller/controllerDashboard.php",
