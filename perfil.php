@@ -46,7 +46,7 @@ $conn->close();
         overflow: hidden;
     }
     .profile-header {
-        background: linear-gradient(135deg, #6c63ff, #836fff);
+        background: linear-gradient(135deg, #ffbf77ff, #723300ff);
         color: white;
         padding: 30px;
         text-align: center;
@@ -65,7 +65,7 @@ $conn->close();
     }
     .profile-item i {
         font-size: 1.5rem;
-        color: #6c63ff;
+        color: #ad680dff;
         margin-right: 15px;
     }
     .profile-item p {

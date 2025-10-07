@@ -80,7 +80,7 @@ if(is_array($servicos)){
         $stmtServ->execute();
         $resServ = $stmtServ->get_result()->fetch_assoc();
         $stmtServ->close();
-        $precoServicos += $resServ['preco'] ?? 0;
+        $precoServicos += $resServ['precoTotal'] ?? 0;
     }
 }
 

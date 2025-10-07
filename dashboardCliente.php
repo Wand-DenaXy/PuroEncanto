@@ -51,6 +51,7 @@ $conn->close();
 </div>
 
 <div class="content" style="margin-left:250px; padding:20px;">
+
     <h2>Calendário de Eventos</h2>
     <div id="calendar"></div>
 
@@ -58,7 +59,7 @@ $conn->close();
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Nome</th>
+                <th>Tipo Evento</th>
                 <th>Data</th>
                 <th>Hora</th>
                 <th>Estado</th>
@@ -101,18 +102,17 @@ $conn->close();
         <form id="formEvento">
           <!-- Nome do Evento -->
           <div class="mb-3">
-            <label for="nome" class="form-label"><strong>Nome do Evento</strong></label>
+            <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
             <select id="nome" name="Nome" class="form-control" required>
               <optgroup label="Manhã">
-                <option value="1">Casamentos</option>
-                <option value="2">Festas</option>
-                <option value="3">Aniversários</option>
-                <option value="4">Empresarial</option>Fvar
+                <option value="2">Casamentos</option>
+                <option value="3">Festas Infantis</option>
+                <option value="4">Aniversários</option>
+                <option value="1">Empresarial</option>
               </optgroup>
             </select>
           </div>
 
-          <!-- Data -->
           <div class="mb-3">
             <label for="data" class="form-label"><strong>Data</strong></label>
             <input type="date" class="form-control" id="data" name="data" required>
@@ -160,8 +160,7 @@ $conn->close();
   </div>
 </div>
 
-<!-- Numero de convidados -->
-<!-- Pacote de Convidados -->
+
 <div class="mb-3">
   <label for="pacote" class="form-label"><strong>Pacote de Convidados</strong></label>
   <select id="pacote" name="pacote" class="form-control" required>
@@ -230,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var hora = $('#hora').val();
     var pacote = $('#pacote').val();
 
-    // Pega os serviços selecionados
     var servicosSelecionados = [];
     $('.servico:checked').each(function() {
         servicosSelecionados.push($(this).val());
@@ -256,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log("Resposta do servidor:", res);
 
                     if(res.flag){
-                        // Adiciona evento ao calendário
+                        
                         calendar.addEvent({ 
                             title: tipoNome, 
                             start: data+"T"+hora,

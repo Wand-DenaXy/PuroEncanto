@@ -408,6 +408,7 @@ session_start();
     <!-- End Portfolio Modal Section -->
 
     <!-- Start Pricing Table Section -->
+     
     <div id="pricing" class="pricing-section">
         <div class="container">
             <div class="row">
@@ -421,16 +422,14 @@ session_start();
                 </div>
             </div>
             <div class="row">
-
                 <div class="pricing">
-
                     <div class="col-md-12">
                         <div class="pricing-table">
                             <div class="plan-name">
                                 <h3>20 Convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">86<span>.99€</span></div>
+                                <div class="price-value">200€</div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
@@ -439,11 +438,13 @@ session_start();
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
                                     <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
-                                <a href="servico.html" class="btn-system btn-small">Comprar</a>
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -454,7 +455,7 @@ session_start();
                                 <h3>40 Convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">172<span>.99€</span></div>
+                                <div class="price-value">350€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
@@ -463,11 +464,13 @@ session_start();
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
                                     <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
-                                <a href="servico.html" class="btn-system btn-small">Comprar</a>
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -477,7 +480,7 @@ session_start();
                                 <h3>60 Convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">258<span>.99€</span></div>
+                                <div class="price-value">500€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
@@ -486,11 +489,13 @@ session_start();
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
                                     <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
-                                <a href="servico.html" class="btn-system btn-small">Comprar</a>
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -501,7 +506,7 @@ session_start();
                                 <h3>80 convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">344<span>.99€</span></div>
+                                <div class="price-value">650€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
@@ -510,17 +515,170 @@ session_start();
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
                                     <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
-                                <a href="servico.html" class="btn-system btn-small">Comprar</a>
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>100 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">800€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>100 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>120 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">950€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>120 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>140 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1100€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>140 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>160 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1250€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>160 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>180 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1400€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>160 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>200 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1550€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>200 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <br>
         <br>
         <br>
@@ -541,7 +699,7 @@ session_start();
                     <!-- Testimonial 1 -->
                     <div class="testimonials item">
                         <div class="testimonial-content">
-                            <img src="images/testimonial/face_1.png" alt="">
+                            <img src="images/jose.jpg" alt="">
                             <div class="testimonial-author">
                                 <div class="author">José Miguel</div>
                             </div>
@@ -552,7 +710,7 @@ session_start();
                     <!-- Testimonial 2 -->
                     <div class="testimonials item">
                         <div class="testimonial-content">
-                            <img src="images/testimonial/face_2.png" alt="">
+                            <img src="images/margarida.jpg" alt="">
                             <div class="testimonial-author">
                                 <div class="author">Margarida Lopes</div>
                             </div>
@@ -564,7 +722,7 @@ session_start();
                     <!-- Testimonial 3 -->
                     <div class="testimonials item">
                         <div class="testimonial-content">
-                            <img src="images/testimonial/face_3.png" alt="">
+                            <img src="images/carlos.jpg" alt="">
                             <div class="testimonial-author">
                                 <div class="author">Carlos Vieira</div>
                             </div>
