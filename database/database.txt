@@ -130,12 +130,7 @@
 			CREATE TABLE Balancete (
 			ID_Balancete INT AUTO_INCREMENT PRIMARY KEY,
 			descricao VARCHAR(100) NOT NULL,
-			codigo_conta VARCHAR(5) NOT NULL,
-			ID_Cliente INT,
-			ID_Fornecedor INT,
-			saldo DECIMAL(15,2),
-			FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente),
-			FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor)
+			saldo DECIMAL(15,2)
 		);
 		CREATE TABLE DividasAPagar (
 			ID_Divida INT PRIMARY KEY AUTO_INCREMENT,
@@ -153,6 +148,27 @@
 			FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE,
 			FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
 		);
+        INSERT INTO Balancete (descricao, saldo) VALUES
+('Depósitos à ordem', 147623.91),
+('Clientes', 218241.36),
+('Fornecedores', 2233.06),
+('Pessoal', 5365.80),
+('Estado e outros entes públicos', 1181.95),
+('Acionistas/sócios', 0.00),
+('Outras contas a receber e a pagar', 20172.00),
+('Diferimentos', 1243.56),
+('Compras', 0.00),
+('Matérias-primas, subsidiárias e de consumo', 5.69),
+('Ativos fixos tangíveis', 50579.98),
+('Ativos intangíveis', 13749.99),
+('Capital subscrito', 10000.00),
+('Custo das mercadorias vendidas e das matérias consumidas', 1815.27),
+('Fornecimentos e serviços externos', 68943.06),
+('Gastos com o pessoal', 7359.78),
+('Gastos de depreciação e de amortização', 2070.03),
+('Vendas', 21082.00),
+('Prestações de serviços', 156350.00);
+
 		select * from servicos;
 			INSERT INTO Funcionarios (nome,telefone,salario ,nif) VALUES 
 		("António Dias Alegres",920123345,885,"250941392"), 
@@ -1335,6 +1351,8 @@
 	FROM TotalAtivo
 	GROUP BY MONTH(Data)
 	ORDER BY MONTH(Data);
+    
+select * from Clientes;
 
 
 
