@@ -70,9 +70,9 @@ function GraficoDiferencaDashboard() {
                             datasets: [{
                                 label: 'Trimestral',
                                 data: response.dados2  , 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                backgroundColor: 'rgb(163, 117, 66)',
+                                borderColor: 'rgba(0, 0, 0, 1), 1)',
+                                borderWidth: 2
                             }]
                         },
                         options: {
@@ -81,14 +81,14 @@ function GraficoDiferencaDashboard() {
                             title: {
                                 display: true,
                                 text: 'Serviço que mais rendeu - Trimestral',
-                                color: 'white',
+                                color: 'black',
                                 font: {
                                     size: 18
                                 }
                             },
                               legend: {
                                 labels: {
-                                    color: 'white'
+                                    color: 'black'
                                 }
                             }
                         },
@@ -102,10 +102,10 @@ function GraficoDiferencaDashboard() {
                                 },
                                 x: {
                                 ticks: {
-                                    color: 'white'
+                                    color: 'black'
                                 },
                                  grid: {
-                                    color: 'white'
+                                    color: 'black'
                                 }
                             },
                         }
@@ -147,23 +147,30 @@ function GraficoServicoDashboard() {
                                 '#FF8C00', '#00BFFF', '#FF1493', '#20B2AA', '#D2691E', '#ADFF2F', '#A52A2A', '#7FFF00',
                                 '#B22222', '#9932CC', '#FF69B4', '#4B0082', '#FA8072'
                             ], 
-                            borderWidth: 1
+                            borderWidth: 2
                         }]
                     },
                     options: {
                         responsive: true,
                         plugins: {
                             legend: {
-                                position: 'top', 
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 10,
+                                }
                             },
                             tooltip: {
                                 enabled: true 
                             }
                         },
-                        cutout: '70%', 
                         animation: {
                             animateScale: true, 
                             animateRotate: true 
+                        },
+                        layout: {
+                            padding: {
+                                right: 50
+                            }
                         }
                     }
                 });
@@ -176,7 +183,91 @@ function GraficoServicoDashboard() {
         }
     });
 }
+    function GraficoServicoDashboardSoma() {
+        $.ajax({
+            url: "asset/controller/controllerDashboard.php",
+            type: "POST",
+            data: { op: 20 },
+            dataType: "json",
+            success: function(response) {
+                console.log("Resposta AJAX:", response);
+                if (response.flag) {
+                    const ctx = document.getElementById('graficoRendimento99').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: response.dados1,
+                            datasets: [{
+                                label: 'A Soma de Tudos os Serviços Vendidos',
+                                data: response.dados2, 
+                                backgroundColor: 'rgb(163, 117, 66)',
+                                borderColor: 'rgba(0, 0, 0, 1)',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                            title: {
+                                display: true,
+                                text: 'A Soma de Tudos os Serviços Vendidos',
+                                color: 'black',
+                                font: {
+                                    size: 18
+                                }
+                            },
+                              legend: {
+                                labels: {
+                                    color: 'black'
+                                }
+                            }
+                        },
+                        
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: value => value + " €"
+                                    }
+                                },
+                                x: {
+                                ticks: {
+                                    color: 'black'
+                                },
+                                 grid: {
+                                    color: 'black'
+                                }
+                            },
+                        }
+                        }
+                    });
+                } else {
+                    alert(response.msg);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro AJAX:", error);
+            }
+        });
+    }
 
+function BotoesGraficoDashboard()
+{
+            $("#btnGrafico1").click(function() {
+                $("#graficoBalancete").show();
+                $("#graficoVendidos").hide();
+
+                $("#btnGrafico1").addClass("active");
+                $("#btnGrafico2").removeClass("active");
+            });
+            $("#btnGrafico2").click(function() {
+                $("#graficoVendidos").show();
+                $("#graficoBalancete").hide();
+
+                $("#btnGrafico2").addClass("active");
+                $("#btnGrafico1").removeClass("active");
+            });
+}
 
 function GraficoServicoUtilizadoAbril() {
         $.ajax({
@@ -195,9 +286,9 @@ function GraficoServicoUtilizadoAbril() {
                             datasets: [{
                                 label: 'Serviços Utilizados',
                                 data: response.dados2, 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                backgroundColor: 'rgb(163, 117, 66)',
+                                borderColor: 'rgba(0, 0, 0, 1)',
+                                borderWidth: 2
                             }]
                         },
                         options: {
@@ -206,7 +297,7 @@ function GraficoServicoUtilizadoAbril() {
                         title: {
                             display: true,
                             text: 'Serviços mais utilizados - Abril', 
-                            color: 'white',
+                            color: 'black',
                             font: {
                                 size: 18
                             }
@@ -216,10 +307,10 @@ function GraficoServicoUtilizadoAbril() {
                             scales: {
                                 x: {
                                 ticks: {
-                                    color: 'white'
+                                    color: 'black'
                                 },
                                  grid: {
-                                    color: 'white'
+                                    color: 'black'
                                 }
 
                             },
@@ -227,7 +318,7 @@ function GraficoServicoUtilizadoAbril() {
                                     beginAtZero: true,
                                     suggestedMax: Math.max(...response.dados2) * 1.1,
                                     ticks: {
-                                        color: 'white',
+                                        color: 'black',
                                         callback: value => value + ""
                                     }
                                 }
@@ -260,9 +351,9 @@ function GraficoServicoUtilizadoMaio() {
                             datasets: [{
                                 label: 'Serviços Utilizados',
                                 data: response.dados2, 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                backgroundColor: 'rgb(163, 117, 66)',
+                                borderColor: 'rgba(0, 0, 0, 1)',
+                                borderWidth: 2
                             }]
                         },
                         options: {
@@ -271,7 +362,7 @@ function GraficoServicoUtilizadoMaio() {
                         title: {
                             display: true,
                             text: 'Serviços mais utilizados - Maio', 
-                            color: 'white',
+                            color: 'black',
                             font: {
                                 size: 18
                             }
@@ -281,10 +372,10 @@ function GraficoServicoUtilizadoMaio() {
                             scales: {
                                 x: {
                                 ticks: {
-                                    color: 'white'
+                                    color: 'black'
                                 },
                                  grid: {
-                            color: 'white'
+                            color: 'black'
                                 }
 
                             },
@@ -292,7 +383,7 @@ function GraficoServicoUtilizadoMaio() {
                                     beginAtZero: true,
                                     suggestedMax: Math.max(...response.dados2) * 1.1,
                                     ticks: {
-                                        color: 'white',
+                                        color: 'black',
                                         callback: value => value + ""
                                     }
                                 }
@@ -325,9 +416,9 @@ function GraficoServicoUtilizadoJunho() {
                             datasets: [{
                                 label: 'Serviços Utilizados',
                                 data: response.dados2, 
-                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                backgroundColor: 'rgb(163, 117, 66)',
+                                borderColor: 'rgba(0, 0, 0, 1)',
+                                borderWidth: 2
                             }]
                         },
                         options: {
@@ -336,7 +427,7 @@ function GraficoServicoUtilizadoJunho() {
                         title: {
                             display: true,
                             text: 'Serviços mais utilizados - Junho', 
-                            color: 'white',
+                            color: 'black',
                             font: {
                                 size: 18
                             }
@@ -346,10 +437,10 @@ function GraficoServicoUtilizadoJunho() {
                             scales: {
                                 x: {
                                 ticks: {
-                                    color: 'white'
+                                    color: 'black'
                                 },
                                  grid: {
-                                    color: 'white'
+                                    color: 'black'
                                 }
 
                             },
@@ -357,7 +448,7 @@ function GraficoServicoUtilizadoJunho() {
                                     beginAtZero: true,
                                     suggestedMax: Math.max(...response.dados2) * 1.1,
                                     ticks: {
-                                        color: 'white',
+                                        color: 'black',
                                         callback: value => value + ""
                                     }
                                 }
@@ -393,54 +484,6 @@ function getGastosDashboard()
                             data: response.dados2, 
                             backgroundColor: 'rgba(231,74,59,0.5)',
                             borderColor: '#e74a3b',
-                            fill: true
-                        }]
-                    },
-                    options: {
-                                    plugins: {
-                                        legend: {
-                                            display: false
-                                        }
-                                    },
-                                    scales: {
-                                        x: {
-                                            display: false
-                                        },
-                                        y: {
-                                            display: false
-                                        }
-                                    }
-                                }
-                            });
-            } else {
-                alert(response.msg);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro AJAX:", error);
-        }
-    });
-}
-function getRedimentosDashboard()
-{
-        $.ajax({
-        url: "asset/controller/controllerDashboard.php",
-        type: "POST",
-        data: { op: 12 },
-        dataType: "json",
-        success: function(response) {
-            console.log("Resposta AJAX:", response);
-            if (response.flag) {
-                const ctx3 = document.getElementById('chart2').getContext('2d');
-                new Chart(ctx3, {
-                    type: 'line',
-                    data: {
-                        labels: response.dados1,
-                        datasets: [{
-                            label: 'Redimentos',
-                            data: response.dados2, 
-                            backgroundColor: 'rgba(28,200,138,0.5)',
-                            borderColor: '#1cc88a',
                             fill: true
                         }]
                     },
@@ -649,7 +692,7 @@ function pagarDividasReceber(id){
 
     let dados = new FormData();
     dados.append("op", 19);
-    dados.append("ID_Divida", id);
+    dados.append("ID_Evento", id);
 
     $.ajax({
     url: "asset/controller/controllerDashboard.php",
@@ -683,7 +726,7 @@ function recusarDividasPagar(id)
 
     let dados = new FormData();
     dados.append("op", 15);
-    dados.append("ID_Divida", id);
+    dados.append("ID_Evento", id);
 
     $.ajax({
     url: "asset/controller/controllerDashboard.php",
@@ -761,21 +804,6 @@ function GraficoTotalAtivoDashboard() {
         }
     });
 }
-
-function Timer()
-{
-     function updateTime() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const timeString = `${hours}:${minutes}:${seconds}`;
-
-        document.getElementById('time').textContent = timeString;
-    }
-
-    setInterval(updateTime, 1000);
-}
 function alerta(titulo,msg,icon){
     Swal.fire({
         position: 'center',
@@ -786,8 +814,9 @@ function alerta(titulo,msg,icon){
 
       })
 }
-function carregarDashboard() {         
-    setTimeout(GraficoServico, 100);   // prioridade 1
+function carregarDashboard() {   
+    setTimeout(BotoesGraficoDashboard, 100); 
+    setTimeout(GraficoServicoDashboardSoma, 150); 
     setTimeout(GraficoTotalAtivoDashboard, 200);
     setTimeout(GraficoDiferencaDashboard, 200);   // prioridade 2
     setTimeout(getGastosDashboard, 400);          // prioridade 3

@@ -579,19 +579,23 @@ function GraficoDiferencaDashboard(){
     alert( "Request failed: " + textStatus );
     });
 }
-function Timer()
+function BotoesGraficoDashboard()
 {
-     function updateTime() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const timeString = `${hours}:${minutes}:${seconds}`;
+            $("#btnGrafico1").click(function() {
+                $("#graficoBalancete").show();
+                $("#graficoVendidos").hide();
 
-        document.getElementById('time').textContent = timeString;
-    }
+                $("#btnGrafico1").addClass("active");
+                $("#btnGrafico2").removeClass("active");
+            });
 
-    setInterval(updateTime, 1000);
+            $("#btnGrafico2").click(function() {
+                $("#graficoVendidos").show();
+                $("#graficoBalancete").hide();
+
+                $("#btnGrafico2").addClass("active");
+                $("#btnGrafico1").removeClass("active");
+            });
 }
 function alerta2(msg,icon)
 {
@@ -630,11 +634,145 @@ function alerta(titulo,msg,icon){
 
       })
 }
+function getGastosGrafico()
+{
+        $.ajax({
+        url: "asset/controller/controllergastoserendimentos.php",
+        type: "POST",
+        data: { op: 18 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx3 = document.getElementById('graficoGastos99').getContext('2d');
+                new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'Gastos',
+                            data: response.dados2, 
+                            backgroundColor: 'rgba(248, 31, 12, 0.5)',
+                            borderColor: 'rgba(0, 0, 0, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                            responsive: true,
+                                plugins: {
+                        title: {
+                            display: true,
+                            text: 'Gastos', 
+                            color: 'black',
+                            font: {
+                                size: 18
+                            }
+                        },
+
+                    },
+                            scales: {
+                                x: {
+                                ticks: {
+                                    color: 'black'
+                                },
+                                 grid: {
+                                    color: 'black'
+                                }
+
+                            },
+                                y: {
+                                    beginAtZero: true,
+                                    suggestedMax: Math.max(...response.dados2) * 1.1,
+                                    ticks: {
+                                        color: 'black',
+                                        callback: value => value + " €"
+                                    }
+                                }
+                            }
+                        }
+                    });
+            } else {
+                alert(response.msg);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
+}
+function getRedimentosGrafico()
+{
+        $.ajax({
+        url: "asset/controller/controllergastoserendimentos.php",
+        type: "POST",
+        data: { op: 19 },
+        dataType: "json",
+        success: function(response) {
+            console.log("Resposta AJAX:", response);
+            if (response.flag) {
+                const ctx3 = document.getElementById('graficoRendimentos99').getContext('2d');
+                new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: response.dados1,
+                        datasets: [{
+                            label: 'Redimentos',
+                            data: response.dados2, 
+                            backgroundColor: 'rgba(17, 221, 146, 1)',
+                            borderColor: 'rgba(0, 0, 0, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                        options: {
+                            responsive: true,
+                                plugins: {
+                        title: {
+                            display: true,
+                            text: 'Rendimentos', 
+                            color: 'black',
+                            font: {
+                                size: 18
+                            }
+                        },
+
+                    },
+                            scales: {
+                                x: {
+                                ticks: {
+                                    color: 'black'
+                                },
+                                 grid: {
+                                    color: 'black'
+                                }
+
+                            },
+                                y: {
+                                    beginAtZero: true,
+                                    suggestedMax: Math.max(...response.dados2) * 1.1,
+                                    ticks: {
+                                        color: 'black',
+                                        callback: value => value + " €"
+                                    }
+                                }
+                            }
+                        }
+                    });
+            } else {
+                alert(response.msg);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro AJAX:", error);
+        }
+    });
+}
 $(function() {
     getListaRendimentos();
     getListaGastos();
     getListaResumo();
     getSelectGastos();
     getSelectRendimentos();
-    Timer();
+        getGastosGrafico();
+    getRedimentosGrafico();
+    BotoesGraficoDashboard();
 });

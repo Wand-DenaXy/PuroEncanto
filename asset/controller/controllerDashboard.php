@@ -63,6 +63,8 @@ if ($_POST['op'] == 19) {
     $resp = $func->pagarDividasReceber($_POST['ID_Evento']);
     echo $resp;
 }
-
-
+if ($_POST['op'] == 20) {
+    $resp = $func->GraficoServicoDashboardSoma();
+    echo $resp;
+}
 ?>
