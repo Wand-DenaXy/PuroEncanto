@@ -59,6 +59,7 @@ $conn->close();
     <script src="asset/js/lib/datatables.js"></script>
     <script src="asset/js/lib/select2.js"></script>
     <script src="asset/js/lib/sweatalert.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="asset/js/lib/datatables.js">
 </head>
 
@@ -91,66 +92,69 @@ $conn->close();
                     <div class="card p-3">
                         <h6>Total Ativo</h6>
                         <h4><?php echo $totalTotalAtivo; ?>€</h4>
-                        <canvas id="chart1" height="80"></canvas>
+                        <canvas id="TotalAtivo" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Redimentos</h6>
                         <h4><?php echo $totalRendimentos; ?>€</h4>
-                        <canvas id="chart2" height="80"></canvas>
+                        <canvas id="TotalRendimentosGrafico" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Gastos</h6>
                         <h4><?php echo $totalGastos; ?>€</h4>
-                        <canvas id="chart3" height="80"></canvas>
+                        <canvas id="TotalGastosGrafico" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Receita</h6>
                         <h4><?php echo $saldo; ?>€</h4>
-                        <canvas id="chart4" height="80"></canvas>
+                        <canvas id="TotalLucro" height="80"></canvas>
                     </div>
                 </div>
             </div>
- <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="btn-group" role="group" aria-label="Botões de gráficos">
-                    <button class="btn btn-outline-primary" id="btnGrafico1">Gráfico de Rendimentos 1</button>
-                    <button class="btn btn-outline-primary" id="btnGrafico2">Gráfico de Rendimentos 2</button>
-                </div>
-            </div>
-        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="navbar navbar-expand-lg navbar-light bg-light" id="acordionID">
+                            <div class="btn-group" role="group" aria-label="Botões de gráficos">
+                                <button class="btn btn-outline-primary active" id="btnGrafico1"
+                                    data-bs-toggle="button">Balancete</button>
+                                <button class="btn btn-outline-primary" id="btnGrafico2" data-bs-toggle="button">Serviço
+                                    Mais
+                                    Utilizados</button>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Conteúdo Principal com Gráficos -->
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-body">
-                    <div id="conteudoGraficos" class="grafico-container">
-                        <div class="grafico" id="grafico1">
-                            <h5>Balancete</h5>
-                            <canvas id="graficoRendimentos4"></canvas>
-                        </div>
-                        <div class="grafico" id="grafico2" style="display: none;">
-                            <h5>Gráfico 2</h5>
-                            <canvas id="graficoRendimentos2"></canvas>
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <div id="graficoBalancete">
+                                        <h5>Balancete</h5>
+                                        <canvas id="graficoBalanceteDonut"></canvas>
+                                    </div>
+                                    <div id="graficoVendidos" style="display: none;">
+                                        <h5>Serviços mais vendidos
+                                        </h5>
+                                        <canvas id="GraficoSomaServico"></canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
             <br>
             <br>
             <div>
 
-                <div class="container mt-1">
+                <div class=" container mt-1">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Dividas a Pagar</h5>
@@ -185,7 +189,7 @@ $conn->close();
                                         <th scope="col">Hora</th>
                                         <th scope="col">Valor</th>
                                         <th scope="col">Estado</th>
-                                        <th scope="col">Receber</th>
+                                        <th scope="col">Aceitar</th>
                                         <th scope="col">Recusar</th>
                                     </tr>
                                 </thead>
@@ -196,7 +200,6 @@ $conn->close();
                     </div>
                 </div>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="asset/js/graficos.js"></script>
             <script src="asset/js/dashboard.js"></script>
             <script>

@@ -58,7 +58,7 @@ class Dashboard {
                 $msg .= "<td>".$row['hora']."</td>";
                 $msg .= "<td>".$row['precoTotal']."€</td>";
                 $msg .= "<td>".$row['estado']."</td>";
-                $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Pagar</i></button></td>";
+                $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Aceitar</i></button></td>";
                 $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
                 $msg .= "</tr>";
             }
@@ -111,11 +111,11 @@ function pagarDividasReceber($ID_Evento)
     $msg = "";
     $flag = false;
 
-    $sql = "UPDATE Eventos SET Estado = 'aceite' WHERE ID_Evento = $ID_Evento";
+    $sql = "UPDATE Eventos SET estado = 'aceite' WHERE ID_Evento = $ID_Evento";
 
         if ($conn->query($sql) === TRUE) {
             $flag = true;
-            $msg = "Pago com Sucesso";
+            $msg = "Aceite com Sucesso";
         } else {
             $flag = false;
             $msg = "Error: " . $sql . "<br>" . $conn->error;
@@ -181,6 +181,38 @@ function recusarDividasPagar($ID_Divida)
     $conn->close();
     return $resp;
 
+}
+function GraficoServicoDashboardSoma() {
+    global $conn;
+    $dados1 = [];
+    $dados2 = [];
+    $msg = "";
+    $flag = false;
+
+    $sql = "SELECT Servicos.nome as descricao, COUNT(*) AS total FROM Servicos, Eventos_Servicos, Eventos WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico AND Eventos.ID_Evento = Eventos_Servicos.ID_Evento
+    GROUP BY Servicos.nome
+    ORDER BY total DESC;";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $dados1[] = $row['descricao'];
+            $dados2[] = $row['total'];
+        }
+        $flag = true;
+    } else {
+        $msg = "Nenhum Serviço encontrado.";
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg,
+        "dados1" => $dados1,
+        "dados2" => $dados2
+    ));
+
+    $conn->close();
+    return $resp;
 }
 function getServicoUsados() {
     global $conn;

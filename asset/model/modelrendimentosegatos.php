@@ -30,6 +30,102 @@ function registaGastos($descricao,$Valor, $Data){
 
     return $resp;
 }
+function getGastosGrafico() {
+    global $conn;
+    $dados1 = [];
+    $dados2 = [];
+    $msg = "";
+    $flag = false;
+
+    $sql = "SELECT 
+    CASE MONTH(Data)
+    WHEN 1 THEN 'Janeiro'
+    WHEN 2 THEN 'Fevereiro'
+    WHEN 3 THEN 'Março'
+    WHEN 4 THEN 'Abril'
+    WHEN 5 THEN 'Maio'
+    WHEN 6 THEN 'Junho'
+    WHEN 7 THEN 'Julho'
+    WHEN 8 THEN 'Agosto'
+    WHEN 9 THEN 'Setembro'
+    WHEN 10 THEN 'Outubro'
+    WHEN 11 THEN 'Novembro'
+    WHEN 12 THEN 'Dezembro'
+    END AS Mes,
+    SUM(Valor) AS TotalGastos
+    FROM Gastos
+    GROUP BY MONTH(Data)
+    ORDER BY MONTH(Data);";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $dados1[] = $row['Mes'];   
+            $dados2[] = $row['TotalGastos'];
+        }
+        $flag = true;
+    } else {
+        $msg = "Nenhum Gastos encontrado.";
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg,
+        "dados1" => $dados1,
+        "dados2" => $dados2
+    ));
+
+    $conn->close();
+    return $resp;
+}
+function getRedimentosGrafico() {
+            global $conn;
+            $dados1 = [];
+            $dados2 = [];
+            $msg = "";
+            $flag = false;
+
+            $sql = "SELECT 
+        CASE MONTH(Data)
+            WHEN 1 THEN 'Janeiro'
+            WHEN 2 THEN 'Fevereiro'
+            WHEN 3 THEN 'Março'
+            WHEN 4 THEN 'Abril'
+            WHEN 5 THEN 'Maio'
+            WHEN 6 THEN 'Junho'
+            WHEN 7 THEN 'Julho'
+            WHEN 8 THEN 'Agosto'
+            WHEN 9 THEN 'Setembro'
+            WHEN 10 THEN 'Outubro'
+            WHEN 11 THEN 'Novembro'
+            WHEN 12 THEN 'Dezembro'
+        END AS Mes,
+        SUM(Valor) AS TotalRendimentos
+        FROM Rendimento
+        GROUP BY MONTH(Data)
+        ORDER BY MONTH(Data);";
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $dados1[] = $row['Mes'];   
+                    $dados2[] = $row['TotalRendimentos'];
+                }
+                $flag = true;
+            } else {
+                $msg = "Nenhum Gastos encontrado.";
+            }
+
+            $resp = json_encode(array(
+                "flag" => $flag,
+                "msg" => $msg,
+                "dados1" => $dados1,
+                "dados2" => $dados2
+            ));
+
+            $conn->close();
+            return $resp;
+}
 function getListaGastos(){
 
     global $conn;
