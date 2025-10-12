@@ -113,17 +113,4 @@ elseif ($_POST['op'] == 18) {
     $resp = $func->getGastosGrafico();
     echo $resp;
 }
-elseif ($_POST['op'] == 20) { // novo caso
-    $respGastos = json_decode($func->getGastosGrafico(), true);
-    $respRend = json_decode($func->getRedimentosGrafico(), true);
-
-    $resp = json_encode(array(
-        "flag" => ($respGastos["flag"] && $respRend["flag"]),
-        "msg" => "",
-        "gastos" => $respGastos,
-        "rendimentos" => $respRend
-    ));
-
-    echo $resp;
-}
 ?>

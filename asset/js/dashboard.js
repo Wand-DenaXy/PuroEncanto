@@ -10,7 +10,7 @@ function GraficoDiferencaDashboard() {
         success: function(response) {
             console.log("Resposta AJAX:", response);
             if (response.flag) {
-                const ctx4 = document.getElementById('chart4').getContext('2d');
+                const ctx4 = document.getElementById('TotalLucro').getContext('2d');
                 new Chart(ctx4, {
                     type: 'line',
                     data: {
@@ -129,7 +129,7 @@ function GraficoServicoDashboard() {
         success: function(response) {
             console.log("Resposta AJAX:", response);
             if (response.flag) {
-                const ctx = document.getElementById('graficoRendimentos4').getContext('2d');
+                const ctx = document.getElementById('graficoBalanceteDonut').getContext('2d');
                 new Chart(ctx, {
                     type: 'doughnut',
                     data: {
@@ -192,7 +192,7 @@ function GraficoServicoDashboard() {
             success: function(response) {
                 console.log("Resposta AJAX:", response);
                 if (response.flag) {
-                    const ctx = document.getElementById('graficoRendimento99').getContext('2d');
+                    const ctx = document.getElementById('GraficoSomaServico').getContext('2d');
                     new Chart(ctx, {
                         type: 'bar',
                         data: {
@@ -474,7 +474,7 @@ function getGastosDashboard()
         success: function(response) {
             console.log("Resposta AJAX:", response);
             if (response.flag) {
-                const ctx3 = document.getElementById('chart3').getContext('2d');
+                const ctx3 = document.getElementById('TotalGastosGrafico').getContext('2d');
                 new Chart(ctx3, {
                     type: 'line',
                     data: {
@@ -522,7 +522,7 @@ function getRedimentosDashboard()
         success: function(response) {
             console.log("Resposta AJAX:", response);
             if (response.flag) {
-                const ctx3 = document.getElementById('chart2').getContext('2d');
+                const ctx3 = document.getElementById('TotalRendimentosGrafico').getContext('2d');
                 new Chart(ctx3, {
                     type: 'line',
                     data: {
@@ -765,7 +765,7 @@ function GraficoTotalAtivoDashboard() {
         success: function(response) {
             console.log("Resposta AJAX:", response);
             if (response.flag) {
-                const ctx3 = document.getElementById('chart1').getContext('2d');
+                const ctx3 = document.getElementById('TotalAtivo').getContext('2d');
                 new Chart(ctx3, {
                     type: 'bar',
                     data: {

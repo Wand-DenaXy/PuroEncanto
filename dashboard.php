@@ -92,28 +92,28 @@ $conn->close();
                     <div class="card p-3">
                         <h6>Total Ativo</h6>
                         <h4><?php echo $totalTotalAtivo; ?>€</h4>
-                        <canvas id="chart1" height="80"></canvas>
+                        <canvas id="TotalAtivo" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Redimentos</h6>
                         <h4><?php echo $totalRendimentos; ?>€</h4>
-                        <canvas id="chart2" height="80"></canvas>
+                        <canvas id="TotalRendimentosGrafico" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Gastos</h6>
                         <h4><?php echo $totalGastos; ?>€</h4>
-                        <canvas id="chart3" height="80"></canvas>
+                        <canvas id="TotalGastosGrafico" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Receita</h6>
                         <h4><?php echo $saldo; ?>€</h4>
-                        <canvas id="chart4" height="80"></canvas>
+                        <canvas id="TotalLucro" height="80"></canvas>
                     </div>
                 </div>
             </div>
@@ -137,12 +137,12 @@ $conn->close();
                                 <div>
                                     <div id="graficoBalancete">
                                         <h5>Balancete</h5>
-                                        <canvas id="graficoRendimentos4"></canvas>
+                                        <canvas id="graficoBalanceteDonut"></canvas>
                                     </div>
                                     <div id="graficoVendidos" style="display: none;">
                                         <h5>Serviços mais vendidos
                                         </h5>
-                                        <canvas id="graficoRendimento99"></canvas>
+                                        <canvas id="GraficoSomaServico"></canvas>
                                     </div>
                                 </div>
                             </div>

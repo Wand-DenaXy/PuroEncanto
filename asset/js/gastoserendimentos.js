@@ -772,7 +772,7 @@ $(function() {
     getListaResumo();
     getSelectGastos();
     getSelectRendimentos();
-        getGastosGrafico();
+    getGastosGrafico();
     getRedimentosGrafico();
     BotoesGraficoDashboard();
 });
