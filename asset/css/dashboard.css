@@ -34,22 +34,22 @@ body {
     transition: all 0.3s ease;
     font-weight: 500;
 }
-    .btinfoperfil
-    {
-        width: 100%;
-        padding: 12px;
-        border-radius: 10px;
-        border: none;
-        background-color: #b68f5c;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s ease, transform 0.2s ease;
-    }
-    .btinfoperfil:hover {
-    background-color: #a37542;
-    transform: translateY(-2px);
+.btinfoperfil
+{
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: #b68f5c;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.btinfoperfil:hover {
+background-color: #a37542;
+transform: translateY(-2px);
 }
 #inputLabels input:focus,
 #inputLabels select:focus {
@@ -76,7 +76,6 @@ body {
 }
 .card {
     border: none;
-    border-radius: 10px;
     background-color: black;
     color: white;
 }
@@ -113,15 +112,11 @@ body {
 {
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
 }
-#graficoUtilizado {
-  background-color: black;
-  border-radius: 10px;
-}
 .time {
     position: absolute;
-    bottom: 20px;  /* Posiciona a div 20px da parte inferior da sidebar */
+    bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);  /* Centraliza horizontalmente */
+    transform: translateX(-50%);
     color: white;
     font-size: 20px;
     font-weight: 700;
@@ -149,4 +144,47 @@ transform: translateY(-2px);
 body {
     background: url('../images/93ea58efdcb1cedd9cecf423b5d6a2a4.jpg') no-repeat center center fixed;
     background-size: cover;
+}
+#graficoBalanceteDonut
+{
+    margin: auto;
+    width: 45% !important;
+    height: 50% !important;
+}
+#btnGrafico1
+{
+    color: #a37542;
+    border: none;
+}
+#btnGrafico1:hover
+{
+    color: white;
+     background-color: #a37542;
+    transform: translateY(-2px);
+}
+#btnGrafico1.active
+{
+    color: white;
+     background-color: #a37542;
+}
+#btnGrafico2
+{
+    color: #a37542;
+    border: none;
+}
+#btnGrafico2.active
+{
+    color: white;
+    background-color: #a37542;
+}
+#btnGrafico2:hover
+{
+    color: white;
+    background-color: #a37542;
+    transform: translateY(-2px);
+}
+#acordionID
+{
+    padding: 5px;
+    border-radius: 5px;
 }

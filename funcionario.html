@@ -64,6 +64,9 @@
                             <div class="col">
                                 <input type="email" class="form-control" placeholder="NIF" id="NIFFuncionario">
                             </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Tipo" id="ID_TipoColaboradores">
+                            </div>
                         </div>
                         <button type="button" class="btinfoperfil" onclick="registaFuncionario()">Registar</button>
 
@@ -90,8 +93,9 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Salario</th>
-                            <th scope="col">Contacto</th>
+                            <th scope="col">Função</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Valor</th>
                             <th scope="col">NIF</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Remover</th>
@@ -132,7 +136,7 @@
                                 </div>
             
                                 <div class="col-md-6">
-                                    <label for="salarioEdit" class="form-label">Salario</label>
+                                    <label for="salarioEdit" class="form-label">Valor</label>
                                     <input type="email" class="form-control" id="salarioEdit">
                                 </div>
             
@@ -140,7 +144,10 @@
                                     <label for="nifEdit" class="form-label">NIF</label>
                                     <input type="text" class="form-control" id="nifEdit">
                                 </div>
-            
+                                <div class="col-md-6">
+                                    <label for="ID_TipoColaboradoresEdit" class="form-label">Função</label>
+                                    <input type="text" class="form-control" id="ID_TipoColaboradoresEdit">
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -4,22 +4,22 @@ require_once 'connection2.php';
 
 class Funcionario{
 
-    function registaFuncionario($nome, $telefone, $salario,$NIF){
+    function registaFuncionario($nome, $telefone, $valor,$NIF,$ID_TipoColaboradores){
     
         global $conn;
         $msg = "";
         $flag = false;
-                $stmt = $conn->prepare("INSERT INTO Funcionarios (nome, telefone, salario,NIF) 
-            VALUES (?, ?, ?,?);");
-            $stmt->bind_param("siis", $nome, $telefone, $salario,$NIF);
+                $stmt = $conn->prepare("INSERT INTO Colaboradores (nome, telefone, valor,NIF,ID_TipoColaboradores) 
+            VALUES (?, ?, ?,?,?);");
+            $stmt->bind_param("siisi", $nome, $telefone, $valor,$NIF,$ID_TipoColaboradores);
 
             $stmt->execute();
-            $stmt1 = $conn->prepare("INSERT INTO DividasAPagar (Tipo, Valor, Estado,ID_Funcionario) 
+            $stmt1 = $conn->prepare("INSERT INTO DividasAPagar (Tipo, Valor, Estado,ID_Colaboradores) 
             VALUES (?, ?, ?,?);");
-            $ID_Funcionario = $conn->insert_id;
+            $ID_Colaboradores = $conn->insert_id;
             $tipo = "Funcionario";
             $estado = "Em aberto";
-            $stmt1->bind_param("sdsi", $tipo, $salario, $estado, $ID_Funcionario);
+            $stmt1->bind_param("sdsi", $tipo, $valor, $estado, $ID_Colaboradores);
             $stmt1->execute();
             
             $msg = "Registado com sucesso!";
@@ -67,20 +67,21 @@ class Funcionario{
         global $conn;
         $msg = "";
 
-        $sql = "SELECT * FROM Funcionarios";
+        $sql = "SELECT TipoColaboradores.Tipo AS Funcao,Colaboradores.* FROM Colaboradores,TipoColaboradores WHERE Colaboradores.ID_TipoColaboradores = TipoColaboradores.ID_TipoColaboradores";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $msg .= "<tr>";
-                $msg .= "<th scope='row'>".$row['ID_Funcionario']."</th>";
+                $msg .= "<th scope='row'>".$row['ID_Colaboradores']."</th>";
                 $msg .= "<th scope='row'>".$row['nome']."</th>";
-                $msg .= "<td>".$row['salario']."€</td>";
+                $msg .= "<td>".$row['Funcao']."</td>";
                 $msg .= "<td>".$row['telefone']."</td>";
+                $msg .= "<td>".$row['valor']."€</td>";
                 $msg .= "<td>".$row['NIF']."</td>";
-                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='removerFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-trash'>Remover</i></button></td>";
-                $msg .= "<td><button class='btn btn-success' onclick ='PagarSalarioFuncionario(".$row['ID_Funcionario'].")'><i class='fa fa-trash'>Pagar Salario</i></button></td>";
+                $msg .= "<td><button class='btn btn-warning' onclick ='getDadosFuncionario(".$row['ID_Colaboradores'].")'><i class='fa fa-pencil'>Editar</i></button></td>";
+                $msg .= "<td><button class='btn btn-danger' onclick ='removerFuncionario(".$row['ID_Colaboradores'].")'><i class='fa fa-trash'>Remover</i></button></td>";
+                $msg .= "<td><button class='btn btn-success' onclick ='PagarSalarioFuncionario(".$row['ID_Colaboradores'].")'><i class='fa fa-trash'>Pagar Salario</i></button></td>";
                 $msg .= "</tr>";
             }
         } else {
@@ -101,13 +102,13 @@ class Funcionario{
 
         return ($msg);
     }
-    function PagarSalarioFuncionario($ID_Funcionario)
+    function PagarSalarioFuncionario($ID_Colaboradores)
     {
         global $conn;
         $msg = "";
         $flag = true;
         $sql = "";
-        $sql = "UPDATE DividasAPagar SET estado = 'Em aberto' WHERE ID_Funcionario =".$ID_Funcionario;
+        $sql = "UPDATE DividasAPagar SET estado = 'Em aberto' WHERE ID_Colaboradores =".$ID_Colaboradores;
 
                 if ($conn->query($sql) === TRUE) {
             $msg = "Divida Recebida!";
@@ -126,12 +127,12 @@ class Funcionario{
         return($resp);
         
     }
-        function getDadosFuncionario($ID_Funcionario){
+        function getDadosFuncionario($ID_Colaboradores){
         global $conn;
         $msg = "";
         $row = "";
 
-        $sql = "SELECT * FROM Funcionarios WHERE ID_Funcionario =".$ID_Funcionario;
+        $sql = "SELECT * FROM Colaboradores WHERE ID_Colaboradores =".$ID_Colaboradores;
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -144,7 +145,7 @@ class Funcionario{
 
     }
 
-    function guardaEditFuncionario($nome, $telfone, $salario, $nif,$ID_Funcionario){
+    function guardaEditFuncionario($nome, $telfone, $valor, $nif,$ID_Colaboradores,$ID_TipoColaboradores){
         
         global $conn;
         $msg = "";
@@ -152,7 +153,7 @@ class Funcionario{
         $sql = "";
 
 
-        $sql = "UPDATE Funcionarios SET nome = '".$nome."', telefone = '".$telfone."',salario = '".$salario."',nif = '".$nif."' WHERE ID_Funcionario =".$ID_Funcionario;
+        $sql = "UPDATE Colaboradores SET nome = '".$nome."', telefone = '".$telfone."',valor = '".$valor."',nif = '".$nif."',ID_TipoColaboradores = '".$ID_TipoColaboradores."' WHERE ID_Colaboradores =".$ID_Colaboradores;
 
         if ($conn->query($sql) === TRUE) {
             $msg = "Editado com Sucesso";
@@ -171,12 +172,12 @@ class Funcionario{
         return($resp);
 
     }
-    function removerFuncionario($ID_Funcionario){
+    function removerFuncionario($ID_Colaboradores){
         global $conn;
         $msg = "";
         $flag = true;
 
-        $sql = "DELETE FROM Funcionarios WHERE ID_Funcionario = ".$ID_Funcionario;
+        $sql = "DELETE FROM Colaboradores WHERE ID_Colaboradores = ".$ID_Colaboradores;
 
         if ($conn->query($sql) === TRUE) {
             $msg = "Removido com Sucesso";

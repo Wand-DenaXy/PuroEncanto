@@ -105,4 +105,12 @@ elseif ($_POST['op'] == 11) {
     );
     echo $resp;
 }
+elseif ($_POST['op'] == 19) {
+    $resp = $func->getRedimentosGrafico();
+    echo $resp;
+}
+elseif ($_POST['op'] == 18) {
+    $resp = $func->getGastosGrafico();
+    echo $resp;
+}
 ?>

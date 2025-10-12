@@ -4,8 +4,9 @@ function registaFuncionario(){
     dados.append("op", 1);
     dados.append("nome", $('#nomeFuncionario').val());
     dados.append("telefone", $('#contactoFuncionario').val());
-    dados.append("salario", $('#salarioFuncionario').val());
+    dados.append("valor", $('#salarioFuncionario').val());
     dados.append("NIF", $('#NIFFuncionario').val());
+    dados.append("ID_TipoColaboradores", $('#ID_TipoColaboradores').val());
 
     $.ajax({
     url: "asset/controller/controllerFuncionario.php",
@@ -21,11 +22,11 @@ function registaFuncionario(){
 
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Funcionario",obj.msg,"success");
+            alerta("Colaborador",obj.msg,"success");
             getListaFuncionario();
         }else{
             alerta2(obj.msg,"error");
-            alerta("Funcionario",obj.msg,"error");    
+            alerta("Colaborador",obj.msg,"error");    
         }
         
     })
@@ -70,7 +71,7 @@ function removerFuncionario(id){
 
     let dados = new FormData();
     dados.append("op", 3);
-    dados.append("ID_Funcionario", id);
+    dados.append("ID_Colaboradores", id);
 
     $.ajax({
     url: "asset/controller/controllerFuncionario.php",
@@ -103,7 +104,7 @@ function PagarSalarioFuncionario(id){
 
     let dados = new FormData();
     dados.append("op", 6);
-    dados.append("ID_Funcionario", id);
+    dados.append("ID_Colaboradores", id);
 
     $.ajax({
     url: "asset/controller/controllerFuncionario.php",
@@ -169,12 +170,12 @@ Toast.fire({
   title: msg
 });
 }
-function getDadosFuncionario(ID_Funcionario){
+function getDadosFuncionario(ID_Colaboradores){
 
 
     let dados = new FormData();
     dados.append("op", 4);
-    dados.append("ID_Funcionario", ID_Funcionario);
+    dados.append("ID_Colaboradores", ID_Colaboradores);
 
     $.ajax({
     url: "asset/controller/controllerFuncionario.php",
@@ -189,13 +190,14 @@ function getDadosFuncionario(ID_Funcionario){
     .done(function( msg ) {
 
         let obj = JSON.parse(msg);
-        $('#numFuncionarioEdit').val(obj.ID_Funcionario);
+        $('#numFuncionarioEdit').val(obj.ID_Colaboradores);
         $('#nomeEdit').val(obj.nome);
         $('#telefoneEdit').val(obj.telefone);
-        $('#salarioEdit').val(obj.salario);
+        $('#salarioEdit').val(obj.valor);
         $('#nifEdit').val(obj.NIF);
+        $('#ID_TipoColaboradoresEdit').val(obj.ID_TipoColaboradores);
         $('#formEditFornecedores').modal('show');
-       $('#btnGuardar').attr("onclick","guardaEditFuncionario("+obj.ID_Funcionario+")") 
+       $('#btnGuardar').attr("onclick","guardaEditFuncionario("+obj.ID_Colaboradores+")") 
         
        $('#formEditFuncionario').modal('show')
     })
@@ -207,7 +209,7 @@ function getDadosFuncionario(ID_Funcionario){
     
 }
 
-function guardaEditFuncionario(ID_Funcionario) {
+function guardaEditFuncionario(ID_Colaboradores) {
     let dados = new FormData();
     dados.append("op", 5);
     dados.append("numFuncionarioEdit", $('#numFuncionarioEdit').val());
@@ -215,7 +217,8 @@ function guardaEditFuncionario(ID_Funcionario) {
     dados.append("telefoneEdit", $('#telefoneEdit').val());
     dados.append("salarioEdit", $('#salarioEdit').val());
     dados.append("nifEdit", $('#nifEdit').val());
-    dados.append("ID_Funcionario", ID_Funcionario);
+    dados.append("ID_TipoColaboradoresEdit", $('#ID_TipoColaboradoresEdit').val());
+    dados.append("ID_Colaboradores", ID_Colaboradores);
 
     $.ajax({
         url: "asset/controller/controllerFuncionario.php",
@@ -233,7 +236,7 @@ function guardaEditFuncionario(ID_Funcionario) {
         if(obj.flag) {
             alerta("Fornecedor", obj.msg, "success");
             alerta2(obj.msg,"success");
-            getListaFornecedores();
+            getListaFuncionario();
             myModal.hide();
         } else {
             alerta2(obj.msg,"error");
