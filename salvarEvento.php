@@ -28,12 +28,22 @@ $hora = $_POST['hora'] ?? '';
 $estado = "Pendente";
 $servicos = $_POST['servicos'] ?? [];
 
+// Formata hora para H:i:s
 if ($hora) {
     $hora = date('H:i:s', strtotime($hora));
 }
 
 $response['debug']['POST'] = $_POST;
+$response['debug']['hora_formatada'] = $hora;
 
+// Campos obrigatórios
+if (!$nome || !$data || !$hora || !$idTipoEvento || !$idPacote) {
+    $response['msg'] = "Campos obrigatórios em falta.";
+    echo json_encode($response);
+    exit;
+}
+
+// Verifica se o cliente existe
 $stmtCheckCliente = $conn->prepare("SELECT COUNT(*) as cnt FROM clientes WHERE ID_Cliente = ?");
 $stmtCheckCliente->bind_param("i", $idCliente);
 $stmtCheckCliente->execute();
@@ -46,55 +56,56 @@ if ($res['cnt'] == 0) {
     exit;
 }
 
-if (!$nome || !$data || !$hora || !$idTipoEvento || !$idPacote) {
-    $response['msg'] = "Campos obrigatórios em falta.";
-    echo json_encode($response);
-    exit;
-}
-
-$stmtCheck = $conn->prepare("SELECT COUNT(*) as cnt FROM eventos WHERE Data = ? AND hora = ?");
-$stmtCheck->bind_param("ss", $data, $hora);
+// Verifica se já existe evento do mesmo cliente no mesmo dia e hora
+$stmtCheck = $conn->prepare("
+    SELECT COUNT(*) as cnt 
+    FROM eventos 
+    WHERE Data = ? 
+      AND hora = ?
+      AND ID_Cliente = ?
+");
+$stmtCheck->bind_param("ssi", $data, $hora, $idCliente);
 $stmtCheck->execute();
 $rowCheck = $stmtCheck->get_result()->fetch_assoc();
 $stmtCheck->close();
 
-if ($rowCheck['cnt'] > 0) {
-    $response['msg'] = "Já existe um evento nesse horário!";
-    echo json_encode($response);
-    exit;
-}
 
+
+// Preço do pacote
 $stmtPacote = $conn->prepare("SELECT preco FROM pacotesconvidados WHERE ID_Pacote = ?");
 $stmtPacote->bind_param("i", $idPacote);
 $stmtPacote->execute();
 $resPacote = $stmtPacote->get_result()->fetch_assoc();
 $stmtPacote->close();
-$precoPacote = $resPacote['preco'] ?? 0;
+$precoPacote = floatval($resPacote['preco'] ?? 0);
 
+// Preço dos serviços
 $precoServicos = 0;
-if(is_array($servicos)){
-    foreach($servicos as $s){
+if (is_array($servicos)) {
+    foreach ($servicos as $s) {
         $idServico = intval($s);
         $stmtServ = $conn->prepare("SELECT preco FROM servicos WHERE ID_Servico = ?");
         $stmtServ->bind_param("i", $idServico);
         $stmtServ->execute();
         $resServ = $stmtServ->get_result()->fetch_assoc();
         $stmtServ->close();
-        $precoServicos += $resServ['precoTotal'] ?? 0;
+        $precoServicos += floatval($resServ['preco'] ?? 0);
     }
 }
 
+// Total final
 $precoTotal = $precoPacote + $precoServicos;
+
 $response['debug']['precoPacote'] = $precoPacote;
 $response['debug']['precoServicos'] = $precoServicos;
 $response['debug']['precoTotal'] = $precoTotal;
 
+// Insere evento
 $stmt = $conn->prepare("
     INSERT INTO eventos 
     (ID_Cliente, Nome, Data, hora, estado, ID_TipoEvento, ID_Pacote, PrecoTotal)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 ");
-
 $stmt->bind_param("issssiid", $idCliente, $nome, $data, $hora, $estado, $idTipoEvento, $idPacote, $precoTotal);
 
 if ($stmt->execute()) {
@@ -102,7 +113,7 @@ if ($stmt->execute()) {
     $response['msg'] = "Evento criado com sucesso!";
     $response['id'] = $stmt->insert_id;
 } else {
-    $response['msg'] = "Erro no execute: " . $stmt->error;
+    $response['msg'] = "Erro ao criar evento: " . $stmt->error;
 }
 
 $stmt->close();

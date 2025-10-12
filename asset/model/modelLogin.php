@@ -40,37 +40,55 @@ class Login {
     }
 
     function login($email, $pw){
-        global $conn;
-        $flag = true;
-        session_start();
+    global $conn;
+    $flag = true;
+    $redirect = "";
+    session_start();
 
-        $stmt = $conn->prepare("SELECT ID_Cliente, nome, Email, Password, ID_TipoUtilizador FROM Clientes WHERE Email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    $stmt = $conn->prepare("
+        SELECT c.ID_Cliente, c.nome, c.Email, c.Password, c.ID_TipoUtilizador, t.Tipo
+        FROM Clientes c
+        INNER JOIN TipoUtilizador t ON c.ID_TipoUtilizador = t.ID_TipoUtilizador
+        WHERE c.Email = ?
+    ");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            if(password_verify($pw, $row['Password'])){
-                $_SESSION['cliente_id']    = $row['ID_Cliente'];
-                $_SESSION['cliente_nome']  = $row['nome'];
-                $_SESSION['cliente_email'] = $row['Email'];
-                $_SESSION['tpUser']        = $row['ID_TipoUtilizador'];
-                $msg = "Login efetuado com sucesso!";
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        if(password_verify($pw, $row['Password'])){
+            // Guardar dados na sessão
+            $_SESSION['cliente_id']    = $row['ID_Cliente'];
+            $_SESSION['cliente_nome']  = $row['nome'];
+            $_SESSION['cliente_email'] = $row['Email'];
+            $_SESSION['tpUser']        = $row['ID_TipoUtilizador'];
+            $_SESSION['tipo_nome']     = $row['Tipo'];
+
+            // Definir página de destino
+            if ($row['Tipo'] === 'Administrador') {
+                $redirect = 'Dashboard.php';
             } else {
-                $flag = false;
-                $msg = "Password incorreta!";
+                $redirect = 'DashboardCliente.php';
             }
+
+            $msg = "Login efetuado com sucesso!";
         } else {
             $flag = false;
-            $msg = "Email não encontrado!";
+            $msg = "Password incorreta!";
         }
-
-        $stmt->close();
-        $conn->close();
-
-        return json_encode(['flag'=>$flag,'msg'=>$msg]);
+    } else {
+        $flag = false;
+        $msg = "Email não encontrado!";
     }
+
+    $stmt->close();
+    $conn->close();
+
+    return json_encode(['flag'=>$flag, 'msg'=>$msg, 'redirect'=>$redirect]);
+}
+
+
 
     function logout(){
         session_start();

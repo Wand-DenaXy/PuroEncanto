@@ -91,7 +91,7 @@ $conn->close();
     </table>
 </div>
 
-<<div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,7 +100,7 @@ $conn->close();
       </div>
       <div class="modal-body">
         <form id="formEvento">
-          <!-- Nome do Evento -->
+          <!-- Tipo do Evento -->
           <div class="mb-3">
             <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
             <select id="nome" name="Nome" class="form-control" required>
@@ -113,6 +113,7 @@ $conn->close();
             </select>
           </div>
 
+          <!-- Data -->
           <div class="mb-3">
             <label for="data" class="form-label"><strong>Data</strong></label>
             <input type="date" class="form-control" id="data" name="data" required>
@@ -135,54 +136,53 @@ $conn->close();
               </optgroup>
             </select>
           </div>
-          <!-- Serviços -->
-<div class="mb-3">
-  <label class="form-label"><strong>Serviços Adicionais</strong></label>
-  <div class="form-check">
-    <input class="form-check-input servico" type="checkbox" id="catering" value="246">
-    <label class="form-check-label" for="catering">Catering - 246€</label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
-    <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
-    <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
-    <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
-    <label class="form-check-label" for="decoracao">Decoração - 123€</label>
-  </div>
-</div>
 
+          <!-- Serviços Adicionais -->
+          <div class="mb-3">
+            <label class="form-label"><strong>Serviços Adicionais</strong></label>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="catering" value="246">
+              <label class="form-check-label" for="catering">Catering - 246€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
+              <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
+              <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
+              <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
+              <label class="form-check-label" for="decoracao">Decoração - 123€</label>
+            </div>
+          </div>
 
-<div class="mb-3">
-  <label for="pacote" class="form-label"><strong>Pacote de Convidados</strong></label>
-  <select id="pacote" name="pacote" class="form-control" required>
-    <option value="">-- Seleciona um Pacote --</option>
-    <option value="1" data-preco="200">Pacote 20 convidados - 200€</option>
-    <option value="2" data-preco="350">Pacote 40 convidados - 350€</option>
-    <option value="3" data-preco="500">Pacote 60 convidados - 500€</option>
-    <option value="4" data-preco="650">Pacote 80 convidad os - 650€</option>
-    <option value="5" data-preco="800">Pacote 100 convidados - 800€</option>
-    <option value="6" data-preco="950">Pacote 120 convidados - 950€</option>
-    <option value="7" data-preco="1100">Pacote 140 convidados - 1100€</option>
-    <option value="8" data-preco="1250">Pacote 160 convidados - 1250€</option>
-    <option value="9" data-preco="1400">Pacote 180 convidados - 1400€</option>
-    <option value="10" data-preco="1550">Pacote 200 convidados - 1550€</option>
-  </select>
-</div>
+          <!-- Pacote de Convidados -->
+          <div class="mb-3">
+            <label for="pacote" class="form-label"><strong>Pacote de Convidados</strong></label>
+            <select id="pacote" name="pacote" class="form-control" required>
+              <option value="">-- Seleciona um Pacote --</option>
+              <option value="1" data-preco="200">Pacote 20 convidados - 200€</option>
+              <option value="2" data-preco="350">Pacote 40 convidados - 350€</option>
+              <option value="3" data-preco="500">Pacote 60 convidados - 500€</option>
+              <option value="4" data-preco="650">Pacote 80 convidados - 650€</option>
+              <option value="5" data-preco="800">Pacote 100 convidados - 800€</option>
+              <option value="6" data-preco="950">Pacote 120 convidados - 950€</option>
+              <option value="7" data-preco="1100">Pacote 140 convidados - 1100€</option>
+              <option value="8" data-preco="1250">Pacote 160 convidados - 1250€</option>
+              <option value="9" data-preco="1400">Pacote 180 convidados - 1400€</option>
+              <option value="10" data-preco="1550">Pacote 200 convidados - 1550€</option>
+            </select>
+          </div>
 
+          <h4 id="precoTotal">Preço: 0 €</h4>
 
-<h4 id="precoTotal">Preço: 0 €</h4>
-
-<button type="submit" class="btn btn-primary">Criar Evento</button>
-
+          <button type="submit" class="btn btn-primary">Criar Evento</button>
         </form>
       </div>
     </div>
@@ -192,52 +192,217 @@ $conn->close();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicialização do calendário
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: 'pt',
         selectable: true,
+        events: <?php echo json_encode(array_map(function($ev){
+            return [
+                'id' => $ev['ID_Evento'],
+                'title' => $ev['Nome'] . ($ev['estado']=='Cancelado'?' (Cancelado)':''),
+                'start' => $ev['Data'] . 'T' . ($ev['hora'] ?: '09:00:00'),
+                'color' => ($ev['estado'] == 'Cancelado') ? 'red' : 'green'
+            ];
+        }, $eventos)); ?>,
         dateClick: function(info) {
             $('#data').val(info.dateStr);
             $('#eventoModal').modal('show');
+            calcularPreco(); // Atualiza preço ao abrir modal
         },
         validRange: function(nowDate) {
-            return {
-                start: nowDate 
-            };
+            return { start: nowDate };
         }
     });
     calendar.render();
 
-        var eventos = <?php echo json_encode($eventos); ?>;
-        eventos.forEach(function(ev){
-        var horaStr = ev.hora ? ev.hora : '09:00:00';
-        calendar.addEvent({
-        title: ev.Nome + (ev.estado=='Cancelado'?' (Cancelado)':''),
-        start: ev.Data + 'T' + horaStr,
-        color: ev.cor,
-        id: ev.ID_Evento
+    // Função para calcular o preço total
+    function calcularPreco() {
+        let total = 0;
+
+        // Pacote
+        let pacote = $('#pacote option:selected');
+        if(pacote.length > 0 && pacote.val() !== "") {
+            total += parseFloat(pacote.data('preco')) || 0;
+        }
+
+        // Serviços
+        $('.servico:checked').each(function() {
+            total += parseFloat($(this).val()) || 0;
+        });
+
+        $('#precoTotal').text("Preço: " + total.toFixed(2) + " €");
+        return total;
+    }
+
+    $(document).on('change', '.servico, #pacote', calcularPreco);
+    $('#eventoModal').on('shown.bs.modal', calcularPreco);
+
+    // Submit do formulário
+    $('#formEvento').on('submit', function(e) {
+        e.preventDefault();
+
+        let tipoId = $('#nome').val();
+        let tipoNome = $('#nome option:selected').text();
+        let data = $('#data').val();
+        let hora = $('#hora').val();
+        let pacote = $('#pacote').val();
+        let precoTotal = calcularPreco();
+
+        let servicosSelecionados = [];
+        $('.servico:checked').each(function() {
+            servicosSelecionados.push($(this).val());
+        });
+
+        if(tipoId && data && hora && pacote){
+            let horaInt = parseInt(hora.split(':')[0]);
+            if((horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17)){
+                $.ajax({
+                    url: 'salvarEvento.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        nome: tipoNome,
+                        id_tipoevento: tipoId,
+                        data: data,
+                        hora: hora,
+                        id_pacote: pacote,
+                        servicos: servicosSelecionados
+                    },
+                    success: function(res){
+                        console.log("Resposta do servidor:", res);
+                        if(res.flag){
+                            // Adiciona evento ao calendário
+                            calendar.addEvent({ 
+                                title: tipoNome, 
+                                start: data+"T"+hora,
+                                id: res.id,
+                                color: 'green'
+                            });
+
+                            // Adiciona à tabela
+                            $('#tabelaEventos').prepend(
+                                `<tr data-id="${res.id}">
+                                    <td>${tipoNome}</td>
+                                    <td>${data}</td>
+                                    <td>${hora}</td>
+                                    <td>Pendente</td>
+                                    <td><button class="btn btn-danger btn-sm cancelarEvento">Cancelar</button></td>
+                                </tr>`
+                            );
+
+                            $('#eventoModal').modal('hide');
+                            $('#formEvento')[0].reset();
+                            calcularPreco();
+
+                            Swal.fire({
+                                title: 'Evento criado!',
+                                text: 'Preço total: ' + precoTotal.toFixed(2) + ' €',
+                                icon: 'success'
+                            }).then(() => {
+                                window.location.href = 'checkout.php?preco=' + precoTotal.toFixed(2);
+                            });
+                        } else {
+                            Swal.fire('Erro', res.msg, 'error');
+                            console.error("DEBUG PHP:", res.debug || res);
+                        }
+                    },
+                    error: function(xhr){
+                        Swal.fire('Erro', 'Erro no servidor: '+xhr.responseText, 'error');
+                    }
+                });
+            } else {
+                Swal.fire('Horário inválido', 'Só pode marcar eventos das 9h às 13h ou das 14h às 17h.', 'warning');
+            }
+        } else {
+            Swal.fire('Erro', 'Preenche todos os campos obrigatórios!', 'warning');
+        }
     });
+
+    // Cancelar evento
+    $(document).on('click', '.cancelarEvento', function(){
+        var row = $(this).closest('tr');
+        var idEvento = row.data('id');
+
+        Swal.fire({
+            title: 'Tens a certeza?',
+            text: "Queres cancelar este evento?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, cancelar',
+            cancelButtonText: 'Não'
+        }).then((result) => {
+            if(result.isConfirmed){
+                $.ajax({
+                    url: 'cancelarEvento.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { id: idEvento },
+                    success: function(res){
+                        if(res.flag){
+                            row.remove();
+                            var evCal = calendar.getEventById(idEvento);
+                            if(evCal) evCal.remove();
+                            Swal.fire('Cancelado!', res.msg, 'success');
+                        } else {
+                            Swal.fire('Erro', res.msg, 'error');
+                        }
+                    },
+                    error: function(xhr){
+                        Swal.fire('Erro', 'Erro no servidor: '+xhr.responseText, 'error');
+                    }
+                });
+            }
+        });
+    });
+
 });
 
-  $('#formEvento').on('submit', function(e) {
+
+let precoBase = 100; 
+let precoPorConvidado = 10;
+// 📊 Cálculo do preço total (serviços + pacote)
+function calcularPreco() {
+    let total = 0;
+
+    // Pacote
+    let pacote = $('#pacote option:selected');
+    if(pacote.length > 0 && pacote.val() !== "") {
+        total += parseFloat(pacote.data('preco')) || 0;
+    }
+
+    // Serviços
+    $('.servico:checked').each(function() {
+        total += parseFloat($(this).val()) || 0;
+    });
+
+    $('#precoTotal').text("Preço: " + total.toFixed(2) + " €");
+    return total;
+}
+
+$(document).on('change', '.servico, #pacote', calcularPreco);
+$('#eventoModal').on('shown.bs.modal', calcularPreco);
+
+// Submit do formulário
+$('#formEvento').on('submit', function(e) {
     e.preventDefault();
 
-    var tipoId = $('#nome').val();
-    var tipoNome = $('#nome option:selected').text();
-    var data = $('#data').val();
-    var hora = $('#hora').val();
-    var pacote = $('#pacote').val();
+    let tipoId = $('#nome').val();
+    let tipoNome = $('#nome option:selected').text();
+    let data = $('#data').val();
+    let hora = $('#hora').val();
+    let pacote = $('#pacote').val();
+    let precoTotal = calcularPreco();
 
-    var servicosSelecionados = [];
+    let servicosSelecionados = [];
     $('.servico:checked').each(function() {
         servicosSelecionados.push($(this).val());
     });
 
     if(tipoId && data && hora && pacote){
-        var horaInt = parseInt(hora.split(':')[0]);
-        if( (horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17) ){
-
+        let horaInt = parseInt(hora.split(':')[0]);
+        if((horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17)){
             $.ajax({
                 url: 'salvarEvento.php',
                 type: 'POST',
@@ -252,9 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 success: function(res){
                     console.log("Resposta do servidor:", res);
-
                     if(res.flag){
-                        
                         calendar.addEvent({ 
                             title: tipoNome, 
                             start: data+"T"+hora,
@@ -273,26 +436,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         $('#eventoModal').modal('hide');
                         $('#formEvento')[0].reset();
+                        calcularPreco();
 
                         Swal.fire({
                             title: 'Evento criado!',
-                            text: 'Preço total: ' + res.debug.precoTotal.toFixed(2) + ' €',
+                            text: 'Preço total: ' + precoTotal.toFixed(2) + ' €',
                             icon: 'success'
                         }).then(() => {
-                            window.location.href = 'checkout.php?preco=' + res.debug.precoTotal;
+                            window.location.href = 'checkout.php?preco=' + precoTotal.toFixed(2);
                         });
-
                     } else {
                         Swal.fire('Erro', res.msg, 'error');
-                        console.error("DEBUG do PHP:", res.debug || res);
+                        console.error("DEBUG PHP:", res.debug || res);
                     }
                 },
-                error: function(xhr, status, error){
-                    console.error("Erro AJAX:", status, error, xhr.responseText);
-                    Swal.fire('Erro', 'Servidor retornou erro: '+xhr.responseText, 'error');
+                error: function(xhr){
+                    Swal.fire('Erro', 'Erro no servidor: '+xhr.responseText, 'error');
                 }
             });
-
         } else {
             Swal.fire('Horário inválido', 'Só pode marcar eventos das 9h às 13h ou das 14h às 17h.', 'warning');
         }
@@ -300,70 +461,6 @@ document.addEventListener('DOMContentLoaded', function() {
         Swal.fire('Erro', 'Preenche todos os campos obrigatórios!', 'warning');
     }
 });
-
-
-
-    $(document).on('click', '.cancelarEvento', function(){
-    var row = $(this).closest('tr');
-    var idEvento = row.data('id');
-
-    Swal.fire({
-        title: 'Tens a certeza?',
-        text: "Queres cancelar este evento?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sim, cancelar',
-        cancelButtonText: 'Não'
-    }).then((result) => {
-        if(result.isConfirmed){
-            $.ajax({
-                url: 'cancelarEvento.php',
-                type: 'POST',
-                dataType: 'json',
-                data: { id: idEvento },
-                success: function(res){
-                    if(res.flag){
-                        row.remove();
-                        var evCal = calendar.getEventById(idEvento);
-                        if(evCal) evCal.remove();
-                        Swal.fire('Cancelado!', res.msg, 'success');
-                    } else {
-                        Swal.fire('Erro', res.msg, 'error');
-                    }
-                },
-                error: function(xhr){
-                    Swal.fire('Erro', 'Erro no servidor: '+xhr.responseText, 'error');
-                }
-            });
-        }
-    });
-});
-
-
-});
-
-let precoBase = 100; 
-let precoPorConvidado = 10;
-function calcularPreco() {
-    let total = 0;
-    let pacote = $('#pacote option:selected');
-    if (pacote.length > 0 && pacote.val() !== "") {
-        total += parseFloat(pacote.data('preco'));
-    }
-
-    $('.servico:checked').each(function() {
-        total += parseFloat($(this).val());
-    });
-
-    $('#precoTotal').text("Preço: " + total.toFixed(2) + " €");
-    return total;
-}
-
-$(document).on('change', '.servico, #pacote', calcularPreco);
-
-$('#eventoModal').on('shown.bs.modal', calcularPreco);
-
-
 </script>
 </body>
 </html>
