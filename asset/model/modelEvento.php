@@ -32,10 +32,11 @@ function getTiposEventos() {
 function listarSessoesJSON($ID_TipoEvento) {
     global $conn;
     $stmt = $conn->prepare("
-        SELECT Eventos.*, Clientes.Nome AS ClienteNome 
+ SELECT Eventos.*, Clientes.Nome AS ClienteNome 
         FROM Eventos
         INNER JOIN Clientes ON Eventos.ID_Cliente = Clientes.ID_Cliente
-        WHERE Eventos.ID_TipoEvento = ?
+        WHERE Eventos.ID_TipoEvento = ? 
+          AND Eventos.Estado = 'aceite'
     ");
     $stmt->bind_param("i", $ID_TipoEvento);
     $stmt->execute();

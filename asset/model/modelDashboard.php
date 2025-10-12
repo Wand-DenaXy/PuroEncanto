@@ -53,7 +53,7 @@ class Dashboard {
             while($row = $result->fetch_assoc()) {
                 $msg .= "<tr>";
                 $msg .= "<th scope='row'>".$row['ID_Evento']."</th>";
-                $msg .= "<th scope='row'>".$row['NomeEvento']."</th>";
+                $msg .= "<th scope='row'>".$row['Nome']."</th>";
                 $msg .= "<td>".$row['Data']."</td>";
                 $msg .= "<td>".$row['hora']."</td>";
                 $msg .= "<td>".$row['precoTotal']."€</td>";

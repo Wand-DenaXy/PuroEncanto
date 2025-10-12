@@ -6,13 +6,20 @@
 				ID_TipoUtilizador INT PRIMARY KEY AUTO_INCREMENT,
 				Tipo VARCHAR(50) NOT NULL
 			);
-		Create table Funcionarios
+		Create table TipoColaboradores
 		(
-			ID_Funcionario INT PRIMARY KEY AUTO_INCREMENT,
+			ID_TipoColaboradores INT PRIMARY KEY AUTO_INCREMENT,
+            Tipo varchar(250)
+		);
+		Create table Colaboradores
+		(
+			ID_Colaboradores INT PRIMARY KEY AUTO_INCREMENT,
 			nome varchar(250),
 			telefone int,
-			salario int,
-			NIF varchar(250)
+			valor int,
+			NIF varchar(250),
+			ID_TipoColaboradores INT,
+			FOREIGN KEY (ID_TipoColaboradores) REFERENCES TipoColaboradores(ID_TipoColaboradores)
 		);
 
 			CREATE TABLE IF NOT EXISTS Fornecedores (
@@ -141,13 +148,15 @@
 			-- Referências para fornecedores, clientes e funcionários, mas podem ser NULL
 			ID_Fornecedor INT NULL,               -- Referência ao fornecedor, se a dívida for de fornecedor
 			ID_Cliente INT NULL,                  -- Referência ao cliente, se a dívida for de cliente
-			ID_Funcionario INT NULL,              -- Referência ao funcionário, se a dívida for de funcionário
+			ID_Colaboradores INT NULL,              -- Referência ao funcionário, se a dívida for de funcionário
 			
 			-- Chaves estrangeiras para garantir a integridade referencial
 			FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedores(ID_Fornecedor) ON DELETE CASCADE,
 			FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE,
-			FOREIGN KEY (ID_Funcionario) REFERENCES Funcionarios(ID_Funcionario) ON DELETE CASCADE
+			FOREIGN KEY (ID_Colaboradores) REFERENCES Colaboradores(ID_Colaboradores) ON DELETE CASCADE
 		);
+        SELECT 
+    s.nome AS Servico,COUNT(es.ID_Servico) AS Quantidade_de_Vezes_Utilizado,SUM(s.preco) AS Valor_Total FROM Eventos_Servicos es INNER JOIN Servicos s ON es.ID_Servico = s.ID_Servico GROUP BY s.ID_Servico, s.nome ORDER BY Valor_Total DESC;
         INSERT INTO Balancete (descricao, saldo) VALUES
 ('Depósitos à ordem', 147623.91),
 ('Clientes', 218241.36),
@@ -169,12 +178,20 @@
 ('Vendas', 21082.00),
 ('Prestações de serviços', 156350.00);
 
-		select * from servicos;
-			INSERT INTO Funcionarios (nome,telefone,salario ,nif) VALUES 
-		("António Dias Alegres",920123345,885,"250941392"), 
-		("Luisa Noites",920123343,960,"293389047"),
-		("Tiago Tardes",920123317,840,"240378326");
+			INSERT INTO TipoColaboradores (Tipo) VALUES 
+		("Prestador de Serviços"), 
+		("Funcionário");
+			INSERT INTO Colaboradores (nome,telefone,valor,nif,ID_TipoColaboradores) VALUES 
+		("António Dias Alegres",920123345,885,"250941392",1), 
+		("Luisa Noites",920123343,960,"293389047",1),
+		("Tiago Tardes",920123317,840,"240378326",1),
+        ("Carolina",920123317,900,"240378326",2),
+        ("Jéssica",920123317,900,"240378326",2);
 		
+        SELECT Servicos.nome as descricao, COUNT(*) AS total FROM Servicos, Eventos_Servicos, Eventos WHERE Servicos.ID_Servico = Eventos_Servicos.ID_Servico AND Eventos.ID_Evento = Eventos_Servicos.ID_Evento
+    GROUP BY Servicos.nome
+    ORDER BY total DESC;
+        
 	INSERT INTO TotalAtivo  (descricao,valor,data) VALUES 
 		("Abril - TotalAtivo",64592.89,'2025-04-05'), 
 		("Maio - TotalAtivo",47213.06,'2025-05-05'),
@@ -183,9 +200,8 @@
 		INSERT INTO TipoUtilizador (Tipo) VALUES 
 		('Cliente'),
 		('Administrador');
-
-
-	INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES
+        
+ INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES
 	('XPTO, Lda', 'xpto@email.com', '532622448', 'pass123', 'PT50007946838624313088068', 1),
 	('Maria Almeida', 'maria.almeida@email.com', '299446263', 'pass123', 'PT50001410030198503475689', 1),
 	('MoveIT', 'moveit@email.com', '556986032', 'pass123', 'PT50002346819984071468008', 1),
@@ -1301,12 +1317,10 @@
 	GROUP BY MONTH(Data)
 	ORDER BY MONTH(Data);
 
-	select * from DividasAPagar;
-
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Fornecedor)
 	VALUES ('Fornecedor', 2233.06,'Em aberto', 1);
 
-	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Funcionario)
+	INSERT INTO DividasAPagar (Tipo, Valor, Estado, ID_Colaboradores)
 	VALUES ('Funcionario', 5365.8,'Em aberto', 3);
 
 	INSERT INTO DividasAPagar (Tipo, Valor, Estado)
