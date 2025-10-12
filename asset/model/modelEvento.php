@@ -73,7 +73,6 @@ function criarSessao($ID_Evento, $ID_Cliente, $nome, $hora, $estado,$Data,$ID_Ti
         while ($row = $result->fetch_assoc()) {
             $msg .= "<tr><th scope='row'>{$row['ID_Evento']}</th><td>{$row['Nome']}</td><td>{$row['ID_Cliente']}</td><td>{$row['Data']}</td><td>{$row['hora']}</td><td>{$row['tipo_nome']}</td>";
             $msg .= "<td><button class='btn btn-danger' onclick='removerEventos({$row['ID_Evento']})'>Remover</button></td>";
-            $msg .= "<td><button class='btn btn-primary' onclick='getDadosfilme({$row['ID_Evento']})'>Editar</button></td></tr>";
         }
 
         if ($result->num_rows == 0) {
