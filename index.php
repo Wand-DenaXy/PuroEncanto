@@ -164,32 +164,31 @@ session_start();
                         </div>
                     </div>
                 </div>
-            </div>
-             <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-cutlery"></i>
-                    <div class="feature-content">
-                        <h4>Catering</h4>
-                        <p>As comidas perfeitas para tornar a sua festa inesquecível!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-birthday-cake"></i>
+                        <div class="feature-content">
+                            <h4>Bolos</h4>
+                            <p>Fazemos o seu bolo com que sempre sonhou!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-birthday-cake"></i>
-                    <div class="feature-content">
-                        <h4>Bolos</h4>
-                        <p>Fazemos o seu bolo com que sempre sonhou!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-camera-retro"></i>
+                        <div class="feature-content">
+                            <h4>Fotografias</h4>
+                            <p>Postamos em nossas redes socias, a sua festa!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-           
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-gift"></i>
-                    <div class="feature-content">
-                        <h4>Insufláveis</h4>
-                        <p>Festa com crianças? Temos o presente perfeito para não faltar diversão!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-gift"></i>
+                        <div class="feature-content">
+                            <h4>Presentes</h4>
+                            <p>Festa com crianças? Temos o presente perfeito para não faltar diversão!</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-6 col-xs-12">
@@ -241,10 +240,9 @@ session_start();
                     <ul id="portfolio-list">
                         <li>
                             <div class="portfolio-item">
-                                <img src="images/baloes-e-decoracoes-sao-dispostos-em-uma-sala-com-um-tema-arco-iris-generativo-ai_1035763-6807.jpg"
-                                    class="img-responsive" height="100px" with="10px" alt=""
-                                    style="height:260px; width:100%;">
-                                <div class=" portfolio-caption">
+                                <img src="images/Decoração.jpg" class="img-responsive" height="100px" with="10px"
+                                    alt="" />
+                                <div class="portfolio-caption">
                                     <h4>Decoração</h4>
                                     <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i
                                             class="fa fa-magic"></i></a>
@@ -255,7 +253,7 @@ session_start();
                         <li>
                             <div class="portfolio-item">
                                 <img src="images/premium_photo-1663099598927-4d0db938250d (1).jpg"
-                                    class="img-responsive" alt="" style="height:260px; width:100%;">
+                                    class="img-responsive" alt="" />
                                 <div class="portfolio-caption">
                                     <h4>Catering</h4>
                                     <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i
@@ -267,7 +265,7 @@ session_start();
                         <li>
                             <div class="portfolio-item">
                                 <img src="images/candles-cake-cake-sweet-wallpaper-preview.jpg" class="img-responsive"
-                                    alt="" style="height:260px; width:100%;" />
+                                    alt="" />
                                 <div class="portfolio-caption">
                                     <h4>Bolos</h4>
                                     <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i
@@ -278,8 +276,7 @@ session_start();
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="images/4d75f888fd630bcb810c29665425cb08.jpg" class="img-responsive" alt=""
-                                    style="height:260px; width:100%;" />
+                                <img src="images/4d75f888fd630bcb810c29665425cb08.jpg" class="img-responsive" alt="" />
                                 <div class="portfolio-caption">
                                     <h4>Insufláveis</h4>
                                     <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i
@@ -290,8 +287,7 @@ session_start();
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="images/1.jpg" height="100px" class="img-responsive" alt=""
-                                    style="height:260px; width:100%;" />
+                                <img src="images/1.jpg" height="100px" class="img-responsive" alt="" />
                                 <div class="portfolio-caption">
                                     <h4>Casamentos</h4>
                                     <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i
@@ -302,9 +298,8 @@ session_start();
                         </li>
                         <li>
                             <div class="portfolio-item">
-                                <img src="images/8c59e46694d92a60666d6b7e173de650.jpg" class="img-responsive" alt=""
-                                    style="height:260px; width:100%;" />
-                                <div class=" portfolio-caption">
+                                <img src="images/8c59e46694d92a60666d6b7e173de650.jpg" class="img-responsive" alt="" />
+                                <div class="portfolio-caption">
                                     <h4>Festas Empresariais</h4>
                                     <a href="#portfolio-modal" data-toggle="modal" class="link-1"><i
                                             class="fa fa-magic"></i></a>
@@ -342,79 +337,65 @@ session_start();
                 <div class="row">
                     <h2><strong>Decoração</strong></h2>
                     <div class="col-md-4">
-                        <img src="images/Decoração-Mesa-de-Festa-Tema-Jardim-Lojas-Linna.jpg" class="img-responsive"
-                            alt=".." style="height:450px; width:100%">
+                        <img src="images/wedding-party-decoration-dinner-set.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4 w-100">
-                        <img src="images/92ccc97b017d054a2b58f89e11618870.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/36799969-ai-gerado-aniversario-festa-decoracao-em-a-mesa-gratis-foto.jpg"
+                            class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4 w-100 h-100">
-                        <img src="images/IMG_7928-1024x1024.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/ebe4481cc2f3da51a9b4aced3edc6b16.jpg" class="img-responsive" alt="..">
                     </div>
                 </div><!-- /.row -->
                 <div class="row">
                     <h2><strong>Catering</strong></h2>
                     <div class="col-md-4">
-                        <img src="images/catering-4.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/90b8e2092a439e79a8644dfcf56089ca.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/catering-8.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/05c7115cce1c2b9d3ed169dfd738264c.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/Catering+na+marinha+grande.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/800_5e0ba7d35b7dc.jpg" class="img-responsive" alt="..">
                     </div>
 
                 </div><!-- /.row -->
                 <div class="row">
                     <h2><strong>Bolos</strong></h2>
                     <div class="col-md-4 w-50">
-                        <img src="images/85d05eef8a30c26354a53212792abcee.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/85d05eef8a30c26354a53212792abcee.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/87feffe684f8a884d1881a7e8cceb54e.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/87feffe684f8a884d1881a7e8cceb54e.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/7d04481bd1ccb741adf3ac7b67825db0.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/7d04481bd1ccb741adf3ac7b67825db0.jpg" class="img-responsive" alt="..">
                     </div>
 
                 </div><!-- /.row -->
                 <div class="row">
                     <h2><strong>Insufláveis</strong></h2>
                     <div class="col-md-4 w-50">
-                        <img src="images/66cf408bcc299cf69dcd0631d13b2c38.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/66cf408bcc299cf69dcd0631d13b2c38.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/c3e83ba55a19a1ffb07c142bfb564215.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/c3e83ba55a19a1ffb07c142bfb564215.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/20edc6174ce72c0b608459e58959ecf5.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/20edc6174ce72c0b608459e58959ecf5.jpg" class="img-responsive" alt="..">
                     </div>
 
                 </div><!-- /.row -->
                 <div class="row">
                     <h2><strong>Casamentos</strong></h2>
                     <div class="col-md-4 w-50">
-                        <img src="images/7f484044e7c2848f5f66028ffc6b683b.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/7f484044e7c2848f5f66028ffc6b683b.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/e9d54c65473460121c6a98e22df61b2e.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/e9d54c65473460121c6a98e22df61b2e.jpg" class="img-responsive" alt="..">
                     </div>
                     <div class="col-md-4">
-                        <img src="images/6caef9dd8fae6216ff47e4cdfab7f254.jpg" class="img-responsive" alt=".."
-                            style="height:450px; width:100%">
+                        <img src="images/6caef9dd8fae6216ff47e4cdfab7f254.jpg" class="img-responsive" alt="..">
                     </div>
 
                 </div><!-- /.row -->
@@ -431,7 +412,7 @@ session_start();
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="section-title text-center">
-                            <h3>Serviços</h3>
+                            <h3>Pacotes</h3>
                             <br>
                         </div>
                     </div>
@@ -442,15 +423,15 @@ session_start();
                     <div class="col-md-12">
                         <div class="pricing-table">
                             <div class="plan-name">
-                                <h3>Bolo</h3>
+                                <h3>20 Convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">86.10€</div>
+                                <div class="price-value">200€</div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
+                                    <li>20 Convidados</li>
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
@@ -468,15 +449,15 @@ session_start();
                     <div class="col-md-12">
                         <div class="pricing-table">
                             <div class="plan-name">
-                                <h3>Catering</h3>
+                                <h3>40 Convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">246.00€</span></div>
+                                <div class="price-value">350€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
+                                    <li>40 Convidados</li>
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
@@ -493,15 +474,15 @@ session_start();
                     <div class="col-md-12">
                         <div class="pricing-table">
                             <div class="plan-name">
-                                <h3>Decoração</h3>
+                                <h3>60 Convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">123.00€</span></div>
+                                <div class="price-value">500€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
+                                    <li>60 Convidados</li>
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
@@ -519,10 +500,35 @@ session_start();
                     <div class="col-md-12">
                         <div class="pricing-table">
                             <div class="plan-name">
-                                <h3>Insuflável</h3>
+                                <h3>80 convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">123.00€</span></div>
+                                <div class="price-value">650€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>80 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>100 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">800€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
@@ -544,15 +550,115 @@ session_start();
                     <div class="col-md-12">
                         <div class="pricing-table">
                             <div class="plan-name">
-                                <h3>Pipocas</h3>
+                                <h3>120 convidados</h3>
                             </div>
                             <div class="plan-price">
-                                <div class="price-value">369.00€</span></div>
+                                <div class="price-value">950€</span></div>
                                 <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
+                                    <li>120 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>140 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1100€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>140 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>160 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1250€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>160 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>180 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1400€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>160 Convidados</li>
+                                    <li>Bolo</li>
+                                    <li>Decoração</li>
+                                    <li>Catering</li>
+                                    <li>Insufláveis</li>
+                                    <li>Máquina de pipocas</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="plan-signup">
+                                <a href="dashboardCliente.php" class="btn-system btn-small">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pricing-table">
+                            <div class="plan-name">
+                                <h3>200 convidados</h3>
+                            </div>
+                            <div class="plan-price">
+                                <div class="price-value">1550€</span></div>
+                                <div class="interval">iva incluido</div>
+                            </div>
+                            <div class="plan-list">
+                                <ul>
+                                    <li>200 Convidados</li>
                                     <li>Bolo</li>
                                     <li>Decoração</li>
                                     <li>Catering</li>
@@ -569,144 +675,145 @@ session_start();
                 </div>
             </div>
         </div>
-    </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <!-- End Pricing Table Section -->
-
-
-    <!-- Start Testimonial Section -->
-    <div id="testimonial" class="testimonial-section">
-        <h2>Opiniões</h2>
         <br>
         <br>
         <br>
-        <div class="container">
-            <!-- Start Testimonials Carousel -->
-            <div id="testimonial-carousel" class="testimonials-carousel">
-                <!-- Testimonial 1 -->
-                <div class="testimonials item">
-                    <div class="testimonial-content">
-                        <img src="images/jose.jpg" alt="">
-                        <div class="testimonial-author">
-                            <div class="author">José Miguel</div>
-                        </div>
-                        <p>Excelente serviço! Adorei poder organizar tudo pela app, foi muito prático e rápido. A
-                            festa ficou linda e os convidados adoraram. Recomendo a 100%!</p>
-                    </div>
-                </div>
-                <!-- Testimonial 2 -->
-                <div class="testimonials item">
-                    <div class="testimonial-content">
-                        <img src="images/margarida.jpg" alt="">
-                        <div class="testimonial-author">
-                            <div class="author">Margarida Lopes</div>
-                        </div>
-                        <p>A experiência foi fantástica! O Puro Encanto cuidou de todos os detalhes com
-                            profissionalismo e carinho. A decoração e as pipocas foram um sucesso entre as crianças!
-                        </p>
-                    </div>
-                </div>
-                <!-- Testimonial 3 -->
-                <div class="testimonials item">
-                    <div class="testimonial-content">
-                        <img src="images/carlos.jpg" alt="">
-                        <div class="testimonial-author">
-                            <div class="author">Carlos Vieira</div>
-                        </div>
-                        <p>Foi uma experiência incrível! Houve alguns contratempos no início, mas a Puro Encanto
-                            transformou a adversidade em encanto — literalmente. A dedicação e a calma da equipa
-                            fizeram toda a diferença.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- End Testimonials Carousel -->
-        </div>
-    </div>
-    <!-- End Testimonial Section -->
+        <br>
+
+        <!-- End Pricing Table Section -->
 
 
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <h3>Contactos-nos!</h3>
-                        <p class="white-text"></p>
+        <!-- Start Testimonial Section -->
+        <div id="testimonial" class="testimonial-section">
+            <h2>Opiniões</h2>
+            <br>
+            <br>
+            <br>
+            <div class="container">
+                <!-- Start Testimonials Carousel -->
+                <div id="testimonial-carousel" class="testimonials-carousel">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonials item">
+                        <div class="testimonial-content">
+                            <img src="images/jose.jpg" alt="">
+                            <div class="testimonial-author">
+                                <div class="author">José Miguel</div>
+                            </div>
+                            <p>Excelente serviço! Adorei poder organizar tudo pela app, foi muito prático e rápido. A
+                                festa ficou linda e os convidados adoraram. Recomendo a 100%!</p>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonials item">
+                        <div class="testimonial-content">
+                            <img src="images/margarida.jpg" alt="">
+                            <div class="testimonial-author">
+                                <div class="author">Margarida Lopes</div>
+                            </div>
+                            <p>A experiência foi fantástica! O Puro Encanto cuidou de todos os detalhes com
+                                profissionalismo e carinho. A decoração e as pipocas foram um sucesso entre as crianças!
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonials item">
+                        <div class="testimonial-content">
+                            <img src="images/carlos.jpg" alt="">
+                            <div class="testimonial-author">
+                                <div class="author">Carlos Vieira</div>
+                            </div>
+                            <p>Foi uma experiência incrível! Houve alguns contratempos no início, mas a Puro Encanto
+                                transformou a adversidade em encanto — literalmente. A dedicação e a calma da equipa
+                                fizeram toda a diferença.</p>
+                        </div>
                     </div>
                 </div>
+                <!-- End Testimonials Carousel -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <form action="send_mail.php" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name *" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Your Email *"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" name="phone" class="form-control" placeholder="Your Phone *" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea name="message" class="form-control" placeholder="Your Message *"
-                                    required></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 text-center">
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </div>
-                    </div>
-                </form>
+        <!-- End Testimonial Section -->
 
 
 
-            </div>
-        </div>
-        </div>
-        </div>
-        <footer class="style-1">
+        <section id="contact" class="contact">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <span class="copyright">Copyright &copy; <a href="index.php">Puro Encanto</a> 2025</span>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="footer-social text-center">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            </ul>
+                    <div class="col-lg-12">
+                        <div class="section-title text-center">
+                            <h3>Contactos-nos!</h3>
+                            <p class="white-text"></p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form action="send_mail.php" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name *"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control" placeholder="Your Email *"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="phone" class="form-control" placeholder="Your Phone *"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control" placeholder="Your Message *"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+    </div>
+    </div>
+    <footer class="style-1">
+        <div class="container">
+            <div class="row">
                 <div class="col-md-4 col-xs-12">
-                    <div class="footer-link">
-                        <ul class="pull-right">
-                            <li><a href="#">Privacy Policy</a>
-                            </li>
-                            <li><a href="#">Terms of Use</a>
-                            </li>
+                    <span class="copyright">Copyright &copy; <a href="index.php">Puro Encanto</a> 2025</span>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="footer-social text-center">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="footer-link">
+                    <ul class="pull-right">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </footer>
+        </div>
+        </div>
+    </footer>
     </section>
 
 
