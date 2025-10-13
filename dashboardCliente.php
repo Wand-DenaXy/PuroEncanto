@@ -97,178 +97,99 @@ $conn->close();
 
     <div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Criar Evento</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formEvento">
-                        <!-- Tipo do Evento -->
-                        <div class="mb-3">
-                            <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
-                            <select id="nome" name="Nome" class="form-control" required>
-                                <optgroup label="Manhã">
-                                    <option value="2">Casamentos</option>
-                                    <option value="3">Festas Infantis</option>
-                                    <option value="4">Aniversários</option>
-                                    <option value="1">Empresarial</option>
-                                </optgroup>
-                            </select>
-                        </div>
-
-                        <!-- Data -->
-                        <div class="mb-3">
-                            <label for="data" class="form-label"><strong>Data</strong></label>
-                            <input type="date" class="form-control" id="data" name="data" required>
-                        </div>
-
-                        <!-- Hora -->
-                        <div class="mb-3">
-                            <label for="hora" class="form-label"><strong>Hora</strong></label>
-                            <select id="hora" name="hora" class="form-control" required>
-                                <optgroup label="Manhã">
-                                    <option value="09:00">09:00</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
-                                </optgroup>
-                                <optgroup label="Tarde">
-                                    <option value="14:00">14:00</option>
-                                    <option value="15:00">15:00</option>
-                                    <option value="16:00">16:00</option>
-                                </optgroup>
-                            </select>
-                        </div>
-
-                        <!-- Serviços Adicionais -->
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Serviços Adicionais</strong></label>
-                            <div class="form-check">
-                                <input class="form-check-input servico" type="checkbox" id="catering" value="246">
-                                <label class="form-check-label" for="catering">Catering - 246€</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
-                                <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
-                                <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
-                                <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
-                                <label class="form-check-label" for="decoracao">Decoração - 123€</label>
-                            </div>
-                        </div>
-
-                        <!-- Pacote de Convidados -->
-                        <div class="mb-3">
-                            <label for="pacote" class="form-label"><strong>Pacote de Convidados</strong></label>
-                            <select id="pacote" name="pacote" class="form-control" required>
-                                <option value="">-- Seleciona um Pacote --</option>
-                                <option value="1" data-preco="200">Pacote 20 convidados</option>
-                                <option value="2" data-preco="350">Pacote 40 convidados</option>
-                                <option value="3" data-preco="500">Pacote 60 convidados</option>
-                                <option value="4" data-preco="650">Pacote 80 convidados</option>
-                                <option value="5" data-preco="800">Pacote 100 convidados</option>
-                                <option value="6" data-preco="950">Pacote 120 convidados</option>
-                                <option value="7" data-preco="1100">Pacote 140 convidados</option>
-                                <option value="8" data-preco="1250">Pacote 160 convidados</option>
-                                <option value="9" data-preco="1400">Pacote 180 convidados</option>
-                                <option value="10" data-preco="1550">Pacote 200 convidados</option>
-                            </select>
-                        </div>
-
-                        <h4 id="precoTotal">Preço: 0 €</h4>
-
-                        <button type="submit" class="btn btn-primary">Criar Evento</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-<?php else: ?>
-    <tr><td colspan="5">Ainda não tens eventos</td></tr>
-<?php endif; ?>
-
-        </tbody>
-    </table>
-</div>
-
-<div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-header">
-        <h5 class="modal-title">Criar Evento</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formEvento">
-          <!-- Tipo do Evento -->
-          <div class="mb-3">
-            <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
-            <select id="nome" name="Nome" class="form-control" required>
-              <optgroup label="Seleciona um Evento">
-                <option value="2">Casamentos</option>
-                <option value="3">Festas Infantis</option>
-                <option value="4">Aniversários</option>
-                <option value="1">Empresarial</option>
-              </optgroup>
-            </select>
-          </div>
-
-          <!-- Data -->
-          <div class="mb-3">
-            <label for="data" class="form-label"><strong>Data</strong></label>
-            <input type="date" class="form-control" id="data" name="data" required>
-          </div>
-
-          <!-- Hora -->
-          <div class="mb-3">
-            <label for="hora" class="form-label"><strong>Hora</strong></label>
-            <select id="hora" name="hora" class="form-control" required>
-              <optgroup label="Selecione o Tempo">
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-              </optgroup>
-              <optgroup label="Tarde">
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-              </optgroup>
-            </select>
-          </div>
-
-          <!-- Serviços Adicionais -->
-          <div class="mb-3">
-            <label class="form-label"><strong>Serviços Adicionais</strong></label>
-            <div class="form-check">
-              <input class="form-check-input servico" type="checkbox" id="catering" value="246">
-              <label class="form-check-label" for="catering">Catering - 246€</label>
+            <div class="modal-header">
+                <h5 class="modal-title">Criar Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="form-check">
-              <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
-              <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
-              <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
-              <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
-              <label class="form-check-label" for="decoracao">Decoração - 123€</label>
+            <div class="modal-body">
+                <form id="formEvento">
+                    <!-- Tipo do Evento -->
+                    <div class="mb-3">
+                        <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
+                        <select id="nome" name="Nome" class="form-control" required>
+                            <optgroup label="Seleciona um Evento">
+                                <option value="2">Casamentos</option>
+                                <option value="3">Festas Infantis</option>
+                                <option value="4">Aniversários</option>
+                                <option value="1">Empresarial</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Data -->
+                    <div class="mb-3">
+                        <label for="data" class="form-label"><strong>Data</strong></label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+
+                    <!-- Hora -->
+                    <div class="mb-3">
+                        <label for="hora" class="form-label"><strong>Hora</strong></label>
+                        <select id="hora" name="hora" class="form-control" required>
+                            <optgroup label="Manhã">
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                            </optgroup>
+                            <optgroup label="Tarde">
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Serviços Adicionais -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Serviços Adicionais</strong></label>
+                        <div class="form-check">
+                            <input class="form-check-input servico" type="checkbox" id="catering" value="246">
+                            <label class="form-check-label" for="catering">Catering - 246€</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
+                            <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
+                            <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
+                            <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
+                            <label class="form-check-label" for="decoracao">Decoração - 123€</label>
+                        </div>
+                    </div>
+
+                    <!-- Pacote de Convidados -->
+                    <div class="mb-3">
+                        <label for="pacote" class="form-label"><strong>Pacote de Convidados</strong></label>
+                        <select id="pacote" name="pacote" class="form-control" required>
+                            <option value="">-- Seleciona um Pacote --</option>
+                            <option value="1" data-preco="200">Pacote 20 convidados</option>
+                            <option value="2" data-preco="350">Pacote 40 convidados</option>
+                            <option value="3" data-preco="500">Pacote 60 convidados</option>
+                            <option value="4" data-preco="650">Pacote 80 convidados</option>
+                            <option value="5" data-preco="800">Pacote 100 convidados</option>
+                            <option value="6" data-preco="950">Pacote 120 convidados</option>
+                            <option value="7" data-preco="1100">Pacote 140 convidados</option>
+                            <option value="8" data-preco="1250">Pacote 160 convidados</option>
+                            <option value="9" data-preco="1400">Pacote 180 convidados</option>
+                            <option value="10" data-preco="1550">Pacote 200 convidados</option>
+                        </select>
+                    </div>
+
+                    <h4 id="precoTotal">Preço: 0 €</h4>
+
+                    <button type="submit" class="btn btn-primary">Criar Evento</button>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -323,7 +244,6 @@ $conn->close();
         $(document).on('change', '.servico, #pacote', calcularPreco);
         $('#eventoModal').on('shown.bs.modal', calcularPreco);
 
-        // Submit do formulário
         $('#formEvento').on('submit', function(e) {
             e.preventDefault();
 
@@ -357,7 +277,7 @@ $conn->close();
                         success: function(res) {
                             console.log("Resposta do servidor:", res);
                             if (res.flag) {
-                                // Adiciona evento ao calendário
+
                                 calendar.addEvent({
                                     title: tipoNome,
                                     start: data + "T" + hora,
@@ -407,8 +327,6 @@ $conn->close();
                 Swal.fire('Erro', 'Preenche todos os campos obrigatórios!', 'warning');
             }
         });
-
-        // Cancelar evento
         $(document).on('click', '.cancelarEvento', function() {
             var row = $(this).closest('tr');
             var idEvento = row.data('id');
@@ -453,17 +371,16 @@ $conn->close();
 
     let precoBase = 100;
     let precoPorConvidado = 10;
-    // 📊 Cálculo do preço total (serviços + pacote)
+
     function calcularPreco() {
         let total = 0;
 
-        // Pacote
         let pacote = $('#pacote option:selected');
         if (pacote.length > 0 && pacote.val() !== "") {
             total += parseFloat(pacote.data('preco')) || 0;
         }
 
-        // Serviços
+
         $('.servico:checked').each(function() {
             total += parseFloat($(this).val()) || 0;
         });
@@ -507,13 +424,11 @@ $conn->close();
                     },
                     success: function(res) {
                         console.log("Resposta do servidor:", res);
-                        if(res.flag){
-                        
-                            calendar.addEvent({ 
-                                title: tipoNome, 
-                                start: data+"T"+hora,
-                                id: res.id,
-                                color: 'green'
+                        if (res.flag) {
+                            calendar.addEvent({
+                                title: tipoNome,
+                                start: data + "T" + hora,
+                                id: res.id
                             });
 
                             $('#tabelaEventos').prepend(
