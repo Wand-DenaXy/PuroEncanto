@@ -726,41 +726,6 @@ function recusarDividasPagar(id)
 
     let dados = new FormData();
     dados.append("op", 15);
-    dados.append("ID_Divida", id);
-
-    $.ajax({
-    url: "asset/controller/controllerDashboard.php",
-    method: "POST",
-    data: dados,
-    dataType: "html",
-    cache: false,
-    contentType: false,
-    processData: false
-    })
-    
-    .done(function( msg ) {
-
-        let obj = JSON.parse(msg);
-        if(obj.flag){
-            alerta("Divida Recusada!",obj.msg,"success");
-            getDividasPagar();    
-        }else{
-            alerta("Divida",obj.msg,"error");    
-        }
-        
-    })
-    
-    .fail(function( jqXHR, textStatus ) {
-    alert( "Request failed: " + textStatus );
-    });
-
-
-}
-function recusarDividasPagar2(id)
-{
-
-    let dados = new FormData();
-    dados.append("op", 21);
     dados.append("ID_Evento", id);
 
     $.ajax({
@@ -778,7 +743,7 @@ function recusarDividasPagar2(id)
         let obj = JSON.parse(msg);
         if(obj.flag){
             alerta("Divida Recusada!",obj.msg,"success");
-            getDividasReceber();    
+            getDividasPagar();    
         }else{
             alerta("Divida",obj.msg,"error");    
         }
@@ -852,10 +817,10 @@ function alerta(titulo,msg,icon){
 function carregarDashboard() {   
     setTimeout(BotoesGraficoDashboard, 100); 
     setTimeout(GraficoServicoDashboardSoma, 150); 
-    setTimeout(GraficoTotalAtivoDashboard, 200);
-    setTimeout(GraficoDiferencaDashboard, 200);   // prioridade 2
-    setTimeout(getGastosDashboard, 400);          // prioridade 3
-    setTimeout(getRedimentosDashboard, 600);      // prioridade 4
+    //setTimeout(GraficoTotalAtivoDashboard, 200);
+    //setTimeout(GraficoDiferencaDashboard, 200);   // prioridade 2
+    //setTimeout(getGastosDashboard, 400);          // prioridade 3
+    //setTimeout(getRedimentosDashboard, 600);      // prioridade 4
     setTimeout(getDividasReceber, 800); 
     setTimeout(getDividasPagar, 800); 
     setTimeout(GraficoServicoDashboard, 900);             // prioridade 5

@@ -164,6 +164,15 @@ session_start();
                     </div>
                 </div>
             </div>
+             <div class="col-md-2 col-sm-6 col-xs-12">
+                <div class="feature">
+                    <i class="fa fa-cutlery"></i>
+                    <div class="feature-content">
+                        <h4>Catering</h4>
+                        <p>As comidas perfeitas para tornar a sua festa inesquecível!</p>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-2 col-sm-6 col-xs-12">
                 <div class="feature">
                     <i class="fa fa-birthday-cake"></i>
@@ -173,20 +182,12 @@ session_start();
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-camera-retro"></i>
-                    <div class="feature-content">
-                        <h4>Fotografias</h4>
-                        <p>Postamos em nossas redes socias, a sua festa!</p>
-                    </div>
-                </div>
-            </div>
+           
             <div class="col-md-2 col-sm-6 col-xs-12">
                 <div class="feature">
                     <i class="fa fa-gift"></i>
                     <div class="feature-content">
-                        <h4>Presentes</h4>
+                        <h4>Insufláveis</h4>
                         <p>Festa com crianças? Temos o presente perfeito para não faltar diversão!</p>
                     </div>
                 </div>
