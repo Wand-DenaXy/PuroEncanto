@@ -189,6 +189,84 @@ $conn->close();
                         <button type="submit" class="btn btn-primary">Criar Evento</button>
                     </form>
                 </div>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+<?php else: ?>
+    <tr><td colspan="5">Ainda não tens eventos</td></tr>
+<?php endif; ?>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-header">
+        <h5 class="modal-title">Criar Evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEvento">
+          <!-- Tipo do Evento -->
+          <div class="mb-3">
+            <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
+            <select id="nome" name="Nome" class="form-control" required>
+              <optgroup label="Seleciona um Evento">
+                <option value="2">Casamentos</option>
+                <option value="3">Festas Infantis</option>
+                <option value="4">Aniversários</option>
+                <option value="1">Empresarial</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Data -->
+          <div class="mb-3">
+            <label for="data" class="form-label"><strong>Data</strong></label>
+            <input type="date" class="form-control" id="data" name="data" required>
+          </div>
+
+          <!-- Hora -->
+          <div class="mb-3">
+            <label for="hora" class="form-label"><strong>Hora</strong></label>
+            <select id="hora" name="hora" class="form-control" required>
+              <optgroup label="Selecione o Tempo">
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+              </optgroup>
+              <optgroup label="Tarde">
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Serviços Adicionais -->
+          <div class="mb-3">
+            <label class="form-label"><strong>Serviços Adicionais</strong></label>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="catering" value="246">
+              <label class="form-check-label" for="catering">Catering - 246€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="insuflaveis" value="123">
+              <label class="form-check-label" for="insuflaveis">Insufláveis - 123€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="pipocas" value="369">
+              <label class="form-check-label" for="pipocas">Máquina de Pipocas - 369€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="bolos" value="86.10">
+              <label class="form-check-label" for="bolos">Bolos - 86.10€</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input servico" type="checkbox" id="decoracao" value="123">
+              <label class="form-check-label" for="decoracao">Decoração - 123€</label>
             </div>
         </div>
     </div>
@@ -397,7 +475,6 @@ $conn->close();
     $(document).on('change', '.servico, #pacote', calcularPreco);
     $('#eventoModal').on('shown.bs.modal', calcularPreco);
 
-    // Submit do formulário
     $('#formEvento').on('submit', function(e) {
         e.preventDefault();
 
@@ -430,11 +507,13 @@ $conn->close();
                     },
                     success: function(res) {
                         console.log("Resposta do servidor:", res);
-                        if (res.flag) {
-                            calendar.addEvent({
-                                title: tipoNome,
-                                start: data + "T" + hora,
-                                id: res.id
+                        if(res.flag){
+                        
+                            calendar.addEvent({ 
+                                title: tipoNome, 
+                                start: data+"T"+hora,
+                                id: res.id,
+                                color: 'green'
                             });
 
                             $('#tabelaEventos').prepend(

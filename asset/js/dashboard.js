@@ -726,7 +726,7 @@ function recusarDividasPagar(id)
 
     let dados = new FormData();
     dados.append("op", 15);
-    dados.append("ID_Evento", id);
+    dados.append("ID_Divida", id);
 
     $.ajax({
     url: "asset/controller/controllerDashboard.php",
@@ -744,6 +744,41 @@ function recusarDividasPagar(id)
         if(obj.flag){
             alerta("Divida Recusada!",obj.msg,"success");
             getDividasPagar();    
+        }else{
+            alerta("Divida",obj.msg,"error");    
+        }
+        
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+
+}
+function recusarDividasPagar2(id)
+{
+
+    let dados = new FormData();
+    dados.append("op", 21);
+    dados.append("ID_Evento", id);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+
+        let obj = JSON.parse(msg);
+        if(obj.flag){
+            alerta("Divida Recusada!",obj.msg,"success");
+            getDividasReceber();    
         }else{
             alerta("Divida",obj.msg,"error");    
         }
