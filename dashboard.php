@@ -78,6 +78,8 @@ $conn->close();
         <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
         <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
         <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
+         <a href="calendario.html"><i class="bi bi-people"></i> Económico-Financeiro </a>
+          <a href="financas.php"><i class="bi bi-people"></i> Finanças</a>
         <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
 
         <div class="time" id="time"></div>
