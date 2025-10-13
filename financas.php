@@ -4,47 +4,95 @@ include 'asset/model/connection2.php';
 $sql = "SELECT ID_Financa, TotalReceber, TotalPagar, Disponibilidades FROM financas WHERE ID_Financa = 1";
 $result = $conn->query($sql);
 
-$financas = [];
 if ($result->num_rows > 0) {
-    $financas = $result->fetch_assoc();
+    $row = $result->fetch_assoc();
+    $idFinanca = $row['ID_Financa'];
+    $totalReceber = number_format($row['TotalReceber'], 2, ',', '.');
+    $totalPagar = number_format($row['TotalPagar'], 2, ',', '.');
+    $disponibilidades = number_format($row['Disponibilidades'], 2, ',', '.');
 } else {
-    $financas = [
-        'ID_Financa' => 1,
-        'TotalReceber' => 0,
-        'TotalPagar' => 0,
-        'Disponibilidades' => 0
-    ];
+    $idFinanca = 1;
+    $totalReceber = $totalPagar = $disponibilidades = "0,00";
 }
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puro Encanto - Dashboard</title>
+<title>Puro Encanto - Finanças</title>
 
+<link rel="stylesheet" href="asset/css/funcionario.css">
+<link rel="stylesheet" href="asset/css/lib/datatables.css">
 <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
-<link rel="stylesheet" href="asset/css/lib/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="asset/css/dashboard.css">
 
 <script src="asset/js/lib/jquery.js"></script>
 <script src="asset/js/lib/bootstrap.js"></script>
-<script src="asset/js/lib/jquery.dataTables.min.js"></script>
-<script src="asset/js/lib/dataTables.bootstrap5.min.js"></script>
+<script src="asset/js/lib/datatables.js"></script>
+<script src="asset/js/lib/sweatalert.js"></script>
 
 <style>
-.table-container {
-    margin-left: 220px;
-    padding: 40px;
+html, body {
+    height: 100%;
+    margin: 0;
 }
-@media (max-width:768px){
-    .table-container{
-        margin-left:0;
-        padding:20px;
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* verticalmente */
+    align-items: center;      /* horizontalmente */
+    width: 90%;               /* ocupa 90% da largura da página */
+    max-width: 1200px;        /* máximo de largura */
+    margin: 0 auto;           /* centro horizontal */
+    padding: 40px;
+    min-height: 80vh;         /* ocupa grande parte da altura da página */
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
     }
+}
+
+/* DataTable wrapper para esticar tabela */
+#financasTable_wrapper {
+    width: 100% !important;
+
+    max-width: 1200px;
+    margin: 0 auto;
+}
+#financasTable {
+    width: 100% !important;
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+
+#financasTable th, 
+#financasTable td {
+    padding: 20px 24px;
+    font-size: 1.1rem;
+}
+
+#financasTable th:nth-child(1),
+#financasTable td:nth-child(1) { width: 45%; }
+#financasTable th:nth-child(2),
+#financasTable td:nth-child(2) { width: 35%; }
+#financasTable th:nth-child(3),
+#financasTable td:nth-child(3) { width: 20%; }
+
+@media (max-width: 1200px) {
+    #financasTable_wrapper { max-width: 95%; }
+}
+
+@media (max-width: 768px) {
+    #financasTable th, #financasTable td { font-size: 1rem; padding: 16px; }
 }
 </style>
 </head>
@@ -56,113 +104,153 @@ $conn->close();
             <p class="logotitulo">Puro Encanto</p>
         </div>
     </a>
-    <a href="dashboard.php" class="active"><i class="bi bi-grid"></i> Dashboard</a>
+    <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
     <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
     <a href="servicosadmin.html"><i class="bi bi-grid"></i> Vendas</a>
     <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
     <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
     <a href="funcionario.html"><i class="bi bi-people"></i> Funcionário</a>
     <a href="calendario.html"><i class="bi bi-people"></i> Calendário</a>
-    <a href="#"><i class="bi bi-people"></i> Económico-Financeiro</a>
-    <a href="financas.html"><i class="bi bi-people"></i> Finanças</a>
+    <a href="economicofinanceiro.php"><i class="bi bi-people"></i> Económico-Financeiro</a>
+    <a href="financas.html" class="active"><i class="bi bi-people"></i> Finanças</a>
     <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
     <div class="time" id="time"></div>
 </div>
 
 <div class="table-container">
-    <h2 class="mb-4">Resumo Financeiro</h2>
-    <table id="financasTable" class="table table-striped table-bordered">
+    <div class="table-header text-center">
+        <h2>💰 Gestão Económico-Financeira</h2>
+        <p>Utilize o botão <strong>“Editar”</strong> ao lado de cada campo para fazer alterações em tempo real.</p>
+    </div>
+
+    <table id="financasTable" class="table table-bordered table-striped align-middle text-center shadow-sm">
         <thead class="table-dark">
             <tr>
-                <th>Descrição</th>
+                <th>Campo</th>
                 <th>Valor (€)</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>Total a Receber</strong></td>
-                <td class="valor"><?= number_format($financas['TotalReceber'], 2, ',', '.') ?></td>
-                <td><button class="btn btn-primary btn-edit" data-id="<?= $financas['ID_Financa'] ?>" data-field="TotalReceber" data-value="<?= $financas['TotalReceber'] ?>">Editar</button></td>
+                <td>Total a Receber</td>
+                <td class="valor"><?= $totalReceber ?></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit"
+                            data-id="<?= $idFinanca ?>"
+                            data-field="TotalReceber"
+                            data-label="Total a Receber"
+                            data-value="<?= str_replace('.', '', str_replace(',', '.', $totalReceber)) ?>">
+                        Editar
+                    </button>
+                </td>
             </tr>
             <tr>
-                <td><strong>Total a Pagar</strong></td>
-                <td class="valor"><?= number_format($financas['TotalPagar'], 2, ',', '.') ?></td>
-                <td><button class="btn btn-primary btn-edit" data-id="<?= $financas['ID_Financa'] ?>" data-field="TotalPagar" data-value="<?= $financas['TotalPagar'] ?>">Editar</button></td>
+                <td>Total a Pagar</td>
+                <td class="valor"><?= $totalPagar ?></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit"
+                            data-id="<?= $idFinanca ?>"
+                            data-field="TotalPagar"
+                            data-label="Total a Pagar"
+                            data-value="<?= str_replace('.', '', str_replace(',', '.', $totalPagar)) ?>">
+                        Editar
+                    </button>
+                </td>
             </tr>
             <tr>
-                <td><strong>Disponibilidades</strong></td>
-                <td class="valor"><?= number_format($financas['Disponibilidades'], 2, ',', '.') ?></td>
-                <td><button class="btn btn-primary btn-edit" data-id="<?= $financas['ID_Financa'] ?>" data-field="Disponibilidades" data-value="<?= $financas['Disponibilidades'] ?>">Editar</button></td>
+                <td>Disponibilidades</td>
+                <td class="valor"><?= $disponibilidades ?></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit"
+                            data-id="<?= $idFinanca ?>"
+                            data-field="Disponibilidades"
+                            data-label="Disponibilidades"
+                            data-value="<?= str_replace('.', '', str_replace(',', '.', $disponibilidades)) ?>">
+                        Editar
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<!-- Modal -->
+<!-- Modal de edição -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form id="editForm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Editar Valor</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" name="id" id="financaId">
-                <input type="hidden" name="field" id="field">
-                <div class="mb-3">
-                    <label for="valor" class="form-label">Valor (€)</label>
-                    <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success">Salvar</button>
-            </div>
-        </div>
-    </form>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar Valor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm">
+          <input type="hidden" id="financaId" name="id">
+          <input type="hidden" id="field" name="field">
+          <div class="mb-3">
+            <label for="valor" id="valorLabel" class="form-label">Novo Valor</label>
+            <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Guardar Alterações</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
 <script>
 $(document).ready(function() {
-    $('#financasTable').DataTable({
+    var table = $('#financasTable').DataTable({
         paging: false,
         searching: false,
         info: false
     });
 
-    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    let editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    let selectedButton = null;
 
-    $('.btn-edit').on('click', function() {
+    $('#financasTable tbody').on('click', '.btn-edit', function() {
+        selectedButton = $(this);
         $('#financaId').val($(this).data('id'));
         $('#field').val($(this).data('field'));
         $('#valor').val($(this).data('value'));
+        $('#valorLabel').text('Editar ' + $(this).data('label'));
+        $('#editModalLabel').text('Editar ' + $(this).data('label'));
         editModal.show();
     });
 
     $('#editForm').on('submit', function(e) {
         e.preventDefault();
-
-        var id = $('#financaId').val();
-        var field = $('#field').val();
-        var valor = $('#valor').val();
+        const id = $('#financaId').val();
+        const field = $('#field').val();
+        const valor = $('#valor').val();
 
         $.ajax({
             url: 'update_financa.php',
             type: 'POST',
             data: { id: id, field: field, valor: valor },
             success: function(response) {
-                location.reload();
+                if (response.trim() === "success") {
+                    selectedButton.closest('tr').find('.valor').text(
+                        parseFloat(valor).toFixed(2).replace('.', ',')
+                    );
+                    selectedButton.data('value', valor);
+                    editModal.hide();
+                } else {
+                    alert("Erro: " + response);
+                }
             },
-            error: function() {
-                alert('Erro ao atualizar o valor!');
+            error: function(xhr, status, error) {
+                alert('Erro na requisição: ' + error);
             }
         });
     });
 });
 </script>
-
 </body>
 </html>
