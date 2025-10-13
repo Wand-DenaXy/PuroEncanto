@@ -152,57 +152,57 @@ session_start();
 
 
 
-<section id="feature" class="feature-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-magic"></i>
-                    <div class="feature-content">
-                        <h4>Decoração</h4>
-                        <p>Decoramos a sua festa ou evento totalmente a seu gosto!</p>
+    <section id="feature" class="feature-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-magic"></i>
+                        <div class="feature-content">
+                            <h4>Decoração</h4>
+                            <p>Decoramos a sua festa ou evento totalmente a seu gosto!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-birthday-cake"></i>
-                    <div class="feature-content">
-                        <h4>Bolos</h4>
-                        <p>Fazemos o seu bolo com que sempre sonhou!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-birthday-cake"></i>
+                        <div class="feature-content">
+                            <h4>Bolos</h4>
+                            <p>Fazemos o seu bolo com que sempre sonhou!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-camera-retro"></i>
-                    <div class="feature-content">
-                        <h4>Fotografias</h4>
-                        <p>Postamos em nossas redes socias, a sua festa!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-camera-retro"></i>
+                        <div class="feature-content">
+                            <h4>Fotografias</h4>
+                            <p>Postamos em nossas redes socias, a sua festa!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-gift"></i>
-                    <div class="feature-content">
-                        <h4>Presentes</h4>
-                        <p>Festa com crianças? Temos o presente perfeito para não faltar diversão!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-gift"></i>
+                        <div class="feature-content">
+                            <h4>Presentes</h4>
+                            <p>Festa com crianças? Temos o presente perfeito para não faltar diversão!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="feature">
-                    <i class="fa fa-calendar"></i>
-                    <div class="feature-content">
-                        <h4>Calendário</h4>
-                        <p>Nós ajustamos o nosso calendário de acordo com a sua festa!</p>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="feature">
+                        <i class="fa fa-calendar"></i>
+                        <div class="feature-content">
+                            <h4>Calendário</h4>
+                            <p>Nós ajustamos o nosso calendário de acordo com a sua festa!</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
@@ -405,7 +405,7 @@ session_start();
     <!-- End Portfolio Modal Section -->
 
     <!-- Start Pricing Table Section -->
-     
+
     <div id="pricing" class="pricing-section">
         <div class="container">
             <div class="row">
@@ -675,7 +675,7 @@ session_start();
                 </div>
             </div>
         </div>
-        
+
         <br>
         <br>
         <br>

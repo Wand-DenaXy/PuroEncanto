@@ -23,7 +23,7 @@ class Homepage {
                 else
                 {
                     $msg .= "<li><a href='dashboardCliente.php'>Dashboard</a></li>";
-                    $msg .= "<li><a href='perfilCliente.php'>Perfil</a></li>";
+                    $msg .= "<li><a href='perfil.php'>Perfil</a></li>";
                 }
                 
                 $msg .= "<li><a href='asset/controller/controllerLogin.php?op=3'>Logout</a></li>";
