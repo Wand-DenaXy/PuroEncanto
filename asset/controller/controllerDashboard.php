@@ -67,4 +67,8 @@ if ($_POST['op'] == 20) {
     $resp = $func->GraficoServicoDashboardSoma();
     echo $resp;
 }
+if ($_POST['op'] == 21) {
+    $resp = $func->recusarDividasPagar2($_POST['ID_Evento']);
+    echo $resp;
+}
 ?>

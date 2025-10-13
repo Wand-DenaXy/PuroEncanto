@@ -59,7 +59,7 @@ class Dashboard {
                 $msg .= "<td>".$row['precoTotal']."€</td>";
                 $msg .= "<td>".$row['estado']."</td>";
                 $msg .= "<td><button class='btn btn-success' onclick ='pagarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Aceitar</i></button></td>";
-                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasReceber(".$row['ID_Evento'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
+                $msg .= "<td><button class='btn btn-danger' onclick ='recusarDividasPagar2(".$row['ID_Evento'].")'><i class='fa fa-trash'>Recusar</i></button></td>";         
                 $msg .= "</tr>";
             }
         } else {
@@ -116,6 +116,31 @@ function pagarDividasReceber($ID_Evento)
         if ($conn->query($sql) === TRUE) {
             $flag = true;
             $msg = "Aceite com Sucesso";
+        } else {
+            $flag = false;
+            $msg = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $resp = json_encode(array(
+            "flag" => $flag,
+            "msg" => $msg
+        ));
+
+    $conn->close();
+    return $resp;
+
+}
+function recusarDividasPagar2($ID_Evento)
+{
+    global $conn;
+    $msg = "";
+    $flag = false;
+
+    $sql = "UPDATE Eventos SET estado = 'recusado' WHERE ID_Evento = $ID_Evento";
+
+        if ($conn->query($sql) === TRUE) {
+            $flag = true;
+            $msg = "Recusado com Sucesso";
         } else {
             $flag = false;
             $msg = "Error: " . $sql . "<br>" . $conn->error;
