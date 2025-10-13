@@ -28,22 +28,16 @@ $hora = $_POST['hora'] ?? '';
 $estado = "Pendente";
 $servicos = $_POST['servicos'] ?? [];
 
-// Formata hora para H:i:s
 if ($hora) {
     $hora = date('H:i:s', strtotime($hora));
 }
 
-$response['debug']['POST'] = $_POST;
-$response['debug']['hora_formatada'] = $hora;
-
-// Campos obrigatórios
 if (!$nome || !$data || !$hora || !$idTipoEvento || !$idPacote) {
     $response['msg'] = "Campos obrigatórios em falta.";
     echo json_encode($response);
     exit;
 }
 
-// Verifica se o cliente existe
 $stmtCheckCliente = $conn->prepare("SELECT COUNT(*) as cnt FROM clientes WHERE ID_Cliente = ?");
 $stmtCheckCliente->bind_param("i", $idCliente);
 $stmtCheckCliente->execute();
@@ -56,22 +50,28 @@ if ($res['cnt'] == 0) {
     exit;
 }
 
-// Verifica se já existe evento do mesmo cliente no mesmo dia e hora
 $stmtCheck = $conn->prepare("
-    SELECT COUNT(*) as cnt 
+    SELECT ID_Evento 
     FROM eventos 
-    WHERE Data = ? 
+    WHERE ID_Cliente = ? 
+      AND Nome = ? 
+      AND Data = ? 
       AND hora = ?
-      AND ID_Cliente = ?
 ");
-$stmtCheck->bind_param("ssi", $data, $hora, $idCliente);
+$stmtCheck->bind_param("isss", $idCliente, $nome, $data, $hora);
 $stmtCheck->execute();
-$rowCheck = $stmtCheck->get_result()->fetch_assoc();
+$resultCheck = $stmtCheck->get_result();
+
+if ($resultCheck->num_rows > 0) {
+    $row = $resultCheck->fetch_assoc();
+    $response['flag'] = true;
+    $response['msg'] = "Evento já existia, a redirecionar...";
+    $response['id'] = $row['ID_Evento'];
+    echo json_encode($response);
+    exit;
+}
 $stmtCheck->close();
 
-
-
-// Preço do pacote
 $stmtPacote = $conn->prepare("SELECT preco FROM pacotesconvidados WHERE ID_Pacote = ?");
 $stmtPacote->bind_param("i", $idPacote);
 $stmtPacote->execute();
@@ -79,7 +79,6 @@ $resPacote = $stmtPacote->get_result()->fetch_assoc();
 $stmtPacote->close();
 $precoPacote = floatval($resPacote['preco'] ?? 0);
 
-// Preço dos serviços
 $precoServicos = 0;
 if (is_array($servicos)) {
     foreach ($servicos as $s) {
@@ -93,14 +92,8 @@ if (is_array($servicos)) {
     }
 }
 
-// Total final
 $precoTotal = $precoPacote + $precoServicos;
 
-$response['debug']['precoPacote'] = $precoPacote;
-$response['debug']['precoServicos'] = $precoServicos;
-$response['debug']['precoTotal'] = $precoTotal;
-
-// Insere evento
 $stmt = $conn->prepare("
     INSERT INTO eventos 
     (ID_Cliente, Nome, Data, hora, estado, ID_TipoEvento, ID_Pacote, PrecoTotal)

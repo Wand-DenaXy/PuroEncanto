@@ -104,7 +104,7 @@ $conn->close();
           <div class="mb-3">
             <label for="nome" class="form-label"><strong>Tipo do Evento</strong></label>
             <select id="nome" name="Nome" class="form-control" required>
-              <optgroup label="Manhã">
+              <optgroup label="Seleciona um Evento">
                 <option value="2">Casamentos</option>
                 <option value="3">Festas Infantis</option>
                 <option value="4">Aniversários</option>
@@ -239,7 +239,6 @@ document.addEventListener('DOMContentLoaded', function() {
     $(document).on('change', '.servico, #pacote', calcularPreco);
     $('#eventoModal').on('shown.bs.modal', calcularPreco);
 
-    // Submit do formulário
     $('#formEvento').on('submit', function(e) {
         e.preventDefault();
 
@@ -273,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     success: function(res){
                         console.log("Resposta do servidor:", res);
                         if(res.flag){
-                            // Adiciona evento ao calendário
+                        
                             calendar.addEvent({ 
                                 title: tipoNome, 
                                 start: data+"T"+hora,
@@ -319,8 +318,6 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire('Erro', 'Preenche todos os campos obrigatórios!', 'warning');
         }
     });
-
-    // Cancelar evento
     $(document).on('click', '.cancelarEvento', function(){
         var row = $(this).closest('tr');
         var idEvento = row.data('id');
@@ -362,17 +359,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let precoBase = 100; 
 let precoPorConvidado = 10;
-// 📊 Cálculo do preço total (serviços + pacote)
 function calcularPreco() {
     let total = 0;
 
-    // Pacote
     let pacote = $('#pacote option:selected');
     if(pacote.length > 0 && pacote.val() !== "") {
         total += parseFloat(pacote.data('preco')) || 0;
     }
 
-    // Serviços
+  
     $('.servico:checked').each(function() {
         total += parseFloat($(this).val()) || 0;
     });
@@ -384,7 +379,6 @@ function calcularPreco() {
 $(document).on('change', '.servico, #pacote', calcularPreco);
 $('#eventoModal').on('shown.bs.modal', calcularPreco);
 
-// Submit do formulário
 $('#formEvento').on('submit', function(e) {
     e.preventDefault();
 
