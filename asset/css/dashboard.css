@@ -188,3 +188,19 @@ body {
     padding: 5px;
     border-radius: 5px;
 }
+.TotalAtivoCor
+{
+    color: #e97551d5;
+}
+.TotalRendimentosCor
+{
+    color: #1cc889dc;
+}
+.TotalGastosCor
+{
+    color: #e7493bda;
+}
+.TotalReceitaCor
+{
+    color: #4e72dfd5;
+}
