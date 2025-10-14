@@ -8,7 +8,6 @@ $meses = [];
 $rendimentos = [];
 $gastos = [];
 
-//
 $sqlFornecedores = "SELECT COUNT(*) AS totalFornecedores FROM Fornecedores";
 $resultFornecedores = $conn->query($sqlFornecedores);
 
@@ -94,28 +93,28 @@ $conn->close();
                     <div class="card p-3">
                         <h6>Total Ativo</h6>
                         <h4 class="TotalAtivoCor"><?php echo $totalTotalAtivo; ?>€</h4>
-                        <!-- <canvas id="TotalAtivo" height="80"></canvas> -->
+                        <canvas id="TotalAtivo" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Redimentos</h6>
                         <h4 class="TotalRendimentosCor"><?php echo $totalRendimentos; ?>€</h4>
-                        <!-- <canvas id="TotalRendimentosGrafico" height="80"></canvas> -->
+                        <canvas id="TotalRendimentosGrafico" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Gastos</h6>
                         <h4 class="TotalGastosCor"><?php echo $totalGastos; ?>€</h4>
-                        <!-- <canvas id="TotalGastosGrafico" height="80"></canvas> -->
+                        <canvas id="TotalGastosGrafico" height="80"></canvas>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h6>Receita</h6>
                         <h4 class="TotalReceitaCor"><?php echo $saldo; ?>€</h4>
-                        <!-- <canvas id="TotalLucro" height="80"></canvas> -->
+                         <canvas id="TotalLucro" height="80"></canvas>
                     </div>
                 </div>
             </div>

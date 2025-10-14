@@ -817,11 +817,11 @@ function alerta(titulo,msg,icon){
 function carregarDashboard() {   
     setTimeout(BotoesGraficoDashboard, 100); 
     setTimeout(GraficoServicoDashboardSoma, 150); 
-    //setTimeout(GraficoTotalAtivoDashboard, 200);
-    //setTimeout(GraficoDiferencaDashboard, 200);   // prioridade 2
-    //setTimeout(getGastosDashboard, 400);          // prioridade 3
-    //setTimeout(getRedimentosDashboard, 600);      // prioridade 4
+    setTimeout(GraficoTotalAtivoDashboard, 200);
+    setTimeout(GraficoDiferencaDashboard, 200);   
+    setTimeout(getGastosDashboard, 400);         
+    setTimeout(getRedimentosDashboard, 600);     
     setTimeout(getDividasReceber, 800); 
     setTimeout(getDividasPagar, 800); 
-    setTimeout(GraficoServicoDashboard, 900);             // prioridade 5
+    setTimeout(GraficoServicoDashboard, 900);    
 }
