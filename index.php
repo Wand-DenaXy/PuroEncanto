@@ -445,6 +445,8 @@ session_start();
                                 <h3>Bolo</h3>
                             </div>
                             <div class="plan-price">
+                                <div class="price-value">86.10€</div>
+                                <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
@@ -468,6 +470,8 @@ session_start();
                                 <h3>Catering</h3>
                             </div>
                             <div class="plan-price">
+                                <div class="price-value">246.00€</span></div>
+                                <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
@@ -491,6 +495,8 @@ session_start();
                                 <h3>Decoração</h3>
                             </div>
                             <div class="plan-price">
+                                <div class="price-value">123.00€</span></div>
+                                <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
@@ -514,6 +520,8 @@ session_start();
                                 <h3>Insuflável</h3>
                             </div>
                             <div class="plan-price">
+                                <div class="price-value">123.00€</span></div>
+                                <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
@@ -537,6 +545,8 @@ session_start();
                                 <h3>Pipocas</h3>
                             </div>
                             <div class="plan-price">
+                                <div class="price-value">369.00€</span></div>
+                                <div class="interval">iva incluido</div>
                             </div>
                             <div class="plan-list">
                                 <ul>
