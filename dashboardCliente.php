@@ -92,10 +92,9 @@ $conn->close();
     </table>
 </div>
 
-<!-- MODAL CORRIGIDO -->
 <div class="modal fade" id="eventoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content"><!-- ESTA DIV ESTAVA EM FALTA -->
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Criar Evento</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -229,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(tipoId && data && hora && pacote){
             let horaInt = parseInt(hora.split(':')[0]);
-            if((horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 17)){
+            if((horaInt >= 9 && horaInt < 13) || (horaInt >= 14 && horaInt < 18)){
                 $.ajax({
                     url: 'salvarEvento.php',
                     type: 'POST',
