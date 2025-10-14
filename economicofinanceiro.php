@@ -20,7 +20,6 @@ $capitalRealizado    = getValor($conn, 'Capital realizado');
 $resultadoLiquido    = getValor($conn, 'Resultado líquido do período');
 $outrasContasPagar   = getValor($conn, 'Outras contas a pagar');
 
-// Totais
 $totalAtivoNaoCorrente = $ativoTangiveis + $ativoIntangiveis;
 $totalAtivoCorrente = $inventarios + $estadoPublicos + $diferimentos + $caixaDepositos;
 $totalAtivo = $totalAtivoNaoCorrente + $totalAtivoCorrente;
@@ -28,7 +27,7 @@ $totalCapitalProprio = $capitalRealizado + $resultadoLiquido;
 $totalPassivo = $outrasContasPagar;
 $totalCapitalProprioPassivo = $totalCapitalProprio + $totalPassivo;
 
-// Rácios de Liquidez
+
 $lg = getValor($conn, 'Liquidez Geral');
 $lr = getValor($conn, 'Liquidez Reduzida');
 $li = getValor($conn, 'Liquidez Imediata');
@@ -53,11 +52,23 @@ $conn->close();
 </head>
 <body>
     <div class="sidebar">
-        <a href="index.php"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt=""><p class="logotitulo">Puro Encanto</p></div></a>
-        <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="economicofinanceiro.php" class="active"><i class="bi bi-people"></i> Económico-Financeiro</a>
-        <a href="financas.php"><i class="bi bi-people"></i> Finanças</a>
+        <a href="index.php" style="background-color: transparent;border-left: none;">
+            <div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
+                <p class="logotitulo">Puro Encanto</p>
+            </div>
+        </a>
+        <a href="dashboard.php" ><i class="bi bi-grid"></i> Dashboard</a>
+        <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
+        <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
+        <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
+        <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
+        <a href="funcionario.html"><i class="bi bi-people"></i> Funcionario</a>
+        <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
+         <a href="economicofinanceiro.php" class="active"><i class="bi bi-people"></i> Económico-Financeiro </a>
+          <a href="financas.php"><i class="bi bi-people"></i> Finanças</a>
         <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
+
+        <div class="time" id="time"></div>
     </div>
 
     <div class="content" style="margin-left:250px; padding: 20px;">
