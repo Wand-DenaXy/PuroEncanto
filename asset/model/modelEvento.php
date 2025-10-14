@@ -57,7 +57,7 @@ function listarSessoesJSON($ID_TipoEvento) {
 
 function listarEventos() {
         global $conn;
-        $msg = "<table class='table'><thead><tr><th>ID do Evento</th><th>Nome</th><th>ID do Cliente</th><th>Data</th><th>Hora</th><th>Tipo</th><th>Remover</th><th>Editar</th></tr></thead><tbody>";
+        $msg = "<table class='table'><thead><tr><th>ID do Evento</th><th>Nome</th><th>ID do Cliente</th><th>Data</th><th>Hora</th><th>Tipo</th><th>Remover</th></tr></thead><tbody>";
         $stmt = $conn->prepare("SELECT Clientes.nome AS ClienteNome,Eventos.*, TiposEventos.nome As tipo_nome from TiposEventos,Eventos,Clientes where Eventos.ID_TipoEvento = TiposEventos.ID_TipoEvento AND Eventos.estado = 'aceite' AND eventos.ID_Cliente = Clientes.ID_Cliente group by Eventos.ID_Evento;");
         $stmt->execute();
         $result = $stmt->get_result();

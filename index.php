@@ -450,13 +450,6 @@ session_start();
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
-                                    <li>Bolo</li>
-                                    <li>Decoração</li>
-                                    <li>Catering</li>
-                                    <li>Insufláveis</li>
-                                    <li>Máquina de pipocas</li>
-                                    <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
@@ -475,13 +468,6 @@ session_start();
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
-                                    <li>Bolo</li>
-                                    <li>Decoração</li>
-                                    <li>Catering</li>
-                                    <li>Insufláveis</li>
-                                    <li>Máquina de pipocas</li>
-                                    <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
@@ -500,13 +486,6 @@ session_start();
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
-                                    <li>Bolo</li>
-                                    <li>Decoração</li>
-                                    <li>Catering</li>
-                                    <li>Insufláveis</li>
-                                    <li>Máquina de pipocas</li>
-                                    <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
@@ -525,13 +504,6 @@ session_start();
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
-                                    <li>Bolo</li>
-                                    <li>Decoração</li>
-                                    <li>Catering</li>
-                                    <li>Insufláveis</li>
-                                    <li>Máquina de pipocas</li>
-                                    <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
@@ -550,13 +522,6 @@ session_start();
                             </div>
                             <div class="plan-list">
                                 <ul>
-                                    <li>100 Convidados</li>
-                                    <li>Bolo</li>
-                                    <li>Decoração</li>
-                                    <li>Catering</li>
-                                    <li>Insufláveis</li>
-                                    <li>Máquina de pipocas</li>
-                                    <li></li>
                                 </ul>
                             </div>
                             <div class="plan-signup">
