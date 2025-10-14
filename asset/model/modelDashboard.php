@@ -31,10 +31,6 @@ class Dashboard {
             $msg .= "<td></td>";
             $msg .= "<td></td>";
             $msg .= "<td></td>";
-            $msg .= "<td></td>";
-            $msg .= "<td></td>";
-            $msg .= "<td></td>";
-            $msg .= "<td></td>";
             $msg .= "</tr>";
         }
         $conn->close();
@@ -86,50 +82,122 @@ function pagarDividasPagar($ID_Divida)
     $msg = "";
     $flag = false;
 
-    $sql = "UPDATE DividasAPagar SET Estado = 'Pago' WHERE ID_Divida = $ID_Divida";
+    $sqlResult = "SELECT Valor FROM DividasAPagar WHERE ID_Divida = $ID_Divida";
+    $result = $conn->query($sqlResult);
 
-        if ($conn->query($sql) === TRUE) {
-            $flag = true;
-            $msg = "Pago com Sucesso";
+    if ($result && $row = $result->fetch_assoc()) {
+        $valor = $row['Valor'];
+
+        $sqlUpdate = "UPDATE DividasAPagar SET Estado = 'Pago' WHERE ID_Divida = $ID_Divida";
+        if ($conn->query($sqlUpdate) === TRUE) {
+
+            $meses = array(
+                'January' => 'Janeiro',
+                'February' => 'Fevereiro',
+                'March' => 'Março',
+                'April' => 'Abril',
+                'May' => 'Maio',
+                'June' => 'Junho',
+                'July' => 'Julho',
+                'August' => 'Agosto',
+                'September' => 'Setembro',
+                'October' => 'Outubro',
+                'November' => 'Novembro',
+                'December' => 'Dezembro'
+            );
+
+            $mesAtual = date('F');
+            $mesAtualPT = $meses[$mesAtual];
+            $descricao = "Gastos - " . $mesAtualPT;
+            
+            $sqlInsert = "INSERT INTO Gastos (descricao, Valor, Data)
+                          VALUES ('$descricao', '$valor', CURDATE())";
+
+            if ($conn->query($sqlInsert) === TRUE) {
+                $flag = true;
+                $msg = "Dívida paga!";
+            } else {
+                $msg = "Erro ao inserir em Gastos: " . $conn->error;
+            }
+
         } else {
-            $flag = false;
-            $msg = "Error: " . $sql . "<br>" . $conn->error;
+            $msg = "Erro a inserir a dívida: " . $conn->error;
         }
 
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg
-        ));
+    } else {
+        $msg = "Dívida não encontrada ou erro ao obter valor. " . $conn->error;
+    }
+
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg
+    ));
 
     $conn->close();
     return $resp;
-
 }
+
 function pagarDividasReceber($ID_Evento)
 {
     global $conn;
     $msg = "";
     $flag = false;
-
+    
     $sql = "UPDATE Eventos SET estado = 'aceite' WHERE ID_Evento = $ID_Evento";
 
-        if ($conn->query($sql) === TRUE) {
-            $flag = true;
-            $msg = "Aceite com Sucesso";
+    if ($conn->query($sql) === TRUE) {
+        $sqlResult = "SELECT precoTotal FROM eventos WHERE ID_Evento = $ID_Evento";
+        $result = $conn->query($sqlResult);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            $valor = $row['precoTotal'];
+            $meses = array(
+                'January' => 'Janeiro',
+                'February' => 'Fevereiro',
+                'March' => 'Março',
+                'April' => 'Abril',
+                'May' => 'Maio',
+                'June' => 'Junho',
+                'July' => 'Julho',
+                'August' => 'Agosto',
+                'September' => 'Setembro',
+                'October' => 'Outubro',
+                'November' => 'Novembro',
+                'December' => 'Dezembro'
+            );
+            $mesAtual = date('F');
+            $mesAtualPT = $meses[$mesAtual];
+
+            $descricao = "Rendimento - " . $mesAtualPT;
+
+            $sqlInsert = "INSERT INTO Rendimento (descricao, Valor, Data)
+                          VALUES ('$descricao', '$valor', CURDATE())";
+
+            if ($conn->query($sqlInsert) === TRUE) {
+                $flag = true;
+                $msg = "Evento aceite!";
+            } else {
+                $flag = false;
+                $msg = "Erro ao inserir rendimento: " . $conn->error;
+            }
         } else {
             $flag = false;
-            $msg = "Error: " . $sql . "<br>" . $conn->error;
+            $msg = "Erro ao obter valor do evento.";
         }
+    } else {
+        $flag = false;
+        $msg = "Erro ao atualizar evento: " . $conn->error;
+    }
 
-        $resp = json_encode(array(
-            "flag" => $flag,
-            "msg" => $msg
-        ));
+    $resp = json_encode(array(
+        "flag" => $flag,
+        "msg" => $msg
+    ));
 
     $conn->close();
     return $resp;
-
 }
+
 function recusarDividasPagar2($ID_Evento)
 {
     global $conn;
