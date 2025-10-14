@@ -119,14 +119,14 @@ html, body {
 
 <div class="table-container">
     <div class="table-header text-center">
-        <h2>💰 Gestão Económico-Financeira</h2>
-        <p>Utilize o botão <strong>“Editar”</strong> ao lado de cada campo para fazer alterações em tempo real.</p>
+        <h2>Finanças</h2>
+        <br>
     </div>
 
     <table id="financasTable" class="table table-bordered table-striped align-middle text-center shadow-sm">
         <thead class="table-dark">
             <tr>
-                <th>Campo</th>
+                <th></th>
                 <th>Valor (€)</th>
                 <th>Ações</th>
             </tr>
