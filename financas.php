@@ -119,7 +119,7 @@ html, body {
 
 <div class="table-container">
     <div class="table-header text-center">
-        <h2>Finanças</h2>
+        <h2><strong>Finanças</strong></h2>
         <br>
     </div>
 
