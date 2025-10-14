@@ -134,11 +134,28 @@
 				FOREIGN KEY (ID_Evento) REFERENCES Eventos(ID_Evento),
 				FOREIGN KEY (ID_Servico) REFERENCES Servicos(ID_Servico)
 			);
+			CREATE TABLE Financas (
+			ID_Financa INT AUTO_INCREMENT PRIMARY KEY,
+			TotalReceber Decimal(10,2) ,
+			TotalPagar DECIMAL(10,2),
+			Disponibilidades DECIMAL(10,2)
+		);
+		
 			CREATE TABLE Balancete (
 			ID_Balancete INT AUTO_INCREMENT PRIMARY KEY,
 			descricao VARCHAR(100) NOT NULL,
 			saldo DECIMAL(15,2)
 		);
+		CREATE TABLE IF NOT EXISTS econ_financeiro (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(100) NOT NULL,
+    sub_tipo VARCHAR(100),
+    descricao VARCHAR(255) NOT NULL,
+    valor DECIMAL(15,2) NOT NULL,
+    ano INT NOT NULL
+);
+
+				
 		CREATE TABLE DividasAPagar (
 			ID_Divida INT PRIMARY KEY AUTO_INCREMENT,
 			Tipo VARCHAR(50) NOT NULL,            -- Tipo de dívida: Fornecedor, Cliente, Funcionário, Outros
@@ -200,6 +217,30 @@
 		INSERT INTO TipoUtilizador (Tipo) VALUES 
 		('Cliente'),
 		('Administrador');
+		
+		INSERT INTO econ_financeiro (tipo, sub_tipo, descricao, valor, ano) VALUES
+
+('Ativo', 'Ativo não corrente', 'Ativos fixos tangíveis', 50579.98, 2025),
+('Ativo', 'Ativo não corrente', 'Ativos intangíveis', 13749.99, 2025),
+
+('Ativo', 'Ativo corrente', 'Inventários', 5.69, 2025),
+('Ativo', 'Ativo corrente', 'Estado e outros entes públicos', 632.03, 2025),
+('Ativo', 'Ativo corrente', 'Diferimentos', 1243.56, 2025),
+('Ativo', 'Ativo corrente', 'Caixa e depósitos bancários', 46398.41, 2025),
+
+
+('Capital Próprio', NULL, 'Capital realizado', 10000.00, 2025),
+('Capital Próprio', NULL, 'Resultado líquido do período', 97243.86, 2025),
+
+('Passivo', 'Passivo corrente', 'Outras contas a pagar', 5365.80, 2025),
+
+('Rácios de Liquidez', NULL, 'Liquidez Geral', 8.997668, 2025),
+('Rácios de Liquidez', NULL, 'Liquidez Reduzida', 8.996608, 2025),
+('Rácios de Liquidez', NULL, 'Liquidez Imediata', 27.512004, 2025);
+
+
+INSERT INTO financas (TotalReceber, TotalPagar, Disponibilidades)VALUES 
+		('218241.4', '8780.81','147623.9'); 
         
  INSERT INTO Clientes (nome, Email, nif, Password, IBAN, ID_TipoUtilizador) VALUES
 	('XPTO, Lda', 'xpto@email.com', '532622448', 'pass123', 'PT50007946838624313088068', 1),
