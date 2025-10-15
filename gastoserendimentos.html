@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puro Encanto - Gastos e Rendimentos</title>
+    
     <link rel="stylesheet" href="asset/css/funcionario.css">
     <link rel="stylesheet" href="asset/css/lib/datatables.css">
     <link rel="stylesheet" href="asset/css/lib/select2.css">
     <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <script src="asset/js/lib/jquery.js"></script>
     <script src="asset/js/lib/bootstrap.js"></script>
@@ -18,342 +18,861 @@
     <script src="asset/js/lib/sweatalert.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --success-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --warning-color: #f6c23e;
+            --info-color: #36b9cc;
+            --sidebar-width: 260px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fc;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, #4e73df 0%, #224abe 100%);
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+
+        .logo {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .logotitulo {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left-color: white;
+        }
+
+        .sidebar a.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border-left-color: white;
+            font-weight: 600;
+        }
+
+        .sidebar a i {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .time {
+            padding: 20px;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: auto;
+        }
+
+        .content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h2 {
+            color: #5a5c69;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-card h5 {
+            color: #5a5c69;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f8f9fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-card.success h5 {
+            color: var(--success-color);
+        }
+
+        .form-card.danger h5 {
+            color: var(--danger-color);
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            min-height: 500px;
+        }
+
+        .table-card h5 {
+            color: #5a5c69;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f8f9fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #d1d3e2;
+            padding: 10px 15px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78,115,223,0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #5a5c69;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .btinfoperfil, .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #224abe 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btinfoperfil:hover, .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78,115,223,0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #13855c 100%);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 5px 15px rgba(28,200,138,0.4);
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            border-top: none;
+            border-bottom: 2px solid #e3e6f0;
+            color: #858796;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 15px;
+            white-space: nowrap;
+        }
+
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            color: #5a5c69;
+            font-size: 14px;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fc;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #eaecf4;
+            transition: all 0.3s ease;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-sm:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: #333;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin: 30px 0;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .chart-header h5 {
+            color: #5a5c69;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0;
+        }
+
+        .btn-group .btn {
+            border-radius: 0;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-group .btn:first-child {
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        .btn-group .btn:last-child {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .btn-outline-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-outline-primary.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #224abe 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            padding: 20px 25px;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .modal-title {
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 2px solid #f8f9fc;
+        }
+
+        .btinfoperfil2 {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btinfoperfil2:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(28,200,138,0.4);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid rgba(78,115,223,.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .value-badge {
+            background: #e7f3ff;
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .value-badge.success {
+            background: #d4f4dd;
+            color: var(--success-color);
+        }
+
+        .value-badge.danger {
+            background: #ffe5e5;
+            color: var(--danger-color);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        /* Animações de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-card, .table-card, .chart-section {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
 </head>
 
 <body>
     <div class="sidebar">
-        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
-            <p class="logotitulo">Puro Encanto</p>
-        </div></a>
-        <a href="dashboard.php" ><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="gastoserendimentos.html" class="active"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
-        <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
-        <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
-        <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
-        <a href="funcionario.html" ><i class="bi bi-people"></i> Funcionario</a>
-        <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-         <a href="economicofinanceiro.php"><i class="bi bi-people"></i> Económico-Financeiro </a>
-          <a href="financas.php"><i class="bi bi-people"></i> Finanças</a>
-        <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
-
+        <a href="index.php" style="background-color: transparent;border-left: none;">
+            <div class="logo">
+                <img src="images/logos/PURO ENCANTO LOGO.png" alt="Puro Encanto">
+                <p class="logotitulo">Puro Encanto</p>
+            </div>
+        </a>
+        <a href="dashboard.php">
+            <i class="bi bi-grid-fill"></i> Dashboard
+        </a>
+        <a href="gastoserendimentos.html" class="active">
+            <i class="bi bi-cash-stack"></i> Gastos e Rendimentos
+        </a>
+        <a href="servicosadmin.html">
+            <i class="bi bi-cart-fill"></i> Vendas
+        </a>
+        <a href="fornecedores.html">
+            <i class="bi bi-truck"></i> Fornecedores
+        </a>
+        <a href="clientes.html">
+            <i class="bi bi-people-fill"></i> Clientes
+        </a>
+        <a href="funcionario.html">
+            <i class="bi bi-person-badge-fill"></i> Funcionários
+        </a>
+        <a href="calendario.html">
+            <i class="bi bi-calendar3"></i> Calendário
+        </a>
+        <a href="economicofinanceiro.php">
+            <i class="bi bi-graph-up-arrow"></i> Económico-Financeiro
+        </a>
+        <a href="financas.php">
+            <i class="bi bi-wallet2"></i> Finanças
+        </a>
+        <a href="perfilAdmin.php">
+            <i class="bi bi-person-circle"></i> Perfil
+        </a>
         <div class="time" id="time"></div>
     </div>
+
     <div class="content">
-        <!-- Topbar -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Gastos e Rendimentos</h4>
-            <div class="d-flex align-items-center">
-                <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="">
-                <span></span>
-            </div>
+        <div class="page-header">
+            <h2><i class="bi bi-cash-stack"></i> Gastos e Rendimentos</h2>
         </div>
-        <hr>
-        <!-- Form and CSV Import -->
-<div class="container mt-4">
-    <div class="row">
-        <!-- Coluna Gastos -->
-        <div class="col-md-6">
-            <!-- Card Adicionar Gastos -->
-            <div class="card p-4 mb-4" style="min-height: 180px;">
-                <h5>Adicionar Gastos</h5>
-                <form>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Descrição" id="descricaoGasto">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Valor" id="valorGasto">
-                        </div>
-                        <div class="col">
-                            <input type="date" class="form-control" placeholder="Data" id="dataGasto">
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Coluna Gastos -->
+                <div class="col-md-6">
+                    <div class="form-card danger">
+                        <h5>
+                            <i class="bi bi-arrow-down-circle-fill"></i> Adicionar Gastos
+                        </h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="descricaoGasto" class="form-label">Descrição</label>
+                                <input type="text" class="form-control" id="descricaoGasto" placeholder="Digite a descrição do gasto">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="valorGasto" class="form-label">Valor (€)</label>
+                                    <input type="number" class="form-control" id="valorGasto" placeholder="0.00" step="0.01">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dataGasto" class="form-label">Data</label>
+                                    <input type="date" class="form-control" id="dataGasto">
+                                </div>
+                            </div>
+                            <button type="button" class="btinfoperfil w-100" onclick="registaGastos()">
+                                <i class="bi bi-plus-circle"></i> Registar Gasto
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="table-card">
+                        <h5>
+                            <i class="bi bi-list-ul text-danger"></i> Lista de Gastos
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tblGastos">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Descrição</th>
+                                        <th>Valor</th>
+                                        <th>Data</th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listagemGastos">
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <div class="loading-spinner"></div>
+                                            <p class="mt-2">Carregando gastos...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <button type="button" class="btinfoperfil" onclick="registaGastos()">Registar</button>
-                </form>
-            </div>
+                </div>
 
-            <!-- Tabela Gastos -->
-            <div class="card mb-4" style="min-height: 400px;">
-                <div class="card-body">
-                    <h5 class="card-title">Gastos</h5>
-                    <div style="overflow-x:auto;">
-                        <table class="table table-striped table-hover" id="tblGastos">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Valor</th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Remover</th>
-                                </tr>
-                            </thead>
-                            <tbody id="listagemGastos"></tbody>
-                        </table>
+                <!-- Coluna Rendimentos -->
+                <div class="col-md-6">
+                    <div class="form-card success">
+                        <h5>
+                            <i class="bi bi-arrow-up-circle-fill"></i> Adicionar Rendimentos
+                        </h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="descricaoRendimento" class="form-label">Descrição</label>
+                                <input type="text" class="form-control" id="descricaoRendimento" placeholder="Digite a descrição do rendimento">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="valorRendimento" class="form-label">Valor (€)</label>
+                                    <input type="number" class="form-control" id="valorRendimento" placeholder="0.00" step="0.01">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dataRendimento" class="form-label">Data</label>
+                                    <input type="date" class="form-control" id="dataRendimento">
+                                </div>
+                            </div>
+                            <button type="button" class="btinfoperfil btn-success w-100" onclick="registaRendimentos()">
+                                <i class="bi bi-plus-circle"></i> Registar Rendimento
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="table-card">
+                        <h5>
+                            <i class="bi bi-list-ul text-success"></i> Lista de Rendimentos
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tblRendimentos">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Descrição</th>
+                                        <th>Valor</th>
+                                        <th>Data</th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listagemRendimentos">
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <div class="loading-spinner"></div>
+                                            <p class="mt-2">Carregando rendimentos...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Seção de Gráficos -->
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h5><i class="bi bi-graph-up"></i> Análise Financeira</h5>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-primary active" id="btnGrafico1">
+                            <i class="bi bi-arrow-up-circle"></i> Rendimentos
+                        </button>
+                        <button class="btn btn-outline-primary" id="btnGrafico2">
+                            <i class="bi bi-arrow-down-circle"></i> Gastos
+                        </button>
+                    </div>
+                </div>
+                <div id="graficoBalancete">
+                    <canvas id="graficoRendimentos99" height="80"></canvas>
+                </div>
+                <div id="graficoVendidos" style="display: none;">
+                    <canvas id="graficoGastos99" height="80"></canvas>
+                </div>
+            </div>
 
-        <div class="col-md-6">
-            <div class="card p-4 mb-4" style="min-height: 180px;">
-                <h5>Adicionar Rendimentos</h5>
+            <!-- Resumo Financeiro -->
+            <div class="form-card">
+                <h5>
+                    <i class="bi bi-clipboard-data"></i> Adicionar Resumo Financeiro
+                </h5>
                 <form>
                     <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Descrição" id="descricaoRendimento">
+                        <div class="col-md-4">
+                            <label for="descricaoResumo" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="descricaoResumo" placeholder="Digite a descrição">
                         </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Valor" id="valorRendimento">
+                        <div class="col-md-4">
+                            <label for="selectRendimentos" class="form-label">Rendimentos</label>
+                            <select class="form-select" id="selectRendimentos"></select>
                         </div>
-                        <div class="col">
-                            <input type="date" class="form-control" placeholder="Data" id="dataRendimento">
+                        <div class="col-md-4">
+                            <label for="selectGastos" class="form-label">Gastos</label>
+                            <select class="form-select" id="selectGastos"></select>
                         </div>
                     </div>
-                    <button type="button" class="btinfoperfil" onclick="registaRendimentos()">Registar</button>
+                    <button type="button" class="btinfoperfil" onclick="registaResumo()">
+                        <i class="bi bi-save"></i> Registar Resumo
+                    </button>
                 </form>
             </div>
 
-            <div class="card mb-4" style="min-height: 400px;">
-                <div class="card-body">
-                    <h5 class="card-title">Rendimentos</h5>
-                    <div style="overflow-x:auto;">
-                        <table class="table table-striped table-hover" id="tblRendimentos">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Valor</th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Remover</th>
-                                </tr>
-                            </thead>
-                            <tbody id="listagemRendimentos"></tbody>
-                        </table>
-                    </div>
+            <div class="table-card">
+                <h5>
+                    <i class="bi bi-table"></i> Resumo Financeiro
+                </h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="tblResumo">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th>Rendimentos</th>
+                                <th>Gastos</th>
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listagemResumo">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div class="loading-spinner"></div>
+                                    <p class="mt-2">Carregando resumo...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
-    <div class="row2">
-        <div class="col-md-10">
-            <div class="navbar navbar-expand-lg navbar-light bg-light" id="acordionID">
-                <div class="btn-group" role="group" aria-label="Botões de gráficos">
-                    <button class="btn btn-outline-primary active" id="btnGrafico1"
-                        data-bs-toggle="button">Rendimentos</button>
-                    <button class="btn btn-outline-primary" id="btnGrafico2" data-bs-toggle="button">Gastos</button>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <div id="graficoBalancete">
-                            <h5>Rendimentos</h5>
-                            <canvas id="graficoRendimentos99"></canvas>
-                        </div>
-                        <div id="graficoVendidos" style="display: none;">
-                            <h5>Gastos
-                            </h5>
-                            <canvas id="graficoGastos99"></canvas>
-                        </div>
-                    </div>
+    <!-- Modal Editar Gastos -->
+    <div class="modal fade" id="formEditGastos" tabindex="-1" aria-labelledby="modalEditGastosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditGastosLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Gasto
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-        <div class="row" id="resumofinanceiro1">
-            <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Adicionar Resumo Financeiro</h5>
-                    <form>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Descrição" id="descricaoResumo">
-                            </div>
-                            <div class="col">
-                                <select name="" id="selectRendimentos"></select>
-                            </div>
-                            <div class="col">
-                                <select name="" id="selectGastos"></select>
-                            </div>
-                            <div class="col">
-                            </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-12">
+                            <label for="numGastosEdit" class="form-label">Número</label>
+                            <input type="number" class="form-control" id="numGastosEdit" disabled>
                         </div>
-                        <div class="row mb-2">
+                        <div class="col-md-12">
+                            <label for="descricaoGastosEdit" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="descricaoGastosEdit">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="registaResumo()">Registar</button>
-
+                        <div class="col-md-6">
+                            <label for="ValorGastosEdit" class="form-label">Valor (€)</label>
+                            <input type="number" class="form-control" id="ValorGastosEdit" step="0.01">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dataGatosEdit" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="dataGatosEdit">
+                        </div>
                     </form>
                 </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Resumo Financeiro</h5>
-
-                <table class="table table-striped" id="tblResumo">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Rendimentos</th>
-                            <th scope="col">Gastos</th>
-                            <th scope="col">Editar</th>
-                            <th scope="col">Remover</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listagemResumo">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="formEditGastos" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Gastos</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="card">
-                        <h5 class="card-header">Gastos</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Editar</h5>
-                            <form class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="numGastosEdit" class="form-label">Número</label>
-                                    <input type="number" class="form-control" id="numGastosEdit" disabled>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="descricaoGastosEdit" class="form-label">Descrição</label>
-                                    <input type="text" class="form-control" id="descricaoGastosEdit">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="descricaoGastosEdit" class="form-label">Valor</label>
-                                    <input type="text" class="form-control" id="ValorGastosEdit">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="dataGatosEdit" class="form-label">Data</label>
-                                    <input type="date" class="form-control" id="dataGatosEdit">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                        style="padding: 12px;border-radius: 10px;font-size: 16px;font-weight: bold;">Fechar</button>
-                    <button type="button" class='btinfoperfil2' id="btnGuardar">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Fechar
+                    </button>
+                    <button type="button" class="btinfoperfil2" id="btnGuardar">
+                        <i class="bi bi-check-circle"></i> Guardar Alterações
+                    </button>
                 </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="formEditRendimento" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Rendimentos</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="card">
-                        <h5 class="card-header">Rendimentos</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Editar</h5>
-                            <form class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="numRendimentoEdit" class="form-label">Número</label>
-                                    <input type="number" class="form-control" id="numRendimentoEdit" disabled>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="descricaoRendimentoEdit" class="form-label">Descrição</label>
-                                    <input type="text" class="form-control" id="descricaoRendimentoEdit">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ValorRendimentoEdit" class="form-label">Valor</label>
-                                    <input type="text" class="form-control" id="ValorRendimentoEdit">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="dataRendimentoEdit" class="form-label">Data</label>
-                                    <input type="date" class="form-control" id="dataRendimentoEdit">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                        style="padding: 12px;border-radius: 10px;font-size: 16px;font-weight: bold;">Fechar</button>
-                    <button type="button" class='btinfoperfil2' id="btnGuardar1">Guardar</button>
+    <!-- Modal Editar Rendimento -->
+    <div class="modal fade" id="formEditRendimento" tabindex="-1" aria-labelledby="modalEditRendimentoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditRendimentoLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Rendimento
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="formEditResumo" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Rendimentos</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="card">
-                        <h5 class="card-header">Rendimentos</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Editar</h5>
-                            <form class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="numResumoEdit" class="form-label">Número</label>
-                                    <input type="number" class="form-control" id="numResumoEdit" disabled>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="descricaoResumoEdit" class="form-label">Descrição</label>
-                                    <input type="text" class="form-control" id="descricaoResumoEdit">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ID_Gastos" class="form-label">Gastos</label>
-                                    <input type="number" class="form-control" id="ID_Gastos" disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="ID_Rendimentos" class="form-label">Rendimentos</label>
-                                    <input type="number" class="form-control" id="ID_Rendimentos" disabled>
-                                </div>
-                            </form>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-12">
+                            <label for="numRendimentoEdit" class="form-label">Número</label>
+                            <input type="number" class="form-control" id="numRendimentoEdit" disabled>
                         </div>
-                    </div>
+                        <div class="col-md-12">
+                            <label for="descricaoRendimentoEdit" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="descricaoRendimentoEdit">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ValorRendimentoEdit" class="form-label">Valor (€)</label>
+                            <input type="number" class="form-control" id="ValorRendimentoEdit" step="0.01">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dataRendimentoEdit" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="dataRendimentoEdit">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Fechar
+                    </button>
+                    <button type="button" class="btinfoperfil2" id="btnGuardar1">
+                        <i class="bi bi-check-circle"></i> Guardar Alterações
+                    </button>
                 </div>
             </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                        style="padding: 12px;border-radius: 10px;font-size: 16px;font-weight: bold;">Fechar</button>
-                    <button type="button" class='btinfoperfil2' id="btnGuarda99">Guardar</button>
-                </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal Editar Resumo -->
+    <div class="modal fade" id="formEditResumo" tabindex="-1" aria-labelledby="modalEditResumoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditResumoLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Resumo Financeiro
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-12">
+                            <label for="numResumoEdit" class="form-label">Número</label>
+                            <input type="number" class="form-control" id="numResumoEdit" disabled>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="descricaoResumoEdit" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="descricaoResumoEdit">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ID_Gastos" class="form-label">ID Gastos</label>
+                            <input type="number" class="form-control" id="ID_Gastos" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ID_Rendimentos" class="form-label">ID Rendimentos</label>
+                            <input type="number" class="form-control" id="ID_Rendimentos" disabled>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Fechar
+                    </button>
+                    <button type="button" class="btinfoperfil2" id="btnGuarda99">
+                        <i class="bi bi-check-circle"></i> Guardar Alterações
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="asset/js/gastoserendimentos.js"></script>
-    
-</body>
+    <script>
+        // Atualizar relógio
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            document.getElementById('time').textContent = now.toLocaleDateString('pt-PT', options);
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000);
 
+        // Alternar entre gráficos
+        $('#btnGrafico1').click(function() {
+            $(this).addClass('active');
+            $('#btnGrafico2').removeClass('active');
+            $('#graficoBalancete').show();
+            $('#graficoVendidos').hide();
+        });
+
+        $('#btnGrafico2').click(function() {
+            $(this).addClass('active');
+            $('#btnGrafico1').removeClass('active');
+            $('#graficoBalancete').hide();
+            $('#graficoVendidos').show();
+        });
+
+        // Definir data atual nos campos de data
+        $(document).ready(function() {
+            const today = new Date().toISOString().split('T')[0];
+            $('#dataGasto').val(today);
+            $('#dataRendimento').val(today);
+        });
+    </script>
+</body>
 </html>

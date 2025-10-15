@@ -1,3 +1,5 @@
+let chartRendimentos = null;
+let chartGastos = null;
 function formatarValoresComEuro(valores) {
     return valores.map(value => '€' + parseFloat(value));
 }
@@ -464,18 +466,22 @@ function GraficoServicoUtilizadoJunho() {
             }
         });
 }
-function getGastosDashboard()
-{
-        $.ajax({
+function getGastosDashboard() {
+    $.ajax({
         url: "asset/controller/controllerDashboard.php",
         type: "POST",
         data: { op: 9 },
         dataType: "json",
         success: function(response) {
             console.log("Resposta AJAX:", response);
+            
             if (response.flag) {
+                if (chartGastos) {
+                    chartGastos.destroy();
+                }
+
                 const ctx3 = document.getElementById('TotalGastosGrafico').getContext('2d');
-                new Chart(ctx3, {
+                chartGastos = new Chart(ctx3, {
                     type: 'line',
                     data: {
                         labels: response.dados1,
@@ -484,25 +490,36 @@ function getGastosDashboard()
                             data: response.dados2, 
                             backgroundColor: 'rgba(231,74,59,0.5)',
                             borderColor: '#e74a3b',
+                            borderWidth: 2,
+                            tension: 0.4,
                             fill: true
                         }]
                     },
                     options: {
-                                    plugins: {
-                                        legend: {
-                                            display: false
-                                        }
-                                    },
-                                    scales: {
-                                        x: {
-                                            display: false
-                                        },
-                                        y: {
-                                            display: false
-                                        }
-                                    }
-                                }
-                            });
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        }
+                    }
+                });
             } else {
                 alert(response.msg);
             }
@@ -512,45 +529,60 @@ function getGastosDashboard()
         }
     });
 }
-function getRedimentosDashboard()
-{
-        $.ajax({
+function getRedimentosDashboard() {
+    $.ajax({
         url: "asset/controller/controllerDashboard.php",
         type: "POST",
         data: { op: 12 },
         dataType: "json",
         success: function(response) {
             console.log("Resposta AJAX:", response);
+            
             if (response.flag) {
+                if (chartRendimentos) {
+                    chartRendimentos.destroy();
+                }
+
                 const ctx3 = document.getElementById('TotalRendimentosGrafico').getContext('2d');
-                new Chart(ctx3, {
+                chartRendimentos = new Chart(ctx3, {
                     type: 'line',
                     data: {
                         labels: response.dados1,
                         datasets: [{
-                            label: 'Redimentos',
+                            label: 'Rendimentos',
                             data: response.dados2, 
                             backgroundColor: 'rgba(28,200,138,0.5)',
                             borderColor: '#1cc88a',
+                            borderWidth: 2,
+                            tension: 0.4,
                             fill: true
                         }]
                     },
                     options: {
-                                    plugins: {
-                                        legend: {
-                                            display: false
-                                        }
-                                    },
-                                    scales: {
-                                        x: {
-                                            display: false
-                                        },
-                                        y: {
-                                            display: false
-                                        }
-                                    }
-                                }
-                            });
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        }
+                    }
+                });
             } else {
                 alert(response.msg);
             }
@@ -612,7 +644,9 @@ function pagarDividasPagar(id){
         let obj = JSON.parse(msg);
         if(obj.flag){
             alerta("Divida Aceita!",obj.msg,"success");
-            getDividasPagar();    
+            getDividasPagar();
+            getGastosDashboard();  
+            GraficoDiferencaDashboard();  
         }else{
             alerta("Divida",obj.msg,"error");    
         }
@@ -688,38 +722,35 @@ function recusarDividasReceber(id)
     alert( "Request failed: " + textStatus );
     });
 }
-function pagarDividasReceber(id){
 
+
+function pagarDividasReceber(id){
     let dados = new FormData();
     dados.append("op", 19);
     dados.append("ID_Evento", id);
 
     $.ajax({
-    url: "asset/controller/controllerDashboard.php",
-    method: "POST",
-    data: dados,
-    dataType: "html",
-    cache: false,
-    contentType: false,
-    processData: false
+        url: "asset/controller/controllerDashboard.php",
+        method: "POST",
+        data: dados,
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false
     })
-    
-    .done(function( msg ) {
-
+    .done(function(msg) {
         let obj = JSON.parse(msg);
         if(obj.flag){
-            alerta("Divida Aceita!",obj.msg,"success");
-            getDividasReceber();    
-        }else{
-            alerta("Divida",obj.msg,"error");    
+            alerta("Divida Aceita!", obj.msg, "success");
+            getDividasReceber();
+            getRedimentosDashboard();
+        } else {
+            alerta("Divida", obj.msg, "error");    
         }
-        
     })
-    
-    .fail(function( jqXHR, textStatus ) {
-    alert( "Request failed: " + textStatus );
+    .fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
     });
-
 }
 function recusarDividasPagar2(id)
 {
