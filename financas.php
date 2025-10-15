@@ -252,5 +252,19 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+        
+        function atualizarHora() {
+            const agora = new Date();
+            const hora = agora.toLocaleTimeString('pt-PT');
+            const elemento = document.getElementById('time');
+            if (elemento) {
+                elemento.textContent = hora;
+            }
+        }
+        
+        atualizarHora();
+        setInterval(atualizarHora, 1000);
+    </script>
 </body>
 </html>
