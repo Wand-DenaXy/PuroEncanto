@@ -505,91 +505,58 @@ $conn->close();
             </div>
         </div>
 
-        <div class="table-card">
-            <h5><i class="bi bi-exclamation-triangle-fill text-danger"></i> Dívidas a Pagar</h5>
-            <table class="table table-striped table-hover" id="tblPagar">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Valor</th>
-                        <th>Estado</th>
-                        <th class="text-center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="listagemPagar">
-                    <tr>
-                        <td colspan="5" class="text-center">
-                            <div class="loading-spinner"></div> Carregando...
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                <div class=" container mt-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dividas a Pagar</h5>
+                            <table class="table table-striped" id="tblPagar">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Pagar</th>
+                                        <th scope="col">Recusar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listagemPagar">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dividas a Receber</h5>
 
-        <div class="table-card">
-            <h5><i class="bi bi-cash-coin text-success"></i> Dívidas a Receber</h5>
-            <table class="table table-striped table-hover" id="tblReceber">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Valor</th>
-                        <th>Estado</th>
-                        <th class="text-center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="listagemReceber">
-                    <tr>
-                        <td colspan="7" class="text-center">
-                            <div class="loading-spinner"></div> Carregando...
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <script src="asset/js/dashboard.js"></script>
-    <script>
-        // Atualizar relógio
-        function updateTime() {
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            };
-            document.getElementById('time').textContent = now.toLocaleDateString('pt-PT', options);
-        }
-        
-        updateTime();
-        setInterval(updateTime, 60000);
-
-        // Alternar entre gráficos
-        $('#btnGrafico1').click(function() {
-            $(this).addClass('active').removeClass('btn-outline-primary').addClass('btn-primary');
-            $('#btnGrafico2').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary');
-            $('#graficoBalancete').show();
-            $('#graficoVendidos').hide();
-        });
-
-        $('#btnGrafico2').click(function() {
-            $(this).addClass('active').removeClass('btn-outline-primary').addClass('btn-primary');
-            $('#btnGrafico1').removeClass('active').removeClass('btn-primary').addClass('btn-outline-primary');
-            $('#graficoBalancete').hide();
-            $('#graficoVendidos').show();
-        });
-
-        // Carregar dashboard ao iniciar
-        $(document).ready(function() {
-            carregarDashboard();
-        });
-    </script>
+                            <table class="table table-striped" id="tblReceber">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Hora</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Aceitar</th>
+                                        <th scope="col">Recusar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listagemReceber">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="asset/js/graficos.js"></script>
+            <script src="asset/js/dashboard.js"></script>
+            <script>
+            $(document).ready(function() {
+                carregarDashboard();
+            });
+            </script>
 </body>
 </html>
