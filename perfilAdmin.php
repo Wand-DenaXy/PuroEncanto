@@ -475,8 +475,8 @@ session_start();
             <div class="profile-body"></div>
 
             <div class="action-buttons">
-                <button class="btn-edit" data-bs-toggle="modal" data-bs-target="#formEditPerfil" <i
-                    class="bi bi-pencil-square"></i>
+                <button class="btn-edit" data-bs-toggle="modal" data-bs-target="#formEditPerfil">
+                    <i class="bi bi-pencil-square"></i>
                     Editar Perfil
                 </button>
                 <button class="btn-logout" onclick="logout()">
