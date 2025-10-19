@@ -24,7 +24,7 @@ $conn->close();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Puro Encanto - Perfil</title>
-<link rel="stylesheet" href="asset/css/dashboard.css">
+<link rel="stylesheet" href="asset/css/calendario.css">
 <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <script src="asset/js/lib/jquery.js"></script>

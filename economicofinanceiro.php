@@ -1,10 +1,6 @@
 <?php
-// Iniciar sessão e verificar autenticação
+
 session_start();
-// if (!isset($_SESSION['user_id'])) {
-//     header('Location: login.php');
-//     exit();
-// }
 
 require_once 'asset/model/connection2.php';
 
@@ -17,9 +13,7 @@ class EconomicoFinanceiro {
         $this->ano = $ano;
     }
     
-    /**
-     * Obter dados do balanço
-     */
+
     private function getDadosBalanco() {
         $stmt = $this->conn->prepare("SELECT * FROM econ_financeiro WHERE ano = ?");
         $stmt->bind_param("i", $this->ano);
@@ -146,6 +140,17 @@ $conn->close();
     <title>Económico-Financeiro - Puro Encanto</title>
     <link rel="stylesheet" href="asset/css/dashboard.css">
     <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
+
+    <link rel="stylesheet" href="asset/css/lib/datatables.css">
+    <link rel="stylesheet" href="asset/css/lib/select2.css">
+    <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <script src="asset/js/lib/jquery.js"></script>
+    <script src="asset/js/lib/bootstrap.js"></script>
+    <script src="asset/js/lib/datatables.js"></script>
+    <script src="asset/js/lib/select2.js"></script>
+    <script src="asset/js/lib/sweatalert.js"></script>
     <style>
         .content-wrapper {
             margin-left: 250px;
@@ -246,20 +251,40 @@ $conn->close();
     <div class="sidebar">
         <a href="index.php" style="background-color: transparent;border-left: none;">
             <div class="logo">
-                <img src="images/logos/PURO ENCANTO LOGO.png" alt="Logo">
+                <img src="images/logos/PURO ENCANTO LOGO.png" alt="Puro Encanto">
                 <p class="logotitulo">Puro Encanto</p>
             </div>
         </a>
-        <a href="dashboard.php"><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="gastoserendimentos.html"><i class="bi bi-cash-stack"></i> Gastos e Rendimentos</a>
-        <a href="servicosadmin.html"><i class="bi bi-cart"></i> Vendas</a>
-        <a href="fornecedores.html"><i class="bi bi-truck"></i> Fornecedores</a>
-        <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
-        <a href="funcionario.html"><i class="bi bi-person-badge"></i> Funcionário</a>
-        <a href="calendario.html"><i class="bi bi-calendar"></i> Calendário</a>
-        <a href="economicofinanceiro.php" class="active"><i class="bi bi-graph-up"></i> Económico-Financeiro</a>
-        <a href="financas.php"><i class="bi bi-wallet"></i> Finanças</a>
-        <a href="perfilAdmin.php"><i class="bi bi-person-circle"></i> Perfil</a>
+        <a href="dashboard.php">
+            <i class="bi bi-grid-fill"></i> Dashboard
+        </a>
+        <a href="gastoserendimentos.html">
+            <i class="bi bi-cash-stack"></i> Gastos e Rendimentos
+        </a>
+        <a href="servicosadmin.html">
+            <i class="bi bi-cart-fill"></i> Vendas
+        </a>
+        <a href="fornecedores.html">
+            <i class="bi bi-truck"></i> Fornecedores
+        </a>
+        <a href="clientes.html">
+            <i class="bi bi-people-fill"></i> Clientes
+        </a>
+        <a href="funcionario.html">
+            <i class="bi bi-person-badge-fill"></i> Funcionários
+        </a>
+        <a href="calendario.html" >
+            <i class="bi bi-calendar3"></i> Calendário
+        </a>
+        <a href="economicofinanceiro.php" class="active">
+            <i class="bi bi-graph-up-arrow"></i> Económico-Financeiro
+        </a>
+        <a href="financas.php">
+            <i class="bi bi-wallet2"></i> Finanças
+        </a>
+        <a href="perfilAdmin.php">
+            <i class="bi bi-person-circle"></i> Perfil
+        </a>
         <div class="time" id="time"></div>
     </div>
 
@@ -415,19 +440,25 @@ $conn->close();
         </div>
     </div>
     
-    <script>
-        
-        function atualizarHora() {
-            const agora = new Date();
-            const hora = agora.toLocaleTimeString('pt-PT');
+    < <script>
+ function atualizarHora() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
             const elemento = document.getElementById('time');
             if (elemento) {
-                elemento.textContent = hora;
+                elemento.textContent = now.toLocaleDateString('pt-PT', options);
             }
         }
         
         atualizarHora();
-        setInterval(atualizarHora, 1000);
+        setInterval(atualizarHora, 60000);
     </script>
 </body>
 </html>
