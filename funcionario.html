@@ -4,180 +4,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puro Encanto - Funcionario</title>
+    <title>Puro Encanto - Funcionários</title>
+    
     <link rel="stylesheet" href="asset/css/funcionario.css">
     <link rel="stylesheet" href="asset/css/lib/datatables.css">
     <link rel="stylesheet" href="asset/css/lib/select2.css">
     <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <script src="asset/js/lib/jquery.js"></script>
     <script src="asset/js/lib/bootstrap.js"></script>
     <script src="asset/js/lib/datatables.js"></script>
     <script src="asset/js/lib/select2.js"></script>
     <script src="asset/js/lib/sweatalert.js"></script>
-
 </head>
 
 <body>
     <div class="sidebar">
-        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
-            <p class="logotitulo">Puro Encanto</p>
-        </div></a>
-        <a href="dashboard.php" ><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="gastoserendimentos.html"><i class="bi bi-people"></i> Gastos e Rendimentos</a>
-        <a href="servicosadmin.html"><i class="bi bi-grid"></i>Vendas</a>
-        <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
-        <a href="clientes.html"><i class="bi bi-people"></i> Clientes</a>
-        <a href="funcionario.html" class="active"><i class="bi bi-people"></i> Funcionario</a>
-        <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-         <a href="economicofinanceiro.php"><i class="bi bi-people"></i> Económico-Financeiro </a>
-          <a href="financas.php"><i class="bi bi-people"></i> Finanças</a>
-        <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
-
+        <a href="index.php" style="background-color: transparent;border-left: none;">
+            <div class="logo">
+                <img src="images/logos/PURO ENCANTO LOGO.png" alt="Puro Encanto">
+                <p class="logotitulo">Puro Encanto</p>
+            </div>
+        </a>
+        <a href="dashboard.php">
+            <i class="bi bi-grid-fill"></i> Dashboard
+        </a>
+        <a href="gastoserendimentos.html">
+            <i class="bi bi-cash-stack"></i> Gastos e Rendimentos
+        </a>
+        <a href="servicosadmin.html">
+            <i class="bi bi-cart-fill"></i> Vendas
+        </a>
+        <a href="fornecedores.html">
+            <i class="bi bi-truck"></i> Fornecedores
+        </a>
+        <a href="clientes.html">
+            <i class="bi bi-people-fill"></i> Clientes
+        </a>
+        <a href="funcionario.html" class="active">
+            <i class="bi bi-person-badge-fill"></i> Funcionários
+        </a>
+        <a href="calendario.html">
+            <i class="bi bi-calendar3"></i> Calendário
+        </a>
+        <a href="economicofinanceiro.php">
+            <i class="bi bi-graph-up-arrow"></i> Económico-Financeiro
+        </a>
+        <a href="financas.php">
+            <i class="bi bi-wallet2"></i> Finanças
+        </a>
+        <a href="perfilAdmin.php">
+            <i class="bi bi-person-circle"></i> Perfil
+        </a>
         <div class="time" id="time"></div>
     </div>
+
     <div class="content">
-        <!-- Topbar -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Funcionarios</h4>
-            <div class="d-flex align-items-center">
-                <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="">
-                <span></span>
-            </div>
+        <div class="header">
+            <h2><i class="bi bi-person-badge-fill"></i> Gestão de Funcionários</h2>
         </div>
-        <hr>
-        <!-- Form and CSV Import -->
+
         <div class="row">
             <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Adicionar Funcionarios</h5>
+                <div class="card">
+                    <h5><i class="bi bi-person-plus-fill"></i> Adicionar Funcionário</h5>
                     <form>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Nome" id="nomeFuncionario">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="contacto" id="contactoFuncionario">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Salario" id="salarioFuncionario">
-                            </div>
-                            <div class="col">
-                                <input type="email" class="form-control" placeholder="NIF" id="NIFFuncionario">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Tipo" id="ID_TipoColaboradores">
-                            </div>
+                        <div class="mb-3">
+                            <label for="nomeFuncionario" class="form-label">
+                                <i class="bi bi-person"></i> Nome Completo
+                            </label>
+                            <input type="text" class="form-control" id="nomeFuncionario" placeholder="Digite o nome completo">
                         </div>
-                        <button type="button" class="btinfoperfil" onclick="registaFuncionario()">Registar</button>
-
+                        <div class="mb-3">
+                            <label for="contactoFuncionario" class="form-label">
+                                <i class="bi bi-telephone"></i> Contacto
+                            </label>
+                            <input type="text" class="form-control" id="contactoFuncionario" placeholder="+351 000 000 000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="salarioFuncionario" class="form-label">
+                                <i class="bi bi-cash"></i> Salário (€)
+                            </label>
+                            <input type="text" class="form-control" id="salarioFuncionario" placeholder="0.00">
+                        </div>
+                        <div class="mb-3">
+                            <label for="NIFFuncionario" class="form-label">
+                                <i class="bi bi-card-text"></i> NIF
+                            </label>
+                            <input type="text" class="form-control" id="NIFFuncionario" placeholder="000000000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ID_TipoColaboradores" class="form-label">
+                                <i class="bi bi-briefcase"></i> Função / Tipo
+                            </label>
+                            <input type="text" class="form-control" id="ID_TipoColaboradores" placeholder="Ex: Prestador de Serviços (1) | Funcionário (2) ">
+                        </div>
+                        <button type="button" class="btinfoperfil" onclick="registaFuncionario()">
+                            <i class="bi bi-plus-circle"></i> Registar Funcionário
+                        </button>
                     </form>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Importar Funcionarios (CSV)</h5>
-                    <input type="file" class="form-control mb-3">
-                    <button class="btn btn-success" onclick="importarSessoesCSV()">Importar Fornecedores</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Colaboradores</h5>
-
-                <table class="table table-striped" id="tblFuncionario">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Função</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">Valor</th>
-                            <th scope="col">NIF</th>
-                            <th scope="col">Editar</th>
-                            <th scope="col">Remover</th>
-                            <th scope="col">Pagar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listagemFuncionario">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-<div class="modal fade" id="formEditFuncionario" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Funcionario</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="card">
-                        <h5 class="card-header">Funcionario</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Editar</h5>
-                            <form class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="numFuncionarioEdit" class="form-label">Número</label>
-                                    <input type="number" class="form-control" id="numFuncionarioEdit" disabled>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="nomeEdit" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="nomeEdit">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="telefoneEdit" class="form-label">Telefone</label>
-                                    <input type="tel" class="form-control" id="telefoneEdit">
-                                </div>
-            
-                                <div class="col-md-6">
-                                    <label for="salarioEdit" class="form-label">Valor</label>
-                                    <input type="email" class="form-control" id="salarioEdit">
-                                </div>
-            
-                                <div class="col-md-6">
-                                    <label for="nifEdit" class="form-label">NIF</label>
-                                    <input type="text" class="form-control" id="nifEdit">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ID_TipoColaboradoresEdit" class="form-label">Função</label>
-                                    <input type="text" class="form-control" id="ID_TipoColaboradoresEdit">
-                                </div>
-                            </form>
-                        </div>
+                <div class="card">
+                    <h5><i class="bi bi-file-earmark-arrow-up"></i> Importar Funcionários (CSV)</h5>
+                    <p style="color: #858796; font-size: 14px; margin-bottom: 20px;">
+                        Faça upload de um ficheiro CSV com os dados dos funcionários
+                    </p>
+                    <div class="mb-3">
+                        <label for="csvFileInput" class="form-label">
+                            <i class="bi bi-file-earmark-spreadsheet"></i> Selecionar Ficheiro
+                        </label>
+                        <input type="file" class="form-control" id="csvFileInput" accept=".csv">
+                    </div>
+                    <button class="btn-success" onclick="importarSessoesCSV()">
+                        <i class="bi bi-upload"></i> Importar Funcionários
+                    </button>
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fc; border-radius: 8px; border-left: 4px solid var(--info-color);">
+                        <small style="color: #5a5c69;">
+                            <i class="bi bi-info-circle" style="color: var(--info-color);"></i>
+                            <strong>Formato esperado:</strong> Nome, Contacto, Salário, NIF, Tipo
+                        </small>
                     </div>
                 </div>
             </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                        style="padding: 12px;border-radius: 10px;font-size: 16px;font-weight: bold;">Fechar</button>
-                    <button type="button" class='btinfoperfil2' id="btnGuardar">Guardar</button>
-                </div>
+        </div>
+
+        <div class="table-card">
+            <h5><i class="bi bi-table"></i> Lista de Colaboradores</h5>
+            <table class="table table-striped" id="tblFuncionario">
+                <thead>
+                    <tr>
+                        <th scope="col"><i class="bi bi-hash"></i> ID</th>
+                        <th scope="col"><i class="bi bi-person"></i> Nome</th>
+                        <th scope="col"><i class="bi bi-briefcase"></i> Função</th>
+                        <th scope="col"><i class="bi bi-telephone"></i> Telefone</th>
+                        <th scope="col"><i class="bi bi-cash"></i> Salário</th>
+                        <th scope="col"><i class="bi bi-card-text"></i> NIF</th>
+                        <th scope="col"><i class="bi bi-gear"></i> Editar</th>
+                        <th scope="col"><i class="bi bi-gear"></i> Remover</th>
+                        <th scope="col"><i class="bi bi-gear"></i> Salario</th>
+                    </tr>
+                </thead>
+                <tbody id="listagemFuncionario">
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="formEditFuncionario" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Funcionário
+                    </h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="card">
+                            <h5 class="card-header">
+                                <i class="bi bi-person-gear"></i> Informações do Funcionário
+                            </h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Editar Dados</h5>
+                                <form class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="numFuncionarioEdit" class="form-label">
+                                            <i class="bi bi-hash"></i> Número
+                                        </label>
+                                        <input type="number" class="form-control" id="numFuncionarioEdit" disabled>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <label for="nomeEdit" class="form-label">
+                                            <i class="bi bi-person"></i> Nome
+                                        </label>
+                                        <input type="text" class="form-control" id="nomeEdit" placeholder="Digite o nome">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="telefoneEdit" class="form-label">
+                                            <i class="bi bi-telephone"></i> Telefone
+                                        </label>
+                                        <input type="tel" class="form-control" id="telefoneEdit" placeholder="Digite o telefone">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="salarioEdit" class="form-label">
+                                            <i class="bi bi-cash"></i> Salário
+                                        </label>
+                                        <input type="text" class="form-control" id="salarioEdit" placeholder="Digite o salário">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="nifEdit" class="form-label">
+                                            <i class="bi bi-card-text"></i> NIF
+                                        </label>
+                                        <input type="text" class="form-control" id="nifEdit" placeholder="Digite o NIF">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ID_TipoColaboradoresEdit" class="form-label">
+                                            <i class="bi bi-briefcase"></i> Função
+                                        </label>
+                                        <input type="text" class="form-control" id="ID_TipoColaboradoresEdit" placeholder="Digite a função">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Fechar
+                    </button>
+                    <button type="button" class='btinfoperfil2' id="btnGuardar">
+                        <i class="bi bi-check-circle"></i> Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="asset/js/funcionario.js"></script>
     <script>
-        
-        function atualizarHora() {
-            const agora = new Date();
-            const hora = agora.toLocaleTimeString('pt-PT');
+ function atualizarHora() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
             const elemento = document.getElementById('time');
             if (elemento) {
-                elemento.textContent = hora;
+                elemento.textContent = now.toLocaleDateString('pt-PT', options);
             }
         }
         
         atualizarHora();
-        setInterval(atualizarHora, 1000);
+        setInterval(atualizarHora, 60000);
     </script>
 </body>
 

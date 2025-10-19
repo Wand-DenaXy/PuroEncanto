@@ -24,4 +24,8 @@ elseif ($_POST['op'] == 3) {
     );
     echo $resp;
 }
+elseif ($_POST['op'] == 10) {
+    $resp = $func->getButtonEdit($_POST['ID_Cliente']);
+    echo $resp;
+}
 ?>

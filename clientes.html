@@ -1,177 +1,250 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puro Encanto - Clientes</title>
-    <link rel="stylesheet" href="asset/css/funcionario.css">
+    
+    <link rel="stylesheet" href="asset/css/clientes.css">
     <link rel="stylesheet" href="asset/css/lib/datatables.css">
     <link rel="stylesheet" href="asset/css/lib/select2.css">
     <link rel="stylesheet" href="asset/css/lib/bootstrap.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <script src="asset/js/lib/jquery.js"></script>
     <script src="asset/js/lib/bootstrap.js"></script>
     <script src="asset/js/lib/datatables.js"></script>
     <script src="asset/js/lib/select2.js"></script>
     <script src="asset/js/lib/sweatalert.js"></script>
-
 </head>
 
 <body>
     <div class="sidebar">
-        <a href="index.php" style="background-color: transparent;border-left: none;"><div class="logo"><img src="images/logos/PURO ENCANTO LOGO.png" alt="">
-            <p class="logotitulo">Puro Encanto</p>
-        </div></a>
-        <a href="dashboard.php" ><i class="bi bi-grid"></i> Dashboard</a>
-        <a href="gastoserendimentos.html" ><i class="bi bi-people"></i> Gastos e Rendimentos</a>
-        <a href="servicosadmin.html" ><i class="bi bi-grid"></i>Vendas</a>
-        <a href="fornecedores.html"><i class="bi bi-people"></i> Fornecedores</a>
-        <a href="clientes.html" class="active"><i class="bi bi-people"></i> Clientes</a>
-        <a href="funcionario.html" ><i class="bi bi-people"></i> Funcionario</a>
-        <a href="calendario.html"><i class="bi bi-people"></i> Calendario</a>
-         <a href="economicofinanceiro.php"><i class="bi bi-people"></i> Económico-Financeiro </a>
-          <a href="financas.php"><i class="bi bi-people"></i> Finanças</a>
-        <a href="perfilAdmin.php"><i class="bi bi-box-arrow-in-right"></i> Perfil</a>
-
+        <a href="index.php" style="background-color: transparent;border-left: none;">
+            <div class="logo">
+                <img src="images/logos/PURO ENCANTO LOGO.png" alt="Puro Encanto">
+                <p class="logotitulo">Puro Encanto</p>
+            </div>
+        </a>
+        <a href="dashboard.php">
+            <i class="bi bi-grid-fill"></i> Dashboard
+        </a>
+        <a href="gastoserendimentos.html">
+            <i class="bi bi-cash-stack"></i> Gastos e Rendimentos
+        </a>
+        <a href="servicosadmin.html">
+            <i class="bi bi-cart-fill"></i> Vendas
+        </a>
+        <a href="fornecedores.html">
+            <i class="bi bi-truck"></i> Fornecedores
+        </a>
+        <a href="clientes.html" class="active">
+            <i class="bi bi-people-fill"></i> Clientes
+        </a>
+        <a href="funcionario.html">
+            <i class="bi bi-person-badge-fill"></i> Funcionários
+        </a>
+        <a href="calendario.html">
+            <i class="bi bi-calendar3"></i> Calendário
+        </a>
+        <a href="economicofinanceiro.php">
+            <i class="bi bi-graph-up-arrow"></i> Económico-Financeiro
+        </a>
+        <a href="financas.php">
+            <i class="bi bi-wallet2"></i> Finanças
+        </a>
+        <a href="perfilAdmin.php">
+            <i class="bi bi-person-circle"></i> Perfil
+        </a>
         <div class="time" id="time"></div>
     </div>
+
     <div class="content">
-        <!-- Topbar -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Clientes</h4>
-            <div class="d-flex align-items-center">
-                <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="">
-                <span></span>
-            </div>
+        <div class="header">
+            <h2>
+                <i class="bi bi-people-fill"></i>
+                Gestão de Clientes
+            </h2>
         </div>
-        <hr>
-        <!-- Form and CSV Import -->
+
         <div class="row">
             <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Adicionar Clientes</h5>
+                <div class="card">
+                    <h5>
+                        <i class="bi bi-person-plus-fill"></i>
+                        Adicionar Cliente
+                    </h5>
                     <form>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="text" class="form-control " id="inputLabels" placeholder="Nome" id="nomeCliente">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control " id="inputLabels" placeholder="Email" id="EmailCliente">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control " id="inputLabels" placeholder="NIF" id="nifCliente">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control " id="inputLabels" placeholder="Password" id="passwordCliente">
-                            </div>
-                            <div class="col">
-                                <input type="email" class="form-control " id="inputLabels"placeholder="IBAN" id="IBANCliente">
-                            </div>
+                        <div class="mb-3">
+                            <label for="nomeCliente" class="form-label">
+                                <i class="bi bi-person"></i> Nome
+                            </label>
+                            <input type="text" class="form-control" id="nomeCliente" placeholder="Digite o nome completo">
                         </div>
-                        <button type="button" class="btinfoperfil" onclick="registaClientes()">Registar</button>
-
+                        <div class="mb-3">
+                            <label for="EmailCliente" class="form-label">
+                                <i class="bi bi-envelope"></i> Email
+                            </label>
+                            <input type="email" class="form-control" id="EmailCliente" placeholder="email@exemplo.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nifCliente" class="form-label">
+                                <i class="bi bi-card-text"></i> NIF
+                            </label>
+                            <input type="text" class="form-control" id="nifCliente" placeholder="000000000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="passwordCliente" class="form-label">
+                                <i class="bi bi-lock"></i> Password
+                            </label>
+                            <input type="password" class="form-control" id="passwordCliente" placeholder="••••••••">
+                        </div>
+                        <div class="mb-3">
+                            <label for="IBANCliente" class="form-label">
+                                <i class="bi bi-bank"></i> IBAN
+                            </label>
+                            <input type="text" class="form-control" id="IBANCliente" placeholder="PT50 0000 0000 0000 0000 0000 0">
+                        </div>
+                        <button type="button" class="btinfoperfil" onclick="registaClientes()">
+                            <i class="bi bi-plus-circle"></i>
+                            Registar Cliente
+                        </button>
                     </form>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="card p-3">
-                    <h5>Importar Clientes (CSV)</h5>
-                    <input type="file" class="form-control mb-3">
-                    <button class="btn btn-success" onclick="importarSessoesCSV()">Importar Clientes</button>
+                <div class="card success">
+                    <h5>
+                        <i class="bi bi-file-earmark-arrow-up"></i>
+                        Importar Clientes (CSV)
+                    </h5>
+                    <p style="color: #858796; font-size: 14px; margin-bottom: 20px;">
+                        Faça upload de um ficheiro CSV com os dados dos clientes
+                    </p>
+                    <div class="mb-3">
+                        <label for="csvFileInput" class="form-label">
+                            <i class="bi bi-file-earmark-spreadsheet"></i> Selecionar Ficheiro
+                        </label>
+                        <input type="file" class="form-control" id="csvFileInput" accept=".csv">
+                    </div>
+                    <button class="btn-success" onclick="importarSessoesCSV()">
+                        <i class="bi bi-upload"></i>
+                        Importar Clientes
+                    </button>
+                    <div class="info-box">
+                        <small>
+                            <i class="bi bi-info-circle" style="color: var(--info-color);"></i>
+                            <strong>Formato esperado:</strong> Nome, Email, NIF, Password, IBAN
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Clientes</h5>
 
-                <table class="table table-striped" id="tblClientes">
+        <div class="table-card">
+            <h5>
+                <i class="bi bi-table"></i>
+                Lista de Clientes
+            </h5>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="tblClientes">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">NIF</th>
-                            <th scope="col">IBAN</th>
-                            <th scope="col">Editar</th>
-                            <th scope="col">Remover</th>
+                            <th><i class="bi bi-hash"></i> ID</th>
+                            <th><i class="bi bi-person"></i> Nome</th>
+                            <th><i class="bi bi-envelope"></i> Email</th>
+                            <th><i class="bi bi-card-text"></i> NIF</th>
+                            <th><i class="bi bi-bank"></i> IBAN</th>
+                            <th class="text-center"><i class="bi bi-gear"></i> Editar</th>
+                            <th class="text-center"><i class="bi bi-gear"></i> Remover</th>
                         </tr>
                     </thead>
-                    <tbody id="listagemClientes">
-                    </tbody>
+                    <tbody id="listagemClientes"></tbody>
                 </table>
             </div>
         </div>
     </div>
-        <!-- Modal -->
-<div class="modal fade" id="formEditClientes" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cliente</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="card">
-                        <h5 class="card-header">Clientes</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Editar</h5>
-                            <form class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="numClienteEdit" class="form-label">Número</label>
-                                    <input type="number" class="form-control" id="numClienteEdit" disabled>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="nomeClienteEdit" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="nomeClienteEdit">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="nomeClienteEdit" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="EmailClienteEdit">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="nifClienteEdit" class="form-label">NIF</label>
-                                    <input type="tel" class="form-control" id="nifClienteEdit">
-                                </div>
-            
-                                <div class="col-md-6">
-                                    <label for="IBANClienteEdit" class="form-label">IBAN</label>
-                                    <input type="text" class="form-control" id="IBANClienteEdit">
-                                </div>
-                            </form>
+
+    <!-- Modal Editar Cliente -->
+    <div class="modal fade" id="formEditClientes" tabindex="-1" aria-labelledby="editClienteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editClienteLabel">
+                        <i class="bi bi-pencil-square"></i>
+                        Editar Cliente
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-3">
+                            <label for="numClienteEdit" class="form-label">
+                                <i class="bi bi-hash"></i> Número
+                            </label>
+                            <input type="number" class="form-control" id="numClienteEdit" disabled>
                         </div>
-                    </div>
+                        <div class="col-md-9">
+                            <label for="nomeClienteEdit" class="form-label">
+                                <i class="bi bi-person"></i> Nome
+                            </label>
+                            <input type="text" class="form-control" id="nomeClienteEdit" placeholder="Digite o nome">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="EmailClienteEdit" class="form-label">
+                                <i class="bi bi-envelope"></i> Email
+                            </label>
+                            <input type="email" class="form-control" id="EmailClienteEdit" placeholder="Digite o email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nifClienteEdit" class="form-label">
+                                <i class="bi bi-card-text"></i> NIF
+                            </label>
+                            <input type="tel" class="form-control" id="nifClienteEdit" placeholder="Digite o NIF">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="IBANClienteEdit" class="form-label">
+                                <i class="bi bi-bank"></i> IBAN
+                            </label>
+                            <input type="text" class="form-control" id="IBANClienteEdit" placeholder="Digite o IBAN">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i>
+                        Fechar
+                    </button>
+                    <button type="button" class="btinfoperfil2" id="btnGuardar">
+                        <i class="bi bi-check-circle"></i>
+                        Guardar
+                    </button>
                 </div>
             </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                        style="padding: 12px;border-radius: 10px;font-size: 16px;font-weight: bold;">Fechar</button>
-                    <button type="button" class='btinfoperfil2' id="btnGuardar">Guardar</button>
-                </div>
         </div>
     </div>
-</div>
 
     <script src="asset/js/clientes.js"></script>
     <script>
-        
         function atualizarHora() {
-            const agora = new Date();
-            const hora = agora.toLocaleTimeString('pt-PT');
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
             const elemento = document.getElementById('time');
             if (elemento) {
-                elemento.textContent = hora;
+                elemento.textContent = now.toLocaleDateString('pt-PT', options);
             }
         }
         
         atualizarHora();
-        setInterval(atualizarHora, 1000);
+        setInterval(atualizarHora, 60000);
     </script>
 </body>
 
