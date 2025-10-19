@@ -26,9 +26,6 @@ class Perfil{
                 $msg .= "<div class='profile-item'>";
                 $msg .= "<p><strong>IBAN: </strong><span class='infoperfil'>" . $row['IBAN'] . "</span></p>";
                 $msg .= "</div>";
-                $msg .= "<button class='btinfoperfil' onclick='getDadosPerfilEdit(".$row['ID_Cliente'].")'>";
-                $msg .= "Editar Perfil";
-                $msg .= "</button>";
             }
             
         }
@@ -53,6 +50,34 @@ class Perfil{
         return ($msg);
 
     }
+        function getButtonEdit($ID_Cliente){
+        global $conn;
+        $msg = "";
+        $row = "";
+
+        $sql = "SELECT * FROM Clientes WHERE ID_Cliente = " . $ID_Cliente;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                $msg .= "<button type='button' class='btinfoperfil2' id='btnGuardar'>";
+                $msg .= "<i class='bi bi-check-circle'></i> Guardar Alterações";
+                $msg .= "</button>";
+            }
+            
+        }
+        else
+        {
+                $msg .= "<div class='profile-item'>";
+                $msg .= "<p>Botão nao Encontrado</p> ";
+                $msg .= "</div>";
+        }
+        echo $msg;
+        $conn->close();
+        
+        return ($msg);
+
+    }
     
     function TituloPerfil($ID_Cliente){
         global $conn;
@@ -65,7 +90,7 @@ class Perfil{
         if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
                 $msg .= "<div class='profile-header'>";
-                $msg .= "<p>Olá Bem vindo, " . $row['nome'] . "!</p>";
+                $msg .= "<p style='font-size: xx-large;'>" . $row['nome'] . "</p>";
                 $msg .= "</div>";
             }
         }

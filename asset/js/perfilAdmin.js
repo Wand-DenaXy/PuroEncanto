@@ -22,6 +22,30 @@ function getDadosPerfil()
     });
 
 }
+function getButtonEdit()
+{
+    let dados = new FormData();
+    dados.append("op", 10);
+
+    $.ajax({
+    url: "asset/controller/controllerperfilAdmin.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function( msg ) {
+         $('#buttonEdit').html(msg);
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
 function TituloPerfil()
 {
     let dados = new FormData();
