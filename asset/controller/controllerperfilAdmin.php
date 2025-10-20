@@ -18,14 +18,13 @@ elseif ($_POST['op'] == 3) {
         $_POST['nomeEdit'],
         $_POST['emailEdit'],
         $_POST['NIFEdit'],
-        $_POST['passwordEdit'],
         $_POST['IBANEdit'],
         $_POST['ID_Cliente']
     );
     echo $resp;
 }
 elseif ($_POST['op'] == 10) {
-    $resp = $func->getButtonEdit($_POST['ID_Cliente']);
+    $resp = $func->getButtonEdit($_SESSION['cliente_id']);
     echo $resp;
 }
 ?>
