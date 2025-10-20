@@ -38,7 +38,7 @@ function getButtonEdit()
     })
     
     .done(function( msg ) {
-         $('#buttonEdit').html(msg);
+         $('.action-buttons').html(msg);
     })
     
     .fail(function( jqXHR, textStatus ) {
@@ -109,14 +109,12 @@ function getDadosPerfilEdit(ID_Cliente){
 
     
 }
-
 function guardaEditPerfil(ID_Cliente) {
     let dados = new FormData();
     dados.append("op", 4);
     dados.append("nomeEdit", $('#nomeEdit').val());
     dados.append("emailEdit", $('#emailEdit').val());
-    dados.append("NIFEdit", $('#NIFEdit').val());
-    dados.append("passwordEdit", $('#passwordEdit').val());
+    dados.append("NIFEdit", $('#NIFEdit').val())
     dados.append("IBANEdit", $('#IBANEdit').val());
     dados.append("ID_Cliente", ID_Cliente);
 
@@ -184,6 +182,7 @@ Toast.fire({
 });
 }
 $(function() {
+  getButtonEdit();
     TituloPerfil();
     getDadosPerfil();
 });
