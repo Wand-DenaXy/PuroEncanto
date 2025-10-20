@@ -177,16 +177,16 @@ $conn->close();
                         <label for="pacote" class="form-label">Pacote de Convidados</label>
                         <select id="pacote" name="pacote" class="form-select" required>
                             <option value="">-- Seleciona um Pacote --</option>
-                            <option value="1" data-preco="200">Pacote 20 convidados - 200€</option>
-                            <option value="2" data-preco="350">Pacote 40 convidados - 350€</option>
-                            <option value="3" data-preco="500">Pacote 60 convidados - 500€</option>
-                            <option value="4" data-preco="650">Pacote 80 convidados - 650€</option>
-                            <option value="5" data-preco="800">Pacote 100 convidados - 800€</option>
-                            <option value="6" data-preco="950">Pacote 120 convidados - 950€</option>
-                            <option value="7" data-preco="1100">Pacote 140 convidados - 1100€</option>
-                            <option value="8" data-preco="1250">Pacote 160 convidados - 1250€</option>
-                            <option value="9" data-preco="1400">Pacote 180 convidados - 1400€</option>
-                            <option value="10" data-preco="1550">Pacote 200 convidados - 1550€</option>
+                            <option value="1" data-preco="200">Pacote 20 convidados</option>
+                            <option value="2" data-preco="350">Pacote 40 convidados</option>
+                            <option value="3" data-preco="500">Pacote 60 convidados</option>
+                            <option value="4" data-preco="650">Pacote 80 convidados</option>
+                            <option value="5" data-preco="800">Pacote 100 convidados</option>
+                            <option value="6" data-preco="950">Pacote 120 convidados</option>
+                            <option value="7" data-preco="1100">Pacote 140 convidados</option>
+                            <option value="8" data-preco="1250">Pacote 160 convidados</option>
+                            <option value="9" data-preco="1400">Pacote 180 convidados</option>
+                            <option value="10" data-preco="1550">Pacote 200 convidados</option>
                         </select>
                     </div>
 

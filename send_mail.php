@@ -9,20 +9,19 @@ require 'PHPMailer/PHPMailer/src/SMTP.php';
 $mail = new PHPMailer(true);
 
 try {
-    // Configurações do servidor SMTP
+   
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
     $mail->Username = 'pedrofp0711@gmail.com'; 
     $mail->Password = 'vpys iqom wmlv gigr';  
     $mail->SMTPSecure = 'tls';
-    $mail->Port       = 587;
+    $mail->Port = 587;
 
-    // Remetente e destinatário
+   
     $mail->setFrom($_POST['email'], $_POST['name']);
-    $mail->addAddress('pedrofp0711@gmail.com'); // teu email de destino
+    $mail->addAddress('pedrofp0711@gmail.com'); 
 
-    // Conteúdo
     $mail->isHTML(true);
     $mail->Subject = 'Nova mensagem do site Puro Encanto';
     $mail->Body    = '

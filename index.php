@@ -597,46 +597,40 @@ session_start();
         </div>
     </div>
     <!-- End Testimonial Section -->
-    <section id="contact" class="contact">
+     <section id="contact" class="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center">
-                        <h3>Contactos-nos!</h3>
-                        <p class="white-text"></p>
-
+                        <h3>Contacte-nos!</h3>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <form action="send_mail.php" method="post">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name *" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Your Email *"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" name="phone" class="form-control" placeholder="Your Phone *" required>
-                            </div>
+            <form action="send_mail.php" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Your Name *" required>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea name="message" class="form-control" placeholder="Your Message *"
-                                    required></textarea>
-                            </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email *" required>
                         </div>
-                        <div class="col-lg-12 text-center">
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="form-control" placeholder="Your Phone *" required>
                         </div>
                     </div>
-                </form>
-            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea name="message" class="form-control" placeholder="Your Message *" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>  
         </div>
         </div>
         </div>
