@@ -25,7 +25,7 @@ $session = \Stripe\Checkout\Session::create([
         'quantity' => 1,
     ]],
     'mode' => 'payment',
-    'success_url' => 'https://teusite.com/sucesso.php?session_id={CHECKOUT_SESSION_ID}',
+    'success_url' => 'http://localhost/PuroEncanto_Temp-Main/dashboardCliente.php?session_id={CHECKOUT_SESSION_ID}',
     'cancel_url' => 'https://teusite.com/cancelado.php',
 ]);
 

@@ -94,9 +94,7 @@ $conn->close();
         <a href="economicofinanceiro.php">
             <i class="bi bi-graph-up-arrow"></i> Económico-Financeiro
         </a>
-        <a href="financas.php">
-            <i class="bi bi-wallet2"></i> Finanças
-        </a>
+       
         <a href="perfilAdmin.php">
             <i class="bi bi-person-circle"></i> Perfil
         </a>
