@@ -94,7 +94,7 @@ $conn->close();
         <a href="economicofinanceiro.php">
             <i class="bi bi-graph-up-arrow"></i> Económico-Financeiro
         </a>
-       
+
         <a href="perfilAdmin.php">
             <i class="bi bi-person-circle"></i> Perfil
         </a>
@@ -113,7 +113,7 @@ $conn->close();
                         <i class="bi bi-bank"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo number_format($totalTotalAtivo, 2, ',', '.'); ?>€</div>
+                <div class="stat-value"><?php echo $totalTotalAtivo ?>€</div>
                 <canvas id="TotalAtivo" height="60"></canvas>
             </div>
 
@@ -124,7 +124,7 @@ $conn->close();
                         <i class="bi bi-arrow-up-circle-fill"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo number_format($totalRendimentos, 2, ',', '.'); ?>€</div>
+                <div class="stat-value"><?php echo $totalRendimentos ?>€</div>
                 <canvas id="TotalRendimentosGrafico" height="60"></canvas>
             </div>
 
@@ -135,7 +135,7 @@ $conn->close();
                         <i class="bi bi-arrow-down-circle-fill"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo number_format($totalGastos, 2, ',', '.'); ?>€</div>
+                <div class="stat-value"><?php echo $totalGastos?>€</div>
                 <canvas id="TotalGastosGrafico" height="60"></canvas>
             </div>
 
@@ -146,7 +146,7 @@ $conn->close();
                         <i class="bi bi-trophy-fill"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo number_format($saldo, 2, ',', '.'); ?>€</div>
+                <div class="stat-value"><?php echo $saldo?>€</div>
                 <canvas id="TotalLucro" height="60"></canvas>
             </div>
         </div>

@@ -95,6 +95,8 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default .navbar-brand {
     color: #925a19;
+    -webkit-text-stroke-width: 1px; /* Largura do contorno */
+  -webkit-text-stroke-color: #8b4d05; /* Cor do contorno */
 }
 
 .navbar-default .navbar-brand:hover,

@@ -152,7 +152,7 @@ session_start();
 
 
 
-  <section id="feature" class="feature-section">
+    <section id="feature" class="feature-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
@@ -597,7 +597,7 @@ session_start();
         </div>
     </div>
     <!-- End Testimonial Section -->
-     <section id="contact" class="contact">
+    <section id="contact" class="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -621,7 +621,8 @@ session_start();
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea name="message" class="form-control" placeholder="Your Message *" required></textarea>
+                            <textarea name="message" class="form-control" placeholder="Your Message *"
+                                required></textarea>
                         </div>
                     </div>
                     <div class="col-lg-12 text-center">
@@ -630,42 +631,42 @@ session_start();
                 </div>
             </form>
         </div>
-    </section>  
-        </div>
-        </div>
-        </div>
-        <footer class="style-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <span class="copyright">Copyright &copy; <a href="index.php">Puro Encanto</a> 2025</span>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="footer-social text-center">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
+    </section>
+    </div>
+    </div>
+    </div>
+    <footer class="style-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <span class="copyright">Copyright &copy; <a href="index.php">Puro Encanto</a> 2025</span>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <div class="footer-link">
-                        <ul class="pull-right">
-                            <li><a href="#">Privacy Policy</a>
-                            </li>
-                            <li><a href="#">Terms of Use</a>
-                            </li>
-
+                    <div class="footer-social text-center">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="footer-link">
+                    <ul class="pull-right">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
-        </footer>
+        </div>
+        </div>
+    </footer>
 
 
     </section>
