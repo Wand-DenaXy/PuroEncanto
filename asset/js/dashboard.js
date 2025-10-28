@@ -134,7 +134,7 @@ function GraficoServicoDashboard() {
                         data: {
                             labels: response.dados1,
                             datasets: [{
-                                label: 'A Soma de Tudos os Serviços Vendidos',
+                                label: 'A Soma de todos os Serviços Vendidos',
                                 data: response.dados2, 
                                 backgroundColor: 'rgb(163, 117, 66)',
                                 borderColor: 'rgba(0, 0, 0, 1)',
@@ -146,7 +146,7 @@ function GraficoServicoDashboard() {
                             plugins: {
                             title: {
                                 display: true,
-                                text: 'A Soma de Tudos os Serviços Vendidos',
+                                text: 'A Soma de todos os Serviços Vendidos',
                                 color: 'black',
                                 font: {
                                     size: 18
