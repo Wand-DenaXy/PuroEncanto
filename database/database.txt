@@ -891,19 +891,19 @@ INSERT INTO Eventos_Servicos (ID_Evento, ID_Servico, data) VALUES
 -- ============================================
 
 -- 1. Serviços mais utilizados com valor total
-SELECT 
+SELECT
     s.nome AS Servico,
     COUNT(es.ID_Servico) AS Quantidade_Vezes_Utilizado,
-    SUM(s.preco) AS Valor_Total 
-FROM Eventos_Servicos es 
-INNER JOIN Servicos s ON es.ID_Servico = s.ID_Servico 
-GROUP BY s.ID_Servico, s.nome 
+    SUM(s.preco) AS Valor_Total
+FROM Eventos_Servicos es
+INNER JOIN Servicos s ON es.ID_Servico = s.ID_Servico
+GROUP BY s.ID_Servico, s.nome
 ORDER BY Valor_Total DESC;
 
 -- 2. Serviços mais utilizados por mês
-SELECT 
-    Servicos.nome AS Servico, 
-    COUNT(*) AS Total 
+SELECT
+    Servicos.nome AS Servico,
+    COUNT(*) AS Total
 FROM Servicos
 INNER JOIN Eventos_Servicos ON Servicos.ID_Servico = Eventos_Servicos.ID_Servico
 INNER JOIN Eventos ON Eventos.ID_Evento = Eventos_Servicos.ID_Evento
@@ -912,7 +912,7 @@ GROUP BY Servicos.nome
 ORDER BY Total DESC;
 
 -- 3. Resumo Financeiro Mensal
-SELECT 
+SELECT
     ResumoFinanceiro.descricao AS Meses,
     IFNULL(SUM(Rendimento.valor), 0) - IFNULL(SUM(Gastos.valor), 0) AS Saldo
 FROM ResumoFinanceiro
@@ -964,7 +964,7 @@ GROUP BY MONTH(Data)
 ORDER BY MONTH(Data);
 
 -- 6. Total de eventos por tipo
-SELECT 
+SELECT
     te.Nome AS TipoEvento,
     COUNT(*) AS TotalEventos
 FROM Eventos e
@@ -973,7 +973,7 @@ GROUP BY te.Nome
 ORDER BY TotalEventos DESC;
 
 -- 7. Clientes com mais eventos
-SELECT 
+SELECT
     c.nome AS Cliente,
     COUNT(e.ID_Evento) AS TotalEventos
 FROM Clientes c
@@ -983,18 +983,18 @@ ORDER BY TotalEventos DESC
 LIMIT 10;
 
 -- 8. Vendas por serviço
-SELECT 
-    descricao, 
+SELECT
+    descricao,
     SUM(total_vendas) AS Total
 FROM VendasServicos
 GROUP BY descricao
 ORDER BY Total DESC;
 
 -- 9. Fornecedores com maior débito
-SELECT 
-    descricao, 
-    total_debito 
-FROM Fornecedores 
+SELECT
+    descricao,
+    total_debito
+FROM Fornecedores
 ORDER BY total_debito DESC;
 
 -- 10. Total de clientes
@@ -1002,44 +1002,4 @@ SELECT COUNT(*) AS TotalClientes FROM Clientes;
 
 -- ============================================
 -- FIM DO SCRIPT
--- ============================================			WHEN 3 THEN 'Março'
-			WHEN 4 THEN 'Abril'
-			WHEN 5 THEN 'Maio'
-			WHEN 6 THEN 'Junho'
-			WHEN 7 THEN 'Julho'
-			WHEN 8 THEN 'Agosto'
-			WHEN 9 THEN 'Setembro'
-			WHEN 10 THEN 'Outubro'
-			WHEN 11 THEN 'Novembro'
-			WHEN 12 THEN 'Dezembro'
-		END AS Mes,
-		SUM(Valor) AS TotalRendimentos
-	FROM Rendimento
-	GROUP BY MONTH(Data)
-	ORDER BY MONTH(Data);
-
-	SELECT 
-		CASE MONTH(Data)
-			WHEN 1 THEN 'Janeiro'
-			WHEN 2 THEN 'Fevereiro'
-			WHEN 3 THEN 'Março'
-			WHEN 4 THEN 'Abril'
-			WHEN 5 THEN 'Maio'
-			WHEN 6 THEN 'Junho'
-			WHEN 7 THEN 'Julho'
-			WHEN 8 THEN 'Agosto'
-			WHEN 9 THEN 'Setembro'
-			WHEN 10 THEN 'Outubro'
-			WHEN 11 THEN 'Novembro'
-			WHEN 12 THEN 'Dezembro'
-		END AS Mes,
-		SUM(Valor) AS TotalAtivo
-	FROM TotalAtivo
-	GROUP BY MONTH(Data)
-	ORDER BY MONTH(Data);
-    
-select * from Clientes;
-
-
-
-
+-- ============================================
