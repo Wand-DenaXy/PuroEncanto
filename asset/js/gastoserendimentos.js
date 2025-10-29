@@ -716,7 +716,7 @@ function getRedimentosGrafico()
                     data: {
                         labels: response.dados1,
                         datasets: [{
-                            label: 'Redimentos',
+                            label: 'Rendimentos',
                             data: response.dados2, 
                             backgroundColor: 'rgba(17, 221, 146, 1)',
                             borderColor: 'rgba(0, 0, 0, 1)',

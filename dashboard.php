@@ -164,10 +164,10 @@ $conn->close();
                 </div>
             </div>
             <div id="graficoBalancete">
-                <canvas id="graficoBalanceteDonut" height="100"></canvas>
+                <canvas id="graficoBalanceteDonut" height="50"></canvas>
             </div>
             <div id="graficoVendidos" style="display: none;">
-                <canvas id="GraficoSomaServico" height="150"></canvas>
+                <canvas id="GraficoSomaServico" height="130"></canvas>
             </div>
         </div>
 
