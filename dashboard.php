@@ -1,41 +1,3 @@
-<?php
-require_once 'asset/model/connection2.php';
-
-$meses = [];
-$rendimentos = [];
-$gastos = [];
-
-$sqlFornecedores = "SELECT COUNT(*) AS totalFornecedores FROM Fornecedores";
-$resultFornecedores = $conn->query($sqlFornecedores);
-$totalFornecedores = 0;
-if ($row = $resultFornecedores->fetch_assoc()) {
-    $totalFornecedores = $row['totalFornecedores'];
-}
-
-$sqlGastos = "SELECT SUM(gastos.valor) AS Gastos FROM gastos";
-$resultGastos = $conn->query($sqlGastos);
-$totalGastos = 0;
-if ($row = $resultGastos->fetch_assoc()) {
-    $totalGastos = $row['Gastos'] ?? 0;
-}
-
-$sqlRendimentos = "SELECT SUM(Rendimento.valor) AS Rendimento FROM Rendimento";
-$resultRendimentos = $conn->query($sqlRendimentos);
-$totalRendimentos = 0;
-if ($row = $resultRendimentos->fetch_assoc()) {
-    $totalRendimentos = $row['Rendimento'] ?? 0;
-}
-
-$sqlTotalAtivo = "SELECT * FROM TotalAtivo ORDER BY data DESC LIMIT 1";
-$resultTotalAtivo = $conn->query($sqlTotalAtivo);
-$totalTotalAtivo = 0;
-if ($row = $resultTotalAtivo->fetch_assoc()) {
-    $totalTotalAtivo = $row['valor'] ?? 0;
-}
-
-$saldo = $totalRendimentos - $totalGastos;
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -113,7 +75,7 @@ $conn->close();
                         <i class="bi bi-bank"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo $totalTotalAtivo ?>€</div>
+                <div class="stat-value" id="totalAtivoNum"></div>
                 <canvas id="TotalAtivo" height="60"></canvas>
             </div>
 
@@ -124,7 +86,7 @@ $conn->close();
                         <i class="bi bi-arrow-up-circle-fill"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo $totalRendimentos ?>€</div>
+                <div class="stat-value" id="totalRendimentos"></div>
                 <canvas id="TotalRendimentosGrafico" height="60"></canvas>
             </div>
 
@@ -135,7 +97,7 @@ $conn->close();
                         <i class="bi bi-arrow-down-circle-fill"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo $totalGastos?>€</div>
+                <div class="stat-value" id="TotalGastos"></div>
                 <canvas id="TotalGastosGrafico" height="60"></canvas>
             </div>
 
@@ -146,7 +108,7 @@ $conn->close();
                         <i class="bi bi-trophy-fill"></i>
                     </div>
                 </div>
-                <div class="stat-value"><?php echo $saldo?>€</div>
+                <div class="stat-value" id="totalReceita"></div>
                 <canvas id="TotalLucro" height="60"></canvas>
             </div>
         </div>
@@ -219,31 +181,6 @@ $conn->close();
     </div>
     <script src="asset/js/graficos.js"></script>
     <script src="asset/js/dashboard.js"></script>
-
-    <script>
-    $(document).ready(function() {
-        carregarDashboard();
-    });
-
-    function atualizarHora() {
-        const now = new Date();
-        const options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
-        const elemento = document.getElementById('time');
-        if (elemento) {
-            elemento.textContent = now.toLocaleDateString('pt-PT', options);
-        }
-    }
-
-    atualizarHora();
-    setInterval(atualizarHora, 60000);
-    </script>
 </body>
 
 </html>

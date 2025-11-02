@@ -493,6 +493,102 @@ function pagarDividasReceber(id){
         alert("Request failed: " + textStatus);
     });
 }
+function getTotalAtivoNum()
+{
+    let dados = new FormData();
+    dados.append("op", 22);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function(msg) {
+         $('#totalAtivoNum').html(msg + "€");
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
+function getTotalRendimentosNum()
+{
+    let dados = new FormData();
+    dados.append("op", 23);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function(msg) {
+         $('#totalRendimentos').html(msg + "€");
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
+function getTotalReceitaNum()
+{
+    let dados = new FormData();
+    dados.append("op", 24);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function(msg) {
+         $('#totalReceita').html(msg + "€");
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
+function getTotalGastosNum()
+{
+    let dados = new FormData();
+    dados.append("op", 25);
+
+    $.ajax({
+    url: "asset/controller/controllerDashboard.php",
+    method: "POST",
+    data: dados,
+    dataType: "html",
+    cache: false,
+    contentType: false,
+    processData: false
+    })
+    
+    .done(function(msg) {
+         $('#TotalGastos').html(msg + "€");
+    })
+    
+    .fail(function( jqXHR, textStatus ) {
+    alert( "Request failed: " + textStatus );
+    });
+
+}
 function recusarDividasPagar2(id)
 {
 
@@ -621,7 +717,11 @@ function alerta(titulo,msg,icon){
 
       })
 }
-function carregarDashboard() {   
+function carregarDashboard() { 
+    getTotalGastosNum();
+    getTotalReceitaNum();
+    getTotalRendimentosNum();
+    getTotalAtivoNum();
     setTimeout(BotoesGraficoDashboard, 100); 
     setTimeout(GraficoServicoDashboardSoma, 150); 
     setTimeout(GraficoTotalAtivoDashboard, 200);
@@ -631,4 +731,26 @@ function carregarDashboard() {
     setTimeout(getDividasReceber, 800); 
     setTimeout(getDividasPagar, 800); 
     setTimeout(GraficoServicoDashboard, 900);    
+
+        function atualizarHora() {
+        const now = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        const elemento = document.getElementById('time');
+        if (elemento) {
+            elemento.textContent = now.toLocaleDateString('pt-PT', options);
+        }
+    }
+
+    atualizarHora();
+    setInterval(atualizarHora, 60000);
 }
+$(function() {
+  carregarDashboard();
+});

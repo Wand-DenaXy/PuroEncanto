@@ -15,8 +15,6 @@ function getDadosTipoPerfil()
     
     .done(function( msg ) {
          $('#PerfilTipo').html(msg);
-             console.log(1);
-        
     })
     
     .fail(function( jqXHR, textStatus ) {

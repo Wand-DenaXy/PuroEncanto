@@ -71,4 +71,24 @@ if ($_POST['op'] == 21) {
     $resp = $func->recusarDividasPagar2($_POST['ID_Evento']);
     echo $resp;
 }
+if ($_POST['op'] == 21) {
+    $resp = $func->recusarDividasPagar2($_POST['ID_Evento']);
+    echo $resp;
+}
+if ($_POST['op'] == 22) {
+    $resp = $func->getTotalAtivoNum();
+    echo $resp;
+}
+if ($_POST['op'] == 23) {
+    $resp = $func->getTotalRendimentosNum();
+    echo $resp;
+}
+if ($_POST['op'] == 24) {
+    $resp = $func->getTotalReceitaNum();
+    echo $resp;
+}
+if ($_POST['op'] == 25) {
+    $resp = $func->getTotalGastosNum();
+    echo $resp;
+}
 ?>

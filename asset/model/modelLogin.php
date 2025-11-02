@@ -58,7 +58,7 @@ class Login {
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
         if(password_verify($pw, $row['Password'])){
-            // Guardar dados na sessão
+            //
             $_SESSION['cliente_id']    = $row['ID_Cliente'];
             $_SESSION['cliente_nome']  = $row['nome'];
             $_SESSION['cliente_email'] = $row['Email'];

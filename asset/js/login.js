@@ -29,7 +29,7 @@ function registaUser(){
 
 function getTipos(){
     $.ajax({
-        url: 'getTipos.php', // Este ficheiro retorna todos os tipos da tabela TipoUtilizador
+        url: 'getTipos.php',
         type: 'GET',
         success: function(response){
             const tipos = JSON.parse(response);

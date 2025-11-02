@@ -39,32 +39,6 @@ class Fornecedores1{
         return($resp);
 
     }
-    function importarSessoesCSV($ficheiroTMP) {
-        global $conn;
-        $handle = fopen($ficheiroTMP, "r");
-        if ($handle === false) return "Erro ao abrir o ficheiro.";
-
-        $stmt = $conn->prepare("INSERT INTO Fornecedores (ID_Fornecedor, nome, contacto, email, morada) VALUES (?, ?, ?, ?, ?)");
-        if (!$stmt) return "Erro na preparação: " . $conn->error;
-
-        $linha = 0;
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            if ($linha === 0 && $data[0] === 'filme_id') {
-                $linha++;
-                continue;
-            }
-
-            $ID_Fornecedor = intval($data[0]);
-            $nome = $data[1];
-            $contacto = $data[2];
-            $email = $data[3];
-            $morada = $data[4];
-
-            $stmt->bind_param("issss", $ID_Fornecedor, $contacto, $email, $morada);
-            $stmt->execute();
-            $linha++;
-        }
-    }
     function getListaFornecedores(){
 
         global $conn;

@@ -248,6 +248,87 @@ function recusarDividasReceber($ID_Evento)
     return $resp;
 
 }
+function getTotalAtivoNum()
+{
+    global $conn;
+    $msg = "";
+
+    $sql = "SELECT valor FROM TotalAtivo ORDER BY data DESC LIMIT 1";
+    $result = $conn->query($sql);
+
+    if ($result && $row = $result->fetch_assoc()) {
+        $totalTotalAtivo = $row['valor'];
+        $msg = $totalTotalAtivo;
+    } else {
+        $msg = "Erro ao obter o total ativo: " . $conn->error;
+    }
+
+    $conn->close();
+    return $msg;
+
+}
+function getTotalRendimentosNum()
+{
+    global $conn;
+    $msg = "";
+
+    $sql = "SELECT SUM(Rendimento.valor) AS Rendimento FROM Rendimento";
+    $result = $conn->query($sql);
+
+    if ($result && $row = $result->fetch_assoc()) {
+        $totalRendimentos = $row['Rendimento'];
+        $msg = $totalRendimentos;
+    } else {
+        $msg = "Erro ao obter o total ativo: " . $conn->error;
+    }
+
+    $conn->close();
+    return $msg;
+
+}
+function getTotalGastosNum()
+{
+    global $conn;
+    $msg = "";
+
+    $sql = "SELECT SUM(gastos.valor) AS Gastos FROM gastos";
+    $result = $conn->query($sql);
+
+    if ($result && $row = $result->fetch_assoc()) {
+        $resultGastos = $row['Gastos'];
+        $msg = $resultGastos;
+    } else {
+        $msg = "Erro ao obter o total ativo: " . $conn->error;
+    }
+
+    $conn->close();
+    return $msg;
+
+}
+function getTotalReceitaNum()
+{
+    global $conn;
+    $msg = "";
+
+    $sqlRendimento = "SELECT SUM(valor) AS totalRendimento FROM Rendimento";
+    $resultRendimento = $conn->query($sqlRendimento);
+    $totalRendimento = 0;
+    if ($resultRendimento && $row = $resultRendimento->fetch_assoc()) {
+        $totalRendimento = (float)$row['totalRendimento'];
+    }
+    $sqlGastos = "SELECT SUM(valor) AS totalGastos FROM Gastos";
+    $resultGastos = $conn->query($sqlGastos);
+    $totalGastos = 0;
+    if ($resultGastos && $row = $resultGastos->fetch_assoc()) {
+        $totalGastos = (float)$row['totalGastos'];
+    }
+
+    $saldo = $totalRendimento - $totalGastos;
+
+    $conn->close();
+    return $saldo;
+
+}
 function recusarDividasPagar($ID_Divida)
 {
     global $conn;
