@@ -999,7 +999,3 @@ ORDER BY total_debito DESC;
 
 -- 10. Total de clientes
 SELECT COUNT(*) AS TotalClientes FROM Clientes;
-
--- ============================================
--- FIM DO SCRIPT
--- ============================================
