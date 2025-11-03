@@ -206,20 +206,17 @@ $conn->close();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Relógio
+
     function updateTime() {
         const now = new Date();
         document.getElementById('time').textContent = now.toLocaleString('pt-PT');
     }
     updateTime();
     setInterval(updateTime, 1000);
-
-    // Carregar eventos do PHP
-    let eventosData = <?php echo json_encode($eventos); ?>;
     
+    let eventosData = <?php echo json_encode($eventos); ?>;
     console.log('Eventos carregados:', eventosData);
 
-    // Estatísticas
     const totalEventos = eventosData.length;
     const eventosPendentes = eventosData.filter(e => e.estado !== 'Cancelado').length;
     
@@ -237,14 +234,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // FullCalendar
     const calendarEl = document.getElementById('calendar');
     const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
+        initialView: 'dayGridWeek',
         locale: 'pt',
         selectable: true,
         headerToolbar: {
-            left: 'prev,next today',
+            lefFTit: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek'
         },
@@ -265,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
 
-    // Renderizar eventos como cards
+
     function renderEventos() {
         const container = document.getElementById('listaEventos');
         if (eventosData.length === 0) {
@@ -277,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             return;
         }
-
         container.innerHTML = eventosData.map(e => `
             <div class="evento-card" data-id="${e.ID_Evento}">
                 <div class="evento-info">
@@ -299,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     renderEventos();
 
-    // Calcular preço
+
     function calcularPreco() {
         let total = 0;
         const pacote = $('#pacote option:selected');
@@ -316,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
     $(document).on('change', '.servico, #pacote', calcularPreco);
     $('#eventoModal').on('shown.bs.modal', calcularPreco);
 
-    // Submeter formulário
     $('#formEvento').on('submit', function(e) {
         e.preventDefault();
 
@@ -349,7 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     success: function(res) {
                         if (res.flag) {
-                            // Adicionar ao calendário
                             calendar.addEvent({ 
                                 title: tipoNome, 
                                 start: data + "T" + hora,
@@ -357,7 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 color: 'green'
                             });
 
-                            // Adicionar o novo evento ao array
                             const novoEvento = {
                                 ID_Evento: res.id,
                                 Nome: tipoNome,
@@ -367,10 +359,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             };
                             eventosData.unshift(novoEvento);
 
-                            // Atualizar a lista de eventos
                             renderEventos();
 
-                            // Atualizar estatísticas
                             document.getElementById('totalEventos').textContent = eventosData.length;
                             document.getElementById('eventosPendentes').textContent = eventosData.filter(e => e.estado !== 'Cancelado').length;
 
@@ -412,7 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Cancelar evento
     $(document).on('click', '.cancelarEvento', function() {
         const card = $(this).closest('.evento-card');
         const idEvento = card.data('id');
@@ -435,19 +424,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     data: { id: idEvento },
                     success: function(res) {
                         if (res.flag) {
-                            // Remover o evento do array
+             
                             const index = eventosData.findIndex(e => e.ID_Evento == idEvento);
                             if (index > -1) {
                                 eventosData.splice(index, 1);
                             }
 
-                            // Atualizar estatísticas
+                        
                             document.getElementById('totalEventos').textContent = eventosData.length;
                             document.getElementById('eventosPendentes').textContent = eventosData.filter(e => e.estado !== 'Cancelado').length;
 
                             card.fadeOut(300, function() {
                                 $(this).remove();
-                                // Se não houver mais eventos, mostrar estado vazio
+                            
                                 if (eventosData.length === 0) {
                                     renderEventos();
                                 }
