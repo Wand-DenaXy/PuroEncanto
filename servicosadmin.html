@@ -135,59 +135,5 @@
         </div>
 
     <script src="asset/js/vendas.js"></script>
-    <script>
-        function atualizarHora() {
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            };
-            const elemento = document.getElementById('time');
-            if (elemento) {
-                elemento.textContent = now.toLocaleDateString('pt-PT', options);
-            }
-        }
-        
-        atualizarHora();
-        setInterval(atualizarHora, 60000);
-
-        // Carregar gráficos
-        $(document).ready(function() {
-            // Mostrar loading inicial
-            showLoadingState();
-            GraficoServico();
-            getFornecedoresAbril();
-            GraficoServicoUtilizadoAbril();
-            GraficoServicoUtilizadoMaio();
-            GraficoServicoUtilizadoJunho();
-            setTimeout(() => {
-                updateMiniStats();
-            }, 1500);
-        });
-
-        function showLoadingState() {
-            const charts = ['graficoRendimentos', 'graficoUtilizado', 'graficoUtilizado2', 'graficoUtilizado3'];
-            charts.forEach(chartId => {
-                const canvas = document.getElementById(chartId);
-                if (canvas) {
-                    const parent = canvas.parentElement;
-                    parent.innerHTML = `
-                        <div class="loading-container">
-                            <div class="loading-spinner"></div>
-                            <div class="loading-text">Carregando dados...</div>
-                        </div>
-                    `;
-                    // Restaurar canvas após loading
-                    setTimeout(() => {
-                        parent.innerHTML = `<canvas id="${chartId}"></canvas>`;
-                    }, 500);
-                }
-            });
-        }
-    </script>
 </body>
 </html>
