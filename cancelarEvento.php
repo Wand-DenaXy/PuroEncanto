@@ -7,7 +7,6 @@ $idCliente = $_SESSION['cliente_id'] ?? null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && $idCliente) {
     $idEvento = intval($_POST['id']);
 
-    // Verifica se o evento pertence ao cliente logado
     $check = $conn->prepare("SELECT ID_Evento FROM Eventos WHERE ID_Evento = ? AND ID_Cliente = ?");
     $check->bind_param("ii", $idEvento, $idCliente);
     $check->execute();
@@ -19,14 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && $idCliente) 
     }
     $check->close();
 
-    // Apagar registros na tabela eventos_servicos (FK)
+
     $sqlServicos = "DELETE FROM eventos_servicos WHERE ID_Evento = ?";
     $stmtServicos = $conn->prepare($sqlServicos);
     $stmtServicos->bind_param("i", $idEvento);
     $stmtServicos->execute();
     $stmtServicos->close();
 
-    // Apagar evento do próprio cliente
     $sql = "DELETE FROM Eventos WHERE ID_Evento = ? AND ID_Cliente = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $idEvento, $idCliente);
