@@ -25,7 +25,7 @@ if(!$nome || !$email || !$nif || !$iban || !$password || !$tipo){
     exit;
 }
 
-// Verifica email duplicado
+
 $stmt = $conn->prepare("SELECT ID_Cliente FROM Clientes WHERE Email = ? LIMIT 1");
 $stmt->bind_param("s", $email);
 $stmt->execute();

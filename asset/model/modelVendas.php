@@ -83,12 +83,12 @@ function GraficoServicoUtilizadoMaio() {
             $msg = "Nenhum Serviço encontrado.";
         }
 
-        $resp = json_encode((
+        $resp = json_encode([
             "flag" => $flag,
             "msg" => $msg,
             "dados1" => $dados1,
             "dados2" => $dados2
-        ));
+        ]);
 
         $conn->close();
         return $resp;

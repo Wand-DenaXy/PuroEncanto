@@ -72,12 +72,7 @@
                 <span>ou</span>
             </div>
 
-            <div class="social-login">
-                <button type="button" class="btn-social btn-google">
-                    <i class="fab fa-google"></i>
-                    <span>Continuar com Google</span>
-                </button>
-            </div>
+           
         </form>
 
         <div class="auth-footer">
@@ -103,7 +98,6 @@ function togglePassword(id) {
 }
 
 $(document).ready(function(){
-    // Animação dos inputs
     $('.auth-form input').on('focus', function(){
         $(this).closest('.input-group').addClass('focused');
     }).on('blur', function(){
@@ -112,7 +106,7 @@ $(document).ready(function(){
         }
     });
 
-    // Verificar se tem valores ao carregar (autofill)
+
     setTimeout(function(){
         $('.auth-form input').each(function(){
             if($(this).val()) {
@@ -121,7 +115,6 @@ $(document).ready(function(){
         });
     }, 100);
 
-    // Login
     $('#btnLogin').on('click', function(){
         const btn = $(this);
         const email = $('#email').val().trim();
@@ -138,8 +131,6 @@ $(document).ready(function(){
             });
             return;
         }
-
-        // Validação básica de email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!emailRegex.test(email)){
             Swal.fire({
@@ -176,80 +167,12 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 1500
                     }).then(() => window.location.href = 'index.php');
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Erro de Autenticação',
-                        text: res.msg,
-                        confirmButtonColor: '#d1ae79',
-                        background: '#4b2e12',
-                        color: '#e6d7c3'
-                    });
                 }
             },
-            error: function(xhr){
-                btn.removeClass('loading').prop('disabled', false);
-                btn.find('span').text('Entrar');
-                
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro no Servidor',
-                    text: 'Ocorreu um erro. Tente novamente mais tarde.',
-                    confirmButtonColor: '#d1ae79',
-                    background: '#4b2e12',
-                    color: '#e6d7c3'
-                });
-            }
         });
     });
 
-    // Enter para submeter
-    $('.auth-form input').on('keypress', function(e){
-        if(e.which === 13) {
-            $('#btnLogin').click();
-        }
-    });
 
-    // Forgot password
-    $('.forgot-password').on('click', function(e){
-        e.preventDefault();
-        Swal.fire({
-            title: 'Recuperar Password',
-            text: 'Introduza o seu email:',
-            input: 'email',
-            inputPlaceholder: 'seu@email.com',
-            showCancelButton: true,
-            confirmButtonText: 'Enviar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#d1ae79',
-            cancelButtonColor: '#64748b',
-            background: '#4b2e12',
-            color: '#e6d7c3'
-        }).then((result) => {
-            if (result.isConfirmed && result.value) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Email Enviado!',
-                    text: 'Verifique a sua caixa de entrada.',
-                    confirmButtonColor: '#d1ae79',
-                    background: '#4b2e12',
-                    color: '#e6d7c3'
-                });
-            }
-        });
-    });
-
-    // Social login (exemplo)
-    $('.btn-google').on('click', function(){
-        Swal.fire({
-            icon: 'info',
-            title: 'Em Breve',
-            text: 'Login com Google em desenvolvimento.',
-            confirmButtonColor: '#d1ae79',
-            background: '#4b2e12',
-            color: '#e6d7c3'
-        });
-    });
 });
 </script>
 

@@ -250,4 +250,23 @@ function guardaEditFuncionario(ID_Colaboradores) {
 }
 $(function() {
     getListaFuncionario();
+
+     function atualizarHora() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const elemento = document.getElementById('time');
+            if (elemento) {
+                elemento.textContent = now.toLocaleDateString('pt-PT', options);
+            }
+        }
+        
+        atualizarHora();
+        setInterval(atualizarHora, 60000);
 });

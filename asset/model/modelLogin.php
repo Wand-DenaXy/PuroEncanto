@@ -10,7 +10,6 @@ class Login {
 
         $hashedPw = password_hash($pw, PASSWORD_DEFAULT);
 
-        // Valores padrão para NIF e IBAN (ajusta se quiseres campos reais)
         $nif  = "000000000";  
         $iban = "PT50000000000000000000000";
 
@@ -58,14 +57,13 @@ class Login {
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
         if(password_verify($pw, $row['Password'])){
-            //
+          
             $_SESSION['cliente_id']    = $row['ID_Cliente'];
             $_SESSION['cliente_nome']  = $row['nome'];
             $_SESSION['cliente_email'] = $row['Email'];
             $_SESSION['tpUser']        = $row['ID_TipoUtilizador'];
             $_SESSION['tipo_nome']     = $row['Tipo'];
 
-            // Definir página de destino
             if ($row['Tipo'] === 'Administrador') {
                 $redirect = 'Dashboard.php';
             } else {
